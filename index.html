@@ -81,8 +81,7 @@
           Everything Harbor Freight needs to author, govern, distribute and prove its work instructions — running on a secure, multi-site foundation, on any device.
         </p>
       </div>
-      <div id="platform-grid" class="fade-in grid md:grid-cols-2 gap-5"></div>
-      <div id="platform-bridge" class="fade-in mt-5"></div>
+      <div id="phase1-block" class="fade-in"></div>
     </div>
   </section>
 
@@ -133,34 +132,19 @@
 
   <!-- DATA + RENDER -->
   <script>
-    // simple inline icons
-    const ICON = {
-      doc:  'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
-      check:'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
-      shield:'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-      chart:'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
-      layers:'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
-    };
-    const svg = (path) => `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${path}"/></svg>`;
-
-    // ---------- PHASE 1: platform capabilities (value-led, no counts) ----------
-    const CAPABILITIES = [
-      { icon:'doc', title:'Author &amp; control work instructions',
-        value:'One current, correct procedure for every site — never a stale copy in circulation.',
-        features:['Rich editor — text, tables, inline media','Full version history with red-line diffs','Scheduled expiry &amp; review dates','Global search across every procedure'] },
-      { icon:'check', title:'Govern every change',
-        value:'Controlled approvals, and provable acknowledgement from the floor.',
-        features:['Approval with signature &amp; timestamp','Up to 20 acknowledgers per procedure','Acknowledgment-rate tracking','Comment &amp; discussion threads'] },
-      { icon:'shield', title:'Secure, multi-site foundation',
-        value:'The right people see the right procedures, at every location, on any device.',
-        features:['Role-based + relationship-based access','Multi-site scoping','Bulk user management — 500-user import','Full activity audit log · mobile &amp; tablet ready'] },
-      { icon:'chart', title:'Visibility &amp; reporting',
-        value:'A live picture of compliance across the whole organization.',
-        features:['Acknowledgment-rate &amp; procedure-status dashboards','Filter by site, date &amp; tag','Overview reporting at a glance'] },
-    ];
-    const BRIDGE = {
-      icon:'layers', title:'Built to extend',
-      value:'Any procedure becomes the basis for an observation, a training, or a certification — one click. A unified data model ties it all together, so Phase 1 is also the on-ramp to everything below.',
+    // ---------- PHASE 1: the SOP platform (rich block — capability clusters) ----------
+    const PHASE1 = {
+      name:'The SOP Platform', phase:'Phase 1', accent:'#10B981', soft:'#ECFDF5',
+      tagline:'A complete work-instruction system — live from day one.',
+      desc:'Everything Harbor Freight needs to author, govern, distribute and prove its work instructions, on a secure multi-site foundation, on any device.',
+      clusters:[
+        { title:'Author &amp; control work instructions', items:['Rich editor — text, tables, media','Full version history with red-line diffs','Scheduled expiry &amp; review dates','Global search across every procedure'] },
+        { title:'Govern every change', items:['Approval with signature &amp; timestamp','Up to 20 acknowledgers per procedure','Acknowledgment-rate tracking','Comment &amp; discussion threads'] },
+        { title:'Secure, multi-site foundation', items:['Role- &amp; relationship-based access','Multi-site scoping · bulk user import','Full activity audit log','Mobile &amp; tablet ready'] },
+        { title:'Visibility &amp; reporting', items:['Acknowledgment &amp; procedure-status dashboards','Filter by site, date &amp; tag','Overview reporting at a glance'] },
+      ],
+      grows:'Any procedure becomes the basis for an observation, training, or certification — one click. A unified data model ties it together, so Phase 1 is also the on-ramp to everything below.',
+      growsLabel:'Built to extend',
     };
 
     // ---------- PHASES 2–4: growth modules (value-led) ----------
@@ -230,27 +214,48 @@
     ];
 
     // ---------- renders ----------
-    function renderPlatform() {
-      document.getElementById('platform-grid').innerHTML = CAPABILITIES.map(c => `
-        <div class="rounded-2xl border border-gray-200 bg-white p-6 hover:shadow-sm transition-shadow">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="w-10 h-10 rounded-xl bg-brand/10 text-brand-dark flex items-center justify-center flex-shrink-0">${svg(ICON[c.icon])}</span>
-            <h3 class="font-bold text-gray-900 text-lg leading-tight">${c.title}</h3>
-          </div>
-          <p class="text-sm text-gray-600 leading-relaxed mb-4">${c.value}</p>
-          <ul class="space-y-1.5">
-            ${c.features.map(f => `<li class="flex items-start gap-2 text-[13px] text-gray-700"><span class="text-brand mt-0.5">✓</span><span>${f}</span></li>`).join('')}
-          </ul>
-        </div>`).join('');
-
-      document.getElementById('platform-bridge').innerHTML = `
-        <div class="rounded-2xl border border-brand/30 bg-gradient-to-br from-emerald-50/70 to-white p-6 flex items-start gap-4">
-          <span class="w-10 h-10 rounded-xl bg-brand/15 text-brand-dark flex items-center justify-center flex-shrink-0">${svg(ICON[BRIDGE.icon])}</span>
-          <div>
-            <h3 class="font-bold text-gray-900 text-lg mb-1">${BRIDGE.title}</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">${BRIDGE.value}</p>
+    // one block renderer for every phase. Phase 1 passes `clusters`; phases 2–4 pass `does`.
+    function renderBlock(p) {
+      const right = p.clusters
+        ? `<p class="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-3">What it includes</p>
+           <div class="grid sm:grid-cols-2 gap-x-6 gap-y-4 mb-5">
+             ${p.clusters.map(cl => `
+               <div>
+                 <p class="text-[13px] font-semibold text-gray-900 mb-1.5">${cl.title}</p>
+                 <ul class="space-y-1">
+                   ${cl.items.map(it => `<li class="flex items-start gap-2 text-[12.5px] text-gray-600"><span style="color:${p.accent}" class="mt-0.5">✓</span><span>${it}</span></li>`).join('')}
+                 </ul>
+               </div>`).join('')}
+           </div>`
+        : `<p class="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-2">What it does</p>
+           <ul class="grid sm:grid-cols-2 gap-x-5 gap-y-1.5 mb-5">
+             ${p.does.map(d => `<li class="flex items-start gap-2 text-[13px] text-gray-700"><span style="color:${p.accent}" class="mt-0.5">✓</span><span>${d}</span></li>`).join('')}
+           </ul>`;
+      return `
+        <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden">
+          <div class="h-1" style="background:${p.accent}"></div>
+          <div class="p-7 md:flex gap-8">
+            <div class="md:w-2/5 mb-5 md:mb-0">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full" style="color:${p.accent};background:${p.soft}">${p.phase}</span>
+              </div>
+              <h3 class="text-2xl font-extrabold text-gray-900 mb-2">${p.name}</h3>
+              <p class="text-base font-semibold text-gray-800 leading-snug mb-3">${p.tagline}</p>
+              <p class="text-sm text-gray-600 leading-relaxed">${p.desc}</p>
+            </div>
+            <div class="md:w-3/5 md:border-l md:border-gray-100 md:pl-8">
+              ${right}
+              <div class="rounded-xl bg-gray-50 border border-gray-100 px-4 py-3">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400">${p.growsLabel || 'As you grow'}</span>
+                <p class="text-[13px] text-gray-600 mt-0.5">${p.grows}</p>
+              </div>
+            </div>
           </div>
         </div>`;
+    }
+
+    function renderPlatform() {
+      document.getElementById('phase1-block').innerHTML = renderBlock(PHASE1);
     }
 
     function renderLoop() {
@@ -260,30 +265,7 @@
     }
 
     function renderGrowth() {
-      document.getElementById('grows-list').innerHTML = GROWTH.map(m => `
-        <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden">
-          <div class="h-1" style="background:${m.accent}"></div>
-          <div class="p-7 md:flex gap-8">
-            <div class="md:w-2/5 mb-5 md:mb-0">
-              <div class="flex items-center gap-2 mb-2">
-                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full" style="color:${m.accent};background:${m.soft}">${m.phase}</span>
-              </div>
-              <h3 class="text-2xl font-extrabold text-gray-900 mb-2">${m.name}</h3>
-              <p class="text-base font-semibold text-gray-800 leading-snug mb-3">${m.tagline}</p>
-              <p class="text-sm text-gray-600 leading-relaxed">${m.desc}</p>
-            </div>
-            <div class="md:w-3/5 md:border-l md:border-gray-100 md:pl-8">
-              <p class="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-2">What it does</p>
-              <ul class="grid sm:grid-cols-2 gap-x-5 gap-y-1.5 mb-5">
-                ${m.does.map(d => `<li class="flex items-start gap-2 text-[13px] text-gray-700"><span style="color:${m.accent}" class="mt-0.5">✓</span><span>${d}</span></li>`).join('')}
-              </ul>
-              <div class="rounded-xl bg-gray-50 border border-gray-100 px-4 py-3">
-                <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400">As you grow</span>
-                <p class="text-[13px] text-gray-600 mt-0.5">${m.grows}</p>
-              </div>
-            </div>
-          </div>
-        </div>`).join('');
+      document.getElementById('grows-list').innerHTML = GROWTH.map(renderBlock).join('');
     }
 
     // shared phase color ramp — matches the phase accents used above
