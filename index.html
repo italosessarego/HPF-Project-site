@@ -175,7 +175,7 @@
         desc:'Trainer and trainee complete a co-signed checklist tied directly to the work instruction. Supervisors see completion, overdue and time-to-complete at a glance — training that maps to your actual procedures, not a separate silo.',
         does:['Co-signed training delivery','Role-to-work-instruction mapping','Progress &amp; supervisor visibility'],
         grows:'Proficiency levels, recency tracking, and a full skill inventory with gap forecasting.' },
-      { name:'Certifications', phase:'Phase 4', accent:'#8B5CF6', soft:'#F5F3FF',
+      { name:'Certifications', phase:'Phase 4', accent:'#DB2777', soft:'#FDF2F8',
         tagline:'Audit-ready proof that qualifications are current.',
         desc:'Track who is certified on what, tied to the trainings and observations that earned it — so an auditor (or an incident review) gets a clean, current answer.',
         does:['Certification definition &amp; completion tracking'],
@@ -286,6 +286,22 @@
         </div>`).join('');
     }
 
+    // shared phase color ramp — matches the phase accents used above
+    const PHASE_PALETTE = {
+      1: { soft:'#ECFDF5', text:'#047857', border:'#A7F3D0' }, // green  (Phase 1)
+      2: { soft:'#EFF6FF', text:'#1D4ED8', border:'#BFDBFE' }, // blue   (Phase 2)
+      3: { soft:'#F5F3FF', text:'#6D28D9', border:'#DDD6FE' }, // violet (Phase 3)
+      4: { soft:'#FDF2F8', text:'#BE185D', border:'#FBCFE8' }, // pink   (Phase 4)
+    };
+    function phaseChip(lands) {
+      const m = lands.match(/\d/);                 // colour by the first phase referenced
+      const p = m ? PHASE_PALETTE[m[0]] : null;
+      const style = p
+        ? `background:${p.soft};color:${p.text};border:1px solid ${p.border}`
+        : 'background:#F1F5F9;color:#475569;border:1px solid #E2E8F0';
+      return `<span class="chip" style="${style}">${lands}</span>`;
+    }
+
     function renderRequirements() {
       const STAT = { built:'<span class="chip chip-built">✓ Built</span>', tobuild:'<span class="chip chip-tobuild">⊕ To build</span>' };
       const TAG = (t) => t === 'must' ? '<span class="tag tag-must">Must</span>' : '<span class="tag tag-nice">Nice</span>';
@@ -298,7 +314,7 @@
                 <span class="flex-1 text-[13.5px] text-gray-800">${row.r}</span>
                 <span class="flex items-center gap-2 flex-shrink-0">
                   ${TAG(row.tier)}
-                  <span class="chip chip-phase">${row.lands}</span>
+                  ${phaseChip(row.lands)}
                   ${STAT[row.status]}
                 </span>
               </div>`).join('')}
