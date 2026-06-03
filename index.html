@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harbor Freight — Your SOP Platform · MeetBean</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon-32.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        fontFamily: { sans: ['Inter', 'sans-serif'] },
+        colors: {
+          dark: { 900: '#1E1D1D', 800: '#1E1E24', 700: '#343E3F', 600: '#40424D' },
+          brand: { DEFAULT: '#70A593', light: '#9CC9BB', dark: '#508875' },
+        },
+      } },
+    };
+  </script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    nav.scrolled { box-shadow: 0 2px 16px 0 rgba(30,29,29,.10); }
+
+    /* appendix chips */
+    .chip { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:700; letter-spacing:.02em; padding:2px 8px; border-radius:999px; white-space:nowrap; }
+    .chip-built   { background:#ECFDF5; color:#047857; border:1px solid #A7F3D0; }
+    .chip-tobuild { background:#FFF7ED; color:#C2410C; border:1px solid #FED7AA; }
+    .chip-phase   { background:#F1F5F9; color:#475569; border:1px solid #E2E8F0; }
+    .tag { display:inline-block; font-size:9px; font-weight:700; letter-spacing:.03em; padding:1px 6px; border-radius:4px; }
+    .tag-must { background:#1E1D1D; color:#fff; }
+    .tag-nice { background:#E5E7EB; color:#4B5563; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+  <!-- NAV -->
+  <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm transition-shadow duration-300">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#hero" class="flex items-center">
+        <img src="assets/images/meetbean-logo-dark.svg" alt="meetBean" class="h-5" />
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a href="#platform" class="hover:text-brand transition-colors">The platform</a>
+        <a href="#grows" class="hover:text-brand transition-colors">Where it grows</a>
+        <a href="#requirements" class="hover:text-brand transition-colors">Your requirements</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="relative text-white pt-32 pb-24 overflow-hidden" style="background: linear-gradient(135deg, #1E1D1D 0%, #1E1E24 40%, #243330 100%);">
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><line x1=%220%22 y1=%2260%22 x2=%2260%22 y2=%220%22 stroke=%22white%22 stroke-width=%220.5%22/></svg>'); background-size:60px 60px;"></div>
+    <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand/10 blur-[120px]"></div>
+
+    <div class="relative max-w-5xl mx-auto px-6 text-center">
+      <p class="fade-in text-brand-light text-sm font-medium tracking-widest uppercase mb-5">Prepared for Harbor Freight</p>
+      <h1 class="fade-in text-4xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.15] mb-6" style="transition-delay:.1s">
+        Your SOP platform —<br><span class="text-brand-light">and everywhere it can grow.</span>
+      </h1>
+      <p class="fade-in text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto" style="transition-delay:.2s">
+        Phase 1 delivers a complete work-instruction platform. From the same foundation, Observations, Training and Certifications extend it into a full procedure-compliance system — already built into MeetBean, ready whenever you are.
+      </p>
+    </div>
+  </section>
+
+  <!-- THE PLATFORM (value-led) -->
+  <section id="platform" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="fade-in text-center mb-14">
+        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">What you&rsquo;re getting · Phase 1</p>
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-3">A complete SOP platform</h2>
+        <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+          Everything Harbor Freight needs to author, govern, distribute and prove its work instructions — running on a secure, multi-site foundation, on any device.
+        </p>
+      </div>
+      <div id="platform-grid" class="fade-in grid md:grid-cols-2 gap-5"></div>
+      <div id="platform-bridge" class="fade-in mt-5"></div>
+    </div>
+  </section>
+
+  <!-- WHERE IT GROWS -->
+  <section id="grows" class="py-20 bg-gray-50 border-y border-gray-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="fade-in text-center mb-12">
+        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">Where it grows · Phases 2–4</p>
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-3">One platform, a compounding system</h2>
+        <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+          Each module reuses the procedures you build in Phase 1 — and together they close the loop from a written standard to proven, certified execution in the field.
+        </p>
+      </div>
+
+      <!-- closed-loop visual -->
+      <div id="loop" class="fade-in flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-14"></div>
+
+      <!-- module blocks -->
+      <div id="grows-list" class="fade-in space-y-5"></div>
+    </div>
+  </section>
+
+  <!-- REQUIREMENTS APPENDIX -->
+  <section id="requirements" class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="fade-in text-center mb-8">
+        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">For the record</p>
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-3">Your requirements, addressed</h2>
+        <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+          Every requirement you raised in discovery, and where each one lands across the rollout.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-5 text-xs text-gray-500">
+          <span class="flex items-center gap-1.5"><span class="chip chip-built">✓ Built</span> available in the platform today</span>
+          <span class="flex items-center gap-1.5"><span class="chip chip-tobuild">⊕ To build</span> delivered during that phase</span>
+          <span class="flex items-center gap-1.5"><span class="tag tag-must">Must</span> / <span class="tag tag-nice">Nice</span> your stated priority</span>
+        </div>
+      </div>
+      <div id="req-root" class="fade-in space-y-7"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark-900 text-gray-400 py-12">
+    <div class="max-w-6xl mx-auto px-6 flex items-center">
+      <img src="assets/images/meetbean-logo-light.svg" alt="meetBean" class="h-5 opacity-90" />
+    </div>
+  </footer>
+
+  <!-- DATA + RENDER -->
+  <script>
+    // simple inline icons
+    const ICON = {
+      doc:  'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+      check:'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+      shield:'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+      chart:'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+      layers:'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
+    };
+    const svg = (path) => `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${path}"/></svg>`;
+
+    // ---------- PHASE 1: platform capabilities (value-led, no counts) ----------
+    const CAPABILITIES = [
+      { icon:'doc', title:'Author &amp; control work instructions',
+        value:'One current, correct procedure for every site — never a stale copy in circulation.',
+        features:['Rich editor — text, tables, inline media','Full version history with red-line diffs','Scheduled expiry &amp; review dates','Global search across every procedure'] },
+      { icon:'check', title:'Govern every change',
+        value:'Controlled approvals, and provable acknowledgement from the floor.',
+        features:['Approval with signature &amp; timestamp','Up to 20 acknowledgers per procedure','Acknowledgment-rate tracking','Comment &amp; discussion threads'] },
+      { icon:'shield', title:'Secure, multi-site foundation',
+        value:'The right people see the right procedures, at every location, on any device.',
+        features:['Role-based + relationship-based access','Multi-site scoping','Bulk user management — 500-user import','Full activity audit log · mobile &amp; tablet ready'] },
+      { icon:'chart', title:'Visibility &amp; reporting',
+        value:'A live picture of compliance across the whole organization.',
+        features:['Acknowledgment-rate &amp; procedure-status dashboards','Filter by site, date &amp; tag','Overview reporting at a glance'] },
+    ];
+    const BRIDGE = {
+      icon:'layers', title:'Built to extend',
+      value:'Any procedure becomes the basis for an observation, a training, or a certification — one click. A unified data model ties it all together, so Phase 1 is also the on-ramp to everything below.',
+    };
+
+    // ---------- PHASES 2–4: growth modules (value-led) ----------
+    const GROWTH = [
+      { name:'Observations', phase:'Phase 2', accent:'#3B82F6', soft:'#EFF6FF',
+        tagline:'See whether the work is actually done to standard — and act on the gaps.',
+        desc:'Turn any procedure into a field observation. Observers score execution step-by-step on mobile, with coverage and adherence metrics that show exactly where practice drifts from the standard, plus a prioritized queue to follow up.',
+        does:['Graduated step scoring with live feedback','Mobile step-by-step capture','Coverage &amp; adherence dashboards','Follow-up + prioritized action queue'],
+        grows:'Observations targeted by productivity &amp; quality data, automated coaching recommendations, and offline field capture.' },
+      { name:'Training', phase:'Phase 3', accent:'#8B5CF6', soft:'#F5F3FF',
+        tagline:'Build and prove competency on the procedures that govern the work.',
+        desc:'Trainer and trainee complete a co-signed checklist tied directly to the work instruction. Supervisors see completion, overdue and time-to-complete at a glance — training that maps to your actual procedures, not a separate silo.',
+        does:['Co-signed training delivery','Role-to-work-instruction mapping','Progress &amp; supervisor visibility'],
+        grows:'Proficiency levels, recency tracking, and a full skill inventory with gap forecasting.' },
+      { name:'Certifications', phase:'Phase 4', accent:'#8B5CF6', soft:'#F5F3FF',
+        tagline:'Audit-ready proof that qualifications are current.',
+        desc:'Track who is certified on what, tied to the trainings and observations that earned it — so an auditor (or an incident review) gets a clean, current answer.',
+        does:['Certification definition &amp; completion tracking'],
+        grows:'Validity periods &amp; expiration status, renewal / recertification workflows, prerequisite enforcement, and knowledge checks.' },
+    ];
+
+    const LOOP = ['Work instruction','Training','Observation','Action','Certification'];
+
+    // ---------- APPENDIX: HFT requirements → where each lands ----------
+    const REQUIREMENTS = [
+      { cat:'Platform', rows:[
+        { r:'End-to-end loop: WI → observation → action → outcome', tier:'must', lands:'Phases 1–2', status:'built' },
+        { r:'Execute &amp; track procedure activities', tier:'must', lands:'Phase 1', status:'built' },
+        { r:'Mobile / tablet-friendly, intuitive UX', tier:'must', lands:'Phase 1', status:'built' },
+        { r:'Role-based access control', tier:'must', lands:'Phase 1', status:'built' },
+        { r:'Secure, scalable platform with data ownership', tier:'must', lands:'Phase 1', status:'built' },
+        { r:'Scalability across sites', tier:'must', lands:'Phase 1', status:'built' },
+        { r:'Data ownership', tier:'must', lands:'Phase 1', status:'built' },
+        { r:'Security &amp; compliance (SOC 2)', tier:'must', lands:'Phase 1', status:'tobuild' },
+        { r:'Ingest external data (productivity, quality, attendance)', tier:'must', lands:'Phase 2', status:'tobuild' },
+        { r:'Unified data model across modules', tier:'nice', lands:'Phase 1', status:'built' },
+        { r:'Auditability — full activity log', tier:'nice', lands:'Phase 1', status:'built' },
+        { r:'Automated workflow optimization (auto-assignment)', tier:'nice', lands:'Phase 2', status:'tobuild' },
+      ]},
+      { cat:'Procedures', rows:[
+        { r:'Centralized work instructions — single source of truth', tier:'must', lands:'Phase 1', status:'built' },
+        { r:'Version control with visibility into changes', tier:'must', lands:'Phase 1', status:'built' },
+        { r:'Approval workflows &amp; acknowledgement', tier:'nice', lands:'Phase 1', status:'built' },
+        { r:'Custom / multi-step approval flow', tier:'nice', lands:'Phase 1', status:'tobuild' },
+        { r:'Retraining triggers (acknowledgement-as-training)', tier:'nice', lands:'Phase 1', status:'tobuild' },
+        { r:'Auto-update observation forms when a WI changes', tier:'nice', lands:'Phase 2', status:'tobuild' },
+      ]},
+      { cat:'Observations', rows:[
+        { r:'Capture observations with context (comments, actions, media)', tier:'must', lands:'Phase 2', status:'built' },
+        { r:'Real-time observation tracking', tier:'must', lands:'Phase 2', status:'built' },
+        { r:'Follow-up observation tracking', tier:'must', lands:'Phase 2', status:'built' },
+        { r:'Dashboards: completion &amp; performance visibility', tier:'must', lands:'Phase 2', status:'built' },
+        { r:'Ingest performance data to inform observations', tier:'must', lands:'Phase 2', status:'tobuild' },
+        { r:'Historical context during observations', tier:'nice', lands:'Phase 2', status:'built' },
+        { r:'Timestamp + notes visibility', tier:'nice', lands:'Phase 2', status:'built' },
+        { r:'Observer performance tracking', tier:'nice', lands:'Phase 2', status:'built' },
+        { r:'Targeted observations with prioritized action queue', tier:'nice', lands:'Phase 2', status:'built' },
+        { r:'Automated coaching recommendations', tier:'nice', lands:'Phase 2', status:'tobuild' },
+        { r:'Offline cache', tier:'nice', lands:'Phase 2', status:'tobuild' },
+      ]},
+      { cat:'Training', rows:[
+        { r:'Role-to-work-instruction mapping', tier:'must', lands:'Phase 3', status:'built' },
+        { r:'Basic skill tracking by associate', tier:'must', lands:'Phase 3', status:'built' },
+        { r:'Proficiency levels, recency tracking', tier:'nice', lands:'Phase 3', status:'tobuild' },
+        { r:'Knowledge assessments &amp; ability validation', tier:'nice', lands:'Phases 3–4', status:'tobuild' },
+      ]},
+    ];
+
+    // ---------- renders ----------
+    function renderPlatform() {
+      document.getElementById('platform-grid').innerHTML = CAPABILITIES.map(c => `
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 hover:shadow-sm transition-shadow">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-10 h-10 rounded-xl bg-brand/10 text-brand-dark flex items-center justify-center flex-shrink-0">${svg(ICON[c.icon])}</span>
+            <h3 class="font-bold text-gray-900 text-lg leading-tight">${c.title}</h3>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed mb-4">${c.value}</p>
+          <ul class="space-y-1.5">
+            ${c.features.map(f => `<li class="flex items-start gap-2 text-[13px] text-gray-700"><span class="text-brand mt-0.5">✓</span><span>${f}</span></li>`).join('')}
+          </ul>
+        </div>`).join('');
+
+      document.getElementById('platform-bridge').innerHTML = `
+        <div class="rounded-2xl border border-brand/30 bg-gradient-to-br from-emerald-50/70 to-white p-6 flex items-start gap-4">
+          <span class="w-10 h-10 rounded-xl bg-brand/15 text-brand-dark flex items-center justify-center flex-shrink-0">${svg(ICON[BRIDGE.icon])}</span>
+          <div>
+            <h3 class="font-bold text-gray-900 text-lg mb-1">${BRIDGE.title}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">${BRIDGE.value}</p>
+          </div>
+        </div>`;
+    }
+
+    function renderLoop() {
+      document.getElementById('loop').innerHTML = LOOP.map((step, i) => `
+        <span class="inline-flex items-center px-3.5 py-2 rounded-full bg-white border border-gray-200 text-sm font-semibold text-gray-700 shadow-sm">${step}</span>
+        ${i < LOOP.length - 1 ? '<span class="text-gray-300">→</span>' : ''}`).join('');
+    }
+
+    function renderGrowth() {
+      document.getElementById('grows-list').innerHTML = GROWTH.map(m => `
+        <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden">
+          <div class="h-1" style="background:${m.accent}"></div>
+          <div class="p-7 md:flex gap-8">
+            <div class="md:w-2/5 mb-5 md:mb-0">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full" style="color:${m.accent};background:${m.soft}">${m.phase}</span>
+              </div>
+              <h3 class="text-2xl font-extrabold text-gray-900 mb-2">${m.name}</h3>
+              <p class="text-base font-semibold text-gray-800 leading-snug mb-3">${m.tagline}</p>
+              <p class="text-sm text-gray-600 leading-relaxed">${m.desc}</p>
+            </div>
+            <div class="md:w-3/5 md:border-l md:border-gray-100 md:pl-8">
+              <p class="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-2">What it does</p>
+              <ul class="grid sm:grid-cols-2 gap-x-5 gap-y-1.5 mb-5">
+                ${m.does.map(d => `<li class="flex items-start gap-2 text-[13px] text-gray-700"><span style="color:${m.accent}" class="mt-0.5">✓</span><span>${d}</span></li>`).join('')}
+              </ul>
+              <div class="rounded-xl bg-gray-50 border border-gray-100 px-4 py-3">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400">As you grow</span>
+                <p class="text-[13px] text-gray-600 mt-0.5">${m.grows}</p>
+              </div>
+            </div>
+          </div>
+        </div>`).join('');
+    }
+
+    function renderRequirements() {
+      const STAT = { built:'<span class="chip chip-built">✓ Built</span>', tobuild:'<span class="chip chip-tobuild">⊕ To build</span>' };
+      const TAG = (t) => t === 'must' ? '<span class="tag tag-must">Must</span>' : '<span class="tag tag-nice">Nice</span>';
+      document.getElementById('req-root').innerHTML = REQUIREMENTS.map(g => `
+        <div>
+          <h3 class="text-sm font-bold uppercase tracking-widest text-gray-900 mb-2 pb-2 border-b-2" style="border-color:#1E1D1D">${g.cat}</h3>
+          <div class="divide-y divide-gray-100">
+            ${g.rows.map(row => `
+              <div class="py-3 flex items-center gap-3">
+                <span class="flex-1 text-[13.5px] text-gray-800">${row.r}</span>
+                <span class="flex items-center gap-2 flex-shrink-0">
+                  ${TAG(row.tier)}
+                  <span class="chip chip-phase">${row.lands}</span>
+                  ${STAT[row.status]}
+                </span>
+              </div>`).join('')}
+          </div>
+        </div>`).join('');
+    }
+
+    renderPlatform();
+    renderLoop();
+    renderGrowth();
+    renderRequirements();
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 8));
+  </script>
+</body>
+</html>
