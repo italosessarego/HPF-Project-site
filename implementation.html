@@ -103,8 +103,74 @@
     </div>
   </section>
 
+  <!-- PROCEDURE BREAKDOWN -->
+  <section class="py-20 bg-gray-50 border-y border-gray-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="fade-in text-center mb-14">
+        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">Inside Week 2</p>
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-3">From long SOPs to focused procedures</h2>
+        <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+          Your procedures often live as long, multi-topic documents. As we migrate them, we break them into focused, single-task procedures — easier to train on, observe against, and keep current.
+        </p>
+      </div>
+
+      <div class="fade-in flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-10 max-w-4xl mx-auto">
+        <!-- Source SOP -->
+        <div class="w-full sm:w-72 flex-shrink-0">
+          <div class="rounded-xl border border-gray-200 bg-white shadow-sm p-5">
+            <div class="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2">One long SOP</div>
+            <div class="font-bold text-gray-900 mb-4">Truck Receiving SOP</div>
+            <div class="space-y-2">
+              <div class="h-2 rounded bg-gray-200 w-1/2"></div>
+              <div class="h-1.5 rounded bg-gray-100"></div>
+              <div class="h-1.5 rounded bg-gray-100 w-5/6"></div>
+              <div class="h-2 rounded bg-gray-200 w-2/5 mt-1"></div>
+              <div class="h-1.5 rounded bg-gray-100 w-11/12"></div>
+              <div class="h-1.5 rounded bg-gray-100"></div>
+              <div class="h-2 rounded bg-gray-200 w-1/3 mt-1"></div>
+              <div class="h-1.5 rounded bg-gray-100 w-3/4"></div>
+              <div class="h-1.5 rounded bg-gray-100 w-5/6"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="flex flex-col items-center text-gray-400 flex-shrink-0">
+          <span class="text-[10px] font-bold uppercase tracking-wider mb-1.5">Broken into</span>
+          <svg class="w-7 h-7 rotate-90 lg:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+
+        <!-- Resulting work instructions -->
+        <div class="grid grid-cols-2 gap-3 w-full lg:max-w-md">
+          <div class="rounded-lg border border-gray-200 bg-white p-3.5 shadow-sm">
+            <div class="w-7 h-1 rounded-full mb-2" style="background:#10B981"></div>
+            <div class="text-[13px] font-semibold text-gray-900 mb-2">Unload &amp; stage</div>
+            <div class="space-y-1"><div class="h-1.5 rounded bg-gray-100"></div><div class="h-1.5 rounded bg-gray-100 w-2/3"></div></div>
+          </div>
+          <div class="rounded-lg border border-gray-200 bg-white p-3.5 shadow-sm">
+            <div class="w-7 h-1 rounded-full mb-2" style="background:#3B82F6"></div>
+            <div class="text-[13px] font-semibold text-gray-900 mb-2">Verify against manifest</div>
+            <div class="space-y-1"><div class="h-1.5 rounded bg-gray-100"></div><div class="h-1.5 rounded bg-gray-100 w-2/3"></div></div>
+          </div>
+          <div class="rounded-lg border border-gray-200 bg-white p-3.5 shadow-sm">
+            <div class="w-7 h-1 rounded-full mb-2" style="background:#8B5CF6"></div>
+            <div class="text-[13px] font-semibold text-gray-900 mb-2">Scan into inventory</div>
+            <div class="space-y-1"><div class="h-1.5 rounded bg-gray-100"></div><div class="h-1.5 rounded bg-gray-100 w-2/3"></div></div>
+          </div>
+          <div class="rounded-lg border border-gray-200 bg-white p-3.5 shadow-sm">
+            <div class="w-7 h-1 rounded-full mb-2" style="background:#DB2777"></div>
+            <div class="text-[13px] font-semibold text-gray-900 mb-2">Report damages</div>
+            <div class="space-y-1"><div class="h-1.5 rounded bg-gray-100"></div><div class="h-1.5 rounded bg-gray-100 w-2/3"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="fade-in text-center text-xs text-gray-400 mt-8">Illustrative example — your actual breakdown is defined together during migration.</p>
+    </div>
+  </section>
+
   <!-- SUPPORT -->
-  <section class="py-20 bg-gray-50 border-t border-gray-100">
+  <section class="py-20 bg-white">
     <div class="max-w-4xl mx-auto px-6">
       <div class="fade-in text-center mb-10">
         <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">Support</p>
@@ -162,6 +228,7 @@
         ],
         we:[
           'Transfers your existing procedures into MeetBean’s procedure editor',
+          'Breaks long, multi-topic SOPs into focused, single-task procedures (work instructions) where it helps',
           'Imports your core users (procedure owners and supervisors first)',
           'Assigns draft procedures to the correct owners',
           'Notifies each owner: “You’ve been assigned as author — review, confirm tags, and publish when ready.”',
@@ -191,7 +258,7 @@
       { icon:'🏷️', title:'Your Job Functions & Tags', csv:true,
         desc:'The categories you use to organize your procedures (e.g. Safety, Quality, Equipment) — these become the tag system in MeetBean. Most important to start are your Job Functions (e.g. Inbound, Outbound, Picking). Don’t overthink it; you can refine later.' },
       { icon:'📄', title:'Your Existing Procedures',
-        desc:'Your current Standard Operating Procedures in any format — Word docs, PDFs, Google Docs, printed binders. MeetBean migrates these into the platform for you. We work through them together in Week 2.' },
+        desc:'Your current Standard Operating Procedures in any format — Word docs, PDFs, Google Docs, printed binders. MeetBean migrates these into the platform for you, breaking long SOPs into focused procedures where it helps. We work through them together in Week 2.' },
     ];
 
     function renderTimeline() {
