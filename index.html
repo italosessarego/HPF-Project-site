@@ -111,12 +111,10 @@
         <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">For the record</p>
         <h2 class="text-4xl font-extrabold text-gray-900 mb-3">Your requirements, addressed</h2>
         <p class="text-gray-500 text-lg max-w-2xl mx-auto">
-          Every requirement you raised in discovery, and where each one lands across the rollout.
+          Every requirement you raised in discovery, grouped by the phase that delivers it.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-5 text-xs text-gray-500">
-          <span class="flex items-center gap-1.5"><span class="chip chip-built">✓ Built</span> available in the platform today</span>
-          <span class="flex items-center gap-1.5"><span class="chip chip-tobuild">⊕ To build</span> delivered during that phase</span>
-          <span class="flex items-center gap-1.5"><span class="tag tag-must">Must</span> / <span class="tag tag-nice">Nice</span> your stated priority</span>
+          <span class="flex items-center gap-1.5"><span class="tag tag-must">Must</span> / <span class="tag tag-nice">Nice</span> your stated priority in discovery</span>
         </div>
       </div>
       <div id="req-root" class="fade-in"></div>
@@ -169,48 +167,50 @@
     const LOOP = ['Procedure','Observation','Training','Certification'];
 
     // ---------- APPENDIX: HFT requirements → where each lands ----------
+    // Grouped by the phase that delivers each requirement (one home phase, by first use).
+    // tier = Harbor Freight's stated priority: 'must' | 'nice' | null (we proposed it).
     const REQUIREMENTS = [
-      { cat:'Platform', rows:[
-        { r:'End-to-end loop: procedure → observation → action → outcome', tier:'must', lands:'Phases 1–2', status:'built' },
-        { r:'Execute &amp; track procedure activities', tier:'must', lands:'Phase 1', status:'built' },
-        { r:'Mobile / tablet-friendly, intuitive UX', tier:'must', lands:'Phase 1', status:'built' },
-        { r:'Role-based access control', tier:'must', lands:'Phase 1', status:'built' },
-        { r:'Secure, scalable platform with data ownership', tier:'must', lands:'Phase 1', status:'built' },
-        { r:'Scalability across sites', tier:'must', lands:'Phase 1', status:'built' },
-        { r:'Data ownership', tier:'must', lands:'Phase 1', status:'built' },
-        { r:'Security &amp; compliance (SOC 2)', tier:'must', lands:'Phase 1', status:'tobuild' },
-        { r:'Ingest external data (productivity, quality, attendance)', tier:'must', lands:'Phase 2', status:'tobuild' },
-        { r:'Unified data model across modules', tier:'nice', lands:'Phase 1', status:'built' },
-        { r:'Auditability: full activity log', tier:'nice', lands:'Phase 1', status:'built' },
-        { r:'Automated workflow optimization (auto-assignment)', tier:'nice', lands:'Phase 2', status:'tobuild' },
+      { phase:1, label:'Phase 1', modules:'Platform &amp; Procedures', rows:[
+        { r:'End-to-end loop: procedure → observation → action → outcome', tier:'must' },
+        { r:'Execute &amp; track procedure activities', tier:'must' },
+        { r:'Mobile / tablet-friendly, intuitive UX', tier:'must' },
+        { r:'Role-based access control', tier:'must' },
+        { r:'Secure, scalable platform with data ownership', tier:'must' },
+        { r:'Scalability across sites', tier:'must' },
+        { r:'Data ownership', tier:'must' },
+        { r:'Unified data model across modules', tier:'nice' },
+        { r:'Auditability: full activity log', tier:'nice' },
+        { r:'Centralized procedures as a single source of truth', tier:'must' },
+        { r:'Version control with visibility into changes', tier:'must' },
+        { r:'Approval workflows &amp; acknowledgement', tier:'nice' },
+        { r:'Custom / multi-step approval flow', tier:'nice' },
+        { r:'Retraining triggers (acknowledgement-as-training)', tier:'nice' },
+        { r:'Bulk-assign acknowledgers by job function &amp; site', tier:'nice' },
       ]},
-      { cat:'Procedures', rows:[
-        { r:'Centralized procedures as a single source of truth', tier:'must', lands:'Phase 1', status:'built' },
-        { r:'Version control with visibility into changes', tier:'must', lands:'Phase 1', status:'built' },
-        { r:'Approval workflows &amp; acknowledgement', tier:'nice', lands:'Phase 1', status:'built' },
-        { r:'Bulk-assign acknowledgers by job function &amp; site', tier:'nice', lands:'Phase 2', status:'tobuild' },
-        { r:'Custom / multi-step approval flow', tier:'nice', lands:'Phase 1', status:'tobuild' },
-        { r:'Retraining triggers (acknowledgement-as-training)', tier:'nice', lands:'Phase 1', status:'tobuild' },
-        { r:'Auto-update observation forms when a procedure changes', tier:'nice', lands:'Phase 2', status:'tobuild' },
+      { phase:2, label:'Phase 2', modules:'Observations', rows:[
+        { r:'Capture observations with context (comments, actions, media)', tier:'must' },
+        { r:'Real-time observation tracking', tier:'must' },
+        { r:'Follow-up observation tracking', tier:'must' },
+        { r:'Dashboards: completion &amp; performance visibility', tier:'must' },
+        { r:'Ingest performance data to inform observations', tier:'must' },
+        { r:'Historical context during observations', tier:'nice' },
+        { r:'Timestamp + notes visibility', tier:'nice' },
+        { r:'Observer performance tracking', tier:'nice' },
+        { r:'Targeted observations with prioritized action queue', tier:'nice' },
+        { r:'Role-based auto-assignment', tier:'nice' },
+        { r:'Automated coaching recommendations', tier:'nice' },
+        { r:'Auto-update observation forms when a procedure changes', tier:'nice' },
+        { r:'Offline cache', tier:'nice' },
       ]},
-      { cat:'Observations', rows:[
-        { r:'Capture observations with context (comments, actions, media)', tier:'must', lands:'Phase 2', status:'built' },
-        { r:'Real-time observation tracking', tier:'must', lands:'Phase 2', status:'built' },
-        { r:'Follow-up observation tracking', tier:'must', lands:'Phase 2', status:'built' },
-        { r:'Dashboards: completion &amp; performance visibility', tier:'must', lands:'Phase 2', status:'built' },
-        { r:'Ingest performance data to inform observations', tier:'must', lands:'Phase 2', status:'tobuild' },
-        { r:'Historical context during observations', tier:'nice', lands:'Phase 2', status:'built' },
-        { r:'Timestamp + notes visibility', tier:'nice', lands:'Phase 2', status:'built' },
-        { r:'Observer performance tracking', tier:'nice', lands:'Phase 2', status:'built' },
-        { r:'Targeted observations with prioritized action queue', tier:'nice', lands:'Phase 2', status:'built' },
-        { r:'Automated coaching recommendations', tier:'nice', lands:'Phase 2', status:'tobuild' },
-        { r:'Offline cache', tier:'nice', lands:'Phase 2', status:'tobuild' },
+      { phase:3, label:'Phase 3', modules:'Training', rows:[
+        { r:'Role-to-procedure mapping', tier:'must' },
+        { r:'Basic skill tracking by associate', tier:'must' },
+        { r:'Proficiency levels, recency tracking', tier:'nice' },
+        { r:'Knowledge assessments &amp; ability validation', tier:'nice' },
       ]},
-      { cat:'Training', rows:[
-        { r:'Role-to-procedure mapping', tier:'must', lands:'Phase 3', status:'built' },
-        { r:'Basic skill tracking by associate', tier:'must', lands:'Phase 3', status:'built' },
-        { r:'Proficiency levels, recency tracking', tier:'nice', lands:'Phase 3', status:'tobuild' },
-        { r:'Knowledge assessments &amp; ability validation', tier:'nice', lands:'Phases 3–4', status:'tobuild' },
+      { phase:null, label:'Customizations', modules:'Configured per your environment', rows:[
+        { r:'Security &amp; compliance (SOC 2)', tier:'must' },
+        { r:'SSO / SAML', tier:null },
       ]},
     ];
 
@@ -286,26 +286,36 @@
     }
 
     function renderRequirements() {
-      const STAT = { built:'<span class="chip chip-built">✓ Built</span>', tobuild:'<span class="chip chip-tobuild">⊕ To build</span>' };
-      const TAG = (t) => t === 'must' ? '<span class="tag tag-must">Must</span>' : '<span class="tag tag-nice">Nice</span>';
+      const TAG = (t) => t === 'must' ? '<span class="tag tag-must">Must</span>'
+                       : t === 'nice' ? '<span class="tag tag-nice">Nice</span>'
+                       : '<span class="text-gray-300 text-sm">—</span>';
 
       const groups = REQUIREMENTS.map((g, gi) => {
         const id = `req-${gi}`;
-        const tobuild = g.rows.filter(r => r.status === 'tobuild').length;
-        const summary = tobuild
-          ? `${g.rows.length} items · <span class="text-orange-600 font-medium">${tobuild} to build</span>`
-          : `${g.rows.length} items`;
-        const rows = g.rows.map(row => `
-          <div class="flex items-center gap-3 px-5 py-3 pl-12 border-t border-gray-100">
-            <span class="flex-1 text-[13px] text-gray-700">${row.r}</span>
-            <span class="flex items-center gap-2 flex-shrink-0">${TAG(row.tier)} ${phaseChip(row.lands)} ${STAT[row.status]}</span>
-          </div>`).join('');
+        const pal = g.phase ? PHASE_PALETTE[g.phase] : null;
+        const heading = pal
+          ? `<span class="text-[11px] font-bold uppercase tracking-wider" style="color:${pal.text}">${g.label}</span>
+             <span class="text-gray-300">·</span>
+             <span class="font-semibold text-gray-900">${g.modules}</span>`
+          : `<span class="font-semibold text-gray-900">${g.label}</span>
+             <span class="text-gray-300">·</span>
+             <span class="text-sm text-gray-500">${g.modules}</span>`;
+        const rows = `
+          <div class="flex items-center gap-3 px-5 py-2 pl-12 border-t border-gray-100 bg-gray-50/40 text-[10px] uppercase tracking-wider text-gray-400">
+            <span class="flex-1">Requirement</span>
+            <span class="w-32 text-right">HBF requirement</span>
+          </div>
+          ${g.rows.map(row => `
+            <div class="flex items-center gap-3 px-5 py-3 pl-12 border-t border-gray-100">
+              <span class="flex-1 text-[13px] text-gray-700">${row.r}</span>
+              <span class="w-32 text-right">${TAG(row.tier)}</span>
+            </div>`).join('')}`;
         return `
           <div class="border-b border-gray-200 last:border-b-0">
-            <button onclick="toggleReq('${id}', this)" class="w-full flex items-center gap-3 px-5 py-4 bg-gray-50/40 hover:bg-gray-50 transition-colors text-left">
+            <button onclick="toggleReq('${id}', this)" class="w-full flex items-center gap-2.5 px-5 py-4 bg-gray-50/40 hover:bg-gray-50 transition-colors text-left">
               <svg class="reqchev w-4 h-4 text-gray-400 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-              <span class="font-semibold text-gray-900">${g.cat}</span>
-              <span class="ml-auto text-xs text-gray-500">${summary}</span>
+              ${heading}
+              <span class="ml-auto text-xs text-gray-500">${g.rows.length} items</span>
             </button>
             <div id="${id}" class="reqbody hidden bg-white">${rows}</div>
           </div>`;
