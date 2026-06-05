@@ -153,7 +153,7 @@
         tagline:'See whether the work is actually done to standard, and act on the gaps.',
         desc:'Turn any procedure into a field observation. Observers score execution step-by-step on mobile, with coverage and adherence metrics that show exactly where practice drifts from the standard, plus a prioritized queue to follow up.',
         does:['Graduated step scoring with live feedback','Mobile step-by-step capture','Coverage &amp; adherence dashboards','Follow-up + prioritized action queue'],
-        grows:'Observations targeted by productivity &amp; quality data, automated coaching recommendations, and offline field capture.' },
+        grows:'Onboarding automation that assigns the right training and follow-up observation when someone changes role, observations targeted by productivity &amp; quality data, photo &amp; signature capture in the field, automated coaching, and offline use.' },
       { name:'Training', phase:'Phase 3', accent:'#8B5CF6', soft:'#F5F3FF',
         tagline:'Build and prove competency on the procedures that govern the work.',
         desc:'Trainer and trainee complete a co-signed checklist tied directly to the procedure. Supervisors see completion, overdue and time-to-complete at a glance. Training maps to your actual procedures, not a separate silo.',
@@ -163,7 +163,7 @@
         tagline:'Audit-ready proof that qualifications are current.',
         desc:'Track who is certified on what, tied to the trainings and observations that earned it, so an auditor (or an incident review) gets a clean, current answer.',
         does:['Certification definition &amp; completion tracking'],
-        grows:'Validity periods &amp; expiration status, renewal / recertification workflows, prerequisite enforcement, and knowledge checks.' },
+        grows:'Validity &amp; expiry tracking with 90 / 30 / 7-day reminders and an approaching-expiry dashboard, per-step evidence upload, renewal / recertification workflows, and prerequisite enforcement.' },
     ];
 
     const LOOP = ['Procedure','Observation','Training','Certification'];
@@ -188,6 +188,12 @@
         { r:'Custom / multi-step approval flow', tier:'nice', roadmap:true },
         { r:'Retraining triggers (acknowledgement-as-training)', tier:'nice', roadmap:true },
         { r:'Bulk-assign acknowledgers by job function &amp; site', tier:'nice', roadmap:true },
+        { r:'SharePoint / CSV bulk import', tier:null, roadmap:true },
+        { r:'Re-acknowledgement reminders on procedure updates', tier:null, roadmap:true },
+        { r:'Scheduled email report digests', tier:null, roadmap:true },
+        { r:'Department / location comparison dashboards', tier:null, roadmap:true },
+        { r:'Report export (PDF &amp; raw CSV)', tier:null, roadmap:true },
+        { r:'Shift assignments &amp; scheduling', tier:null, roadmap:true },
       ]},
       { phase:2, label:'Phase 2', modules:'Observations', rows:[
         { r:'Capture observations with context (comments, actions, media)', tier:'must' },
@@ -203,6 +209,9 @@
         { r:'Automated coaching recommendations', tier:'nice', roadmap:true },
         { r:'Auto-update observation forms when a procedure changes', tier:'nice', roadmap:true },
         { r:'Offline cache', tier:'nice', roadmap:true },
+        { r:'Onboarding automation: auto-assign training &amp; follow-up observation on role change', tier:null, roadmap:true },
+        { r:'Photo / camera capture in the field', tier:null, roadmap:true },
+        { r:'On-site signature capture', tier:null, roadmap:true },
       ]},
       { phase:3, label:'Phase 3', modules:'Training', rows:[
         { r:'Role-to-procedure mapping', tier:'must' },
@@ -215,6 +224,9 @@
         { r:'Validity periods &amp; expiration status', tier:null, roadmap:true },
         { r:'Renewal / recertification workflow', tier:null, roadmap:true },
         { r:'Prerequisite enforcement', tier:null, roadmap:true },
+        { r:'Expiry reminders (90 / 30 / 7-day)', tier:null, roadmap:true },
+        { r:'Approaching-expiry dashboard widget', tier:null, roadmap:true },
+        { r:'Per-step evidence upload', tier:null, roadmap:true },
       ]},
       { phase:null, label:'Customizations', modules:'Configured per your environment', rows:[
         { r:'Security &amp; compliance (SOC 2)', tier:'must' },
