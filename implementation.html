@@ -211,7 +211,7 @@
           <div>
             <h3 class="font-bold text-gray-900 mb-1">${c.title}</h3>
             <p class="text-sm text-gray-600 leading-relaxed">${c.desc}</p>
-            ${c.csv ? '<a href="#" class="inline-flex items-center gap-1 mt-2 text-xs font-semibold text-brand-dark hover:text-brand">↓ CSV template</a>' : ''}
+            ${c.csv ? '<span class="inline-flex items-center gap-1.5 mt-2.5 text-xs font-semibold text-gray-400"><span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>CSV template · coming soon</span>' : ''}
           </div>
         </div>`).join('');
     }
