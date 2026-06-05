@@ -34,6 +34,7 @@
     .chip-built   { background:#ECFDF5; color:#047857; border:1px solid #A7F3D0; }
     .chip-tobuild { background:#FFF7ED; color:#C2410C; border:1px solid #FED7AA; }
     .chip-phase   { background:#F1F5F9; color:#475569; border:1px solid #E2E8F0; }
+    .chip-roadmap { background:#FFF7ED; color:#C2410C; border:1px solid #FED7AA; }
     .tag { display:inline-block; font-size:9px; font-weight:700; letter-spacing:.03em; padding:1px 6px; border-radius:4px; }
     .tag-must { background:#1E1D1D; color:#fff; }
     .tag-nice { background:#E5E7EB; color:#4B5563; }
@@ -115,6 +116,7 @@
         </p>
         <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-5 text-xs text-gray-500">
           <span class="flex items-center gap-1.5"><span class="tag tag-must">Must</span> / <span class="tag tag-nice">Nice</span> your stated priority in discovery</span>
+          <span class="flex items-center gap-1.5"><span class="chip chip-roadmap">Roadmap</span> planned, not yet built</span>
         </div>
       </div>
       <div id="req-root" class="fade-in"></div>
@@ -183,30 +185,30 @@
         { r:'Centralized procedures as a single source of truth', tier:'must' },
         { r:'Version control with visibility into changes', tier:'must' },
         { r:'Approval workflows &amp; acknowledgement', tier:'nice' },
-        { r:'Custom / multi-step approval flow', tier:'nice' },
-        { r:'Retraining triggers (acknowledgement-as-training)', tier:'nice' },
-        { r:'Bulk-assign acknowledgers by job function &amp; site', tier:'nice' },
+        { r:'Custom / multi-step approval flow', tier:'nice', roadmap:true },
+        { r:'Retraining triggers (acknowledgement-as-training)', tier:'nice', roadmap:true },
+        { r:'Bulk-assign acknowledgers by job function &amp; site', tier:'nice', roadmap:true },
       ]},
       { phase:2, label:'Phase 2', modules:'Observations', rows:[
         { r:'Capture observations with context (comments, actions, media)', tier:'must' },
         { r:'Real-time observation tracking', tier:'must' },
         { r:'Follow-up observation tracking', tier:'must' },
         { r:'Dashboards: completion &amp; performance visibility', tier:'must' },
-        { r:'Ingest performance data to inform observations', tier:'must' },
+        { r:'Ingest performance data to inform observations', tier:'must', roadmap:true },
         { r:'Historical context during observations', tier:'nice' },
         { r:'Timestamp + notes visibility', tier:'nice' },
         { r:'Observer performance tracking', tier:'nice' },
         { r:'Targeted observations with prioritized action queue', tier:'nice' },
-        { r:'Role-based auto-assignment', tier:'nice' },
-        { r:'Automated coaching recommendations', tier:'nice' },
-        { r:'Auto-update observation forms when a procedure changes', tier:'nice' },
-        { r:'Offline cache', tier:'nice' },
+        { r:'Role-based auto-assignment', tier:'nice', roadmap:true },
+        { r:'Automated coaching recommendations', tier:'nice', roadmap:true },
+        { r:'Auto-update observation forms when a procedure changes', tier:'nice', roadmap:true },
+        { r:'Offline cache', tier:'nice', roadmap:true },
       ]},
       { phase:3, label:'Phase 3', modules:'Training', rows:[
         { r:'Role-to-procedure mapping', tier:'must' },
         { r:'Basic skill tracking by associate', tier:'must' },
-        { r:'Proficiency levels, recency tracking', tier:'nice' },
-        { r:'Knowledge assessments &amp; ability validation', tier:'nice' },
+        { r:'Proficiency levels, recency tracking', tier:'nice', roadmap:true },
+        { r:'Knowledge assessments &amp; ability validation', tier:'nice', roadmap:true },
       ]},
       { phase:null, label:'Customizations', modules:'Configured per your environment', rows:[
         { r:'Security &amp; compliance (SOC 2)', tier:'must' },
@@ -307,7 +309,7 @@
           </div>
           ${g.rows.map(row => `
             <div class="flex items-center gap-3 px-5 py-3 pl-12 border-t border-gray-100">
-              <span class="flex-1 text-[13px] text-gray-700">${row.r}</span>
+              <span class="flex-1 text-[13px] text-gray-700">${row.r}${row.roadmap ? ' <span class="chip chip-roadmap align-middle ml-1.5">Roadmap</span>' : ''}</span>
               <span class="w-32 text-right">${TAG(row.tier)}</span>
             </div>`).join('')}`;
         return `
