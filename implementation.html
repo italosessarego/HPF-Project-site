@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harbor Freight · Implementation Plan · MeetBean</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon-32.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        fontFamily: { sans: ['Inter', 'sans-serif'] },
+        colors: {
+          dark: { 900: '#1E1D1D', 800: '#1E1E24', 700: '#343E3F', 600: '#40424D' },
+          brand: { DEFAULT: '#70A593', light: '#9CC9BB', dark: '#508875' },
+        },
+      } },
+    };
+  </script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    nav.scrolled { box-shadow: 0 2px 16px 0 rgba(30,29,29,.10); }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+  <!-- NAV (shared two-page toggle) -->
+  <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm transition-shadow duration-300">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center">
+        <img src="assets/images/meetbean-logo-dark.svg" alt="meetBean" class="h-5" />
+      </a>
+      <div class="flex items-center gap-1 bg-gray-100 rounded-full p-1 text-sm font-medium">
+        <a href="index.html" class="px-4 py-1.5 rounded-full text-gray-500 hover:text-gray-900 transition-colors">Overview</a>
+        <a href="implementation.html" class="px-4 py-1.5 rounded-full bg-white text-gray-900 shadow-sm">Implementation plan</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="relative text-white pt-32 pb-20 overflow-hidden" style="background: linear-gradient(135deg, #1E1D1D 0%, #1E1E24 40%, #243330 100%);">
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><line x1=%220%22 y1=%2260%22 x2=%2260%22 y2=%220%22 stroke=%22white%22 stroke-width=%220.5%22/></svg>'); background-size:60px 60px;"></div>
+    <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand/10 blur-[120px]"></div>
+
+    <div class="relative max-w-3xl mx-auto px-6 text-center">
+      <p class="fade-in text-brand-light text-sm font-medium tracking-widest uppercase mb-5">Implementation plan</p>
+      <h1 class="fade-in text-4xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.15] mb-6" style="transition-delay:.1s">
+        Let&rsquo;s get your<br><span class="text-brand-light">procedures live.</span>
+      </h1>
+      <p class="fade-in text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto" style="transition-delay:.2s">
+        Getting set up is a collaborative process. MeetBean handles the technical heavy lifting; you provide the information and existing materials, then sign off at key checkpoints.
+      </p>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="fade-in text-center mb-12">
+        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">The plan</p>
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-3">Three weeks to live</h2>
+        <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+          From your existing SOPs to a published, governed procedure library across every site.
+        </p>
+      </div>
+      <div id="timeline" class="fade-in grid md:grid-cols-3 gap-5"></div>
+    </div>
+  </section>
+
+  <!-- WHAT WE NEED -->
+  <section class="py-20 bg-gray-50 border-y border-gray-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="fade-in text-center mb-12">
+        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">Before we start</p>
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-3">What we&rsquo;ll need from you</h2>
+        <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+          A short list to kick things off. We provide CSV templates for the data, and you can refine everything later.
+        </p>
+      </div>
+      <div id="checklist" class="fade-in grid md:grid-cols-2 gap-5"></div>
+    </div>
+  </section>
+
+  <!-- PHASES -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="fade-in text-center mb-12">
+        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">Week by week</p>
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-3">How it goes</h2>
+        <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+          Each week has a clear split: what you do, what MeetBean does, and what you walk away with.
+        </p>
+      </div>
+      <div id="phases" class="fade-in space-y-5"></div>
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section class="py-20 bg-gray-50 border-t border-gray-100">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="fade-in text-center mb-10">
+        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">Support</p>
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-3">We&rsquo;re here when you need us</h2>
+        <p class="text-gray-500 text-base max-w-2xl mx-auto">
+          Questions, issues, or something doesn&rsquo;t look right — reach out. We&rsquo;re a small, responsive team and treat every request seriously.
+        </p>
+      </div>
+      <div class="fade-in grid sm:grid-cols-2 gap-5">
+        <div class="rounded-2xl border border-gray-200 bg-white p-6">
+          <h3 class="font-bold text-gray-900 mb-1">General support</h3>
+          <p class="text-sm text-gray-600 mb-3">Questions about using the platform, user management, procedure setup, or anything else.</p>
+          <a href="mailto:support@meetbean.ai" class="text-brand-dark font-semibold text-sm">support@meetbean.ai</a>
+          <p class="text-xs text-gray-400 mt-2">Response within 1 business day.</p>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-white p-6">
+          <h3 class="font-bold text-gray-900 mb-1">Urgent issues</h3>
+          <p class="text-sm text-gray-600 mb-3">Platform outage, users locked out, data concerns, or anything blocking your operations.</p>
+          <a href="mailto:support@meetbean.ai" class="text-brand-dark font-semibold text-sm">support@meetbean.ai</a>
+          <p class="text-xs text-gray-400 mt-2">Include <strong>&ldquo;URGENT&rdquo;</strong> in the subject for same-day response.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark-900 text-gray-400 py-12">
+    <div class="max-w-6xl mx-auto px-6 flex items-center">
+      <img src="assets/images/meetbean-logo-light.svg" alt="meetBean" class="h-5 opacity-90" />
+    </div>
+  </footer>
+
+  <script>
+    const PHASES = [
+      { week:'Week 1', title:'Kickoff & Setup', accent:'#10B981', soft:'#ECFDF5',
+        you:[
+          'Designate your Implementation Lead and share their contact with MeetBean',
+          'Deliver your sites, team, and tags via the CSV templates above',
+          'Share your existing SOPs in any format',
+          'Confirm your org setup looks correct before we proceed',
+        ],
+        we:[
+          'Creates your organization and site structure in MeetBean',
+          'Imports your reference data (sites, tags, roles)',
+          'Creates your admin account and sends your invitation email',
+          'Schedules a kickoff call to walk through the platform together',
+        ],
+        deliverable:'Your admin account is active. Your organizational structure — sites, tags, and roles — is set up and ready.' },
+      { week:'Week 2', title:'Procedure Migration', accent:'#3B82F6', soft:'#EFF6FF',
+        you:[
+          'Identify who should own each procedure — responsible for its content and accuracy',
+          'Review draft procedures as they’re migrated into MeetBean',
+          'Confirm tags, steps, and content are accurate before publishing',
+          'Reviewers: respond to your assignment, review drafts, and publish; leave comments for the owner to address before resubmitting',
+        ],
+        we:[
+          'Transfers your existing procedures into MeetBean’s procedure editor',
+          'Imports your core users (procedure owners and supervisors first)',
+          'Assigns draft procedures to the correct owners',
+          'Notifies each owner: “You’ve been assigned as author — review, confirm tags, and publish when ready.”',
+        ],
+        deliverable:'Your core procedures are live and published. Procedure owners are onboarded and comfortable in the platform.' },
+      { week:'Week 3', title:'Go-Live', accent:'#8B5CF6', soft:'#F5F3FF',
+        you:[
+          'Deliver your full user roster CSV',
+          'Brief your site managers and supervisors before rollout',
+          'Roll out the published procedures to your operators',
+        ],
+        we:[
+          'Imports your full user roster',
+          'Sends every user an invitation email to set up their account',
+          'Stays on-call for support questions',
+        ],
+        deliverable:'All users are onboarded. Your procedures are live across every site. You’re live.' },
+    ];
+
+    const CHECKLIST = [
+      { icon:'👤', title:'An Implementation Lead',
+        desc:'One person at your organization who owns this project and is our main point of contact throughout setup. They should have authority to sign off on procedure content and user roles.' },
+      { icon:'📍', title:'Your Site List', csv:true,
+        desc:'The names of all your site locations that will use MeetBean. We use these to set up your organizational structure.' },
+      { icon:'👥', title:'Your Team Roles', csv:true,
+        desc:'Your team with full name, email, site assignment, and user role. Our roles are Admin, Executive, Site Manager, Supervisor, and Operator. Start with your core team — procedure owners and supervisors — then we add the rest once your procedures are set up.' },
+      { icon:'🏷️', title:'Your Job Functions & Tags', csv:true,
+        desc:'The categories you use to organize your procedures (e.g. Safety, Quality, Equipment) — these become the tag system in MeetBean. Most important to start are your Job Functions (e.g. Inbound, Outbound, Picking). Don’t overthink it; you can refine later.' },
+      { icon:'📄', title:'Your Existing Procedures',
+        desc:'Your current Standard Operating Procedures in any format — Word docs, PDFs, Google Docs, printed binders. MeetBean migrates these into the platform for you. We work through them together in Week 2.' },
+    ];
+
+    function renderTimeline() {
+      document.getElementById('timeline').innerHTML = PHASES.map((p, i) => `
+        <div class="relative rounded-2xl border p-5" style="border-color:${p.accent}33;background:${p.soft}66">
+          <span class="absolute top-0 left-5 right-5 h-1 rounded-b-full" style="background:${p.accent}"></span>
+          ${i < PHASES.length - 1 ? '<div class="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-6 h-6 rounded-full bg-white border border-gray-200 items-center justify-center text-gray-400 text-xs">→</div>' : ''}
+          <div class="text-[11px] font-bold uppercase tracking-wider mt-1 mb-1" style="color:${p.accent}">${p.week}</div>
+          <div class="text-xl font-extrabold text-gray-900">${p.title}</div>
+        </div>`).join('');
+    }
+
+    function renderChecklist() {
+      document.getElementById('checklist').innerHTML = CHECKLIST.map(c => `
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 flex items-start gap-4">
+          <span class="w-11 h-11 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-xl flex-shrink-0">${c.icon}</span>
+          <div>
+            <h3 class="font-bold text-gray-900 mb-1">${c.title}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">${c.desc}</p>
+            ${c.csv ? '<a href="#" class="inline-flex items-center gap-1 mt-2 text-xs font-semibold text-brand-dark hover:text-brand">↓ CSV template</a>' : ''}
+          </div>
+        </div>`).join('');
+    }
+
+    function renderPhases() {
+      document.getElementById('phases').innerHTML = PHASES.map((p, i) => {
+        const col = (label, items) => `
+          <div>
+            <p class="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-2">${label}</p>
+            <ul class="space-y-2">
+              ${items.map(it => `<li class="flex items-start gap-2 text-[13px] text-gray-700 leading-snug"><span class="mt-0.5 flex-shrink-0" style="color:${p.accent}">✓</span><span>${it}</span></li>`).join('')}
+            </ul>
+          </div>`;
+        return `
+          <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden">
+            <div class="h-1" style="background:${p.accent}"></div>
+            <div class="p-7">
+              <div class="flex items-center gap-3 mb-6">
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full" style="color:${p.accent};background:${p.soft}">${p.week}</span>
+                <h3 class="text-2xl font-extrabold text-gray-900">${p.title}</h3>
+              </div>
+              <div class="grid md:grid-cols-2 gap-8 mb-6">
+                ${col('You do', p.you)}
+                <div class="md:border-l md:border-gray-100 md:pl-8">${col('MeetBean does', p.we)}</div>
+              </div>
+              <div class="rounded-xl px-4 py-3 flex items-start gap-2.5" style="background:${p.soft}">
+                <span class="font-bold flex-shrink-0" style="color:${p.accent}">✓</span>
+                <p class="text-[13px] text-gray-700"><span class="font-semibold">By the end of ${p.week.toLowerCase()}:</span> ${p.deliverable}</p>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    renderTimeline();
+    renderChecklist();
+    renderPhases();
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+    setTimeout(() => document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight * 1.5) el.classList.add('visible');
+    }), 1500);
+
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 8));
+  </script>
+</body>
+</html>
