@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Harbor Freight · SOP Platform · MeetBean</title>
+  <title>Harbor Freight · Project Overview · MeetBean</title>
   <link rel="icon" type="image/png" href="assets/images/favicon-32.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,87 +12,67 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      theme: { extend: {
-        fontFamily: { sans: ['Inter', 'sans-serif'], display: ['DM Sans', 'sans-serif'] },
-        colors: {
-          dark: { 900: '#1E1D1D', 800: '#1E1E24', 700: '#343E3F', 600: '#40424D' },
-          brand: { DEFAULT: '#70A593', light: '#9CC9BB', dark: '#508875' },
-        },
-      } },
-    };
+    tailwind.config = { theme: { extend: {
+      fontFamily: { sans: ['Inter', 'sans-serif'], display: ['DM Sans', 'sans-serif'] },
+      colors: {
+        dark: { 900: '#1E1D1D', 800: '#1E1E24', 700: '#343E3F', 600: '#40424D' },
+        brand: { DEFAULT: '#70A593', light: '#9CC9BB', dark: '#508875' },
+      },
+    } } };
   </script>
 
   <style>
-    /* ============================================================
-       meetBean · Design System tokens  (minimal / futuristic)
-       Mirror these in every page's <style>. Source of truth:
-       design-system.html
-       ============================================================ */
     :root {
-      /* surfaces */
-      --paper:   #F3F3F3;   /* page base            (Cloud)   */
-      --surface: #FFFFFF;   /* cards / raised        */
-      --panel:   #ECECEC;   /* recessed panels       */
-      --ink:     #1E1D1D;   /* primary text          */
-      --ink-2:   #343E3F;   /* secondary / slate     */
-      --muted:   #5F626C;   /* muted body  (tuned for AA on paper)  */
-      --faint:   #6B6E7C;   /* light labels / hints  (tuned for AA)  */
-      --line:    rgba(30,29,29,.12);  /* hairline           */
-      --line-2:  rgba(30,29,29,.24);  /* stronger hairline  */
-      /* single accent — sage (use sparingly: dots, edges, fills, ONE highlight) */
-      --accent:      #508875;   /* accent text/edges on light */
-      --accent-mid:  #70A593;   /* brand default              */
-      --accent-soft: #9CC9BB;   /* fills                      */
-      --accent-wash: #EAF2EE;   /* faint tint background      */
-      /* radius — minimal */
-      --r-xs: 3px; --r-sm: 6px; --r-md: 10px; --r-pill: 999px;
+      --paper:#F3F3F3; --surface:#FFFFFF; --panel:#ECECEC;
+      --ink:#1E1D1D; --ink-2:#343E3F; --muted:#5F626C; --faint:#6B6E7C;
+      --line:rgba(30,29,29,.12); --line-2:rgba(30,29,29,.24);
+      --accent:#508875; --accent-mid:#70A593; --accent-soft:#9CC9BB; --accent-wash:#EAF2EE;
+      --indigo:#4F5E91; --indigo-mid:#6C7BA7; --indigo-soft:#AEB8D6;
+      --r-xs:3px; --r-sm:6px; --r-md:10px; --r-pill:999px;
     }
-
     body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); }
     h1, h2, h3, .font-display { font-family: 'DM Sans', sans-serif; letter-spacing: -0.02em; font-weight: 500; }
-
     .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
     nav.scrolled { box-shadow: 0 1px 0 0 var(--line); }
 
-    /* —— Swiss scaffolding —— */
-    .mono-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); }
-    .eyebrow .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--accent-mid); flex: none; }
-    .rule { height: 1px; background: var(--line); border: 0; }
+    .mono-label { font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; }
+    .eyebrow { display:inline-flex; align-items:center; gap:8px; color:var(--muted); }
+    .eyebrow .dot { width:6px; height:6px; border-radius:999px; background:var(--accent-mid); flex:none; }
+    .rule { height:1px; background:var(--line); border:0; }
     .grid-bg { background-image: linear-gradient(to right, rgba(30,29,29,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(30,29,29,.05) 1px, transparent 1px); background-size: 64px 64px; }
-    .stat { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 2.5rem; letter-spacing: -0.03em; line-height: 1; }
+    .stat { font-family:'DM Sans', sans-serif; font-weight:500; font-size:2.5rem; letter-spacing:-0.03em; line-height:1; }
+    .card { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); }
 
-    /* —— flat card —— */
-    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); }
+    /* status board */
+    .status-grid { display:flex; flex-direction:column; gap:16px; }
+    .checkbox { width:15px; height:15px; border:1.5px solid var(--line-2); border-radius:3px; flex:none; margin-top:1px; }
+    .pillst { display:inline-flex; align-items:center; gap:5px; font-size:10.5px; font-weight:500; letter-spacing:.02em; padding:2px 9px; border-radius:999px; white-space:nowrap; }
+    .pill-prog { color:var(--accent); background:var(--accent-wash); border:1px solid var(--accent-soft); }
+    .pill-idle { color:var(--muted); background:transparent; border:1px solid var(--line-2); }
+    .doclink { color:var(--ink); font-weight:500; text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--line-2); }
+    .doclink:hover { text-decoration-color:var(--ink); }
+    .codechip { font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--ink-2); background:var(--paper); border:1px solid var(--line-2); border-radius:var(--r-xs); padding:1px 7px; }
 
-    /* —— buttons —— */
-    .btn { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; padding: 9px 18px; border-radius: 999px; border: 1px solid var(--ink); color: var(--ink); background: transparent; transition: background .18s ease, color .18s ease; cursor: pointer; }
-    .btn:hover { background: var(--ink); color: #fff; }
-    .btn-accent { border-color: var(--accent); color: var(--accent); }
-    .btn-accent:hover { background: var(--accent); color: #fff; }
-    .btn-solid { background: var(--ink); color: #fff; border-color: var(--ink); }
-    .btn-solid:hover { background: var(--ink-2); border-color: var(--ink-2); }
-    /* circular icon button */
-    .btn-icon { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:999px; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); transition:background .18s ease, color .18s ease; cursor:pointer; }
-    .btn-icon:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
-
-    /* —— pills / tags (monochrome + one accent) —— */
+    /* features board */
     .pill { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:500; letter-spacing:.01em; padding:3px 11px; border-radius:999px; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); white-space:nowrap; }
-    .pill-solid  { background:var(--ink); color:#fff; border-color:var(--ink); }
-    .pill-accent { background:var(--accent-wash); color:var(--accent); border-color:var(--accent-soft); }
-    .pill .ring  { width:6px; height:6px; border-radius:999px; border:1.5px solid currentColor; flex:none; }
-
-    /* tier tags (Must / Nice) */
+    .pill .ring { width:6px; height:6px; border-radius:999px; border:1.5px solid currentColor; flex:none; }
     .tag { display:inline-block; font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; padding:2px 7px; border-radius:var(--r-xs); }
     .tag-must { background:var(--ink); color:#fff; }
     .tag-nice { background:transparent; color:var(--muted); border:1px solid var(--line-2); }
-
-    /* requirements accordion */
+    .btn { display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:500; padding:9px 18px; border-radius:999px; border:1px solid var(--ink); color:var(--ink); background:transparent; transition:background .18s ease, color .18s ease; cursor:pointer; }
+    .btn:hover { background:var(--ink); color:#fff; }
+    .btn-solid { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .btn-solid:hover { background:var(--ink-2); border-color:var(--ink-2); }
     .req-hdr { background:var(--surface); transition:background .15s ease; }
     .req-hdr:hover { background:var(--paper); }
     .reqchev.rotate-90 { transform: rotate(90deg); }
+
+    /* summary band */
+    .sumtile { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); padding:22px; }
+    .jump { display:inline-flex; align-items:center; gap:7px; font-size:13px; color:var(--ink); text-decoration:none; }
+    .jump:hover { color:var(--accent); }
+    .divider-eyebrow { display:flex; align-items:center; justify-content:space-between; gap:24px; }
   </style>
 </head>
 <body class="antialiased">
@@ -105,10 +85,9 @@
         <span class="mono-label hidden sm:inline" style="color:var(--faint)">/ Project</span>
       </a>
       <div class="flex items-center gap-1 sm:gap-1.5 text-[12.5px] sm:text-[13px] font-normal">
-        <span class="px-3 sm:px-4 py-1.5 font-medium" style="color:#9DA2B3; cursor:default" aria-current="page">Overview</span>
+        <span class="px-3 sm:px-4 py-1.5 font-medium" style="color:#9DA2B3; cursor:default" aria-current="page">Project Overview</span>
         <a href="implementation.html" class="px-3 sm:px-4 py-1.5 transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Implementation Plan</a>
-        <a href="status.html" class="px-3 sm:px-4 py-1.5 transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Status</a>
-        <span class="px-3 sm:px-4 py-1.5 inline-flex items-center gap-2" style="color:var(--faint); cursor:not-allowed" aria-disabled="true" title="Coming soon">Deployment Phases <span class="mono-label" style="font-size:9px; color:var(--faint); border:1px solid var(--line-2); border-radius:999px; padding:1px 6px">Soon</span></span>
+        <span class="px-3 sm:px-4 py-1.5" style="color:#B4B6C0; cursor:default" aria-disabled="true">Deployment Phases</span>
       </div>
     </div>
   </nav>
@@ -116,14 +95,11 @@
   <!-- HERO -->
   <section id="hero" class="relative overflow-hidden flex items-center" style="border-bottom:1px solid var(--line); min-height:84vh">
     <div class="grid-bg absolute inset-0" style="-webkit-mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%);"></div>
-
-    <!-- left vertical rail -->
     <div class="hidden lg:flex absolute left-0 top-16 bottom-0 w-14 flex-col items-center justify-between py-10" style="border-right:1px solid var(--line)">
       <span class="dot" style="width:7px;height:7px;border-radius:999px;background:var(--accent-mid)"></span>
       <span class="mono-label" style="writing-mode:vertical-rl; transform:rotate(180deg); color:var(--muted)">Project · Harbor&nbsp;Freight</span>
       <span class="mono-label" style="color:var(--faint)">01</span>
     </div>
-
     <div class="relative w-full px-6 sm:px-8 lg:pl-28 lg:pr-12 py-24">
       <div class="eyebrow mono-label lg:hidden mb-8"><span class="dot"></span><span>Project</span><span style="color:var(--line-2)">/</span><span>Harbor Freight</span></div>
       <h1 class="fade-in text-6xl md:text-7xl lg:text-8xl leading-[1.0] max-w-5xl" style="transition-delay:.1s">
@@ -132,72 +108,73 @@
     </div>
   </section>
 
-  <!-- REQUIREMENTS APPENDIX -->
-  <section id="requirements" class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line);">
+  <!-- SUMMARY BAND -->
+  <section class="py-16 md:py-20" style="background:var(--surface); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
-      <div class="fade-in">
-        <div class="flex items-center justify-between gap-6 mb-5">
-          <div class="eyebrow mono-label"><span class="dot"></span><span>For the record</span></div>
-          <span class="mono-label" style="color:var(--faint)">01 / 04</span>
-        </div>
-        <hr class="rule mb-9" />
-        <div class="max-w-2xl">
-          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Your requirements, addressed</h2>
-          <p class="text-lg leading-relaxed" style="color:var(--muted)">
-            Every requirement you raised in discovery, grouped by the phase that delivers it.
-          </p>
-        </div>
-        <div class="flex flex-wrap items-center gap-x-7 gap-y-2.5 mt-7 text-[13px]" style="color:var(--muted)">
-          <span class="flex items-center gap-2"><span class="tag tag-must">Must</span> <span class="tag tag-nice">Nice</span> your stated priority in discovery</span>
-          <span class="flex items-center gap-2"><span class="pill" style="padding:1px 9px"><span class="ring"></span>Roadmap</span> planned, not yet built</span>
-        </div>
+      <div class="fade-in divider-eyebrow mb-8">
+        <div class="eyebrow mono-label"><span class="dot"></span><span>At a glance</span></div>
+        <span class="mono-label" style="color:var(--faint)">As of Jun 18</span>
       </div>
-      <div id="req-root" class="fade-in mt-10"></div>
+      <div id="summary-tiles" class="fade-in grid grid-cols-2 lg:grid-cols-4 gap-4"></div>
+      <div class="fade-in flex flex-wrap gap-x-8 gap-y-3 mt-8">
+        <a class="jump" href="#where-things-stand">Where things stand <span style="color:var(--faint)">↓</span></a>
+        <a class="jump" href="#the-platform">The platform <span style="color:var(--faint)">↓</span></a>
+      </div>
     </div>
   </section>
 
-  <!-- THE PLATFORM (value-led) -->
-  <section id="platform" class="py-20 md:py-24" style="background:var(--paper)">
+  <!-- WHERE THINGS STAND -->
+  <section id="where-things-stand" class="py-20 md:py-24" style="background:var(--paper); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
-      <div class="fade-in">
-        <div class="flex items-center justify-between gap-6 mb-5">
-          <div class="eyebrow mono-label"><span class="dot"></span><span>What you&rsquo;re getting · Phase 1</span></div>
-          <span class="mono-label" style="color:var(--faint)">02 / 04</span>
+      <div class="fade-in mb-10">
+        <div class="divider-eyebrow mb-5">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Where things stand</span></div>
+          <span class="mono-label" style="color:var(--faint)">01 / 02</span>
         </div>
         <hr class="rule mb-9" />
         <div class="max-w-2xl">
-          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">A complete SOP platform</h2>
-          <p class="text-lg leading-relaxed" style="color:var(--muted)">
-            Replace scattered documents and tribal knowledge with one current, governed system for every procedure.
-          </p>
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Where things stand</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">Open items, reference documents, and the next steps lined up to keep the engagement moving.</p>
         </div>
       </div>
-      <div id="phase1-block" class="fade-in mt-10"></div>
+      <div id="status-stand-root" class="status-grid fade-in mb-4"></div>
+      <div id="status-next-root" class="status-grid fade-in"></div>
     </div>
   </section>
 
-  <!-- WHERE IT GROWS -->
-  <section id="grows" class="py-20 md:py-24" style="background:var(--surface); border-top:1px solid var(--line)">
+  <!-- THE PLATFORM -->
+  <section id="the-platform" class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
-      <div class="fade-in">
-        <div class="flex items-center justify-between gap-6 mb-5">
-          <div class="eyebrow mono-label"><span class="dot"></span><span>Where it grows · Phases 2–4</span></div>
-          <span class="mono-label" style="color:var(--faint)">03 / 04</span>
+      <div class="fade-in mb-10">
+        <div class="divider-eyebrow mb-5">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>The platform</span></div>
+          <span class="mono-label" style="color:var(--faint)">02 / 02</span>
         </div>
         <hr class="rule mb-9" />
         <div class="max-w-2xl">
-          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">One platform, a compounding system</h2>
-          <p class="text-lg leading-relaxed" style="color:var(--muted)">
-            Each module reuses the procedures you build in Phase 1, and together they close the loop from a written standard to proven, certified execution in the field.
-          </p>
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Your SOP platform, and where it grows</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">Every requirement from discovery, the complete Phase 1 platform, and the modules that extend it.</p>
         </div>
       </div>
 
-      <!-- closed-loop visual -->
-      <div id="loop" class="fade-in flex flex-wrap items-center gap-2 sm:gap-3 mt-12 mb-14"></div>
+      <!-- Requirements -->
+      <div class="fade-in mb-16">
+        <p class="mono-label mb-5" style="color:var(--faint)">Your requirements, addressed</p>
+        <div id="req-root"></div>
+      </div>
 
-      <!-- module blocks -->
-      <div id="grows-list" class="fade-in space-y-5"></div>
+      <!-- Phase 1 -->
+      <div class="fade-in mb-16">
+        <p class="mono-label mb-5" style="color:var(--faint)">What you&rsquo;re getting · Phase 1</p>
+        <div id="phase1-block"></div>
+      </div>
+
+      <!-- Where it grows -->
+      <div class="fade-in">
+        <p class="mono-label mb-5" style="color:var(--faint)">Where it grows · Phases 2–4</p>
+        <div id="loop" class="flex flex-wrap items-center gap-2 sm:gap-3 mb-12"></div>
+        <div id="grows-list" class="space-y-5"></div>
+      </div>
     </div>
   </section>
 
@@ -209,230 +186,33 @@
     </div>
   </footer>
 
-  <!-- DATA + RENDER -->
+  <script src="assets/js/features.js"></script>
+  <script src="assets/js/status.js"></script>
   <script>
-    // ---------- PHASE 1: the SOP platform (rich block — capability clusters) ----------
-    const PHASE1 = {
-      name:'The SOP Platform', phase:'Phase 1', accent:'#10B981', soft:'#ECFDF5',
-      tagline:'A complete Procedures system, live from day one.',
-      desc:'Everything Harbor Freight needs to author, govern, distribute and prove its procedures, on a secure multi-site foundation, on any device.',
-      clusters:[
-        { title:'Author &amp; control procedures', items:['Rich editor with text, tables &amp; media','Full version history with red-line diffs','Scheduled expiry &amp; review dates','Global search across every procedure'] },
-        { title:'Govern every change', items:['Recorded approval with timestamp','Multiple acknowledgers per procedure','Acknowledgment-rate tracking','Comment &amp; suggested-changes threads'] },
-        { title:'Secure, multi-site foundation', items:['Role- &amp; relationship-based access','Multi-site scoping','Full activity audit log','Mobile &amp; tablet ready'] },
-        { title:'Visibility &amp; reporting', items:['Acknowledgment &amp; procedure-status dashboards','Filter by site, job function &amp; date range','Overview reporting at a glance'] },
-      ],
-      grows:'Any procedure becomes the basis for an observation, training, or certification in one click. A unified data model ties it together, so Phase 1 is also the on-ramp to everything below.',
-      growsLabel:'Built to extend',
-    };
-
-    // ---------- PHASES 2–4: growth modules (value-led) ----------
-    const GROWTH = [
-      { name:'Observations', phase:'Phase 2', accent:'#3B82F6', soft:'#EFF6FF',
-        tagline:'See whether the work is actually done to standard, and act on the gaps.',
-        desc:'Turn any procedure into a field observation. Observers score execution step-by-step on mobile, with coverage and adherence metrics that show exactly where practice drifts from the standard, plus a prioritized queue to follow up.',
-        does:['Graduated step scoring with live feedback','Mobile step-by-step capture','Coverage &amp; adherence dashboards','Follow-up + prioritized action queue'],
-        grows:'Onboarding automation that assigns the right training and follow-up observation when someone changes role, observations targeted by productivity &amp; quality data, photo &amp; signature capture in the field, automated coaching, and offline use.' },
-      { name:'Training', phase:'Phase 3', accent:'#8B5CF6', soft:'#F5F3FF',
-        tagline:'Build and prove competency on the procedures that govern the work.',
-        desc:'Trainer and trainee complete a co-signed checklist tied directly to the procedure. Supervisors see completion, overdue and time-to-complete at a glance. Training maps to your actual procedures, not a separate silo.',
-        does:['Co-signed training delivery','Role-to-procedure mapping','Skill tracking by associate','Progress &amp; supervisor visibility'],
-        grows:'Proficiency levels, recency tracking, and a full skill inventory with gap forecasting.' },
-      { name:'Certifications', phase:'Phase 4', accent:'#DB2777', soft:'#FDF2F8',
-        tagline:'Audit-ready proof that qualifications are current.',
-        desc:'Track who is certified on what, tied to the trainings and observations that earned it, so an auditor (or an incident review) gets a clean, current answer.',
-        does:['Define certifications from procedures, training &amp; observations','Assign &amp; track completion','See who is certified at a glance','Certification completion reporting'],
-        grows:'Validity &amp; expiry tracking with 90 / 30 / 7-day reminders and an approaching-expiry dashboard, per-step evidence upload, renewal / recertification workflows, and prerequisite enforcement.' },
-    ];
-
-    const LOOP = ['Procedure','Observation','Training','Certification'];
-
-    // ---------- APPENDIX: HFT requirements → where each lands ----------
-    // Grouped by the phase that delivers each requirement (one home phase, by first use).
-    // tier = Harbor Freight's stated priority: 'must' | 'nice' | null (we proposed it).
-    const REQUIREMENTS = [
-      { phase:1, label:'Phase 1', modules:'Platform &amp; Procedures', rows:[
-        { r:'Execute &amp; track procedure activities', tier:'must' },
-        { r:'Mobile / tablet-friendly, intuitive UX', tier:'must' },
-        { r:'Role-based access control', tier:'must' },
-        { r:'Secure, scalable platform with data ownership', tier:'must' },
-        { r:'Scalability across sites', tier:'must' },
-        { r:'Data ownership', tier:'must' },
-        { r:'Unified data model across modules', tier:'nice' },
-        { r:'Auditability: full activity log', tier:'nice' },
-        { r:'Detailed support &amp; SLA structures', tier:'nice' },
-        { r:'Centralized procedures as a single source of truth', tier:'must' },
-        { r:'Version control with visibility into changes', tier:'must' },
-        { r:'Approval workflows with suggested changes and comments', tier:'nice' },
-        { r:'Acknowledgement workflows with notifications', tier:'nice' },
-      ]},
-      { phase:2, label:'Phase 2', modules:'Observations', rows:[
-        { r:'Capture observations with context (comments, actions, media)', tier:'must' },
-        { r:'Real-time observation tracking', tier:'must' },
-        { r:'Follow-up observation tracking', tier:'must' },
-        { r:'Dashboards: completion &amp; performance visibility', tier:'must' },
-        { r:'Ingest performance data to inform observations', tier:'must', roadmap:true },
-        { r:'Historical context during observations', tier:'nice' },
-        { r:'Timestamp + notes visibility', tier:'nice' },
-        { r:'Observer performance tracking', tier:'nice' },
-        { r:'Targeted observations with prioritized action queue', tier:'nice' },
-        { r:'Actionable insights &amp; trend analysis', tier:'nice' },
-        { r:'Role-based auto-assignment', tier:'nice', roadmap:true },
-        { r:'Automated coaching recommendations', tier:'nice', roadmap:true },
-        { r:'Auto-update observation forms when a procedure changes', tier:'nice', roadmap:true },
-        { r:'Offline cache', tier:'nice', roadmap:true },
-      ]},
-      { phase:3, label:'Phase 3', modules:'Training', rows:[
-        { r:'Role-to-procedure mapping', tier:'must' },
-        { r:'Basic skill tracking by associate', tier:'must' },
-        { r:'Proficiency levels, recency tracking', tier:'nice', roadmap:true },
-        { r:'Knowledge assessments &amp; ability validation', tier:'nice', roadmap:true },
-      ]},
-      { phase:null, label:'Customizations', modules:'Configured per your environment', rows:[
-        { r:'Security &amp; compliance (SOC 2)', tier:'must' },
-        { r:'Procedures: custom / multi-step approval flow', tier:'nice' },
-      ]},
-    ];
-
-    // ---------- renders ----------
-    // one block renderer for every phase. Phase 1 passes `clusters`; phases 2–4 pass `does`.
-    function renderBlock(p) {
-      const right = p.clusters
-        ? `<p class="mono-label mb-4" style="color:var(--faint)">What it includes</p>
-           <div class="grid sm:grid-cols-2 gap-x-8 gap-y-5">
-             ${p.clusters.map(cl => `
-               <div>
-                 <p class="font-display text-[14px] mb-2" style="color:var(--ink)">${cl.title}</p>
-                 <ul class="space-y-1.5">
-                   ${cl.items.map(it => `<li class="flex items-start gap-2.5 text-[13px]" style="color:var(--muted)"><span style="color:var(--ink); margin-top:1px">✓</span><span>${it}</span></li>`).join('')}
-                 </ul>
-               </div>`).join('')}
-           </div>`
-        : `<p class="mono-label mb-4" style="color:var(--faint)">What it does</p>
-           <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-2.5">
-             ${p.does.map(d => `<li class="flex items-start gap-2.5 text-[13.5px]" style="color:var(--ink-2)"><span style="color:var(--ink); margin-top:1px">✓</span><span>${d}</span></li>`).join('')}
-           </ul>`;
-      return `
-        <div class="card overflow-hidden">
-          <div class="p-7 md:p-9 md:flex gap-10">
-            <div class="md:w-2/5 mb-6 md:mb-0">
-              <div class="flex items-center gap-2 mb-4">
-                <span class="pill">${p.phase}</span>
-              </div>
-              <h3 class="text-2xl md:text-[1.75rem] mb-3" style="color:var(--ink)">${p.name}</h3>
-              <p class="text-[15px] leading-snug mb-3" style="color:var(--ink-2)">${p.tagline}</p>
-              <p class="text-[13.5px] leading-relaxed" style="color:var(--muted)">${p.desc}</p>
-            </div>
-            <div class="md:w-3/5 md:pl-10 md:border-l pt-6 md:pt-0" style="border-color:var(--line)">
-              ${right}
-              <div class="mt-6 pt-5" style="border-top:1px solid var(--line)">
-                <span class="mono-label" style="color:var(--faint)">${p.growsLabel || 'As you grow'}</span>
-                <p class="text-[13px] mt-1.5 leading-relaxed" style="color:var(--muted)">${p.grows}</p>
-              </div>
-            </div>
-          </div>
-        </div>`;
+    function renderSummary() {
+      const phases = 1 + GROWTH.length;
+      const openCount = STAND.openItems.length;
+      const tiles = [
+        { big:'Phase 1', sub:'SOP Platform — live day one' },
+        { big:String(phases), sub:'phases, one compounding system' },
+        { big:String(openCount), sub:'open items in flight' },
+        { big:NEXT_MILESTONE.label, sub:'next · ' + NEXT_MILESTONE.date },
+      ];
+      document.getElementById('summary-tiles').innerHTML = tiles.map(t => `
+        <div class="sumtile">
+          <div class="stat" style="color:var(--ink)">${t.big}</div>
+          <p class="text-[13px] mt-2.5" style="color:var(--muted)">${t.sub}</p>
+        </div>`).join('');
     }
 
-    function renderPlatform() {
-      document.getElementById('phase1-block').innerHTML = renderBlock(PHASE1);
-    }
-
-    function renderLoop() {
-      document.getElementById('loop').innerHTML = LOOP.map((step, i) => `
-        <span class="pill" style="padding:7px 15px; font-size:12.5px">${step}</span>
-        ${i < LOOP.length - 1 ? '<span style="color:var(--faint)">→</span>' : ''}`).join('');
-    }
-
-    function renderGrowth() {
-      document.getElementById('grows-list').innerHTML = GROWTH.map(renderBlock).join('');
-    }
-
-    // shared phase color ramp — matches the phase accents used above
-    const PHASE_PALETTE = {
-      1: { soft:'#ECFDF5', text:'#047857', border:'#A7F3D0' }, // green  (Phase 1)
-      2: { soft:'#EFF6FF', text:'#1D4ED8', border:'#BFDBFE' }, // blue   (Phase 2)
-      3: { soft:'#F5F3FF', text:'#6D28D9', border:'#DDD6FE' }, // violet (Phase 3)
-      4: { soft:'#FDF2F8', text:'#BE185D', border:'#FBCFE8' }, // pink   (Phase 4)
-    };
-    function phaseChip(lands) {
-      const m = lands.match(/\d/);                 // colour by the first phase referenced
-      const p = m ? PHASE_PALETTE[m[0]] : null;
-      const style = p
-        ? `background:${p.soft};color:${p.text};border:1px solid ${p.border}`
-        : 'background:#F1F5F9;color:#475569;border:1px solid #E2E8F0';
-      return `<span class="chip" style="${style}">${lands}</span>`;
-    }
-
-    function renderRequirements() {
-      const TAG = (t) => t === 'must' ? '<span class="tag tag-must">Must</span>'
-                       : t === 'nice' ? '<span class="tag tag-nice">Nice</span>'
-                       : '<span style="color:var(--faint)">—</span>';
-
-      const groups = REQUIREMENTS.map((g, gi) => {
-        const id = `req-${gi}`;
-        const num = String(gi + 1).padStart(2, '0');
-        const label = g.phase
-          ? `<span class="mono-label" style="color:var(--ink)">${g.label}</span>`
-          : `<span class="mono-label" style="color:var(--muted)">${g.label}</span>`;
-        const heading = `
-          <span class="mono-label mr-1" style="color:var(--faint)">${num}</span>
-          ${label}
-          <span style="color:var(--line-2)">·</span>
-          <span class="font-display text-[15px]" style="color:var(--ink)">${g.modules}</span>`;
-        const rows = `
-          <div class="flex items-center gap-3 px-5 py-2.5 pl-14 mono-label" style="color:var(--faint);border-top:1px solid var(--line);background:var(--paper)">
-            <span class="flex-1" style="font-size:10px">Requirement</span>
-            <span class="w-24 text-right" style="font-size:10px">Priority</span>
-          </div>
-          ${g.rows.map(row => `
-            <div class="flex items-center gap-3 px-5 py-3 pl-14" style="border-top:1px solid var(--line)">
-              <span class="flex-1 text-[13px]" style="color:var(--ink-2)">${row.r}${row.roadmap ? ' <span class="pill align-middle ml-1.5" style="padding:1px 8px;font-size:10px"><span class="ring"></span>Roadmap</span>' : ''}</span>
-              <span class="w-24 text-right">${TAG(row.tier)}</span>
-            </div>`).join('')}`;
-        return `
-          <div style="border-top:1px solid var(--line)">
-            <button onclick="toggleReq('${id}', this)" class="req-hdr w-full flex items-center gap-3 px-5 py-4 text-left">
-              <svg class="reqchev w-3.5 h-3.5 transition-transform duration-200 flex-shrink-0" style="color:var(--faint)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-              ${heading}
-            </button>
-            <div id="${id}" class="reqbody hidden" style="background:var(--surface)">${rows}</div>
-          </div>`;
-      }).join('');
-
-      document.getElementById('req-root').innerHTML = `
-        <div class="card overflow-hidden" style="border-top:0">${groups}</div>
-        <div class="mt-7">
-          <button onclick="toggleAllReq(this)" class="btn btn-solid">
-            <span class="reqall-label">Show full breakdown</span>
-            <svg class="reqall-chev w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </button>
-        </div>`;
-    }
-
-    function toggleReq(id, btn) {
-      document.getElementById(id).classList.toggle('hidden');
-      btn.querySelector('.reqchev').classList.toggle('rotate-90');
-    }
-    function toggleAllReq(btn) {
-      const bodies = [...document.querySelectorAll('.reqbody')];
-      const expand = bodies.some(b => b.classList.contains('hidden'));
-      bodies.forEach(b => b.classList.toggle('hidden', !expand));
-      document.querySelectorAll('.reqchev').forEach(c => c.classList.toggle('rotate-90', expand));
-      btn.querySelector('.reqall-label').textContent = expand ? 'Hide breakdown' : 'Show full breakdown';
-      btn.querySelector('.reqall-chev').classList.toggle('rotate-180', expand);
-    }
-
-    renderPlatform();
-    renderLoop();
-    renderGrowth();
-    renderRequirements();
+    initStatus();
+    initFeatures();
+    renderSummary();
 
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
     }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
-    // Failsafe: never leave a section rendered-but-invisible.
     setTimeout(() => document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
       if (el.getBoundingClientRect().top < window.innerHeight * 1.5) el.classList.add('visible');
     }), 1500);
