@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harbor Freight · Project Status (sections) · MeetBean</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon-32.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { sans: ['Inter', 'sans-serif'], display: ['DM Sans', 'sans-serif'] },
+      colors: {
+        dark: { 900: '#1E1D1D', 800: '#1E1E24', 700: '#343E3F', 600: '#40424D' },
+        brand: { DEFAULT: '#70A593', light: '#9CC9BB', dark: '#508875' },
+      },
+    } } };
+  </script>
+
+  <style>
+    :root {
+      --paper:#F3F3F3; --surface:#FFFFFF; --panel:#ECECEC;
+      --ink:#1E1D1D; --ink-2:#343E3F; --muted:#5F626C; --faint:#6B6E7C;
+      --line:rgba(30,29,29,.12); --line-2:rgba(30,29,29,.24);
+      --accent:#508875; --accent-mid:#70A593; --accent-soft:#9CC9BB; --accent-wash:#EAF2EE;
+      --indigo:#4F5E91; --indigo-mid:#6C7BA7; --indigo-soft:#AEB8D6;
+      --r-xs:3px; --r-sm:6px; --r-md:10px; --r-pill:999px;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); }
+    h1, h2, h3, .font-display { font-family: 'DM Sans', sans-serif; letter-spacing: -0.02em; font-weight: 500; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    nav.scrolled { box-shadow: 0 1px 0 0 var(--line); }
+
+    .mono-label { font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; }
+    .eyebrow { display:inline-flex; align-items:center; gap:8px; color:var(--muted); }
+    .eyebrow .dot { width:6px; height:6px; border-radius:999px; background:var(--accent-mid); flex:none; }
+    .rule { height:1px; background:var(--line); border:0; }
+    .grid-bg { background-image: linear-gradient(to right, rgba(30,29,29,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(30,29,29,.05) 1px, transparent 1px); background-size: 64px 64px; }
+    .card { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); }
+
+    .checkbox { width:15px; height:15px; border:1.5px solid var(--line-2); border-radius:3px; flex:none; margin-top:1px; }
+    .pillst { display:inline-flex; align-items:center; gap:5px; font-size:10.5px; font-weight:500; letter-spacing:.02em; padding:2px 9px; border-radius:999px; white-space:nowrap; }
+    .pill-prog { color:var(--accent); background:var(--accent-wash); border:1px solid var(--accent-soft); }
+    .pill-idle { color:var(--muted); background:transparent; border:1px solid var(--line-2); }
+    .doclink { color:var(--ink); font-weight:500; text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--line-2); }
+    .doclink:hover { text-decoration-color:var(--ink); }
+    .codechip { font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--ink-2); background:var(--paper); border:1px solid var(--line-2); border-radius:var(--r-xs); padding:1px 7px; }
+    .strow { border-top:1px solid var(--line); }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- NAV -->
+  <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-shadow duration-300" style="background:rgba(243,243,243,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/images/meetbean-logo-dark.svg" alt="meetBean" class="h-5" />
+        <span class="mono-label hidden sm:inline" style="color:var(--faint)">/ Project</span>
+      </a>
+      <div class="flex items-center gap-1 sm:gap-1.5 text-[12.5px] sm:text-[13px] font-normal">
+        <a href="index.html" class="px-3 sm:px-4 py-1.5 transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Overview</a>
+        <a href="implementation.html" class="px-3 sm:px-4 py-1.5 transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Implementation Plan</a>
+        <a href="status.html" class="px-3 sm:px-4 py-1.5 transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Status</a>
+        <span class="px-3 sm:px-4 py-1.5 inline-flex items-center gap-2" style="color:var(--faint); cursor:not-allowed" aria-disabled="true" title="Coming soon">Deployment Phases <span class="mono-label" style="font-size:9px; color:var(--faint); border:1px solid var(--line-2); border-radius:999px; padding:1px 6px">Soon</span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="relative overflow-hidden flex items-center" style="border-bottom:1px solid var(--line); min-height:68vh">
+    <div class="grid-bg absolute inset-0" style="-webkit-mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%);"></div>
+
+    <div class="hidden lg:flex absolute left-0 top-16 bottom-0 w-14 flex-col items-center justify-between py-10" style="border-right:1px solid var(--line)">
+      <span class="dot" style="width:7px;height:7px;border-radius:999px;background:var(--accent-mid)"></span>
+      <span class="mono-label" style="writing-mode:vertical-rl; transform:rotate(180deg); color:var(--muted)">Status · Harbor&nbsp;Freight</span>
+      <span class="mono-label" style="color:var(--faint)">04</span>
+    </div>
+
+    <div class="relative w-full px-6 sm:px-8 lg:pl-28 lg:pr-12 py-24">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="eyebrow mono-label"><span class="dot"></span><span>Project Status</span></div>
+        <span class="mono-label ml-auto" style="color:var(--faint)">As of Jun 18 · sections view</span>
+      </div>
+      <h1 class="fade-in text-5xl md:text-6xl lg:text-7xl leading-[1.02] mb-8 max-w-4xl" style="transition-delay:.1s">
+        Where things<br><span style="color:var(--muted)">stand.</span>
+      </h1>
+      <p class="fade-in text-lg leading-relaxed max-w-2xl" style="color:var(--muted); transition-delay:.2s">
+        Open items, reference documents, action items, and next steps for the Harbor Freight engagement — kept current as we go.
+      </p>
+    </div>
+  </section>
+
+  <!-- 01 · OPEN ITEMS -->
+  <section class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="fade-in">
+        <div class="flex items-center justify-between gap-6 mb-5">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Open items</span></div>
+          <span class="mono-label" style="color:var(--faint)">01 / 04</span>
+        </div>
+        <hr class="rule mb-9" />
+        <div class="card overflow-hidden max-w-4xl">
+          <div class="flex items-center gap-3 px-5 md:px-7 py-4">
+            <span class="checkbox"></span>
+            <span class="flex-1 text-[14px]" style="color:var(--ink-2)">Procurement <span style="color:var(--muted)">— Alex sending spec to PMs</span></span>
+            <span class="pillst pill-prog">In progress</span>
+          </div>
+          <div class="flex items-center gap-3 px-5 md:px-7 py-4 strow">
+            <span class="checkbox"></span>
+            <span class="flex-1 text-[14px]" style="color:var(--ink-2)">Legal review</span>
+            <span class="pillst pill-idle">Not started</span>
+          </div>
+          <div class="flex items-center gap-3 px-5 md:px-7 py-4 strow">
+            <span class="checkbox"></span>
+            <span class="flex-1 text-[14px]" style="color:var(--ink-2)">IT review</span>
+            <span class="pillst pill-idle">Not started</span>
+          </div>
+          <div class="flex items-center gap-3 px-5 md:px-7 py-4 strow">
+            <span class="checkbox"></span>
+            <span class="flex-1 text-[14px]" style="color:var(--ink-2)">Contract signature</span>
+            <span class="pillst pill-idle">Not started</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · REFERENCE DOCUMENTS -->
+  <section class="py-20 md:py-24" style="background:var(--paper); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="fade-in">
+        <div class="flex items-center justify-between gap-6 mb-5">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Reference documents</span></div>
+          <span class="mono-label" style="color:var(--faint)">02 / 04</span>
+        </div>
+        <hr class="rule mb-9" />
+        <div class="card overflow-hidden max-w-4xl">
+          <div class="px-5 md:px-7 py-4 flex items-start justify-between gap-4">
+            <div>
+              <a class="doclink" href="https://www.figma.com/deck/h7UERqMWov8u1YZZeESGYz/S-S--Presentation---Copy-?node-id=1-537&t=K16Iiwq6xbuY5HRI-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" target="_blank" rel="noopener noreferrer">Comparison with incumbent <span style="font-size:11px">&#8599;</span></a>
+            </div>
+            <span class="flex items-center gap-2 text-[12px] flex-none" style="color:var(--muted)"><span>Password</span><span class="codechip">HFT123</span></span>
+          </div>
+          <div class="px-5 md:px-7 py-4 strow flex items-start justify-between gap-4">
+            <a class="doclink" href="https://docs.google.com/document/d/10HoFwiA8fLzhU6DLme9MxPnArPD9nBhKoKebMTZdOkI/edit?usp=sharing" target="_blank" rel="noopener noreferrer">HFT Functional Requirements <span style="font-size:11px">&#8599;</span></a>
+            <span class="text-[12px] flex-none" style="color:var(--muted)">Sent April 8</span>
+          </div>
+          <div class="px-5 md:px-7 py-4 strow flex items-start justify-between gap-4">
+            <span class="text-[14px] font-medium" style="color:var(--ink-2)">Implementation overview</span>
+            <span class="flex items-center gap-2 text-[12px] flex-none" style="color:var(--muted)"><span class="pillst pill-prog">In progress</span><span>For Friday dry run</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · ACTION ITEMS -->
+  <section class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="fade-in">
+        <div class="flex items-center justify-between gap-6 mb-5">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Action items</span></div>
+          <span class="mono-label" style="color:var(--faint)">03 / 04</span>
+        </div>
+        <hr class="rule mb-9" />
+        <div class="card overflow-hidden max-w-4xl">
+          <div class="flex items-start gap-4 px-5 md:px-7 py-4 text-[14px]">
+            <span class="mono-label flex-none" style="width:84px; color:var(--muted); margin-top:2px">Alex</span>
+            <span style="color:var(--ink-2)">Resend the proposal/spec that MeetBean didn&rsquo;t receive</span>
+          </div>
+          <div class="flex items-start gap-4 px-5 md:px-7 py-4 text-[14px] strow">
+            <span class="mono-label flex-none" style="width:84px; color:var(--muted); margin-top:2px">Alex</span>
+            <span style="color:var(--ink-2)">Send updated requirements after finalizing with James and Michael</span>
+          </div>
+          <div class="flex items-start gap-4 px-5 md:px-7 py-4 text-[14px] strow">
+            <span class="mono-label flex-none" style="width:84px; color:var(--accent); margin-top:2px">MeetBean</span>
+            <span style="color:var(--ink-2)">Outline Phase 1 scope vs. later phases</span>
+          </div>
+          <div class="flex items-start gap-4 px-5 md:px-7 py-4 text-[14px] strow">
+            <span class="mono-label flex-none" style="width:84px; color:var(--accent); margin-top:2px">MeetBean</span>
+            <span style="color:var(--ink-2)">Share incumbent comparison <span style="color:var(--muted)">— see Reference documents</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · PROJECT NEXT STEPS -->
+  <section class="py-20 md:py-24" style="background:var(--paper)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="fade-in">
+        <div class="flex items-center justify-between gap-6 mb-5">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Project next steps</span></div>
+          <span class="mono-label" style="color:var(--faint)">04 / 04</span>
+        </div>
+        <hr class="rule mb-9" />
+        <div class="card overflow-hidden max-w-4xl">
+          <div class="flex items-start gap-4 px-5 md:px-7 py-4 text-[14px]">
+            <span class="mono-label flex-none" style="color:var(--faint); margin-top:1px">01</span>
+            <span style="color:var(--ink-2)">Alex: Talk to Ken about pricing <span style="color:var(--muted)">(meeting June 18)</span></span>
+          </div>
+          <div class="flex items-start gap-4 px-5 md:px-7 py-4 text-[14px] strow">
+            <span class="mono-label flex-none" style="color:var(--faint); margin-top:1px">02</span>
+            <span style="color:var(--ink-2)">Dry run <span style="color:var(--muted)">— Friday June 20, 2pm PT</span></span>
+          </div>
+          <div class="flex items-start gap-4 px-5 md:px-7 py-4 text-[14px] strow">
+            <span class="mono-label flex-none" style="color:var(--faint); margin-top:1px">03</span>
+            <span style="color:var(--ink-2)">Demo with HFT team <span style="color:var(--muted)">— Monday June 22</span></span>
+          </div>
+          <div class="flex items-start gap-4 px-5 md:px-7 py-4 text-[14px] strow">
+            <span class="mono-label flex-none" style="color:var(--faint); margin-top:1px">04</span>
+            <span style="color:var(--ink-2)">Align on pricing &amp; phases <span style="color:var(--muted)">(after demo)</span></span>
+          </div>
+          <div class="flex items-start gap-4 px-5 md:px-7 py-4 text-[14px] strow">
+            <span class="mono-label flex-none" style="color:var(--faint); margin-top:1px">05</span>
+            <span style="color:var(--ink-2)">Confirm target timeline</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12" style="background:var(--ink)">
+    <div class="px-6 sm:px-8 lg:px-12 flex items-center justify-between">
+      <img src="assets/images/meetbean-logo-light.svg" alt="meetBean" class="h-5 opacity-90" />
+      <span class="mono-label" style="color:var(--faint)">Status · Harbor Freight</span>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+    setTimeout(() => document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight * 1.5) el.classList.add('visible');
+    }), 1500);
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 8));
+  </script>
+</body>
+</html>

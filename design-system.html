@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>meetBean · Design System · HBF Project</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon-32.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { sans: ['Inter', 'sans-serif'], display: ['DM Sans', 'sans-serif'] },
+      colors: {
+        dark: { 900: '#1E1D1D', 800: '#1E1E24', 700: '#343E3F', 600: '#40424D' },
+        brand: { DEFAULT: '#70A593', light: '#9CC9BB', dark: '#508875' },
+      },
+    } } };
+  </script>
+
+  <style>
+    /* ============================================================
+       meetBean · Design System tokens  (minimal / futuristic)
+       This file is the SOURCE OF TRUTH. Mirror the :root block and
+       component classes into every page's <style>.
+       ============================================================ */
+    :root {
+      /* surfaces */
+      --paper:   #F3F3F3;   /* page base            (Cloud)    */
+      --surface: #FFFFFF;   /* cards / raised                  */
+      --panel:   #ECECEC;   /* recessed panels                 */
+      --ink:     #1E1D1D;   /* primary text                    */
+      --ink-2:   #343E3F;   /* secondary / slate               */
+      --muted:   #5F626C;   /* muted body            (Graphite) */
+      --faint:   #6B6E7C;   /* hints / placeholders  (Space)    */
+      --line:    rgba(30,29,29,.12);  /* hairline                */
+      --line-2:  rgba(30,29,29,.24);  /* stronger hairline       */
+      /* single accent — sage (use sparingly: dots, edges, fills, ONE highlight) */
+      --accent:      #508875;
+      --accent-mid:  #70A593;
+      --accent-soft: #9CC9BB;
+      --accent-wash: #EAF2EE;
+      /* radius — minimal */
+      --r-xs: 3px; --r-sm: 6px; --r-md: 10px; --r-pill: 999px;
+    }
+
+    body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); }
+    h1, h2, h3, .font-display { font-family: 'DM Sans', sans-serif; letter-spacing: -0.02em; font-weight: 500; }
+
+    .mono-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); }
+    .eyebrow .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--accent-mid); flex: none; }
+    .rule { height: 1px; background: var(--line); border: 0; }
+    .grid-bg { background-image: linear-gradient(to right, rgba(30,29,29,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(30,29,29,.05) 1px, transparent 1px); background-size: 64px 64px; }
+    .stat { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 2.5rem; letter-spacing: -0.03em; line-height: 1; }
+
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; padding: 9px 18px; border-radius: 999px; border: 1px solid var(--ink); color: var(--ink); background: transparent; transition: background .18s ease, color .18s ease; cursor: pointer; }
+    .btn:hover { background: var(--ink); color: #fff; }
+    .btn-accent { border-color: var(--accent); color: var(--accent); }
+    .btn-accent:hover { background: var(--accent); color: #fff; }
+    .btn-solid { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .btn-solid:hover { background: var(--ink-2); border-color: var(--ink-2); }
+    .btn-icon { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:999px; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); transition:background .18s ease, color .18s ease; cursor:pointer; }
+    .btn-icon:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
+
+    .pill { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:500; letter-spacing:.01em; padding:3px 11px; border-radius:999px; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); white-space:nowrap; }
+    .pill-solid  { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .pill-accent { background:var(--accent-wash); color:var(--accent); border-color:var(--accent-soft); }
+    .pill .ring  { width:6px; height:6px; border-radius:999px; border:1.5px solid currentColor; flex:none; }
+
+    .tag { display:inline-block; font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; padding:2px 7px; border-radius:var(--r-xs); }
+    .tag-must { background:var(--ink); color:#fff; }
+    .tag-nice { background:transparent; color:var(--muted); border:1px solid var(--line-2); }
+
+    /* doc-only helpers */
+    .swatch { height: 88px; border-radius: var(--r-sm); border: 1px solid var(--line); }
+    .spec { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+    .ds-section { scroll-margin-top: 84px; }
+    .specimen { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 1.75rem; }
+    a.toclink:hover { color: var(--ink); }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50" style="background:rgba(243,243,243,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="assets/images/meetbean-logo-dark.svg" alt="meetBean" class="h-5" />
+        <span class="mono-label" style="color:var(--faint)">/ Design System</span>
+      </div>
+      <a href="index.html" class="btn">Back to project</a>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="relative overflow-hidden" style="border-bottom:1px solid var(--line)">
+    <div class="grid-bg absolute inset-0" style="-webkit-mask-image: radial-gradient(ellipse 70% 70% at 25% 0%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 70% 70% at 25% 0%, #000 30%, transparent 100%);"></div>
+    <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-16">
+      <div class="eyebrow mono-label mb-7"><span class="dot"></span><span>meetBean</span><span style="color:var(--line-2)">·</span><span style="color:var(--faint)">v1.0</span></div>
+      <h1 class="text-4xl md:text-5xl leading-[1.08] max-w-3xl mb-5">Design system.<br><span style="color:var(--muted)">Minimal, futuristic, calm.</span></h1>
+      <p class="text-lg max-w-2xl leading-relaxed" style="color:var(--muted)">
+        The tokens and components behind the Harbor Freight project document. Monochrome, full-bleed, flat surfaces, one typeface, and Swiss scaffolding — built on the meetBean brand palette. Sage stays in reserve as an optional single accent.
+      </p>
+    </div>
+  </header>
+
+  <!-- TOC -->
+  <div style="border-bottom:1px solid var(--line); background:var(--surface)">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex flex-wrap gap-x-6 gap-y-1 mono-label" style="color:var(--muted)">
+      <a class="toclink" href="#principles">Principles</a>
+      <a class="toclink" href="#color">Color</a>
+      <a class="toclink" href="#type">Type</a>
+      <a class="toclink" href="#space">Space &amp; line</a>
+      <a class="toclink" href="#components">Components</a>
+      <a class="toclink" href="#a11y">Accessibility</a>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto px-6 py-16 space-y-24">
+
+    <!-- PRINCIPLES -->
+    <section id="principles" class="ds-section">
+      <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Principles</span></div><span class="mono-label" style="color:var(--faint)">00</span></div>
+      <hr class="rule mb-9" />
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="specimen">
+          <h3 class="text-lg mb-2">Monochrome + one accent</h3>
+          <p class="text-[14px] leading-relaxed" style="color:var(--muted)">Off-white, near-black, and gray do the work. Sage is the single accent — used only on a few deliberate moments (a dot, an active state, one node), exactly how the references use their one color. Never spread across the page.</p>
+        </div>
+        <div class="specimen">
+          <h3 class="text-lg mb-2">Full-bleed, no margins</h3>
+          <p class="text-[14px] leading-relaxed" style="color:var(--muted)">Content runs edge-to-edge with consistent edge padding — never a narrow centered column. Structure comes from rails, dividers, and alignment, not from a boxed container.</p>
+        </div>
+        <div class="specimen">
+          <h3 class="text-lg mb-2">Flat + Swiss scaffolding</h3>
+          <p class="text-[14px] leading-relaxed" style="color:var(--muted)">No gradients or shadows. Hairline rules, tracked uppercase micro-labels with bullets, and index numbers (01 / 04) give every section a precise, systematic frame.</p>
+        </div>
+        <div class="specimen">
+          <h3 class="text-lg mb-2">One typeface, calm type</h3>
+          <p class="text-[14px] leading-relaxed" style="color:var(--muted)">DM Sans for everything — display and body. Contrast comes from size, weight, and spacing, not from mixing fonts. Large headings at Medium weight, generous negative space.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLOR -->
+    <section id="color" class="ds-section">
+      <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Color</span></div><span class="mono-label" style="color:var(--faint)">01</span></div>
+      <hr class="rule mb-9" />
+
+      <p class="mono-label mb-4" style="color:var(--muted)">Surfaces &amp; ink</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        <div><div class="swatch" style="background:var(--paper)"></div><p class="text-[13px] font-medium mt-2.5">Paper</p><p class="spec">#F3F3F3 · --paper</p></div>
+        <div><div class="swatch" style="background:var(--surface)"></div><p class="text-[13px] font-medium mt-2.5">Surface</p><p class="spec">#FFFFFF · --surface</p></div>
+        <div><div class="swatch" style="background:var(--ink)"></div><p class="text-[13px] font-medium mt-2.5">Ink</p><p class="spec">#1E1D1D · --ink</p></div>
+        <div><div class="swatch" style="background:var(--ink-2)"></div><p class="text-[13px] font-medium mt-2.5">Slate</p><p class="spec">#343E3F · --ink-2</p></div>
+        <div><div class="swatch" style="background:var(--muted)"></div><p class="text-[13px] font-medium mt-2.5">Graphite</p><p class="spec">#5F626C · --muted</p></div>
+        <div><div class="swatch" style="background:var(--faint)"></div><p class="text-[13px] font-medium mt-2.5">Space</p><p class="spec">#6B6E7C · --faint</p></div>
+        <div><div class="swatch" style="background:var(--panel)"></div><p class="text-[13px] font-medium mt-2.5">Panel</p><p class="spec">#ECECEC · --panel</p></div>
+        <div><div class="swatch" style="background:repeating-linear-gradient(45deg,#fff,#fff 6px,#F3F3F3 6px,#F3F3F3 12px); position:relative"><span style="position:absolute;inset:0;border:1px solid var(--line-2);border-radius:var(--r-sm)"></span></div><p class="text-[13px] font-medium mt-2.5">Hairline</p><p class="spec">12% / 24% · --line</p></div>
+      </div>
+
+      <p class="mono-label mb-4" style="color:var(--muted)">Accent — sage <span style="color:var(--faint)">· the one color</span></p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div><div class="swatch" style="background:var(--accent)"></div><p class="text-[13px] font-medium mt-2.5">Sage Dark</p><p class="spec">#508875 · --accent</p></div>
+        <div><div class="swatch" style="background:var(--accent-mid)"></div><p class="text-[13px] font-medium mt-2.5">Sage</p><p class="spec">#70A593 · --accent-mid</p></div>
+        <div><div class="swatch" style="background:var(--accent-soft)"></div><p class="text-[13px] font-medium mt-2.5">Mint</p><p class="spec">#9CC9BB · --accent-soft</p></div>
+        <div><div class="swatch" style="background:var(--accent-wash)"></div><p class="text-[13px] font-medium mt-2.5">Wash</p><p class="spec">#EAF2EE · --accent-wash</p></div>
+      </div>
+    </section>
+
+    <!-- TYPE -->
+    <section id="type" class="ds-section">
+      <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Typography</span></div><span class="mono-label" style="color:var(--faint)">02</span></div>
+      <hr class="rule mb-9" />
+
+      <div class="grid md:grid-cols-3 gap-4 mb-10">
+        <div class="specimen"><p class="font-display text-3xl mb-1" style="font-weight:500">Aa</p><p class="text-[13px] font-medium">DM Sans · Medium</p><p class="spec">Display · headings · 500</p></div>
+        <div class="specimen"><p class="font-display text-3xl mb-1" style="font-weight:400">Aa</p><p class="text-[13px] font-medium">DM Sans · Regular</p><p class="spec">Body · UI · 400</p></div>
+        <div class="specimen"><p class="text-3xl mb-1 mono-label" style="font-size:1.875rem;letter-spacing:0">Aa</p><p class="text-[13px] font-medium">JetBrains Mono</p><p class="spec">Micro-labels · 11px tracked</p></div>
+      </div>
+
+      <div class="specimen space-y-5">
+        <div class="flex items-baseline gap-4 flex-wrap"><span class="spec w-28 flex-none">Display / 3.6rem</span><span class="font-display" style="font-size:3.6rem;line-height:1;font-weight:500">Your SOP platform</span></div>
+        <hr class="rule" />
+        <div class="flex items-baseline gap-4 flex-wrap"><span class="spec w-28 flex-none">H2 / 2.4rem</span><span class="font-display" style="font-size:2.4rem;font-weight:500">A complete system</span></div>
+        <hr class="rule" />
+        <div class="flex items-baseline gap-4 flex-wrap"><span class="spec w-28 flex-none">H3 / 1.5rem</span><span class="font-display" style="font-size:1.5rem;font-weight:500">Govern every change</span></div>
+        <hr class="rule" />
+        <div class="flex items-baseline gap-4 flex-wrap"><span class="spec w-28 flex-none">Body L / 18px</span><span style="font-size:18px;color:var(--muted)">Replace scattered documents with one governed system.</span></div>
+        <hr class="rule" />
+        <div class="flex items-baseline gap-4 flex-wrap"><span class="spec w-28 flex-none">Body / 16px</span><span style="font-size:16px;color:var(--ink-2)">Every procedure, current and acknowledged.</span></div>
+        <hr class="rule" />
+        <div class="flex items-baseline gap-4 flex-wrap"><span class="spec w-28 flex-none">Mono label</span><span class="mono-label" style="color:var(--muted)">For the record</span></div>
+      </div>
+    </section>
+
+    <!-- SPACE & LINE -->
+    <section id="space" class="ds-section">
+      <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Space &amp; line</span></div><span class="mono-label" style="color:var(--faint)">03</span></div>
+      <hr class="rule mb-9" />
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="specimen">
+          <p class="mono-label mb-4" style="color:var(--muted)">Spacing scale · 4px base</p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3"><div style="height:10px;width:4px;background:var(--accent-mid)"></div><span class="spec">4 · 8 · 12 · 16</span></div>
+            <div class="flex items-center gap-3"><div style="height:10px;width:24px;background:var(--accent-mid)"></div><span class="spec">24 · 32</span></div>
+            <div class="flex items-center gap-3"><div style="height:10px;width:48px;background:var(--accent-mid)"></div><span class="spec">48 · 64</span></div>
+            <div class="flex items-center gap-3"><div style="height:10px;width:96px;background:var(--accent-mid)"></div><span class="spec">96 · section rhythm</span></div>
+          </div>
+        </div>
+        <div class="specimen">
+          <p class="mono-label mb-4" style="color:var(--muted)">Radius &amp; lines</p>
+          <div class="flex items-center gap-4 mb-5">
+            <div style="width:54px;height:54px;background:var(--panel);border:1px solid var(--line-2);border-radius:var(--r-xs)"></div>
+            <div style="width:54px;height:54px;background:var(--panel);border:1px solid var(--line-2);border-radius:var(--r-sm)"></div>
+            <div style="width:54px;height:54px;background:var(--panel);border:1px solid var(--line-2);border-radius:var(--r-md)"></div>
+            <div style="width:54px;height:54px;background:var(--panel);border:1px solid var(--line-2);border-radius:var(--r-pill)"></div>
+          </div>
+          <p class="spec">3px · 6px · 10px · pill — cards stay small-radius; only tags &amp; buttons go pill.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPONENTS -->
+    <section id="components" class="ds-section">
+      <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Components</span></div><span class="mono-label" style="color:var(--faint)">04</span></div>
+      <hr class="rule mb-9" />
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <!-- eyebrow / index -->
+        <div class="specimen">
+          <p class="mono-label mb-5" style="color:var(--faint)">Section header</p>
+          <div class="flex items-center justify-between mb-3"><div class="eyebrow mono-label"><span class="dot"></span><span>For the record</span></div><span class="mono-label" style="color:var(--faint)">01 / 04</span></div>
+          <hr class="rule mb-4" />
+          <h3 class="text-2xl">Your requirements, addressed</h3>
+        </div>
+
+        <!-- buttons -->
+        <div class="specimen">
+          <p class="mono-label mb-5" style="color:var(--faint)">Buttons</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <button class="btn btn-solid">Get in touch</button>
+            <button class="btn">Secondary</button>
+            <button class="btn-icon" aria-label="Next"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"/></svg></button>
+          </div>
+          <p class="spec mt-4">Solid ink pill for primary, ghost for secondary, circular icon button — as in the references. No accent fills.</p>
+        </div>
+
+        <!-- pills / tags -->
+        <div class="specimen">
+          <p class="mono-label mb-5" style="color:var(--faint)">Pills &amp; tags</p>
+          <div class="flex flex-wrap items-center gap-2.5 mb-4">
+            <span class="pill">Default</span>
+            <span class="pill pill-solid">Solid</span>
+            <span class="pill pill-accent">Accent</span>
+            <span class="pill"><span class="ring"></span>Roadmap</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <span class="tag tag-must">Must</span>
+            <span class="tag tag-nice">Nice</span>
+          </div>
+        </div>
+
+        <!-- stat -->
+        <div class="specimen">
+          <p class="mono-label mb-5" style="color:var(--faint)">Stat number</p>
+          <div class="flex items-end gap-6">
+            <div><p class="stat">87<span style="font-size:1.25rem;color:var(--faint)">%</span></p><p class="spec mt-1">adherence</p></div>
+            <div><p class="stat">23</p><p class="spec mt-1">integrations</p></div>
+          </div>
+        </div>
+
+        <!-- flat card -->
+        <div class="specimen md:col-span-2">
+          <p class="mono-label mb-5" style="color:var(--faint)">Flat card</p>
+          <div class="card p-6 max-w-md">
+            <div class="flex items-center gap-2 mb-3"><span class="pill">Phase 1</span></div>
+            <h3 class="text-xl mb-1.5">The SOP Platform</h3>
+            <p class="text-[14px] leading-relaxed" style="color:var(--muted)">White surface, hairline border, small radius, zero shadow. Accent enters only through the pill.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCESSIBILITY -->
+    <section id="a11y" class="ds-section">
+      <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Accessibility</span></div><span class="mono-label" style="color:var(--faint)">05</span></div>
+      <hr class="rule mb-9" />
+      <div class="specimen">
+        <p class="text-[15px] leading-relaxed mb-4" style="color:var(--ink-2)">
+          The sage greens are <strong style="font-weight:600">accent colors, not text colors</strong>. On white, <span style="color:var(--accent-mid)">#70A593</span> and even <span style="color:var(--accent)">#508875</span> do not meet WCAG AA for normal body text.
+        </p>
+        <ul class="space-y-2 text-[14px]" style="color:var(--muted)">
+          <li class="flex gap-2"><span style="color:var(--accent)">→</span> Use sage for fills, dots, edges, large display highlights, and icon strokes.</li>
+          <li class="flex gap-2"><span style="color:var(--accent)">→</span> For text, use Ink (#1E1D1D) and Graphite (#5F626C) — both pass AA on Paper/Surface.</li>
+          <li class="flex gap-2"><span style="color:var(--accent)">→</span> White text on Sage Dark (#508875) is acceptable for large labels and buttons only.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="background:var(--ink)" class="py-12">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+      <img src="assets/images/meetbean-logo-light.svg" alt="meetBean" class="h-5 opacity-90" />
+      <span class="mono-label" style="color:var(--faint)">Design System · v1.0</span>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harbor Freight · Deployment Phases · MeetBean</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon-32.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { sans: ['Inter', 'sans-serif'], display: ['DM Sans', 'sans-serif'] },
+      colors: {
+        dark: { 900: '#1E1D1D', 800: '#1E1E24', 700: '#343E3F', 600: '#40424D' },
+        brand: { DEFAULT: '#70A593', light: '#9CC9BB', dark: '#508875' },
+      },
+    } } };
+  </script>
+
+  <style>
+    /* meetBean · Design System tokens — mirror of design-system.html */
+    :root {
+      --paper:#F3F3F3; --surface:#FFFFFF; --panel:#ECECEC;
+      --ink:#1E1D1D; --ink-2:#343E3F; --muted:#5F626C; --faint:#6B6E7C;
+      --line:rgba(30,29,29,.12); --line-2:rgba(30,29,29,.24);
+      --accent:#508875; --accent-mid:#70A593; --accent-soft:#9CC9BB; --accent-wash:#EAF2EE;
+      --indigo:#4F5E91; --indigo-mid:#6C7BA7; --indigo-soft:#AEB8D6; /* muted slate-indigo — sibling to sage */
+      --r-xs:3px; --r-sm:6px; --r-md:10px; --r-pill:999px;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); }
+    h1, h2, h3, .font-display { font-family: 'DM Sans', sans-serif; letter-spacing: -0.02em; font-weight: 500; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    nav.scrolled { box-shadow: 0 1px 0 0 var(--line); }
+
+    .mono-label { font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; }
+    .eyebrow { display:inline-flex; align-items:center; gap:8px; color:var(--muted); }
+    .eyebrow .dot { width:6px; height:6px; border-radius:999px; background:var(--accent-mid); flex:none; }
+    .rule { height:1px; background:var(--line); border:0; }
+    .grid-bg { background-image: linear-gradient(to right, rgba(30,29,29,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(30,29,29,.05) 1px, transparent 1px); background-size: 64px 64px; }
+
+    .card { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); }
+    .btn { display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:500; padding:9px 18px; border-radius:999px; border:1px solid var(--ink); color:var(--ink); background:transparent; transition:background .18s ease, color .18s ease; cursor:pointer; }
+    .btn:hover { background:var(--ink); color:#fff; }
+    .btn-solid { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .btn-solid:hover { background:var(--ink-2); border-color:var(--ink-2); }
+
+    .pill { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:500; letter-spacing:.01em; padding:3px 11px; border-radius:999px; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); white-space:nowrap; }
+    .pill .dot-i { width:6px; height:6px; border-radius:999px; background:var(--ink); flex:none; }
+    .pill .ring { width:6px; height:6px; border-radius:999px; border:1.5px solid currentColor; flex:none; }
+
+    .tag { display:inline-block; font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; padding:2px 7px; border-radius:var(--r-xs); }
+    .tag-must { background:var(--ink); color:#fff; }
+    .tag-nice { background:transparent; color:var(--muted); border:1px solid var(--line-2); }
+
+    .dep-hdr { background:var(--surface); transition:background .15s ease; }
+    .dep-hdr:hover { background:var(--paper); }
+    .depchev.rotate-90 { transform: rotate(90deg); }
+    .dep-note { display:inline-flex; align-items:baseline; gap:6px; font-size:12px; color:var(--muted); }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- NAV -->
+  <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-shadow duration-300" style="background:rgba(243,243,243,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/images/meetbean-logo-dark.svg" alt="meetBean" class="h-5" />
+        <span class="mono-label hidden sm:inline" style="color:var(--faint)">/ Project</span>
+      </a>
+      <div class="flex items-center gap-1 sm:gap-1.5 text-[12.5px] sm:text-[13px] font-normal">
+        <a href="index.html" class="px-3 sm:px-4 py-1.5 transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Overview</a>
+        <a href="implementation.html" class="px-3 sm:px-4 py-1.5 transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Implementation Plan</a>
+        <a href="status.html" class="px-3 sm:px-4 py-1.5 transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Status</a>
+        <span class="px-3 sm:px-4 py-1.5 inline-flex items-center gap-2" style="color:var(--faint); cursor:not-allowed" aria-disabled="true" title="Coming soon">Deployment Phases <span class="mono-label" style="font-size:9px; color:var(--faint); border:1px solid var(--line-2); border-radius:999px; padding:1px 6px">Soon</span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="relative overflow-hidden flex items-center" style="border-bottom:1px solid var(--line); min-height:72vh">
+    <div class="grid-bg absolute inset-0" style="-webkit-mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%);"></div>
+
+    <!-- left vertical rail -->
+    <div class="hidden lg:flex absolute left-0 top-16 bottom-0 w-14 flex-col items-center justify-between py-10" style="border-right:1px solid var(--line)">
+      <span class="dot" style="width:7px;height:7px;border-radius:999px;background:var(--accent-mid)"></span>
+      <span class="mono-label" style="writing-mode:vertical-rl; transform:rotate(180deg); color:var(--muted)">Deployment · Harbor&nbsp;Freight</span>
+      <span class="mono-label" style="color:var(--faint)">03</span>
+    </div>
+
+    <div class="relative w-full px-6 sm:px-8 lg:pl-28 lg:pr-12 py-24">
+      <div class="eyebrow mono-label mb-8"><span class="dot"></span><span>Deployment Phases</span></div>
+      <h1 class="fade-in text-5xl md:text-6xl lg:text-7xl leading-[1.02] mb-8 max-w-4xl" style="transition-delay:.1s">
+        What ships,<br><span style="color:var(--muted)">and when.</span>
+      </h1>
+      <p class="fade-in text-lg leading-relaxed max-w-2xl" style="color:var(--muted); transition-delay:.2s">
+        Every requirement from discovery, mapped to the phase that delivers it — what&rsquo;s in scope now, what expands in Phase 2, and what sits outside this engagement.
+      </p>
+    </div>
+  </section>
+
+  <!-- SCOPE BY PHASE -->
+  <section id="scope" class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="fade-in">
+        <div class="flex items-center justify-between gap-6 mb-5">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Scope by phase</span></div>
+          <span class="mono-label" style="color:var(--faint)">01 / 01</span>
+        </div>
+        <hr class="rule mb-9" />
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">The deployment phases</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            Grouped by phase, then by module. Expand a phase to see each requirement, its priority, and where it lands today versus later.
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-x-7 gap-y-2.5 mt-7 text-[13px]" style="color:var(--muted)">
+          <span class="flex items-center gap-3"><span class="flex items-center gap-2"><span style="width:7px;height:7px;border-radius:999px;background:var(--accent-mid);display:inline-block"></span> Must</span><span class="flex items-center gap-2"><span style="width:7px;height:7px;border-radius:999px;background:var(--indigo-mid);display:inline-block"></span> Nice</span><span style="color:var(--faint)">priority from discovery</span></span>
+          <span class="flex items-center gap-2"><span class="pill" style="padding:1px 9px"><span class="dot-i"></span>In scope</span> / <span class="pill" style="padding:1px 9px"><span class="ring"></span>Out of scope</span></span>
+        </div>
+      </div>
+      <div id="dep-root" class="fade-in mt-10"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12" style="background:var(--ink)">
+    <div class="px-6 sm:px-8 lg:px-12 flex items-center justify-between">
+      <img src="assets/images/meetbean-logo-light.svg" alt="meetBean" class="h-5 opacity-90" />
+      <span class="mono-label" style="color:var(--faint)">Deployment · Harbor Freight</span>
+    </div>
+  </footer>
+
+  <script>
+    // Source: HFT Implementation plan — scope by deployment phase.
+    const DEPLOY = [
+      { phase:'Phase 1', scope:'In scope', inScope:true, groups:[
+        { module:'Platform', rows:[
+          { tier:'must', r:'End-to-end loop: WI → observations → actions → outcomes' },
+          { tier:'must', r:'Executing and tracking PC activities (procedures, training, observations)' },
+          { tier:'must', r:'Mobile / tablet-friendly, intuitive UX' },
+          { tier:'must', r:'Role-based access control' },
+          { tier:'must', r:'Secure, scalable platform with data ownership' },
+          { tier:'must', r:'Scalability across sites' },
+          { tier:'must', r:'Data ownership' },
+          { tier:'must', r:'Security & compliance (SOC 2)', now:'Can be scoped' },
+          { tier:'nice', r:'Unified data model across all modules' },
+          { tier:'nice', r:'Auditability, full activity log' },
+          { tier:'nice', r:'Detailed support and SLA structures' },
+          { tier:'nice', r:'Automated workflow optimization', now:'Time-based observations', next:'Auto-assign (role-based), integrations' },
+        ]},
+        { module:'Procedures', rows:[
+          { tier:'must', r:'Centralized work instructions as a single source of truth' },
+          { tier:'must', r:'Version control with visibility into changes', now:'Versions' },
+          { tier:'nice', r:'Approval workflows, retraining triggers, process improvement tracking', now:'Acknowledgers + approvers', next:'Acknowledgement as training' },
+        ]},
+        { module:'Observations', rows:[
+          { tier:'must', r:'Capture observations with context (comments, actions, media)' },
+          { tier:'must', r:'Real-time observation tracking' },
+          { tier:'must', r:'Follow-up observation tracking' },
+          { tier:'must', r:'Basic dashboards: observation completion and performance visibility', now:'Dashboards', next:'Integrations with LM' },
+          { tier:'nice', r:'Associate historical context during observations' },
+          { tier:'nice', r:'Timestamp + notes visibility' },
+          { tier:'nice', r:'Observer performance tracking' },
+          { tier:'nice', r:'Automated coaching recommendations' },
+          { tier:'nice', r:'Targeted observations with a prioritized action queue', now:'Last observed, follow-ups', next:'Integrations: LM for trigger' },
+          { tier:'nice', r:'Actionable insights and trend analysis', now:'Dashboards', later:'AI insights' },
+        ]},
+        { module:'Training', rows:[
+          { tier:'must', r:'Role-to-work-instruction mapping' },
+          { tier:'must', r:'Basic skill tracking by associate' },
+          { tier:'nice', r:'Proficiency levels, recency tracking' },
+          { tier:'nice', r:'Knowledge assessments, ability validation', now:'Observations + training', later:'Certifications + quizzes' },
+        ]},
+      ]},
+      { phase:'Phase 2', scope:'In scope', inScope:true, groups:[
+        { module:'Platform', rows:[
+          { tier:'must', r:'Ingest external data (productivity, quality, attendance)', next:'Integrations' },
+        ]},
+        { module:'Procedures', rows:[
+          { tier:'nice', r:'Automatic updates to observation forms based on WI changes', next:'Part of approval package / custom approval flow', later:'AI module' },
+        ]},
+        { module:'Observations', rows:[
+          { tier:'must', r:'Ingest performance data (productivity, quality) to inform observations', next:'Integrations' },
+          { tier:'nice', r:'Offline cache', next:'Offline cache' },
+        ]},
+      ]},
+      { phase:'Future', scope:'Out of scope', inScope:false, groups:[
+        { module:'Platform', rows:[
+          { tier:'nice', r:'Data export, APIs, integrations', later:'Public APIs' },
+          { tier:'nice', r:'Advanced compliance features' },
+          { tier:'nice', r:'Configurable workflows' },
+        ]},
+        { module:'Procedures', rows:[
+          { tier:'nice', r:'AI-assisted WI creation and updates, change-impact analysis', later:'AI module' },
+        ]},
+        { module:'Observations', rows:[
+          { tier:'nice', r:'AI observation scoring' },
+          { tier:'nice', r:'AI-assisted insights, quality and recommendations' },
+          { tier:'nice', r:'Predictive analytics and AI-driven recommendations' },
+        ]},
+        { module:'Training', rows:[
+          { tier:'nice', r:'Automated rotation recommendations' },
+          { tier:'nice', r:'Skill-gap forecasting' },
+        ]},
+      ]},
+    ];
+
+    function renderDeploy() {
+      const TAG = (t) => t === 'must' ? '<span class="tag tag-must">Must</span>' : '<span class="tag tag-nice">Nice</span>';
+      const note = (label, val) => val ? `<span class="dep-note"><span class="mono-label" style="color:var(--faint)">${label}</span> ${val}</span>` : '';
+
+      const groups = DEPLOY.map((p, gi) => {
+        const id = `dep-${gi}`;
+        const num = String(gi + 1).padStart(2, '0');
+        const scopePill = `<span class="pill" style="padding:1px 9px">${p.inScope ? '<span class="dot-i"></span>' : '<span class="ring"></span>'}${p.scope}</span>`;
+        const mark = (t) => t === 'must'
+          ? '<span class="flex-none" title="Must" style="width:7px;height:7px;border-radius:999px;background:var(--accent-mid);margin-top:6px"></span>'
+          : '<span class="flex-none" title="Nice" style="width:7px;height:7px;border-radius:999px;background:var(--indigo-mid);margin-top:6px"></span>';
+        const body = p.groups.map(g => `
+          <div>
+            <div class="px-5 md:px-8 py-2.5" style="background:var(--paper); border-top:1px solid var(--line)">
+              <span class="mono-label" style="color:var(--ink)">${g.module}</span>
+            </div>
+            <ul class="grid sm:grid-cols-2 gap-x-10 px-5 md:px-8 py-2.5">
+              ${g.rows.map(row => `
+                <li class="flex items-start gap-2.5 py-1.5 text-[13px] leading-snug" style="color:var(--ink-2)">
+                  ${mark(row.tier)}
+                  <span>${row.r}${(row.now || row.next || row.later) ? `<span style="color:var(--faint)"> — ${[row.now && ('now ' + row.now), row.next && ('phase 2 ' + row.next), row.later && ('later ' + row.later)].filter(Boolean).join('  ·  ')}</span>` : ''}</span>
+                </li>`).join('')}
+            </ul>
+          </div>`).join('');
+        const open = gi === 0;
+        return `
+          <div style="border-top:1px solid var(--line)">
+            <button onclick="toggleDep('${id}', this)" class="dep-hdr w-full flex items-center gap-3 px-5 md:px-8 py-4 text-left">
+              <svg class="depchev w-3.5 h-3.5 transition-transform duration-200 flex-shrink-0 ${open ? 'rotate-90' : ''}" style="color:var(--faint)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              <span class="mono-label mr-1" style="color:var(--faint)">${num}</span>
+              <span class="mono-label" style="color:var(--ink)">${p.phase}</span>
+              <span class="ml-2.5">${scopePill}</span>
+            </button>
+            <div id="${id}" class="depbody ${open ? '' : 'hidden'}" style="background:var(--surface)">${body}</div>
+          </div>`;
+      }).join('');
+
+      document.getElementById('dep-root').innerHTML = `
+        <div class="card overflow-hidden" style="border-top:0">${groups}</div>
+        <div class="mt-7">
+          <button onclick="toggleAllDep(this)" class="btn btn-solid">
+            <span class="depall-label">Expand all phases</span>
+            <svg class="depall-chev w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+        </div>`;
+    }
+
+    function toggleDep(id, btn) {
+      document.getElementById(id).classList.toggle('hidden');
+      btn.querySelector('.depchev').classList.toggle('rotate-90');
+    }
+    function toggleAllDep(btn) {
+      const bodies = [...document.querySelectorAll('.depbody')];
+      const expand = bodies.some(b => b.classList.contains('hidden'));
+      bodies.forEach(b => b.classList.toggle('hidden', !expand));
+      document.querySelectorAll('.depchev').forEach(c => c.classList.toggle('rotate-90', expand));
+      btn.querySelector('.depall-label').textContent = expand ? 'Collapse all phases' : 'Expand all phases';
+      btn.querySelector('.depall-chev').classList.toggle('rotate-180', expand);
+    }
+
+    renderDeploy();
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+    setTimeout(() => document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight * 1.5) el.classList.add('visible');
+    }), 1500);
+
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 8));
+  </script>
+</body>
+</html>

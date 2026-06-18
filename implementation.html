@@ -8,13 +8,13 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: { extend: {
-        fontFamily: { sans: ['Inter', 'sans-serif'] },
+        fontFamily: { sans: ['Inter', 'sans-serif'], display: ['DM Sans', 'sans-serif'] },
         colors: {
           dark: { 900: '#1E1D1D', 800: '#1E1E24', 700: '#343E3F', 600: '#40424D' },
           brand: { DEFAULT: '#70A593', light: '#9CC9BB', dark: '#508875' },
@@ -24,195 +24,260 @@
   </script>
 
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    /* meetBean · Design System tokens — mirror of design-system.html */
+    :root {
+      --paper:#F3F3F3; --surface:#FFFFFF; --panel:#ECECEC;
+      --ink:#1E1D1D; --ink-2:#343E3F; --muted:#5F626C; --faint:#6B6E7C;
+      --line:rgba(30,29,29,.12); --line-2:rgba(30,29,29,.24);
+      --accent:#508875; --accent-mid:#70A593; --accent-soft:#9CC9BB; --accent-wash:#EAF2EE;
+      --r-xs:3px; --r-sm:6px; --r-md:10px; --r-pill:999px;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); }
+    h1, h2, h3, .font-display { font-family: 'DM Sans', sans-serif; letter-spacing: -0.02em; font-weight: 500; }
     .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
-    nav.scrolled { box-shadow: 0 2px 16px 0 rgba(30,29,29,.10); }
+    nav.scrolled { box-shadow: 0 1px 0 0 var(--line); }
+
+    .mono-label { font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; }
+    .eyebrow { display:inline-flex; align-items:center; gap:8px; color:var(--muted); }
+    .eyebrow .dot { width:6px; height:6px; border-radius:999px; background:var(--accent-mid); flex:none; }
+    .rule { height:1px; background:var(--line); border:0; }
+    .grid-bg { background-image: linear-gradient(to right, rgba(30,29,29,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(30,29,29,.05) 1px, transparent 1px); background-size: 64px 64px; }
+
+    .card { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); }
+
+    .btn { display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:500; padding:9px 18px; border-radius:999px; border:1px solid var(--ink); color:var(--ink); background:transparent; transition:background .18s ease, color .18s ease; cursor:pointer; }
+    .btn:hover { background:var(--ink); color:#fff; }
+    .btn-solid { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .btn-solid:hover { background:var(--ink-2); border-color:var(--ink-2); }
+
+    .pill { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:500; letter-spacing:.01em; padding:3px 11px; border-radius:999px; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); white-space:nowrap; }
+    .pill .ring { width:6px; height:6px; border-radius:999px; border:1.5px solid currentColor; flex:none; }
   </style>
 </head>
-<body class="bg-white text-gray-900 antialiased">
+<body class="antialiased">
 
   <!-- NAV (shared two-page toggle) -->
-  <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm transition-shadow duration-300">
-    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center">
+  <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-shadow duration-300" style="background:rgba(243,243,243,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
         <img src="assets/images/meetbean-logo-dark.svg" alt="meetBean" class="h-5" />
+        <span class="mono-label hidden sm:inline" style="color:var(--faint)">/ Project</span>
       </a>
-      <div class="flex items-center gap-1 bg-gray-100 rounded-full p-1 text-sm font-medium">
-        <a href="index.html" class="px-4 py-1.5 rounded-full text-gray-500 hover:text-gray-900 transition-colors">Overview</a>
-        <a href="implementation.html" class="px-4 py-1.5 rounded-full bg-white text-gray-900 shadow-sm">Implementation Plan</a>
+      <div class="flex items-center gap-1 sm:gap-1.5 text-[12.5px] sm:text-[13px] font-normal">
+        <a href="index.html" class="px-3 sm:px-4 py-1.5 transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Overview</a>
+        <span class="px-3 sm:px-4 py-1.5 font-medium" style="color:#9DA2B3; cursor:default" aria-current="page">Implementation Plan</span>
+        <a href="status.html" class="px-3 sm:px-4 py-1.5 transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Status</a>
+        <span class="px-3 sm:px-4 py-1.5 inline-flex items-center gap-2" style="color:var(--faint); cursor:not-allowed" aria-disabled="true" title="Coming soon">Deployment Phases <span class="mono-label" style="font-size:9px; color:var(--faint); border:1px solid var(--line-2); border-radius:999px; padding:1px 6px">Soon</span></span>
       </div>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section id="hero" class="relative text-white pt-32 pb-20 overflow-hidden" style="background: linear-gradient(135deg, #1E1D1D 0%, #1E1E24 40%, #243330 100%);">
-    <div class="absolute inset-0 opacity-[0.04]" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><line x1=%220%22 y1=%2260%22 x2=%2260%22 y2=%220%22 stroke=%22white%22 stroke-width=%220.5%22/></svg>'); background-size:60px 60px;"></div>
-    <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand/10 blur-[120px]"></div>
+  <section id="hero" class="relative overflow-hidden flex items-center" style="border-bottom:1px solid var(--line); min-height:76vh">
+    <div class="grid-bg absolute inset-0" style="-webkit-mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%);"></div>
 
-    <div class="relative max-w-3xl mx-auto px-6 text-center">
-      <p class="fade-in text-brand-light text-sm font-medium tracking-widest uppercase mb-5">Implementation Plan</p>
-      <h1 class="fade-in text-4xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.15] mb-6" style="transition-delay:.1s">
-        Let&rsquo;s get your<br><span class="text-brand-light">procedures live.</span>
+    <!-- left vertical rail -->
+    <div class="hidden lg:flex absolute left-0 top-16 bottom-0 w-14 flex-col items-center justify-between py-10" style="border-right:1px solid var(--line)">
+      <span class="dot" style="width:7px;height:7px;border-radius:999px;background:var(--accent-mid)"></span>
+      <span class="mono-label" style="writing-mode:vertical-rl; transform:rotate(180deg); color:var(--muted)">Implementation · Harbor&nbsp;Freight</span>
+      <span class="mono-label" style="color:var(--faint)">02</span>
+    </div>
+
+    <div class="relative w-full px-6 sm:px-8 lg:pl-28 lg:pr-12 py-24">
+      <div class="eyebrow mono-label mb-8"><span class="dot"></span><span>Implementation Plan</span></div>
+      <h1 class="fade-in text-5xl md:text-6xl lg:text-7xl leading-[1.02] mb-8 max-w-4xl" style="transition-delay:.1s">
+        Let&rsquo;s get your<br><span style="color:var(--muted)">procedures live.</span>
       </h1>
-      <p class="fade-in text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto" style="transition-delay:.2s">
+      <p class="fade-in text-lg leading-relaxed max-w-2xl" style="color:var(--muted); transition-delay:.2s">
         Getting set up is a collaborative process. MeetBean handles the technical heavy lifting; you provide the information and existing materials, then sign off at key checkpoints.
       </p>
     </div>
   </section>
 
   <!-- TIMELINE -->
-  <section class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="fade-in text-center mb-12">
-        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">The plan</p>
-        <h2 class="text-4xl font-extrabold text-gray-900 mb-3">Three weeks to live</h2>
-        <p class="text-gray-500 text-lg max-w-2xl mx-auto">
-          From your existing SOPs to a published, governed procedure library across every site.
-        </p>
+  <section class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="fade-in">
+        <div class="flex items-center justify-between gap-6 mb-5">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>The plan</span></div>
+          <span class="mono-label" style="color:var(--faint)">01 / 05</span>
+        </div>
+        <hr class="rule mb-9" />
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Three weeks to live</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            From your existing SOPs to a published, governed procedure library across every site.
+          </p>
+        </div>
       </div>
-      <div id="timeline" class="fade-in grid md:grid-cols-3 gap-5"></div>
+      <div id="timeline" class="fade-in grid md:grid-cols-3 gap-4 mt-10"></div>
     </div>
   </section>
 
   <!-- WHAT WE NEED -->
-  <section class="py-20 bg-gray-50 border-y border-gray-100">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="fade-in text-center mb-12">
-        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">Before we start</p>
-        <h2 class="text-4xl font-extrabold text-gray-900 mb-3">What we&rsquo;ll need from you</h2>
-        <p class="text-gray-500 text-lg max-w-2xl mx-auto">
-          A short list to kick things off. We provide CSV templates for the data, and you can refine everything later.
-        </p>
+  <section class="py-20 md:py-24" style="background:var(--paper)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="fade-in">
+        <div class="flex items-center justify-between gap-6 mb-5">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Before we start</span></div>
+          <span class="mono-label" style="color:var(--faint)">02 / 05</span>
+        </div>
+        <hr class="rule mb-9" />
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">What we&rsquo;ll need from you</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            A short list to kick things off. We provide CSV templates for the data, and you can refine everything later.
+          </p>
+        </div>
       </div>
-      <div id="checklist" class="fade-in grid md:grid-cols-2 gap-5"></div>
+      <div id="checklist" class="fade-in grid md:grid-cols-2 gap-4 mt-10"></div>
     </div>
   </section>
 
   <!-- PHASES -->
-  <section class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="fade-in text-center mb-12">
-        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">Week by week</p>
-        <h2 class="text-4xl font-extrabold text-gray-900 mb-3">How it goes</h2>
-        <p class="text-gray-500 text-lg max-w-2xl mx-auto">
-          Each week has a clear split: what you do, what MeetBean does, and what you walk away with.
-        </p>
+  <section class="py-20 md:py-24" style="background:var(--surface); border-top:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="fade-in">
+        <div class="flex items-center justify-between gap-6 mb-5">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Week by week</span></div>
+          <span class="mono-label" style="color:var(--faint)">03 / 05</span>
+        </div>
+        <hr class="rule mb-9" />
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">How it goes</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            Each week has a clear split: what you do, what MeetBean does, and what you walk away with.
+          </p>
+        </div>
       </div>
-      <div id="phases" class="fade-in space-y-5"></div>
+      <div id="phases" class="fade-in space-y-4 mt-10"></div>
     </div>
   </section>
 
   <!-- PROCEDURE BREAKDOWN -->
-  <section class="py-20 bg-gray-50 border-y border-gray-100">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="fade-in text-center mb-14">
-        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">Inside Week 2</p>
-        <h2 class="text-4xl font-extrabold text-gray-900 mb-3">From long SOPs to focused procedures</h2>
-        <p class="text-gray-500 text-lg max-w-2xl mx-auto">
-          Your procedures often live as long, multi-topic documents — your Receiving SOP alone runs 122 pages across 28 sections. As we migrate them, we break them into focused, single-task work instructions: easier to train on, observe against, and keep current.
-        </p>
+  <section class="py-20 md:py-24" style="background:var(--paper)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="fade-in">
+        <div class="flex items-center justify-between gap-6 mb-5">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Inside Week 2</span></div>
+          <span class="mono-label" style="color:var(--faint)">04 / 05</span>
+        </div>
+        <hr class="rule mb-9" />
+        <div class="max-w-2xl mb-14">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">From long SOPs to focused procedures</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            Your procedures often live as long, multi-topic documents — your Receiving SOP alone runs 122 pages across 28 sections. As we migrate them, we break them into focused, single-task work instructions: easier to train on, observe against, and keep current.
+          </p>
+        </div>
       </div>
 
-      <div class="fade-in flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 max-w-5xl mx-auto">
+      <div class="fade-in flex flex-col lg:flex-row items-center gap-8 lg:gap-12 max-w-5xl">
         <!-- Source SOP (stacked to suggest length) -->
         <div class="relative w-full sm:w-72 flex-shrink-0">
-          <div class="absolute inset-0 translate-x-2 translate-y-2 rounded-xl border border-gray-200 bg-white"></div>
-          <div class="absolute inset-0 translate-x-1 translate-y-1 rounded-xl border border-gray-200 bg-white"></div>
-          <div class="relative rounded-xl border border-gray-200 bg-white shadow-sm p-5">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400">One long SOP</span>
-              <span class="text-[10px] font-semibold text-gray-500 bg-gray-100 rounded-full px-2 py-0.5">122 pages</span>
+          <div class="absolute inset-0 translate-x-2 translate-y-2 card"></div>
+          <div class="absolute inset-0 translate-x-1 translate-y-1 card"></div>
+          <div class="relative card p-5">
+            <div class="flex items-center justify-between mb-3">
+              <span class="mono-label" style="color:var(--faint)">One long SOP</span>
+              <span class="pill" style="padding:1px 9px">122 pages</span>
             </div>
-            <div class="font-bold text-gray-900 mb-4">Receiving SOP <span class="text-gray-400 font-normal text-xs">· Doc 026</span></div>
+            <div class="font-display mb-4" style="color:var(--ink)">Receiving SOP <span class="text-xs" style="color:var(--faint)">· Doc 026</span></div>
             <div class="space-y-2">
-              <div class="h-2 rounded bg-gray-200 w-1/2"></div>
-              <div class="h-1.5 rounded bg-gray-100"></div>
-              <div class="h-1.5 rounded bg-gray-100 w-5/6"></div>
-              <div class="h-2 rounded bg-gray-200 w-2/5 mt-1"></div>
-              <div class="h-1.5 rounded bg-gray-100 w-11/12"></div>
-              <div class="h-1.5 rounded bg-gray-100"></div>
-              <div class="h-2 rounded bg-gray-200 w-1/3 mt-1"></div>
-              <div class="h-1.5 rounded bg-gray-100 w-3/4"></div>
-              <div class="h-1.5 rounded bg-gray-100 w-5/6"></div>
+              <div class="h-2 rounded w-1/2" style="background:var(--line-2)"></div>
+              <div class="h-1.5 rounded" style="background:var(--line)"></div>
+              <div class="h-1.5 rounded w-5/6" style="background:var(--line)"></div>
+              <div class="h-2 rounded w-2/5 mt-1" style="background:var(--line-2)"></div>
+              <div class="h-1.5 rounded w-11/12" style="background:var(--line)"></div>
+              <div class="h-1.5 rounded" style="background:var(--line)"></div>
+              <div class="h-2 rounded w-1/3 mt-1" style="background:var(--line-2)"></div>
+              <div class="h-1.5 rounded w-3/4" style="background:var(--line)"></div>
+              <div class="h-1.5 rounded w-5/6" style="background:var(--line)"></div>
             </div>
           </div>
         </div>
 
         <!-- Arrow -->
-        <div class="flex flex-col items-center text-gray-400 flex-shrink-0">
-          <span class="text-[10px] font-bold uppercase tracking-wider mb-1.5">Broken into</span>
+        <div class="flex flex-col items-center flex-shrink-0" style="color:var(--muted)">
+          <span class="mono-label mb-1.5">Broken into</span>
           <svg class="w-7 h-7 rotate-90 lg:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg>
         </div>
 
         <!-- Resulting work instructions (real sections) -->
         <div class="grid grid-cols-2 gap-3 w-full lg:max-w-lg">
-          <div class="rounded-lg border border-gray-200 bg-white p-3.5 shadow-sm">
-            <div class="w-7 h-1 rounded-full mb-2" style="background:#10B981"></div>
-            <div class="text-[13px] font-semibold text-gray-900 mb-2">View &amp; print ASN</div>
-            <div class="space-y-1"><div class="h-1.5 rounded bg-gray-100"></div><div class="h-1.5 rounded bg-gray-100 w-2/3"></div></div>
+          <div class="card p-3.5">
+            <div class="mono-label mb-2" style="color:var(--faint)">01</div>
+            <div class="text-[13px] font-display mb-2" style="color:var(--ink)">View &amp; print ASN</div>
+            <div class="space-y-1"><div class="h-1.5 rounded" style="background:var(--line)"></div><div class="h-1.5 rounded w-2/3" style="background:var(--line)"></div></div>
           </div>
-          <div class="rounded-lg border border-gray-200 bg-white p-3.5 shadow-sm">
-            <div class="w-7 h-1 rounded-full mb-2" style="background:#3B82F6"></div>
-            <div class="text-[13px] font-semibold text-gray-900 mb-2">Inspect the trailer</div>
-            <div class="space-y-1"><div class="h-1.5 rounded bg-gray-100"></div><div class="h-1.5 rounded bg-gray-100 w-2/3"></div></div>
+          <div class="card p-3.5">
+            <div class="mono-label mb-2" style="color:var(--faint)">02</div>
+            <div class="text-[13px] font-display mb-2" style="color:var(--ink)">Inspect the trailer</div>
+            <div class="space-y-1"><div class="h-1.5 rounded" style="background:var(--line)"></div><div class="h-1.5 rounded w-2/3" style="background:var(--line)"></div></div>
           </div>
-          <div class="rounded-lg border border-gray-200 bg-white p-3.5 shadow-sm">
-            <div class="w-7 h-1 rounded-full mb-2" style="background:#8B5CF6"></div>
-            <div class="text-[13px] font-semibold text-gray-900 mb-2">TI-HI &amp; building a pallet</div>
-            <div class="space-y-1"><div class="h-1.5 rounded bg-gray-100"></div><div class="h-1.5 rounded bg-gray-100 w-2/3"></div></div>
+          <div class="card p-3.5">
+            <div class="mono-label mb-2" style="color:var(--faint)">03</div>
+            <div class="text-[13px] font-display mb-2" style="color:var(--ink)">TI-HI &amp; building a pallet</div>
+            <div class="space-y-1"><div class="h-1.5 rounded" style="background:var(--line)"></div><div class="h-1.5 rounded w-2/3" style="background:var(--line)"></div></div>
           </div>
-          <div class="rounded-lg border border-gray-200 bg-white p-3.5 shadow-sm">
-            <div class="w-7 h-1 rounded-full mb-2" style="background:#D97706"></div>
-            <div class="text-[13px] font-semibold text-gray-900 mb-2">Conveyor unload</div>
-            <div class="space-y-1"><div class="h-1.5 rounded bg-gray-100"></div><div class="h-1.5 rounded bg-gray-100 w-2/3"></div></div>
+          <div class="card p-3.5">
+            <div class="mono-label mb-2" style="color:var(--faint)">04</div>
+            <div class="text-[13px] font-display mb-2" style="color:var(--ink)">Conveyor unload</div>
+            <div class="space-y-1"><div class="h-1.5 rounded" style="background:var(--line)"></div><div class="h-1.5 rounded w-2/3" style="background:var(--line)"></div></div>
           </div>
-          <div class="rounded-lg border border-gray-200 bg-white p-3.5 shadow-sm">
-            <div class="w-7 h-1 rounded-full mb-2" style="background:#DB2777"></div>
-            <div class="text-[13px] font-semibold text-gray-900 mb-2">Handle receiving exceptions</div>
-            <div class="space-y-1"><div class="h-1.5 rounded bg-gray-100"></div><div class="h-1.5 rounded bg-gray-100 w-2/3"></div></div>
+          <div class="card p-3.5">
+            <div class="mono-label mb-2" style="color:var(--faint)">05</div>
+            <div class="text-[13px] font-display mb-2" style="color:var(--ink)">Handle receiving exceptions</div>
+            <div class="space-y-1"><div class="h-1.5 rounded" style="background:var(--line)"></div><div class="h-1.5 rounded w-2/3" style="background:var(--line)"></div></div>
           </div>
-          <div class="rounded-lg border border-dashed border-gray-300 bg-gray-50 p-3.5 flex items-center justify-center">
-            <span class="text-[13px] font-semibold text-gray-500">+ 20 more</span>
+          <div class="p-3.5 flex items-center justify-center" style="border:1px dashed var(--line-2); border-radius:var(--r-sm)">
+            <span class="text-[13px] font-medium" style="color:var(--muted)">+ 20 more</span>
           </div>
         </div>
       </div>
 
-      <p class="fade-in text-center text-xs text-gray-400 mt-8">A sample of your real Receiving SOP. The full breakdown is defined together during migration.</p>
+      <p class="fade-in text-xs mt-8" style="color:var(--faint)">A sample of your real Receiving SOP. The full breakdown is defined together during migration.</p>
     </div>
   </section>
 
   <!-- SUPPORT -->
-  <section class="py-20 bg-white">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="fade-in text-center mb-10">
-        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-2">Support</p>
-        <h2 class="text-3xl font-extrabold text-gray-900 mb-3">We&rsquo;re here when you need us</h2>
-        <p class="text-gray-500 text-base max-w-2xl mx-auto">
-          Questions, issues, or something doesn&rsquo;t look right — reach out. We&rsquo;re a small, responsive team and treat every request seriously.
-        </p>
-      </div>
-      <div class="fade-in grid sm:grid-cols-2 gap-5">
-        <div class="rounded-2xl border border-gray-200 bg-white p-6">
-          <h3 class="font-bold text-gray-900 mb-1">General support</h3>
-          <p class="text-sm text-gray-600 mb-3">Questions about using the platform, user management, procedure setup, or anything else.</p>
-          <a href="mailto:support@meetbean.ai" class="text-brand-dark font-semibold text-sm">support@meetbean.ai</a>
-          <p class="text-xs text-gray-400 mt-2">Response within 1 business day.</p>
+  <section class="py-20 md:py-24" style="background:var(--surface); border-top:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="fade-in">
+        <div class="flex items-center justify-between gap-6 mb-5">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Support</span></div>
+          <span class="mono-label" style="color:var(--faint)">05 / 05</span>
         </div>
-        <div class="rounded-2xl border border-gray-200 bg-white p-6">
-          <h3 class="font-bold text-gray-900 mb-1">Urgent issues</h3>
-          <p class="text-sm text-gray-600 mb-3">Platform outage, users locked out, data concerns, or anything blocking your operations.</p>
-          <a href="mailto:support@meetbean.ai" class="text-brand-dark font-semibold text-sm">support@meetbean.ai</a>
-          <p class="text-xs text-gray-400 mt-2">Include <strong>&ldquo;URGENT&rdquo;</strong> in the subject for same-day response.</p>
+        <hr class="rule mb-9" />
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">We&rsquo;re here when you need us</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            Questions, issues, or something doesn&rsquo;t look right — reach out. We&rsquo;re a small, responsive team and treat every request seriously.
+          </p>
+        </div>
+      </div>
+      <div class="fade-in grid sm:grid-cols-2 gap-4 mt-10">
+        <div class="card p-6">
+          <h3 class="font-display text-lg mb-1.5" style="color:var(--ink)">General support</h3>
+          <p class="text-[13.5px] leading-relaxed mb-3" style="color:var(--muted)">Questions about using the platform, user management, procedure setup, or anything else.</p>
+          <a href="mailto:support@meetbean.ai" class="font-medium text-sm" style="color:var(--ink); text-decoration:underline; text-underline-offset:3px">support@meetbean.ai</a>
+          <p class="text-xs mt-2" style="color:var(--faint)">Response within 1 business day.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-display text-lg mb-1.5" style="color:var(--ink)">Urgent issues</h3>
+          <p class="text-[13.5px] leading-relaxed mb-3" style="color:var(--muted)">Platform outage, users locked out, data concerns, or anything blocking your operations.</p>
+          <a href="mailto:support@meetbean.ai" class="font-medium text-sm" style="color:var(--ink); text-decoration:underline; text-underline-offset:3px">support@meetbean.ai</a>
+          <p class="text-xs mt-2" style="color:var(--faint)">Include <strong style="color:var(--ink-2)">&ldquo;URGENT&rdquo;</strong> in the subject for same-day response.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="bg-dark-900 text-gray-400 py-12">
-    <div class="max-w-6xl mx-auto px-6 flex items-center">
+  <footer class="py-12" style="background:var(--ink)">
+    <div class="px-6 sm:px-8 lg:px-12 flex items-center justify-between">
       <img src="assets/images/meetbean-logo-light.svg" alt="meetBean" class="h-5 opacity-90" />
+      <span class="mono-label" style="color:var(--faint)">Implementation · meetBean</span>
     </div>
   </footer>
 
@@ -276,22 +341,21 @@
 
     function renderTimeline() {
       document.getElementById('timeline').innerHTML = PHASES.map((p, i) => `
-        <div class="relative rounded-2xl border p-5" style="border-color:${p.accent}33;background:${p.soft}66">
-          <span class="absolute top-0 left-5 right-5 h-1 rounded-b-full" style="background:${p.accent}"></span>
-          ${i < PHASES.length - 1 ? '<div class="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-6 h-6 rounded-full bg-white border border-gray-200 items-center justify-center text-gray-400 text-xs">→</div>' : ''}
-          <div class="text-[11px] font-bold uppercase tracking-wider mt-1 mb-1" style="color:${p.accent}">${p.week}</div>
-          <div class="text-xl font-extrabold text-gray-900">${p.title}</div>
+        <div class="card p-6 relative">
+          <div class="mono-label mb-3" style="color:var(--muted)">${p.week}</div>
+          <div class="font-display text-xl" style="color:var(--ink)">${p.title}</div>
+          ${i < PHASES.length - 1 ? '<div class="hidden md:flex absolute -right-2.5 top-1/2 -translate-y-1/2 z-10 w-6 h-6 rounded-full items-center justify-center text-xs" style="background:var(--surface); border:1px solid var(--line-2); color:var(--muted)">→</div>' : ''}
         </div>`).join('');
     }
 
     function renderChecklist() {
-      document.getElementById('checklist').innerHTML = CHECKLIST.map(c => `
-        <div class="rounded-2xl border border-gray-200 bg-white p-6 flex items-start gap-4">
-          <span class="w-11 h-11 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-xl flex-shrink-0">${c.icon}</span>
+      document.getElementById('checklist').innerHTML = CHECKLIST.map((c, i) => `
+        <div class="card p-6 flex items-start gap-4">
+          <span class="mono-label flex-shrink-0" style="color:var(--faint); margin-top:3px">${String(i + 1).padStart(2, '0')}</span>
           <div>
-            <h3 class="font-bold text-gray-900 mb-1">${c.title}</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">${c.desc}</p>
-            ${c.csv ? '<span class="inline-flex items-center gap-1.5 mt-2.5 text-xs font-semibold text-gray-400"><span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>CSV template · coming soon</span>' : ''}
+            <h3 class="font-display text-[15px] mb-1.5" style="color:var(--ink)">${c.title}</h3>
+            <p class="text-[13.5px] leading-relaxed" style="color:var(--muted)">${c.desc}</p>
+            ${c.csv ? '<span class="inline-flex items-center gap-1.5 mt-3 mono-label" style="color:var(--faint)"><span class="w-1.5 h-1.5 rounded-full" style="background:var(--line-2)"></span>CSV template · coming soon</span>' : ''}
           </div>
         </div>`).join('');
     }
@@ -300,26 +364,25 @@
       document.getElementById('phases').innerHTML = PHASES.map((p, i) => {
         const col = (label, items) => `
           <div>
-            <p class="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-2">${label}</p>
+            <p class="mono-label mb-3" style="color:var(--faint)">${label}</p>
             <ul class="space-y-2">
-              ${items.map(it => `<li class="flex items-start gap-2 text-[13px] text-gray-700 leading-snug"><span class="mt-0.5 flex-shrink-0" style="color:${p.accent}">✓</span><span>${it}</span></li>`).join('')}
+              ${items.map(it => `<li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--ink-2)"><span class="flex-shrink-0" style="color:var(--ink); margin-top:1px">✓</span><span>${it}</span></li>`).join('')}
             </ul>
           </div>`;
         return `
-          <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden">
-            <div class="h-1" style="background:${p.accent}"></div>
-            <div class="p-7">
-              <div class="flex items-center gap-3 mb-6">
-                <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full" style="color:${p.accent};background:${p.soft}">${p.week}</span>
-                <h3 class="text-2xl font-extrabold text-gray-900">${p.title}</h3>
+          <div class="card overflow-hidden">
+            <div class="p-7 md:p-9">
+              <div class="flex items-center gap-3 mb-7">
+                <span class="pill">${p.week}</span>
+                <h3 class="font-display text-2xl" style="color:var(--ink)">${p.title}</h3>
               </div>
-              <div class="grid md:grid-cols-2 gap-8 mb-6">
+              <div class="grid md:grid-cols-2 gap-8 md:gap-10 mb-7">
                 ${col('You do', p.you)}
-                <div class="md:border-l md:border-gray-100 md:pl-8">${col('MeetBean does', p.we)}</div>
+                <div class="md:border-l md:pl-10 pt-6 md:pt-0" style="border-color:var(--line)">${col('MeetBean does', p.we)}</div>
               </div>
-              <div class="rounded-xl px-4 py-3 flex items-start gap-2.5" style="background:${p.soft}">
-                <span class="font-bold flex-shrink-0" style="color:${p.accent}">✓</span>
-                <p class="text-[13px] text-gray-700"><span class="font-semibold">By the end of ${p.week.toLowerCase()}:</span> ${p.deliverable}</p>
+              <div class="pt-5 flex items-start gap-2.5" style="border-top:1px solid var(--line)">
+                <span class="flex-shrink-0" style="color:var(--ink)">✓</span>
+                <p class="text-[13px]" style="color:var(--muted)"><span class="font-medium" style="color:var(--ink-2)">By the end of ${p.week.toLowerCase()}:</span> ${p.deliverable}</p>
               </div>
             </div>
           </div>`;
