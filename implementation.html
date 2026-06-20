@@ -67,6 +67,7 @@
       <div class="flex items-center gap-1 sm:gap-1.5 text-[12.5px] sm:text-[13px] font-normal">
         <a href="index.html" class="px-3 sm:px-4 py-1.5 transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Project Overview</a>
         <span class="px-3 sm:px-4 py-1.5 font-medium" style="color:#9DA2B3; cursor:default" aria-current="page">Implementation Plan</span>
+        <a href="procedures.html" class="px-3 sm:px-4 py-1.5 transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Procedure Breakdown</a>
         <span class="px-3 sm:px-4 py-1.5" style="color:#B4B6C0; cursor:default" aria-disabled="true">Deployment Phases</span>
       </div>
     </div>
@@ -154,12 +155,12 @@
     </div>
   </section>
 
-  <!-- PROCEDURE BREAKDOWN -->
-  <section class="py-20 md:py-24" style="background:var(--paper)">
+  <!-- BEFORE / AFTER -->
+  <section class="py-20 md:py-24" style="background:var(--paper); border-top:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
       <div class="fade-in">
         <div class="flex items-center justify-between gap-6 mb-5">
-          <div class="eyebrow mono-label"><span class="dot"></span><span>Inside Week 2</span></div>
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Before &amp; after</span></div>
           <span class="mono-label" style="color:var(--faint)">04 / 05</span>
         </div>
         <hr class="rule mb-9" />
@@ -171,71 +172,66 @@
         </div>
       </div>
 
-      <div class="fade-in flex flex-col lg:flex-row items-center gap-8 lg:gap-12 max-w-5xl">
-        <!-- Source SOP (stacked to suggest length) -->
-        <div class="relative w-full sm:w-72 flex-shrink-0">
-          <div class="absolute inset-0 translate-x-2 translate-y-2 card"></div>
-          <div class="absolute inset-0 translate-x-1 translate-y-1 card"></div>
-          <div class="relative card p-5">
-            <div class="flex items-center justify-between mb-3">
-              <span class="mono-label" style="color:var(--faint)">One long SOP</span>
-              <span class="pill" style="padding:1px 9px">122 pages</span>
-            </div>
-            <div class="font-display mb-4" style="color:var(--ink)">Receiving SOP <span class="text-xs" style="color:var(--faint)">· Doc 026</span></div>
-            <div class="space-y-2">
-              <div class="h-2 rounded w-1/2" style="background:var(--line-2)"></div>
-              <div class="h-1.5 rounded" style="background:var(--line)"></div>
-              <div class="h-1.5 rounded w-5/6" style="background:var(--line)"></div>
-              <div class="h-2 rounded w-2/5 mt-1" style="background:var(--line-2)"></div>
-              <div class="h-1.5 rounded w-11/12" style="background:var(--line)"></div>
-              <div class="h-1.5 rounded" style="background:var(--line)"></div>
-              <div class="h-2 rounded w-1/3 mt-1" style="background:var(--line-2)"></div>
-              <div class="h-1.5 rounded w-3/4" style="background:var(--line)"></div>
-              <div class="h-1.5 rounded w-5/6" style="background:var(--line)"></div>
-            </div>
+      <div class="fade-in flex flex-col lg:flex-row items-stretch lg:items-center gap-8 lg:gap-12">
+        <!-- source doc -->
+        <div class="card p-6 w-full lg:w-[300px] flex-shrink-0 self-stretch">
+          <div class="flex items-center justify-between mb-4">
+            <span class="mono-label" style="color:var(--faint)">One long SOP</span>
+            <span class="mono-label" style="color:var(--faint); border:1px solid var(--line-2); border-radius:999px; padding:2px 9px">122 pages</span>
+          </div>
+          <h3 class="font-display text-lg mb-1" style="color:var(--ink)">Receiving SOP</h3>
+          <p class="text-[12.5px] mb-5" style="color:var(--muted)">Doc 026</p>
+          <div class="flex flex-col gap-2.5">
+            <span class="block h-1.5 rounded-full" style="background:var(--line-2); width:90%"></span>
+            <span class="block h-1.5 rounded-full" style="background:var(--line); width:100%"></span>
+            <span class="block h-1.5 rounded-full" style="background:var(--line); width:78%"></span>
+            <span class="block h-1.5 rounded-full" style="background:var(--line-2); width:95%"></span>
+            <span class="block h-1.5 rounded-full" style="background:var(--line); width:88%"></span>
+            <span class="block h-1.5 rounded-full" style="background:var(--line); width:100%"></span>
+            <span class="block h-1.5 rounded-full" style="background:var(--line); width:72%"></span>
+            <span class="block h-1.5 rounded-full" style="background:var(--line-2); width:84%"></span>
+            <span class="block h-1.5 rounded-full" style="background:var(--line); width:64%"></span>
           </div>
         </div>
 
-        <!-- Arrow -->
-        <div class="flex flex-col items-center flex-shrink-0" style="color:var(--muted)">
-          <span class="mono-label mb-1.5">Broken into</span>
-          <svg class="w-7 h-7 rotate-90 lg:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <!-- arrow -->
+        <div class="flex lg:flex-col items-center justify-center gap-2.5 flex-shrink-0" style="color:var(--muted)">
+          <span class="mono-label">Broken into</span>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="rotate-90 lg:rotate-0">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
         </div>
 
-        <!-- Resulting work instructions (real sections) -->
-        <div class="grid grid-cols-2 gap-3 w-full lg:max-w-lg">
-          <div class="card p-3.5">
-            <div class="mono-label mb-2" style="color:var(--faint)">01</div>
-            <div class="text-[13px] font-display mb-2" style="color:var(--ink)">View &amp; print ASN</div>
-            <div class="space-y-1"><div class="h-1.5 rounded" style="background:var(--line)"></div><div class="h-1.5 rounded w-2/3" style="background:var(--line)"></div></div>
+        <!-- result grid -->
+        <div class="grid grid-cols-2 gap-3 flex-1 min-w-0 w-full">
+          <div class="card p-4">
+            <div class="mono-label mb-2.5" style="color:var(--faint)">01</div>
+            <div class="font-display text-[14px] leading-snug mb-3" style="color:var(--ink)">View &amp; print ASN</div>
+            <div class="flex flex-col gap-1.5"><span class="block h-1.5 rounded-full" style="background:var(--line)"></span><span class="block h-1.5 rounded-full" style="background:var(--line); width:66%"></span></div>
           </div>
-          <div class="card p-3.5">
-            <div class="mono-label mb-2" style="color:var(--faint)">02</div>
-            <div class="text-[13px] font-display mb-2" style="color:var(--ink)">Inspect the trailer</div>
-            <div class="space-y-1"><div class="h-1.5 rounded" style="background:var(--line)"></div><div class="h-1.5 rounded w-2/3" style="background:var(--line)"></div></div>
+          <div class="card p-4">
+            <div class="mono-label mb-2.5" style="color:var(--faint)">02</div>
+            <div class="font-display text-[14px] leading-snug mb-3" style="color:var(--ink)">Inspect the trailer</div>
+            <div class="flex flex-col gap-1.5"><span class="block h-1.5 rounded-full" style="background:var(--line)"></span><span class="block h-1.5 rounded-full" style="background:var(--line); width:66%"></span></div>
           </div>
-          <div class="card p-3.5">
-            <div class="mono-label mb-2" style="color:var(--faint)">03</div>
-            <div class="text-[13px] font-display mb-2" style="color:var(--ink)">TI-HI &amp; building a pallet</div>
-            <div class="space-y-1"><div class="h-1.5 rounded" style="background:var(--line)"></div><div class="h-1.5 rounded w-2/3" style="background:var(--line)"></div></div>
+          <div class="card p-4">
+            <div class="mono-label mb-2.5" style="color:var(--faint)">03</div>
+            <div class="font-display text-[14px] leading-snug mb-3" style="color:var(--ink)">TI-HI &amp; building a pallet</div>
+            <div class="flex flex-col gap-1.5"><span class="block h-1.5 rounded-full" style="background:var(--line)"></span><span class="block h-1.5 rounded-full" style="background:var(--line); width:66%"></span></div>
           </div>
-          <div class="card p-3.5">
-            <div class="mono-label mb-2" style="color:var(--faint)">04</div>
-            <div class="text-[13px] font-display mb-2" style="color:var(--ink)">Conveyor unload</div>
-            <div class="space-y-1"><div class="h-1.5 rounded" style="background:var(--line)"></div><div class="h-1.5 rounded w-2/3" style="background:var(--line)"></div></div>
+          <div class="card p-4">
+            <div class="mono-label mb-2.5" style="color:var(--faint)">04</div>
+            <div class="font-display text-[14px] leading-snug mb-3" style="color:var(--ink)">Conveyor unload</div>
+            <div class="flex flex-col gap-1.5"><span class="block h-1.5 rounded-full" style="background:var(--line)"></span><span class="block h-1.5 rounded-full" style="background:var(--line); width:66%"></span></div>
           </div>
-          <div class="card p-3.5">
-            <div class="mono-label mb-2" style="color:var(--faint)">05</div>
-            <div class="text-[13px] font-display mb-2" style="color:var(--ink)">Handle receiving exceptions</div>
-            <div class="space-y-1"><div class="h-1.5 rounded" style="background:var(--line)"></div><div class="h-1.5 rounded w-2/3" style="background:var(--line)"></div></div>
+          <div class="card p-4">
+            <div class="mono-label mb-2.5" style="color:var(--faint)">05</div>
+            <div class="font-display text-[14px] leading-snug mb-3" style="color:var(--ink)">Handle receiving exceptions</div>
+            <div class="flex flex-col gap-1.5"><span class="block h-1.5 rounded-full" style="background:var(--line)"></span><span class="block h-1.5 rounded-full" style="background:var(--line); width:66%"></span></div>
           </div>
-          <div class="p-3.5 flex items-center justify-center" style="border:1px dashed var(--line-2); border-radius:var(--r-sm)">
-            <span class="text-[13px] font-medium" style="color:var(--muted)">+ 20 more</span>
-          </div>
+          <div class="flex items-center justify-center text-[13px] font-medium" style="border:1px dashed var(--line-2); border-radius:var(--r-sm); color:var(--muted); min-height:78px">+ 20 more</div>
         </div>
       </div>
-
-      <p class="fade-in text-xs mt-8" style="color:var(--faint)">A sample of your real Receiving SOP. The full breakdown is defined together during migration.</p>
     </div>
   </section>
 
