@@ -1,0 +1,102 @@
+/* =========================================================================
+   meetBean · system.css
+   Single source of truth for shared styles. Linked by every page.
+   Page-specific rules stay in that page's own <style> block.
+   Tokens + components mirror the design system; the breakdown diagram
+   (.bd-viz) is the one canonical "X becomes Y" component.
+   ========================================================================= */
+
+/* ---- tokens ---- */
+:root {
+  --paper:#F3F3F3; --surface:#FFFFFF; --panel:#ECECEC;
+  --ink:#1E1D1D; --ink-2:#343E3F; --muted:#5F626C; --faint:#6B6E7C;
+  --line:rgba(30,29,29,.12); --line-2:rgba(30,29,29,.24);
+  --accent:#508875; --accent-mid:#70A593; --accent-soft:#9CC9BB; --accent-wash:#EAF2EE;
+  --indigo:#4F5E91; --indigo-mid:#6C7BA7; --indigo-soft:#AEB8D6;
+  --r-xs:3px; --r-sm:6px; --r-md:10px; --r-pill:999px;
+}
+
+/* ---- base ---- */
+body { font-family:'DM Sans', sans-serif; background:var(--paper); color:var(--ink); }
+h1, h2, h3, h4, .font-display { font-family:'DM Sans', sans-serif; letter-spacing:-0.02em; font-weight:500; }
+
+/* ---- scroll-reveal helpers (both naming conventions in use across pages) ---- */
+.fade-in { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+.reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity:1; transform:none; }
+nav.scrolled { box-shadow:0 1px 0 0 var(--line); }
+
+/* ---- micro-typography & rules ---- */
+.mono-label { font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; }
+.eyebrow { display:inline-flex; align-items:center; gap:8px; color:var(--muted); }
+.eyebrow .dot { width:6px; height:6px; border-radius:999px; background:var(--accent-mid); flex:none; }
+.rule { height:1px; background:var(--line); border:0; }
+.grid-bg { background-image:linear-gradient(to right, rgba(30,29,29,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(30,29,29,.05) 1px, transparent 1px); background-size:64px 64px; }
+.stat { font-family:'DM Sans', sans-serif; font-weight:500; font-size:2.5rem; letter-spacing:-0.03em; line-height:1; }
+
+/* ---- surfaces ---- */
+.card { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); }
+
+/* ---- buttons ---- */
+.btn { display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:500; padding:9px 18px; border-radius:999px; border:1px solid var(--ink); color:var(--ink); background:transparent; transition:background .18s ease, color .18s ease; cursor:pointer; }
+.btn:hover { background:var(--ink); color:#fff; }
+.btn-accent { border-color:var(--accent); color:var(--accent); }
+.btn-accent:hover { background:var(--accent); color:#fff; }
+.btn-solid { background:var(--ink); color:#fff; border-color:var(--ink); }
+.btn-solid:hover { background:var(--ink-2); border-color:var(--ink-2); }
+.btn-icon { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:999px; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); transition:background .18s ease, color .18s ease; cursor:pointer; }
+.btn-icon:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
+
+/* ---- pills & tags ---- */
+.pill { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:500; letter-spacing:.01em; padding:3px 11px; border-radius:999px; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); white-space:nowrap; }
+.pill-solid { background:var(--ink); color:#fff; border-color:var(--ink); }
+.pill-accent { background:var(--accent-wash); color:var(--accent); border-color:var(--accent-soft); }
+.pill .ring { width:6px; height:6px; border-radius:999px; border:1.5px solid currentColor; flex:none; }
+.pill .dot-i { width:6px; height:6px; border-radius:999px; background:var(--ink); flex:none; }
+.tag { display:inline-block; font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; padding:2px 7px; border-radius:var(--r-xs); }
+.tag-must { background:var(--ink); color:#fff; }
+.tag-nice { background:transparent; color:var(--muted); border:1px solid var(--line-2); }
+
+/* ---- breakdown diagram — one canonical "X becomes Y" component ----
+   source doc (left) → arrow verb → cell grid (right). Single source card
+   (no stacked-pages effect) that stretches to the grid's height; the grid
+   fills the row full-width. Swap only the data: doc title, arrow verb, cells.
+   A .bd-cell.dashed = a possible / not-yet-built output; .bd-more = "+N more". */
+.bd-viz { display:flex; align-items:center; gap:48px; margin-top:10px; }
+@media(max-width:760px){ .bd-viz { flex-direction:column; align-items:stretch; gap:26px; } }
+.bd-src { position:relative; width:300px; flex-shrink:0; align-self:stretch; display:flex; flex-direction:column; }
+@media(max-width:760px){ .bd-src { width:100%; } }
+.bd-src .doc { position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); padding:18px; flex:1; }
+.bd-src .doc-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:13px; }
+.bd-cap { font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.bd-pages { font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--muted); border:1px solid var(--line-2); border-radius:999px; padding:2px 9px; white-space:nowrap; }
+.bd-src .doc-title { font-weight:600; font-size:16px; letter-spacing:-.01em; margin-bottom:14px; }
+.bd-src .doc-title span { color:var(--muted); font-size:12px; font-weight:400; }
+.bd-lines { display:flex; flex-direction:column; gap:8px; }
+.bd-lines i { height:6px; border-radius:3px; background:var(--line); }
+.bd-lines i.h { background:var(--line-2); }
+.bd-arrow { display:flex; flex-direction:column; align-items:center; gap:7px; color:var(--muted); flex-shrink:0; }
+.bd-arrow .lbl { font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; }
+.bd-arrow svg { width:26px; height:26px; }
+@media(max-width:760px){ .bd-arrow svg { transform:rotate(90deg); } }
+.bd-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; flex:1; min-width:0; }
+.bd-grid.three { grid-template-columns:repeat(3,1fr); }
+@media(max-width:600px){ .bd-grid.three { grid-template-columns:1fr; } }
+.bd-cell { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); padding:14px 15px; }
+.bd-cell.dashed { border-style:dashed; border-color:var(--line-2); }
+.bd-cell.dashed .n, .bd-cell.dashed .t { color:#B7B9C3; }
+.bd-cell.dashed .ll i { background:rgba(30,29,29,.055); }
+.bd-cell .n { font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--muted); margin-bottom:9px; }
+.bd-cell .t { font-weight:600; font-size:13.5px; letter-spacing:-.01em; margin-bottom:10px; line-height:1.25; }
+.bd-cell .ll { display:flex; flex-direction:column; gap:5px; }
+.bd-cell .ll i { height:6px; border-radius:3px; background:var(--line); }
+.bd-more { display:flex; align-items:center; justify-content:center; border:1px dashed var(--line-2); border-radius:var(--r-sm); color:var(--muted); font-size:13px; font-weight:500; min-height:78px; }
+
+/* ---- closing statement band — full-bleed closing line ---- */
+.statement { background:var(--surface); border-top:1px solid var(--line); padding:clamp(84px,12vw,168px) 0; }
+.statement .st-head { color:var(--ink); font-family:'DM Sans', sans-serif; font-weight:500; letter-spacing:-.04em; line-height:1.05; font-size:clamp(2.2rem, 6vw, 5.5rem); max-width:none; min-height:2.1em; }
+.statement .st-accent { color:var(--accent); }
+.statement .st-caret { display:inline-block; width:.05em; height:.82em; margin-left:.06em; border-radius:1px; background:var(--accent); vertical-align:-.06em; }
+.statement .st-head.typed .st-caret { animation:st-blink 1.05s step-end infinite; }
+@keyframes st-blink { 50% { opacity:0; } }

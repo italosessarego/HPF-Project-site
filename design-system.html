@@ -21,61 +21,12 @@
     } } };
   </script>
 
+  <link rel="stylesheet" href="assets/css/system.css" />
+
   <style>
-    /* ============================================================
-       meetBean · Design System tokens  (minimal / futuristic)
-       This file is the SOURCE OF TRUTH. Mirror the :root block and
-       component classes into every page's <style>.
-       ============================================================ */
-    :root {
-      /* surfaces */
-      --paper:   #F3F3F3;   /* page base            (Cloud)    */
-      --surface: #FFFFFF;   /* cards / raised                  */
-      --panel:   #ECECEC;   /* recessed panels                 */
-      --ink:     #1E1D1D;   /* primary text                    */
-      --ink-2:   #343E3F;   /* secondary / slate               */
-      --muted:   #5F626C;   /* muted body            (Graphite) */
-      --faint:   #6B6E7C;   /* hints / placeholders  (Space)    */
-      --line:    rgba(30,29,29,.12);  /* hairline                */
-      --line-2:  rgba(30,29,29,.24);  /* stronger hairline       */
-      /* single accent — sage (use sparingly: dots, edges, fills, ONE highlight) */
-      --accent:      #508875;
-      --accent-mid:  #70A593;
-      --accent-soft: #9CC9BB;
-      --accent-wash: #EAF2EE;
-      /* radius — minimal */
-      --r-xs: 3px; --r-sm: 6px; --r-md: 10px; --r-pill: 999px;
-    }
-
-    body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); }
-    h1, h2, h3, .font-display { font-family: 'DM Sans', sans-serif; letter-spacing: -0.02em; font-weight: 500; }
-
-    .mono-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); }
-    .eyebrow .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--accent-mid); flex: none; }
-    .rule { height: 1px; background: var(--line); border: 0; }
-    .grid-bg { background-image: linear-gradient(to right, rgba(30,29,29,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(30,29,29,.05) 1px, transparent 1px); background-size: 64px 64px; }
-    .stat { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 2.5rem; letter-spacing: -0.03em; line-height: 1; }
-
-    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); }
-
-    .btn { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; padding: 9px 18px; border-radius: 999px; border: 1px solid var(--ink); color: var(--ink); background: transparent; transition: background .18s ease, color .18s ease; cursor: pointer; }
-    .btn:hover { background: var(--ink); color: #fff; }
-    .btn-accent { border-color: var(--accent); color: var(--accent); }
-    .btn-accent:hover { background: var(--accent); color: #fff; }
-    .btn-solid { background: var(--ink); color: #fff; border-color: var(--ink); }
-    .btn-solid:hover { background: var(--ink-2); border-color: var(--ink-2); }
-    .btn-icon { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:999px; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); transition:background .18s ease, color .18s ease; cursor:pointer; }
-    .btn-icon:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
-
-    .pill { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:500; letter-spacing:.01em; padding:3px 11px; border-radius:999px; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); white-space:nowrap; }
-    .pill-solid  { background:var(--ink); color:#fff; border-color:var(--ink); }
-    .pill-accent { background:var(--accent-wash); color:var(--accent); border-color:var(--accent-soft); }
-    .pill .ring  { width:6px; height:6px; border-radius:999px; border:1.5px solid currentColor; flex:none; }
-
-    .tag { display:inline-block; font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; padding:2px 7px; border-radius:var(--r-xs); }
-    .tag-must { background:var(--ink); color:#fff; }
-    .tag-nice { background:transparent; color:var(--muted); border:1px solid var(--line-2); }
+    /* Tokens, base type, and shared components now live in assets/css/system.css —
+       the single source of truth. Every page links it; this page keeps only the
+       doc-only display helpers below. */
 
     /* doc-only helpers */
     .swatch { height: 88px; border-radius: var(--r-sm); border: 1px solid var(--line); }
@@ -83,6 +34,8 @@
     .ds-section { scroll-margin-top: 84px; }
     .specimen { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 1.75rem; }
     a.toclink:hover { color: var(--ink); }
+
+    /* The breakdown diagram (.bd-viz) and statement band (.statement) live in system.css. */
   </style>
 </head>
 <body class="antialiased">
@@ -118,6 +71,7 @@
       <a class="toclink" href="#type">Type</a>
       <a class="toclink" href="#space">Space &amp; line</a>
       <a class="toclink" href="#components">Components</a>
+      <a class="toclink" href="#sections">Section setup</a>
       <a class="toclink" href="#a11y">Accessibility</a>
     </div>
   </div>
@@ -126,8 +80,7 @@
 
     <!-- PRINCIPLES -->
     <section id="principles" class="ds-section">
-      <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Principles</span></div><span class="mono-label" style="color:var(--faint)">00</span></div>
-      <hr class="rule mb-9" />
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Principles</span></div><span class="mono-label" style="color:var(--faint)">00</span></div>
       <div class="grid md:grid-cols-2 gap-4">
         <div class="specimen">
           <h3 class="text-lg mb-2">Monochrome + one accent</h3>
@@ -150,8 +103,7 @@
 
     <!-- COLOR -->
     <section id="color" class="ds-section">
-      <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Color</span></div><span class="mono-label" style="color:var(--faint)">01</span></div>
-      <hr class="rule mb-9" />
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Color</span></div><span class="mono-label" style="color:var(--faint)">01</span></div>
 
       <p class="mono-label mb-4" style="color:var(--muted)">Surfaces &amp; ink</p>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
@@ -176,8 +128,7 @@
 
     <!-- TYPE -->
     <section id="type" class="ds-section">
-      <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Typography</span></div><span class="mono-label" style="color:var(--faint)">02</span></div>
-      <hr class="rule mb-9" />
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Typography</span></div><span class="mono-label" style="color:var(--faint)">02</span></div>
 
       <div class="grid md:grid-cols-3 gap-4 mb-10">
         <div class="specimen"><p class="font-display text-3xl mb-1" style="font-weight:500">Aa</p><p class="text-[13px] font-medium">DM Sans · Medium</p><p class="spec">Display · headings · 500</p></div>
@@ -202,8 +153,7 @@
 
     <!-- SPACE & LINE -->
     <section id="space" class="ds-section">
-      <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Space &amp; line</span></div><span class="mono-label" style="color:var(--faint)">03</span></div>
-      <hr class="rule mb-9" />
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Space &amp; line</span></div><span class="mono-label" style="color:var(--faint)">03</span></div>
       <div class="grid md:grid-cols-2 gap-4">
         <div class="specimen">
           <p class="mono-label mb-4" style="color:var(--muted)">Spacing scale · 4px base</p>
@@ -229,15 +179,13 @@
 
     <!-- COMPONENTS -->
     <section id="components" class="ds-section">
-      <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Components</span></div><span class="mono-label" style="color:var(--faint)">04</span></div>
-      <hr class="rule mb-9" />
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Components</span></div><span class="mono-label" style="color:var(--faint)">04</span></div>
 
       <div class="grid md:grid-cols-2 gap-4">
         <!-- eyebrow / index -->
         <div class="specimen">
           <p class="mono-label mb-5" style="color:var(--faint)">Section header</p>
-          <div class="flex items-center justify-between mb-3"><div class="eyebrow mono-label"><span class="dot"></span><span>For the record</span></div><span class="mono-label" style="color:var(--faint)">01 / 04</span></div>
-          <hr class="rule mb-4" />
+          <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>For the record</span></div><span class="mono-label" style="color:var(--faint)">01 / 04</span></div>
           <h3 class="text-2xl">Your requirements, addressed</h3>
         </div>
 
@@ -285,13 +233,73 @@
             <p class="text-[14px] leading-relaxed" style="color:var(--muted)">White surface, hairline border, small radius, zero shadow. Accent enters only through the pill.</p>
           </div>
         </div>
+
+        <!-- breakdown diagram shell -->
+        <div class="specimen md:col-span-2">
+          <p class="mono-label mb-2" style="color:var(--faint)">Breakdown diagram — reusable &ldquo;shell&rdquo;</p>
+          <p class="text-[13px] leading-relaxed mb-6" style="color:var(--muted)">One template for any &ldquo;X becomes Y&rdquo; breakdown. Swap only the <strong style="color:var(--ink);font-weight:600">data</strong>: the source doc (left), the arrow verb, and the cells (right). Solid <code>.bd-cell</code> = real outputs; a same-size <code>.bd-cell.dashed</code> (identical cell, dashed border only) = a possible / not-yet-built output; compact <code>.bd-more</code> = a &ldquo;+N more&rdquo; count. Keep every instance identical — one 300&nbsp;px source card that stretches to match the grid height (no stacked-pages effect), with the 2-column cell grid filling the row. Used by both <strong style="color:var(--ink);font-weight:600">The split</strong> (SOP&rarr;procedures) and <strong style="color:var(--ink);font-weight:600">Derive</strong> (procedure&rarr;artifacts).</p>
+          <div class="bd-viz">
+            <div class="bd-src">
+              <div class="doc">
+                <div class="doc-top"><span class="bd-cap">Source</span><span class="bd-pages">N pages</span></div>
+                <div class="doc-title">Document title <span>&middot; ref</span></div>
+                <div class="bd-lines"><i class="h" style="width:50%"></i><i></i><i style="width:83%"></i><i class="h" style="width:40%;margin-top:4px"></i><i style="width:92%"></i><i></i></div>
+              </div>
+            </div>
+            <div class="bd-arrow"><span class="lbl">Becomes</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="bd-grid">
+              <div class="bd-cell"><div class="n">01</div><div class="t">Output A</div><div class="ll"><i></i><i style="width:66%"></i></div></div>
+              <div class="bd-cell"><div class="n">02</div><div class="t">Output B</div><div class="ll"><i></i><i style="width:66%"></i></div></div>
+              <div class="bd-cell"><div class="n">03</div><div class="t">Output C</div><div class="ll"><i></i><i style="width:66%"></i></div></div>
+              <div class="bd-cell dashed"><div class="n">04</div><div class="t">Could-also-be</div><div class="ll"><i></i><i style="width:66%"></i></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- statement band -->
+        <div class="specimen md:col-span-2">
+          <p class="mono-label mb-2" style="color:var(--faint)">Statement band &mdash; full-bleed closing line</p>
+          <p class="text-[13px] leading-relaxed mb-6" style="color:var(--muted)">A page&rsquo;s last word: one large DM Sans line, full-bleed on a light surface, with a <strong style="color:var(--ink);font-weight:600">single sage phrase</strong> carrying the payoff. Closing punctuation &mdash; not a numbered section, so it stays out of the <code>01 / 04</code> count. In production the type scales fluidly edge-to-edge (<code>clamp(2.6rem, 8.4vw, 8.5rem)</code>); shown reduced below. Swap the text only.</p>
+          <div style="border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden">
+            <div class="statement" style="border-top:0; padding:48px 36px">
+              <h2 class="st-head" style="font-size:clamp(1.9rem,4.4vw,3.2rem)">From one procedure to <span class="st-accent">a living compliance program</span></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION SETUP -->
+    <section id="sections" class="ds-section">
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Section setup</span></div><span class="mono-label" style="color:var(--faint)">05</span></div>
+      <p class="text-[15px] leading-relaxed mb-8 max-w-2xl" style="color:var(--muted)">Every content section is built from one scaffold &mdash; full-bleed, one vertical rhythm, one header pattern. Reuse it exactly so a new page lands in step with Project&nbsp;Overview, Implementation&nbsp;Plan, and Procedure&nbsp;Breakdown.</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="specimen">
+          <p class="mono-label mb-5" style="color:var(--faint)">Header anatomy</p>
+          <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Section label</span></div><span class="mono-label" style="color:var(--faint)">01 / 04</span></div>
+          <div class="max-w-2xl">
+            <h3 class="text-2xl mb-2">Section heading</h3>
+            <p class="text-[14px] leading-relaxed" style="color:var(--muted)">One or two lines of intro at Body&nbsp;L, held to a max-w-2xl column. Content begins about 56&nbsp;px below.</p>
+          </div>
+        </div>
+        <div class="specimen">
+          <p class="mono-label mb-5" style="color:var(--faint)">The recipe &mdash; in order</p>
+          <ul class="spec" style="line-height:1.9; list-style:none">
+            <li>&lt;section&gt; full-bleed &middot; <strong style="color:var(--ink)">py-20 md:py-24</strong></li>
+            <li>background alternates <strong style="color:var(--ink)">--paper / --surface</strong> &middot; top <strong style="color:var(--ink)">--line</strong></li>
+            <li>edge rail <strong style="color:var(--ink)">px-6 sm:px-8 lg:px-12</strong> &middot; never a centered column</li>
+            <li>header row &middot; eyebrow left, index <strong style="color:var(--ink)">01 / 04</strong> right &middot; <strong style="color:var(--ink)">mb-8</strong> &middot; no divider rule</li>
+            <li>h2 <strong style="color:var(--ink)">text-3xl md:text-[2.4rem]</strong> &middot; mb-4 &middot; in max-w-2xl</li>
+            <li>intro <strong style="color:var(--ink)">text-lg</strong> &middot; --muted</li>
+            <li>content &middot; margin-top <strong style="color:var(--ink)">~56px</strong></li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- ACCESSIBILITY -->
     <section id="a11y" class="ds-section">
-      <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Accessibility</span></div><span class="mono-label" style="color:var(--faint)">05</span></div>
-      <hr class="rule mb-9" />
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Accessibility</span></div><span class="mono-label" style="color:var(--faint)">06</span></div>
       <div class="specimen">
         <p class="text-[15px] leading-relaxed mb-4" style="color:var(--ink-2)">
           The sage greens are <strong style="font-weight:600">accent colors, not text colors</strong>. On white, <span style="color:var(--accent-mid)">#70A593</span> and even <span style="color:var(--accent)">#508875</span> do not meet WCAG AA for normal body text.
