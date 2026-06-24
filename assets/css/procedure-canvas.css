@@ -1,0 +1,331 @@
+/* ============================================================================
+   PROCEDURE CANVAS — faithful, scaled-down replica of the real SOP platform's
+   procedure-detail page (document canvas + right DetailDrawer meta sidebar).
+   1:1 with the live product, then shrunk via CSS `zoom` (same technique as
+   task-runner.css). Source of truth = the app codebase at
+   `SOP Demo 6.18/apps/web/src/components/procedures/` and
+   `SOP Demo 6.18/packages/{editor,ui}/src/` — every value here is lifted from
+   it: Tailwind classes resolved to px, theme oklch colors resolved to hex
+   (globals.css / semantic-ramp.css / sop.css). No app chrome / left nav.
+
+   Usage:  <div class="proc-frame"><div class="proc-screen"> … </div></div>
+   Size:   set --ts-scale on .proc-frame (and --proc-w for the design width).
+
+   The .proc-screen is rendered at the platform's TRUE 880px width, then the
+   .proc-frame zooms the whole thing down (--ts-scale) so the internal layout
+   stays pixel-exact while the screen becomes phone-sized. The frame sizes to
+   the scaled content (a real, tall document) so the sidebar action buttons
+   land at the bottom once scaled.
+   ============================================================================ */
+
+/* the wide "screen / tablet" frame — less rounded than the phone */
+.proc-frame {
+  --ts-scale: 0.56;
+  --proc-w: 880px;
+  box-sizing: border-box;
+  width: calc(var(--proc-w) * var(--ts-scale));
+  max-width: 100%;
+  margin: 0 auto;
+  border: 1px solid #E4E4E7;          /* --border */
+  border-radius: 16px;
+  overflow: hidden;
+  background: #FFFFFF;                 /* --background (canvas reads white) */
+  box-shadow: 0 30px 72px -34px rgba(30, 29, 29, 0.34), 0 6px 18px -12px rgba(30, 29, 29, 0.18);
+}
+.proc-frame > .proc-screen { width: var(--proc-w); zoom: var(--ts-scale); }
+
+/* the procedure screen — document canvas (left) + meta sidebar (right) */
+.proc-screen {
+  /* theme tokens (globals.css / semantic-ramp.css / sop.css, oklch → hex) */
+  --c-fg: #09090B;            /* --foreground (title, body, value text) */
+  --c-muted: #71717A;         /* --muted-foreground (labels, meta, placeholders) */
+  --c-border: #E4E4E7;        /* --border / --input (dividers, outlines) */
+  --c-card: #FFFFFF;          /* --card / --background (page + sidebar surface) */
+  --c-muted-bg: #F4F4F5;      /* --muted / --secondary / --accent (hover, fills) */
+  --c-secondary-fg: #18181B;  /* --secondary-foreground / --primary */
+  --c-primary: #18181B;       /* --primary (solid button) */
+  --c-primary-fg: #FAFAFA;    /* --primary-foreground (solid button text) */
+  /* status badge families (resolved from semantic-ramp / sop.css) */
+  --c-pub-bg: #E8F6E2;  --c-pub-fg: #057F04;   /* published — success/green */
+  --c-draft-bg: #F4F4F5; --c-draft-fg: #71717A; /* draft — neutral/gray */
+  --c-info-bg: #E6F0FC; --c-info-fg: #006BDF;   /* pending / status pill — info/blue */
+  --c-arc-bg: #F2E9F8; --c-arc-fg: #7E3CAE;     /* archived — purple */
+  --c-warn: #AE5700;                            /* warning — amber text */
+  --c-success: #057F04;                         /* --success (check icons) */
+  --c-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.05); /* --shadow-xs */
+
+  font-family: 'Inter', system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  color: var(--c-fg);
+  background: var(--c-card);            /* white document page */
+  display: grid;
+  grid-template-columns: 1fr 282px;     /* document column + 282px meta sidebar
+                                           (the real app uses a 360px resizable
+                                           panel; 282px keeps the established
+                                           880px width + a roomy doc column) */
+}
+
+/* ===========================================================================
+   LEFT — DOCUMENT CANVAS
+   The real measure is a 700px-max centered text column via
+   px-[max(100px,calc(50%-350px))], shared by title + status row + body.
+   At the 1fr (≈598px) column the calc floors to the 100px gutter, so the text
+   spans the column inset by 100px each side. We reproduce that with a 100px
+   horizontal inset (capped to a 700px centered column on wider renders).
+   =========================================================================== */
+.proc-canvas {
+  min-width: 0;
+  background: var(--c-card);
+  padding: 32px 0 96px;                 /* py-8 top (32) + a trimmed pb-72 runway */
+}
+/* the shared 700px-max centered text measure (px-[max(100px,calc(50%-350px))]) */
+.proc-measure {
+  padding-left: max(100px, calc(50% - 350px));
+  padding-right: max(100px, calc(50% - 350px));
+}
+
+/* TITLE — h1 text-4xl/700 tracking-tight, mb-2 (ProcedureHeader) */
+.proc-title {
+  min-height: 40px;                     /* min-h-[2.5rem] */
+  font-size: 36px;                      /* text-4xl */
+  line-height: 40px;
+  font-weight: 700;
+  letter-spacing: -0.035em;             /* tracking-tight on -0.01em base */
+  color: var(--c-fg);
+  margin: 0 0 8px;                      /* mb-2 */
+}
+
+/* STATUS ROW — flex-wrap gap-2, text-sm muted, mb-6 (ProcedureDetailStatusRow) */
+.proc-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;                             /* gap-2 */
+  margin-bottom: 24px;                  /* mb-6 */
+  font-size: 12.8px;                    /* text-sm (0.8rem override) */
+  line-height: 1.5;
+  color: var(--c-muted);
+}
+.proc-meta { display: inline-flex; align-items: center; gap: 4px; } /* gap-1 */
+.proc-meta svg { width: 12px; height: 12px; }                       /* h-3 w-3 */
+.proc-meta.warn { color: var(--c-warn); }
+
+/* status badge — Badge size=sm: h-5 rounded-sm px-[0.325rem] text-[0.6875rem]
+   leading-[0.75rem] font-medium gap-1 */
+.proc-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;                         /* h-5 */
+  min-width: 20px;                      /* min-w-5 */
+  gap: 4px;                             /* gap-1 */
+  padding: 0 5.2px;                     /* px-[0.325rem] */
+  border: 1px solid transparent;
+  border-radius: 4px;                   /* rounded-sm */
+  font-size: 11px;                      /* text-[0.6875rem] */
+  line-height: 12px;                    /* leading-[0.75rem] */
+  font-weight: 500;                     /* font-medium */
+  white-space: nowrap;
+}
+.proc-badge svg { width: 12px; height: 12px; }   /* [&_svg]:size-3 */
+.proc-badge.pub   { background: var(--c-pub-bg);   color: var(--c-pub-fg); }
+.proc-badge.draft { background: var(--c-draft-bg); color: var(--c-draft-fg); }
+.proc-badge.info  { background: var(--c-info-bg);  color: var(--c-info-fg); }
+.proc-badge.arc   { background: var(--c-arc-bg);   color: var(--c-arc-fg); }
+/* VersionBadge "v{n}" — Badge variant=secondary size=sm */
+.proc-badge.ver { background: var(--c-muted-bg); color: var(--c-secondary-fg); }
+/* "Current" pill on the active version row — Badge variant=secondary size=sm */
+.proc-badge.cur { background: var(--c-muted-bg); color: var(--c-secondary-fg); }
+
+/* DOCUMENT BODY — Editor pt-4 pb-72 text-base; system-ui font stack
+   (the body deliberately uses the native UI font, not Inter). Element styles
+   live in the Plate node components; faithful proportions at text-base=16px. */
+.proc-body {
+  padding-top: 16px;                    /* pt-4 (gap under status row) */
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: 16px;                      /* text-base — the only 16px on the canvas */
+  line-height: 1.5;
+  color: var(--c-fg);
+}
+.proc-body p { margin: 0 0 16px; }
+.proc-body p:last-child { margin-bottom: 0; }
+/* heading levels — visibly larger/bold over the 16px baseline */
+.proc-h2 { font-size: 24px; line-height: 1.3; font-weight: 700; letter-spacing: -0.02em; margin: 28px 0 12px; }
+.proc-h3 { font-size: 19px; line-height: 1.35; font-weight: 600; letter-spacing: -0.015em; margin: 24px 0 10px; }
+.proc-body > .proc-h2:first-child,
+.proc-body > .proc-h3:first-child { margin-top: 0; }
+/* lists — indented list items, 16px copy */
+.proc-list { margin: 0 0 16px; padding-left: 26px; }
+.proc-list li { margin-bottom: 7px; line-height: 1.5; }
+.proc-list li:last-child { margin-bottom: 0; }
+.proc-list.ol { list-style: decimal; }
+.proc-list.ul { list-style: disc; }
+/* an embedded media figure (photo/video the procedure carries inline) */
+.proc-figure {
+  margin: 8px 0 20px;
+  border: 1px solid var(--c-border);
+  border-radius: 8px;
+  background: var(--c-muted-bg);
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+  color: var(--c-muted);
+  overflow: hidden;
+}
+.proc-figure svg { width: 34px; height: 34px; }
+.proc-figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ===========================================================================
+   RIGHT — META SIDEBAR (DetailDrawer)
+   White surface, 1px left border. Sections separated by a top border with
+   px-4 py-3 padding. Footer pinned to the bottom (mt-auto / sticky in app →
+   here a flex:1 spacer, robust under `zoom`).
+   =========================================================================== */
+.proc-side {
+  border-left: 1px solid var(--c-border);  /* divider from the canvas */
+  background: var(--c-card);               /* white surface */
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* DetailDrawer.Section — border-t px-4 py-3, first-child no top border */
+.side-sec {
+  padding: 12px 16px;                      /* py-3 px-4 */
+  border-top: 1px solid var(--c-border);
+}
+.side-sec:first-child { border-top: 0; }
+/* SectionLabel (override text-xs font-medium) — uppercase tracking-wider muted */
+.side-h {
+  margin: 2px 0 0;                         /* mt-0.5 */
+  font-size: 11.2px;                       /* text-xs */
+  font-weight: 500;                        /* font-medium override */
+  line-height: 1;
+  letter-spacing: 0.04em;                  /* tracking-wider (0.448px on 11.2px, verified live) */
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+/* content sits below the title with the Section's space-y-4 rhythm */
+.side-body { margin-top: 14px; }
+
+/* DetailDrawer.PropList — grid [96px 60fr] gap-x-3 gap-y-2, items-baseline */
+.side-props {
+  display: grid;
+  grid-template-columns: 96px 60fr;        /* labelWidth w-24 = 96px */
+  align-items: baseline;
+  column-gap: 12px;                        /* gap-x-3 */
+  row-gap: 8px;                            /* gap-y-2 */
+}
+/* DetailDrawer.Prop label — text-xs muted, leading size-3 icon, gap-1.5 */
+.side-k {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;                                /* gap-1.5 */
+  min-width: 0;
+  font-size: 11.2px;                       /* text-xs */
+  color: var(--c-muted);
+}
+.side-k svg { width: 12px; height: 12px; align-self: center; flex: none; } /* size-3 */
+.side-k .req { color: #CC272E; }           /* text-destructive asterisk */
+/* DetailDrawer.Prop value — text-sm foreground */
+.side-v {
+  min-width: 0;
+  font-size: 12.8px;                       /* text-sm */
+  color: var(--c-fg);
+}
+.side-v.muted { font-size: 11.2px; color: var(--c-muted); } /* "None" / "Not set" */
+/* green CircleCheck approval icon (text-success size-4) */
+.side-v .ok {
+  display: inline-flex;
+  vertical-align: -2px;
+  margin-left: 4px;
+  color: var(--c-success);
+}
+.side-v .ok svg { width: 16px; height: 16px; }
+
+/* StackedField (Acknowledgers / Collaborators) — flex-col gap-1.5, value text-sm.
+   Lives in the same PropList grid but spans both columns as a stacked block. */
+.side-stack { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px; }
+.side-stack .side-k { font-size: 11.2px; }
+.side-stack .stack-v { display: flex; flex-direction: column; gap: 4px; font-size: 12.8px; } /* gap-1 list */
+.ack-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ack-name { display: inline-flex; align-items: center; gap: 6px; color: var(--c-fg); }
+.ack-name .ok { color: var(--c-success); display: inline-flex; }
+.ack-name .ok svg { width: 16px; height: 16px; }
+.ack-date { color: var(--c-muted); font-size: 11.2px; white-space: nowrap; flex: none; }
+.ack-prog { font-size: 11.2px; color: var(--c-muted); }
+
+/* badge-list value cells (Sites / Job Function / Tags) — wrap of soft chips */
+.side-badges { display: flex; flex-wrap: wrap; gap: 4px; }
+.proc-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 6px;                      /* tag badges read as md radius */
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 500;
+  background: var(--c-muted-bg);
+  color: var(--c-secondary-fg);
+  border: 1px solid transparent;
+}
+
+/* VERSIONS — PreviousVersionsSection: flex-col gap-1 of TanStack <Link> rows */
+.side-versions { display: flex; flex-direction: column; gap: 4px; } /* gap-1 */
+.ver-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;                                /* gap-2 */
+  padding: 6px 8px;                        /* py-1.5 px-2 */
+  border-radius: 6px;                      /* rounded-md */
+}
+.ver-row.cur { background: var(--c-muted-bg); }  /* bg-accent/50 current tint */
+.ver-l { display: flex; flex-direction: column; gap: 2px; min-width: 0; } /* flex-1 col gap-0.5 */
+.ver-line { display: flex; align-items: center; gap: 8px; min-width: 0; }  /* gap-2 */
+.ver-n { font-size: 12.8px; font-weight: 500; color: var(--c-fg); }        /* text-sm font-medium */
+.ver-title { font-size: 11.2px; color: var(--c-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ver-r { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex: none; }
+.ver-label { font-size: 11.2px; color: var(--c-muted); }
+.ver-date { font-size: 11.2px; color: var(--c-muted); white-space: nowrap; }
+
+/* spacer grows to push the footer to the base of the (tall) sidebar — robust
+   under `zoom`, where flex margin/mt-auto collapse to 0 */
+.proc-spacer { flex: 1 1 auto; min-height: 16px; }
+
+/* DetailDrawer.Footer — border-t px-4 py-3, flex-col gap-2, full-width buttons */
+.proc-actions {
+  border-top: 1px solid var(--c-border);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;                                /* gap-2 */
+  background: var(--c-card);
+}
+/* footer buttons — default h-9 (36px), rounded-md, text-sm font-medium, w-full */
+.proc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;                            /* h-9 */
+  width: 100%;
+  padding: 0 12px;
+  border-radius: 6px;                      /* rounded-md */
+  font-size: 12.8px;                       /* text-sm */
+  font-weight: 500;                        /* font-medium */
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.proc-btn.solid {                          /* primary: foreground fill, inverse text */
+  background: var(--c-primary);
+  color: var(--c-primary-fg);
+  border-color: var(--c-primary);
+}
+.proc-btn.outline {                        /* secondary: white fill, border, shadow-xs */
+  background: var(--c-card);
+  color: var(--c-fg);
+  border-color: var(--c-border);
+  box-shadow: var(--c-shadow);
+}

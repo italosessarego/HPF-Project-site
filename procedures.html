@@ -8,13 +8,13 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: { extend: {
-        fontFamily: { sans: ['Inter', 'sans-serif'], display: ['DM Sans', 'sans-serif'] },
+        fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['DM Sans', 'sans-serif'] },
         colors: {
           dark: { 900: '#1E1D1D', 800: '#1E1E24', 700: '#343E3F', 600: '#40424D' },
           brand: { DEFAULT: '#70A593', light: '#9CC9BB', dark: '#508875' },
@@ -24,22 +24,14 @@
   </script>
 
   <link rel="stylesheet" href="assets/css/system.css" />
+  <link rel="stylesheet" href="assets/css/task-runner.css" />
 
   <style>
     /* Page-specific styles only. Shared tokens & components: assets/css/system.css */
 
     /* ---- hero metrics (page-specific) ---- */
-    .hero-metrics { display:flex; flex-wrap:wrap; gap:34px 56px; margin-top:56px; }
-    .hero-metrics .m .n { font-family:'DM Sans', sans-serif; font-weight:500; font-size:46px; line-height:1; letter-spacing:-.03em; color:var(--ink); }
-    .hero-metrics .m .l { font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:11px; }
 
     /* ---- nav ---- */
-    .nav-tabs { display:flex; align-items:center; gap:2px; font-size:13px; }
-    .nav-tabs a, .nav-tabs span { padding:6px 16px; color:var(--muted); text-decoration:none; white-space:nowrap; transition:color .18s ease; }
-    .nav-tabs a:hover { color:var(--ink); }
-    .nav-tabs .cur { color:#9DA2B3; font-weight:500; }
-    .nav-tabs .dis { color:#B4B6C0; }
-    @media(max-width:1040px){ .nav-tabs a, .nav-tabs span { padding:6px 9px; font-size:12px; } }
 
 
     /* ---- (section sub-labels use the shared .mono-label, like the other pages) ---- */
@@ -79,29 +71,14 @@
     .s-letter { font-family:'JetBrains Mono', monospace; font-weight:500; font-size:13px; color:var(--ink); padding-left:6px; }
     .s-title { letter-spacing:-.01em; }
     .s-meta { display:flex; align-items:center; gap:9px; }
-    .s-type { font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:3px 10px; border-radius:999px; border:1px solid var(--line-2); color:var(--muted); background:transparent; }
     .s-pages { font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--muted); min-width:42px; text-align:right; }
 
-    @media(min-width:900px){ .how { position:sticky; top:84px; } }
-    .how-card { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); padding:22px; margin-bottom:16px; }
-    .how-card h3 { font-size:20px; font-weight:500; margin-bottom:8px; letter-spacing:-.01em; }
-    .how-step { display:flex; gap:13px; margin-top:16px; }
-    .how-step .hn { font-family:'JetBrains Mono', monospace; font-weight:500; color:var(--accent); font-size:13px; border:1px solid var(--accent-soft); border-radius:var(--r-sm); min-width:26px; height:26px; display:grid; place-items:center; flex-shrink:0; }
-    .how-step .ht { font-size:14px; color:var(--muted); }
-    .how-step .ht b { color:var(--ink); font-weight:600; }
-    .how-cards-2up { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-    .how-cards-2up .how-card { margin-bottom:0; }
-    @media(max-width:760px){ .how-cards-2up { grid-template-columns:1fr; } }
     .flow-pills { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:6px; }
-    .flow-pill { font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:500; padding:6px 11px; border-radius:999px; border:1px solid var(--line-2); color:var(--ink); }
-    .flow-pill.sop { background:var(--ink); color:#fff; border-color:var(--ink); }
-    .flow-pill.wi { color:var(--accent); border-color:var(--accent-soft); background:var(--accent-wash); }
-    .flow-pill.tr, .flow-pill.ob { color:var(--muted); border-color:var(--line-2); }
     .flow-arrow { color:var(--muted); font-weight:600; }
 
     /* ---- 04 · worked example — three derivatives off one procedure ---- */
     .tabs { display:flex; flex-wrap:wrap; gap:8px; }
-    .tab { font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:500; letter-spacing:.02em; padding:8px 14px; border:1px solid var(--line-2); border-radius:999px; background:transparent; color:var(--muted); cursor:pointer; transition:border-color .16s, color .16s, background .16s; }
+    .tab { font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:500; letter-spacing:.02em; padding:8px 14px; border:1px solid var(--line-2); border-radius:var(--r-pill); background:transparent; color:var(--muted); cursor:pointer; transition:border-color .16s, color .16s, background .16s; }
     .tab b { color:var(--ink); font-weight:600; margin-right:6px; }
     .tab:hover { border-color:var(--ink); color:var(--ink); }
     .tab.active { background:var(--ink); color:#fff; border-color:var(--ink); }
@@ -110,7 +87,7 @@
     /* the one procedure all three derive from */
     .derive-src { display:flex; align-items:baseline; flex-wrap:wrap; gap:8px 16px; margin:36px 0 30px; padding-bottom:20px; border-bottom:1px solid var(--line); }
     .derive-src .ds-from { display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
-    .derive-src .ds-from .dot { width:6px; height:6px; border-radius:999px; background:var(--accent-mid); flex:none; }
+    .derive-src .ds-from .dot { width:6px; height:6px; border-radius:var(--r-pill); background:var(--accent-mid); flex:none; }
     .derive-src .ds-doc { font-family:'DM Sans', sans-serif; font-weight:600; font-size:18px; letter-spacing:-.01em; color:var(--ink); }
     .derive-src .ds-meta { font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--muted); letter-spacing:.02em; }
 
@@ -122,11 +99,9 @@
     .dcol:last-child { border-right:none; }
     @media(max-width:980px){ .dcol { border-right:none; border-bottom:1px solid var(--line); } .dcol:last-child { border-bottom:none; } }
     .dcol-head { margin-bottom:14px; }
-    .dcol-tag { display:inline-flex; align-items:center; gap:7px; font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; padding:5px 11px; border-radius:var(--r-xs); border:1px solid var(--line); }
-    .dcol-tag .tn { font-weight:500; opacity:.55; }
-    .dcol-tag.wi { color:var(--ink); background:var(--panel); border-color:var(--line-2); }
-    .dcol-tag.tr { color:var(--accent); background:var(--accent-wash); border-color:var(--accent-soft); }
-    .dcol-tag.ob { color:var(--amber); background:var(--amber-wash); border-color:var(--amber-soft); }
+    /* observation gets a page-local amber tag fill (not in system.css) */
+    .tag-obs { background:var(--amber-wash); color:var(--amber); }
+    .dcol-head .tag .tn { font-weight:500; opacity:.55; margin-right:5px; }
     .dcol-desc { font-size:13px; color:var(--ink-2); line-height:1.55; margin-bottom:18px; min-height:3.6em; padding-bottom:15px; border-bottom:1px solid var(--line); }
     @media(max-width:980px){ .dcol-desc { min-height:0; } }
 
@@ -168,8 +143,8 @@
     /* minimal progress rails — identical for Training & Observation, sit above the list */
     .col-prog { display:flex; align-items:center; gap:13px; margin-bottom:20px; }
     .cp-label { font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); white-space:nowrap; }
-    .cp-track { flex:1; height:3px; background:var(--line); border-radius:99px; overflow:hidden; }
-    .cp-fill { display:block; height:100%; width:0; background:var(--accent); border-radius:99px; transition:width .45s cubic-bezier(.2,.8,.2,1); }
+    .cp-track { flex:1; height:3px; background:var(--line); border-radius:var(--r-pill); overflow:hidden; }
+    .cp-fill { display:block; height:100%; width:0; background:var(--accent); border-radius:var(--r-pill); transition:width .45s cubic-bezier(.2,.8,.2,1); }
     .cp-val { font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--ink); white-space:nowrap; font-variant-numeric:tabular-nums; }
 
     /* 03 — observation audit (clickable four-point scale, live score) */
@@ -189,6 +164,22 @@
     .sc.on[data-v="2"] { background:#F7E9CE; color:#8C6011; border-color:#E4CEA0; }  /* Somewhat — amber */
     .sc.on[data-v="1"] { background:#F6DDD6; color:#A93C29; border-color:#E6BEB2; }  /* Never    — red */
 
+    /* ---- worked example · Training & Observation rendered in the product (task-runner)
+       design system, flattened into the column (no phone frame). Inter + zinc/blue tokens.
+       Uses .app-screen (from task-runner.css) for the --ts-* tokens + Inter, overridden here
+       to a soft canvas panel instead of the 560px phone screen. ---- */
+    .dcol .app-screen { width:auto; padding:16px; background:var(--ts-canvas); border-radius:10px; }
+    .dcol .app-screen .ro-steps-head { margin-bottom:7px; }
+    .dcol .app-screen .ro-card.ro-checklist { margin-top:14px; }
+    /* observation criteria — product-styled graded prompts on the canvas panel */
+    .dcol .ob2 { padding:15px 2px; border-top:1px solid var(--ts-border); }
+    .dcol .ob2:first-of-type { border-top:0; padding-top:14px; }
+    .dcol .ob2-q { font-size:13px; font-weight:600; line-height:1.4; color:var(--ts-fg); letter-spacing:-.01em; }
+    .dcol .ob2-sub { font-size:12px; color:var(--ts-muted-fg); line-height:1.45; margin-top:3px; }
+    .dcol .ob2 .ro-opts { margin-top:10px; gap:6px; }
+    .dcol .ob2 .ro-opt { padding:8px 11px; }
+    .dcol .ob2 .ro-opt-l { font-size:12.4px; }
+
     /* ---- closing statement: shared component (.statement) lives in system.css ---- */
 
   </style>
@@ -197,8 +188,9 @@
 <script>window.STEP_IMAGES={"T":{"1":["assets/images/sop/T_1_1.jpg"],"3":["assets/images/sop/T_3_1.jpg"],"10":["assets/images/sop/T_10_1.jpg","assets/images/sop/T_10_2.jpg","assets/images/sop/T_10_3.jpg","assets/images/sop/T_10_4.jpg"],"11":["assets/images/sop/T_11_1.jpg","assets/images/sop/T_11_2.jpg","assets/images/sop/T_11_3.jpg","assets/images/sop/T_11_4.jpg","assets/images/sop/T_11_5.jpg"],"12":["assets/images/sop/T_12_1.jpg"]},"L":{"1":["assets/images/sop/L_1_1.jpg"],"5":["assets/images/sop/L_5_1.jpg"]}};</script>
 
   <!-- NAV (shared meetBean two-page toggle) -->
-  <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-shadow duration-300" style="background:rgba(243,243,243,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)">
-    <div class="px-6 sm:px-8 lg:px-12 h-16 flex items-center justify-between">
+  <!-- NAV -->
+  <nav id="main-nav" class="site-nav">
+    <div class="nav-inner">
       <a href="index.html" class="flex items-center gap-3">
         <img src="assets/images/meetbean-logo-dark.svg" alt="meetBean" class="h-5" />
         <span class="mono-label hidden lg:inline" style="color:var(--faint)">/ Project</span>
@@ -206,9 +198,10 @@
       <div class="nav-tabs">
         <a href="index.html">Project Overview</a>
         <a href="methodology.html">Methodology</a>
-        <a href="implementation.html">Implementation Plan</a>
         <span class="cur" aria-current="page">Procedure Breakdown</span>
-        <span class="dis" aria-disabled="true">Deployment Phases</span>
+        <a href="implementation.html">Implementation Plan</a>
+        <a href="recap.html">Recap</a>
+        <span class="dis">Deployment Phases</span>
       </div>
     </div>
   </nav>
@@ -218,7 +211,7 @@
     <div class="grid-bg absolute inset-0" style="-webkit-mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%);"></div>
 
     <div class="hidden lg:flex absolute left-0 top-16 bottom-0 w-14 flex-col items-center justify-between py-10" style="border-right:1px solid var(--line)">
-      <span style="width:7px;height:7px;border-radius:999px;background:var(--accent-mid)"></span>
+      <span style="width:7px;height:7px;border-radius:var(--r-pill);background:var(--accent-mid)"></span>
       <span class="mono-label" style="writing-mode:vertical-rl; transform:rotate(180deg); color:var(--muted)">Procedure Breakdown · Harbor&nbsp;Freight</span>
       <span class="mono-label" style="color:var(--faint)">03</span>
     </div>
@@ -231,22 +224,42 @@
       <p class="reveal text-lg leading-relaxed max-w-2xl" style="color:var(--muted); transition-delay:.2s">
         The Receiving SOP is a single <strong style="color:var(--ink);font-weight:600">122-page monolith</strong> that bundles the procedures for every job on the inbound dock into one file. We break it into <strong style="color:var(--ink);font-weight:600">atomic, role-tagged procedures</strong> — and from each one, derive a <strong style="color:var(--ink);font-weight:600">Training checklist</strong> and a graded <strong style="color:var(--ink);font-weight:600">Observation</strong>.
       </p>
-      <div class="hero-metrics reveal" style="transition-delay:.3s">
-        <div class="m"><div class="n">28</div><div class="l">Sections A&ndash;BB</div></div>
-        <div class="m"><div class="n">~22</div><div class="l">Procedures</div></div>
-        <div class="m"><div class="n">5</div><div class="l">Core job functions</div></div>
-        <div class="m"><div class="n">10</div><div class="l">Exception flows</div></div>
+    </div>
+  </section>
+
+  <!-- AT A GLANCE -->
+  <section class="py-16 md:py-20" style="background:var(--surface); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="reveal flex items-center justify-between gap-6 mb-8">
+        <div class="eyebrow mono-label"><span class="dot"></span><span>At a glance</span></div>
+      </div>
+      <div class="reveal grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="sumtile">
+          <div class="stat" style="color:var(--ink)">28</div>
+          <p class="text-[13px] mt-2.5" style="color:var(--muted)">Sections A&ndash;BB</p>
+        </div>
+        <div class="sumtile">
+          <div class="stat" style="color:var(--ink)">~22</div>
+          <p class="text-[13px] mt-2.5" style="color:var(--muted)">Procedures</p>
+        </div>
+        <div class="sumtile">
+          <div class="stat" style="color:var(--ink)">5</div>
+          <p class="text-[13px] mt-2.5" style="color:var(--muted)">Core job functions</p>
+        </div>
+        <div class="sumtile">
+          <div class="stat" style="color:var(--ink)">10</div>
+          <p class="text-[13px] mt-2.5" style="color:var(--muted)">Exception flows</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- INTRO · long SOP → focused procedures (below hero) -->
-  <section class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
+  <section class="py-20 md:py-24" style="background:var(--paper); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
       <div class="reveal">
         <div class="flex items-center justify-between gap-6 mb-8">
           <div class="eyebrow mono-label"><span class="dot"></span><span>The split</span></div>
-          <span class="mono-label" style="color:var(--faint)">01 / 04</span>
         </div>
         <div class="max-w-2xl">
           <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">From long SOPs to focused procedures</h2>
@@ -290,12 +303,11 @@
   </section>
 
   <!-- 01 · MONOLITH → ATOMIZED (parallax split) -->
-  <section class="py-20 md:py-24" style="background:var(--paper)">
+  <section class="py-20 md:py-24" style="background:var(--surface)">
     <div class="px-6 sm:px-8 lg:px-12">
       <div class="reveal">
         <div class="flex items-center justify-between gap-6 mb-8">
           <div class="eyebrow mono-label"><span class="dot"></span><span>Atomized</span></div>
-          <span class="mono-label" style="color:var(--faint)">02 / 04</span>
         </div>
         <div class="max-w-2xl">
           <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Monolith &rarr; atomized</h2>
@@ -319,12 +331,11 @@
   </section>
 
   <!-- 05 · DERIVE — one procedure, four layers (white) -->
-  <section class="py-20 md:py-24" style="background:var(--surface); border-top:1px solid var(--line)">
+  <section class="py-20 md:py-24" style="background:var(--paper); border-top:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
       <div class="reveal">
         <div class="flex items-center justify-between gap-6 mb-8">
           <div class="eyebrow mono-label"><span class="dot"></span><span>Derive</span></div>
-          <span class="mono-label" style="color:var(--faint)">03 / 04</span>
         </div>
         <div class="max-w-3xl">
           <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">One procedure, four layers</h2>
@@ -335,10 +346,10 @@
       </div>
 
       <div class="flow-pills reveal" style="margin-top:40px">
-        <span class="flow-pill sop">SOP</span><span class="flow-arrow">&rarr;</span>
-        <span class="flow-pill wi">WORK&nbsp;INSTRUCTION</span><span class="flow-arrow">&rarr;</span>
-        <span class="flow-pill tr">TRAINING</span><span class="flow-arrow">+</span>
-        <span class="flow-pill ob">OBSERVATION</span>
+        <span class="tag tag-must">SOP</span><span class="flow-arrow">&rarr;</span>
+        <span class="tag tag-accent">WORK&nbsp;INSTRUCTION</span><span class="flow-arrow">&rarr;</span>
+        <span class="tag tag-nice">TRAINING</span><span class="flow-arrow">+</span>
+        <span class="tag tag-nice">OBSERVATION</span>
       </div>
 
       <div class="bd-viz reveal" style="margin-top:56px">
@@ -376,12 +387,11 @@
   </section>
 
   <!-- 06 · WORKED EXAMPLE — the Receiver (interactive, gray) -->
-  <section class="py-20 md:py-24" style="background:var(--paper); border-top:1px solid var(--line)">
+  <section class="py-20 md:py-24" style="background:var(--surface); border-top:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
       <div class="reveal">
         <div class="flex items-center justify-between gap-6 mb-8">
           <div class="eyebrow mono-label"><span class="dot"></span><span>Worked example</span></div>
-          <span class="mono-label" style="color:var(--faint)">04 / 04</span>
         </div>
         <div class="max-w-3xl">
           <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Procedure → executions</h2>
@@ -411,9 +421,11 @@
   <footer class="py-12" style="background:var(--ink)">
     <div class="px-6 sm:px-8 lg:px-12 flex items-center justify-between">
       <img src="assets/images/meetbean-logo-light.svg" alt="meetBean" class="h-5 opacity-90" />
-      <span class="mono-label" style="color:var(--faint)">Procedure Breakdown · meetBean</span>
+      <span class="mono-label" style="color:var(--faint)">Procedure Breakdown · Harbor Freight</span>
     </div>
   </footer>
+<!-- worked-example data: single source of truth, shared with methodology.html -->
+<script src="assets/js/worked-example.js"></script>
 <script>
 /* ---------------- DATA ---------------- */
 const ROLES = {
@@ -457,116 +469,6 @@ const SECTIONS = [
   ["BB","Revision Notes","shared","ref","121"]
 ];
 
-// Receiver worked example — real steps from the SOP
-const EXAMPLES = {
-  T:{
-    title:"Receive/Verify ASN — International Freight",
-    pages:"80–89",
-    sop:[
-      ["Obtain the ASN Control Log from the AM or OC at the receiving desk.","Contains ASN #, Door #, Container #, Item TI-HI, Inner Pack Qty."],
-      ["Walk to the door number noted on the ASN Control Log."],
-      ["Verify the plaque on the pallet rows matches the ASN number on the log."],
-      ["Check the SKU on the ASN matches the assigned container."],
-      ["Count the offloaded pallets; note on the tally sheet.","1 SKU/pallet → continue. >1 SKU/pallet → contact AM/OC and wait."],
-      ["Verify Unloaders followed the TI-HI for each SKU (see Section K)."],
-      ["For each SKU, check the PO number printed on the carton."],
-      ["Count total boxes per pallet × units per box (e.g. 24 cases × 20 = 480)."],
-      ["Calculate total units and verify against the ASN Report."],
-      ["RF Gladiator: log in to WMOS → Receiving → Recv Item Lvl-HFT."],
-      ["Enter dock door, scan ASN, scan iLPN; verify Pack Qty, enter Qty."],
-      ["Place the iLPN on the bottom-right corner of the pallet; repeat per SKU."],
-      ["Tally total unit count and write it beside “Received” on the ASN paperwork."],
-      ["Close the load via the UI at a workstation."]
-    ],
-    training:[
-      ["Locate & read the ASN Control Log (ASN#, Door#, Container#, TI-HI, inner pack)",1,"Have them read every field out loud before leaving the desk — ASN#, Door#, Container#, TI-HI and inner-pack qty. The log drives everything downstream."],
-      ["Match pallet plaque to the ASN number",1,"Finger on the plaque, finger on the log — the numbers must match exactly before any counting starts. No eyeballing."],
-      ["Verify SKU on ASN against the assigned container",1,"Confirm the ASN's SKU is the one in the assigned container. A wrong container means stop and check, not improvise."],
-      ["Count pallets and record on the tally sheet",1,"Count offloaded pallets and write the tally as they go — never reconstruct the count from memory at the end."],
-      ["Identify single- vs multi-SKU pallet and escalate correctly",0,"One SKU per pallet continues. More than one means stop and call AM/OC — teach the escalation, not a workaround."],
-      ["Verify TI-HI against the ASN for each SKU",0,"Check each SKU's stack against the TI-HI (Section K). A wrong TI-HI is a receiving error waiting to happen."],
-      ["Cross-check the PO number printed on the carton",0,"Show them where the PO prints on the carton, and have them match it to the ASN for every SKU."],
-      ["Calculate total units (boxes × units per box)",0,"Walk the math once together — boxes × units per box (24 × 20 = 480) — then have them do the next SKU unaided."],
-      ["Reconcile counted total against the ASN Report",0,"Counts must match the ASN Report. On a mismatch they recount first — never assume the paperwork is right."],
-      ["Log in to WMOS and navigate Recv Item Lvl-HFT on the RF gun",0,"Walk the RF Gladiator login and the Receiving → Recv Item Lvl-HFT path until they find it without prompting."],
-      ["Receive item-level: dock door, iLPN, pack qty, qty",0,"Verify pack qty before they enter quantity — entering qty against the wrong pack is the most common mistake."],
-      ["Place the iLPN in the correct pallet position",0,"Bottom-right corner, facing out, one per pallet per SKU — so putaway can read it without hunting."],
-      ["Tally & record “Received” on ASN paperwork; close the load",0,"Final unit count written beside “Received,” then close the load at the workstation. The receive isn't done until it's closed."]
-    ],
-    obs:[
-      ["Verifies ASN, SKU and PO match before receiving any product.","Watch them physically check the plaque and carton PO — not just glance. Mismatches should stop the receive.",[1,3,3,3]],
-      ["Maintains one SKU per pallet and escalates mixed pallets.","Mixed-SKU pallets must trigger a call to AM/OC, not a workaround.",[0,2,3,2]],
-      ["Counts and reconciles units accurately against the ASN.","Re-counts on discrepancy; tallies per-pallet before flagging.",[0,2,3,3]],
-      ["Places the iLPN in the correct position (bottom-right, facing out).","Label visible for putaway; one iLPN per pallet per SKU.",[0,1,2,3]],
-      ["Practices CAYGO and keeps the receiving area clean.","No debris, straps, or wrap left in the work lane.",[2,0,1,3]]
-    ]
-  },
-  L:{
-    title:"SKUs with FIFO Labeling Requirement",
-    pages:"36–38",
-    sop:[
-      ["Open the DC FIFO Shelf Life Labeling SKUs spreadsheet from the shared drive."],
-      ["Obtain the PO / packing slip for the freight to be unloaded."],
-      ["Check whether each SKU is listed in the FIFO spreadsheet."],
-      ["Determine if the sticker applies to master pack only, or master + inner.","Yellow = master + inner pack. Blue = master pack only."],
-      ["Use the year’s color sticker (e.g. 2020 = green)."],
-      ["OC notifies the Receiver of inbound SKUs needing colored stickers."],
-      ["Receiver locates the staged item and gets the roll of stickers + empty pallet."],
-      ["Master pack: apply label to top outside of the case; stack per TI-HI."],
-      ["Master + inner: label master, open and label inner, replace, re-label master top."],
-      ["Receive the item into WMOS per the Item-Level Receiving SOP."]
-    ],
-    training:[
-      ["Open and read the DC FIFO Shelf Life SKU spreadsheet",1,"Show them where the FIFO spreadsheet lives on the shared drive — and that it's checked every load, not from memory."],
-      ["Match PO / packing-slip SKUs against the FIFO list",1,"Cross-reference each SKU on the PO/packing slip against the FIFO list before touching a single sticker."],
-      ["Interpret the yellow vs blue color code (master+inner vs master-only)",0,"Yellow = master + inner pack; blue = master pack only. Quiz them until there's no hesitation."],
-      ["Select the correct year color sticker",0,"Current-year color only (e.g. 2020 = green). A wrong year defeats the entire point of FIFO."],
-      ["Apply master-pack label in the correct position",0,"Top outside of the case, every time — placement is what makes it readable once it's in the rack."],
-      ["Open, label and re-seal inner packs correctly",0,"For yellow SKUs: open, label the inner, replace it, then re-label the master top. Watch they re-seal cleanly."],
-      ["Stack labeled cases per the required TI-HI",0,"Build the pallet to the TI-HI as they label — no loose or mis-stacked cases left behind."],
-      ["Receive the labeled item into WMOS",0,"Only once labeling is fully complete do they receive the item per the Item-Level Receiving SOP."]
-    ],
-    obs:[
-      ["Correctly identifies which SKUs require FIFO labeling.","Cross-references the spreadsheet every load — doesn’t rely on memory.",[0,3,2,2]],
-      ["Applies the right label scope (master-only vs master + inner).","Yellow SKUs get the inner pack opened and labeled; blue do not.",[0,3,2,1]],
-      ["Uses the correct year color and label placement.","Label on top outside of case, current-year color only.",[0,2,2,2]],
-      ["Stacks labeled cases per TI-HI before system receive.","Pallet built to spec; no loose or mis-stacked cases.",[1,1,2,2]]
-    ]
-  },
-  V:{
-    title:"Receive/Verify ASN — Domestic Freight",
-    pages:"93–96",
-    sop:[
-      ["Obtain the signed BOL that came with the load plus a blank ASN Control Log."],
-      ["Tally case count and unit count for each SKU; enter on the control log.","Ensure one SKU per pallet; >1 → contact AM/OC."],
-      ["Match physical total unit & case count for each SKU to the BOL."],
-      ["If the BOL is not available, ask the Receiving Clerk to pull PO details from WMOS."],
-      ["Once counts match the BOL, log in to WMOS at the nearest workstation."],
-      ["Create an ASN from PO: search “Create ASN From PO”, find the PO, Add.","Domestic ASN numbers begin with “D”."],
-      ["Select PO line items, set Shipped Qty, Save — ASN goes “In Transit.”"],
-      ["Print the ASN (see Section H)."],
-      ["Receive the domestic shipment using the same steps as Section T."]
-    ],
-    training:[
-      ["Obtain and read the signed BOL + blank ASN Control Log",1,"Start from the signed BOL and a blank control log. No BOL means they pull PO details from WMOS — not guess."],
-      ["Tally case and unit counts per SKU onto the control log",1,"Tally case and unit counts per SKU onto the log as they count, keeping one SKU per pallet."],
-      ["Match physical counts to the BOL",0,"Physical counts must match the BOL before anything enters the system — note any discrepancy on the BOL."],
-      ["Recover PO details from WMOS when the BOL is missing",0,"Show them how to ask the Receiving Clerk to pull PO details from WMOS when the BOL isn't available."],
-      ["Create an ASN from PO in WMOS (D-prefix)",0,"Search “Create ASN From PO,” find the right PO, Add — domestic ASN numbers begin with “D.”"],
-      ["Set shipped qty and move the ASN to In-Transit",0,"Select the PO line items, set Shipped Qty, Save — then confirm the ASN status reaches “In Transit.”"],
-      ["Print the ASN",0,"Print the ASN per Section H so it's ready for the physical receive."],
-      ["Receive the shipment per the Section T flow",0,"From here it's the Section T flow — same item-level receive, iLPN placement and close-out."]
-    ],
-    obs:[
-      ["Reconciles physical counts to the BOL before creating the ASN.","Counts are matched, not assumed; discrepancies noted on the BOL.",[0,2,3,2]],
-      ["Creates the ASN from PO correctly (D-prefix, right line items).","Right PO, correct shipped qty, status reaches In-Transit.",[0,3,2,1]],
-      ["Keeps one SKU per pallet and escalates exceptions.","Mixed pallets escalated to AM/OC before proceeding.",[0,2,3,2]],
-      ["Completes system receive accurately following Section T.","iLPNs placed and counts recorded against the ASN.",[0,2,3,2]]
-    ]
-  }
-};
-
-const SCALE = [["Always",4],["Mostly",3],["Somewhat",2],["Never",1]];
 
 /* ---------------- RENDER ---------------- */
 const $=s=>document.querySelector(s), ce=(t,c)=>{const e=document.createElement(t);if(c)e.className=c;return e};
@@ -596,7 +498,7 @@ SECTIONS.forEach(([L,t,role,type,pg])=>{
   r.dataset.role=role;
   r.innerHTML=`<span class="s-letter">${L}</span>
     <span class="s-title">${t}</span>
-    <span class="s-meta">${type==='ref'?`<span class="s-type">Reference</span>`:''}<span class="s-pages">p.${pg}</span></span>`;
+    <span class="s-meta">${type==='ref'?`<span class="tag tag-nice">Reference</span>`:''}<span class="s-pages">p.${pg}</span></span>`;
   if(EXAMPLES[L]){r.style.cursor="pointer";r.title="Open worked example";r.onclick=()=>{setTab(L);document.querySelector('#tabs').scrollIntoView({behavior:'smooth',block:'center'});};}
   spineEl.appendChild(r);
 });
@@ -631,20 +533,20 @@ function renderDerive(k){
     return `<li>${s[0]}${s[1]?`<span class="sub">${s[1]}</span>`:""}${gal}</li>`;
   }).join("");
   const firstOpen=e.training.findIndex(t=>!t[1]);
-  const tr=e.training.map((t,i)=>`<li class="tr-step${t[1]?' done':''}${i===firstOpen&&t[2]?' open':''}" data-i="${i}">
-        <div class="tr-head">
-          <span class="tr-box" role="checkbox" aria-checked="${t[1]?'true':'false'}" tabindex="0"></span>
-          <button class="tr-expand" aria-expanded="${i===firstOpen&&t[2]?'true':'false'}">
-            <span class="tr-skill">${t[0]}</span>
-            ${t[2]?`<svg class="tr-chev" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>`:''}
+  const tr=e.training.map((t,i)=>`<div class="ts-item${t[1]?' done':''}${i===firstOpen?' open':''}" data-i="${i}">
+        <div class="ts-row">
+          <input type="checkbox" class="ts-check"${t[1]?' checked':''}>
+          <button class="ts-trigger" aria-expanded="${i===firstOpen?'true':'false'}">
+            <span class="ts-title">${t[0]}</span>
+            <svg class="ts-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
         </div>
-        ${t[2]?`<div class="tr-body"><div class="tr-lbl">Trainer instructions</div><div class="tr-note">${t[2]}</div></div>`:''}
-      </li>`).join("");
-  const ob=e.obs.map((o,i)=>`<div class="ob-item">
-        <div class="ob-q">${o[0]}</div>
-        <div class="ob-look"><b>What to look for</b>${o[1]}</div>
-        <div class="scale" data-ob="${i}">${SCALE.map(s=>`<span class="sc" data-v="${s[1]}">${s[0]}</span>`).join("")}</div>
+        <div class="ts-body"><p class="ts-desc">${t[2]}</p></div>
+      </div>`).join("");
+  const ob=e.obs.map((o,i)=>`<div class="ob2" data-ob="${i}">
+        <div class="ob2-q">${o[0]}</div>
+        <div class="ob2-sub">${o[1]}</div>
+        <div class="ro-opts">${SCALE.map(s=>`<label class="ro-opt"><input type="radio" class="ro-radio" name="ob-${k}-${i}" data-v="${s[1]}"><span class="ro-opt-l">${s[0]}</span></label>`).join("")}</div>
       </div>`).join("");
   d.innerHTML=`
     <div class="derive-src">
@@ -654,62 +556,62 @@ function renderDerive(k){
     </div>
     <div class="derive">
       <div class="dcol">
-        <div class="dcol-head"><span class="dcol-tag wi"><span class="tn">01</span> Work instruction</span></div>
+        <div class="dcol-head"><span class="tag tag-nice"><span class="tn">01</span> Work instruction</span></div>
         <p class="dcol-desc">The atomic step-by-step, verbatim from the SOP — what the operator actually does.</p>
         <ol class="steps">${sop}</ol>
       </div>
       <div class="dcol">
-        <div class="dcol-head"><span class="dcol-tag tr"><span class="tn">02</span> Training</span></div>
+        <div class="dcol-head"><span class="tag tag-accent"><span class="tn">02</span> Training</span></div>
         <p class="dcol-desc">Each step is a skill to master — check off what they've got, and expand any step for the trainer's instructions.</p>
-        <div class="col-prog">
-          <span class="cp-label">Mastered</span>
-          <span class="cp-track"><span class="cp-fill" id="trFill"></span></span>
-          <span class="cp-val" id="trVal">—</span>
+        <div class="app-screen">
+          <div class="ro-steps-head"><span class="ro-steps-lbl">Steps</span><span class="ro-steps-prog" id="trProg">—</span></div>
+          <div class="ro-progress"><i id="trFill" style="width:0"></i></div>
+          <div class="ro-card ro-checklist" id="checklist">${tr}</div>
         </div>
-        <ul class="checklist" id="checklist">${tr}</ul>
       </div>
       <div class="dcol">
-        <div class="dcol-head"><span class="dcol-tag ob"><span class="tn">03</span> Observation</span></div>
+        <div class="dcol-head"><span class="tag tag-obs"><span class="tn">03</span> Observation</span></div>
         <p class="dcol-desc">An adherence audit — grade each step on the four-point scale; the score builds as you go.</p>
-        <div class="col-prog">
-          <span class="cp-label">Adherence</span>
-          <span class="cp-track"><span class="cp-fill" id="obFill"></span></span>
-          <span class="cp-val" id="obVal">—</span>
+        <div class="app-screen">
+          <div class="ro-steps-head"><span class="ro-steps-lbl">Adherence</span><span class="ro-steps-prog" id="obProg">Not started</span></div>
+          <div class="ro-progress"><i id="obFill" style="width:0"></i></div>
+          <div class="obs">${ob}</div>
         </div>
-        <div class="obs">${ob}</div>
       </div>
     </div>`;
 
-  // Training — check the box to mark mastered; expand the row for the trainer's instructions
-  const trSteps=[...d.querySelectorAll("#checklist .tr-step")];
+  // Training — check the box to mark a skill mastered; expand a row for the trainer's instructions
+  const trItems=[...d.querySelectorAll("#checklist .ts-item")];
   function updateTraining(){
-    const done=d.querySelectorAll("#checklist .tr-step.done").length, tot=trSteps.length;
-    $("#trVal").textContent=`${done} of ${tot}`;
-    $("#trFill").style.width=(tot?Math.round(done/tot*100):0)+"%";
+    const done=d.querySelectorAll("#checklist .ts-item.done").length, tot=trItems.length;
+    d.querySelector("#trProg").textContent=`${done} of ${tot} mastered`;
+    d.querySelector("#trFill").style.width=(tot?Math.round(done/tot*100):0)+"%";
   }
-  trSteps.forEach(step=>{
-    const box=step.querySelector(".tr-box");
-    box.onclick=()=>{ const on=step.classList.toggle("done"); box.setAttribute("aria-checked",on); updateTraining(); };
-    const ex=step.querySelector(".tr-expand");
-    if(ex) ex.onclick=()=>{ const o=step.classList.toggle("open"); ex.setAttribute("aria-expanded",o); };
+  trItems.forEach(item=>{
+    const chk=item.querySelector(".ts-check");
+    chk.addEventListener("change",()=>{ item.classList.toggle("done",chk.checked); updateTraining(); });
+    const trg=item.querySelector(".ts-trigger");
+    trg.addEventListener("click",()=>{ const o=item.classList.toggle("open"); trg.setAttribute("aria-expanded",o); });
   });
   updateTraining();
 
-  // Observation — pick one of four graded responses per question; adherence score builds live
-  const scales=[...d.querySelectorAll(".scale")];
+  // Observation — grade each prompt on the four-point scale; the adherence score builds live
+  const obItems=[...d.querySelectorAll(".obs .ob2")];
   function updateScore(){
-    const ons=d.querySelectorAll(".scale .sc.on");
-    if(!ons.length){ $("#obVal").textContent="—"; $("#obFill").style.width="0"; return; }
+    const ons=d.querySelectorAll(".obs .ro-radio:checked");
+    const prog=d.querySelector("#obProg"), fill=d.querySelector("#obFill");
+    if(!ons.length){ prog.textContent="Not started"; fill.style.width="0"; return; }
     let sum=0; ons.forEach(o=>sum+=+o.dataset.v);
     const pct=Math.round(sum/(ons.length*4)*100);
-    $("#obVal").textContent=pct+"%";
-    $("#obFill").style.width=pct+"%";
+    prog.textContent=`${pct}% · ${ons.length} of ${obItems.length}`;
+    fill.style.width=pct+"%";
   }
-  scales.forEach(sc=>sc.querySelectorAll(".sc").forEach(btn=>btn.onclick=()=>{
-    sc.querySelectorAll(".sc").forEach(x=>x.classList.remove("on"));
-    btn.classList.add("on");
-    updateScore();
-  }));
+  d.querySelectorAll(".obs .ro-radio").forEach(radio=>{
+    radio.addEventListener("change",()=>{
+      d.querySelectorAll(`.ro-radio[name="${radio.name}"]`).forEach(r=>r.closest(".ro-opt").classList.toggle("on",r.checked));
+      updateScore();
+    });
+  });
   updateScore();
 }
 setTab("T");
@@ -722,35 +624,10 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on');});
 
-// reveal on scroll
-const io=new IntersectionObserver((es)=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target);}}),{threshold:.12});
-document.querySelectorAll(".reveal").forEach((el,i)=>{el.style.transitionDelay=(Math.min(i,6)*70)+"ms";io.observe(el);});
 
-// closing statement — typewriter (monochrome text, single sage caret)
-(function(){
-  const head=document.querySelector('.statement .st-head');
-  if(!head) return;
-  const full=["From one procedure to","a living compliance program"].join("\n");
-  const draw=n=>{
-    const s=full.slice(0,n), nl=s.indexOf("\n");
-    const body = nl<0 ? s : s.slice(0,nl)+'<br><span style="color:var(--muted)">'+s.slice(nl+1)+'</span>';
-    head.innerHTML = body + '<span class="st-caret" aria-hidden="true"></span>';
-  };
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return; // leave the static text
-  draw(0);
-  let started=false;
-  function run(){
-    if(started) return; started=true;
-    let i=0;
-    (function step(){
-      draw(i);
-      if(i<full.length){ const brk=full[i]==="\n"; i++; setTimeout(step, brk?320:42); }
-      else head.classList.add("typed");
-    })();
-  }
-  const sio=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ run(); sio.disconnect(); } }),{threshold:.55});
-  sio.observe(head);
-})();
 </script>
+  <!-- closing statement typewriter — shared component -->
+  <script src="assets/js/closing.js"></script>
+  <script src="assets/js/reveal.js"></script>
 </body>
 </html>

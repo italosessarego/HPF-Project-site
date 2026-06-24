@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOP Platform Skin · Reference</title>
+  <link rel="stylesheet" href="assets/css/platform-skin.css" />
+  <style>
+    body { margin: 0; background: #F8F8F8; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    .page { max-width: 760px; margin: 0 auto; padding: 40px 24px 80px; }
+    .lede { color: #71717A; font-size: 14px; margin: 4px 0 32px; max-width: 52ch; line-height: 1.5; }
+    .block { margin: 0 0 36px; }
+    .block > .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #71717A; margin: 0 0 12px; }
+    .row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .sw { border: 1px solid #E4E4E7; border-radius: 8px; overflow: hidden; background: #fff; }
+    .sw .chip { height: 46px; }
+    .sw .meta { padding: 7px 10px; font-size: 11px; }
+    .sw .meta b { display: block; font-weight: 500; color: #09090B; }
+    .sw .meta span { font-family: 'JetBrains Mono', monospace; color: #71717A; font-size: 10px; }
+  </style>
+</head>
+<body>
+  <div class="sop page">
+    <h1>SOP platform skin</h1>
+    <p class="lede">Drop-in design language of the real SOP platform — Inter, zinc neutrals, the semantic badge ramp, 8px radius. Wrap any product mock in <code class="sop-mono">.sop</code> and use these primitives. Source: <code class="sop-mono">platform-skin.css</code>.</p>
+
+    <div class="block">
+      <p class="lbl">Core palette</p>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#09090B"></div><div class="meta"><b>Foreground</b><span>#09090B</span></div></div>
+        <div class="sw"><div class="chip" style="background:#18181B"></div><div class="meta"><b>Primary</b><span>#18181B</span></div></div>
+        <div class="sw"><div class="chip" style="background:#71717A"></div><div class="meta"><b>Muted fg</b><span>#71717A</span></div></div>
+        <div class="sw"><div class="chip" style="background:#F4F4F5"></div><div class="meta"><b>Muted</b><span>#F4F4F5</span></div></div>
+        <div class="sw"><div class="chip" style="background:#E4E4E7"></div><div class="meta"><b>Border</b><span>#E4E4E7</span></div></div>
+        <div class="sw"><div class="chip" style="background:#F8F8F8"></div><div class="meta"><b>Canvas</b><span>#F8F8F8</span></div></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <p class="lbl">Buttons</p>
+      <div class="row">
+        <button class="sop-btn">Primary</button>
+        <button class="sop-btn sop-btn--secondary">Secondary</button>
+        <button class="sop-btn sop-btn--outline">Outline</button>
+        <button class="sop-btn sop-btn--ghost">Ghost</button>
+        <button class="sop-btn sop-btn--destructive">Delete</button>
+        <button class="sop-btn sop-btn--sm sop-btn--outline">Small</button>
+      </div>
+    </div>
+
+    <div class="block">
+      <p class="lbl">Badges — semantic ramp + domain</p>
+      <div class="row">
+        <span class="sop-badge">Draft</span>
+        <span class="sop-badge sop-badge--info">Pending</span>
+        <span class="sop-badge sop-badge--success">Published</span>
+        <span class="sop-badge sop-badge--warning">In progress</span>
+        <span class="sop-badge sop-badge--danger">Rejected</span>
+        <span class="sop-badge sop-badge--training">Training</span>
+        <span class="sop-badge sop-badge--cert">Certification</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <p class="lbl">Input</p>
+      <div style="max-width:320px"><input class="sop-input" placeholder="Search procedures…" /></div>
+    </div>
+
+    <div class="block">
+      <p class="lbl">Card — composed example</p>
+      <div class="sop-card" style="max-width:420px">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:10px;">
+          <h2>Receiving — dock to stock</h2>
+          <span class="sop-badge sop-badge--info">Pending</span>
+        </div>
+        <p class="sop-muted" style="font-size:13px; margin:0 0 16px; line-height:1.5;">Observation · 6 steps · assigned to A. Rivera</p>
+        <div class="row">
+          <button class="sop-btn">Start observation</button>
+          <button class="sop-btn sop-btn--outline">View steps</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

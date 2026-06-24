@@ -41,8 +41,8 @@ const NEXT_MILESTONE = { label:'Dry run', date:'Fri Jun 20' };
 
 // ---------- renders ----------
 function statusPill(kind, label) {
-  const cls = kind === 'prog' ? 'pill-prog' : 'pill-idle';
-  return `<span class="pillst ${cls}">${label}</span>`;
+  const cls = kind === 'prog' ? 'pill pill-accent' : 'pill';
+  return `<span class="${cls}">${label}</span>`;
 }
 
 function renderStand() {

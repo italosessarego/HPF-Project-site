@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proctor — Receiving SOP Procedure Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --fg:#09090B; --primary:#18181B; --primary-fg:#FAFAFA; --muted:#F4F4F5;
+    --muted-fg:#71717A; --border:#E4E4E7; --card:#FFFFFF; --canvas:#F8F8F8;
+    --blue:#006BDF; --blue-bg:#E6F0FC; --green:#057F04;
+    --ink:#1E1D1D; --ink-2:#343E3F; --mkt-muted:#5F626C; --faint:#6B6E7C;
+    --paper:#F3F3F3; --surface:#FFFFFF; --line:rgba(30,29,29,.12); --line-2:rgba(30,29,29,.24);
+    --accent:#508875; --accent-mid:#70A593; --accent-soft:#9CC9BB; --accent-wash:#EAF2EE;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink)}
+  body{
+    font-family:'DM Sans',system-ui,sans-serif;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    padding:54px 24px 70px;-webkit-font-smoothing:antialiased;
+  }
+
+  /* ----- marketing wrapper ----- */
+  .wrap{width:100%;max-width:1200px}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+    text-transform:uppercase;letter-spacing:.14em;color:var(--ink-2);
+    display:flex;align-items:center;gap:9px;margin-bottom:16px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:999px;background:var(--accent)}
+  .lede{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:26px}
+  h1.title{font-size:29px;font-weight:600;letter-spacing:-.02em;color:var(--ink);line-height:1.15;max-width:660px}
+  h1.title .num{font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:500;font-size:.86em}
+  .lede p{font-size:14px;color:var(--mkt-muted);max-width:330px;line-height:1.55;font-weight:400}
+
+  /* ----- product window ----- */
+  .window{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;
+    box-shadow:0 24px 60px -24px rgba(30,29,29,.22), 0 2px 10px 0 rgba(0,0,0,.05);
+    overflow:hidden;
+    font-family:'Inter',system-ui,sans-serif;color:var(--fg);
+    letter-spacing:-.01em;font-size:12.8px;
+  }
+  .titlebar{
+    height:38px;display:flex;align-items:center;gap:8px;padding:0 14px;
+    background:var(--muted);border-bottom:1px solid var(--border);
+  }
+  .traffic{display:flex;gap:7px}
+  .traffic i{width:11px;height:11px;border-radius:999px;background:#E4E4E7;display:block}
+  .titlebar .tb-label{
+    margin:0 auto;font-size:11.5px;color:var(--muted-fg);font-weight:500;
+    display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;
+  }
+  .titlebar .tb-label .lock{font-size:9px;color:#A1A1AA}
+
+  /* app bar */
+  .appbar{
+    height:54px;display:flex;align-items:center;gap:14px;padding:0 16px;
+    border-bottom:1px solid var(--border);background:var(--card);
+  }
+  .brand{display:flex;align-items:center;gap:9px;flex-shrink:0}
+  .logo{
+    width:26px;height:26px;border-radius:7px;background:var(--primary);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .logo svg{display:block}
+  .brand .name{font-weight:600;font-size:14.5px;letter-spacing:-.02em;color:var(--fg)}
+  .crumb{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted-fg);
+    padding-left:14px;margin-left:2px;border-left:1px solid var(--border)}
+  .crumb .sep{color:#D4D4D8}
+  .crumb .cur{color:var(--fg);font-weight:500}
+  .appbar .spacer{flex:1}
+  .search{position:relative;width:226px}
+  .search svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted-fg)}
+  .search input{
+    width:100%;height:32px;border:1px solid var(--border);border-radius:6px;
+    background:var(--card);padding:0 10px 0 29px;font-family:inherit;font-size:12.3px;
+    color:var(--fg);letter-spacing:-.01em;
+  }
+  .search input::placeholder{color:var(--muted-fg)}
+  .search input:focus{outline:none;border-color:#A1A1AA;box-shadow:0 0 0 3px rgba(24,24,27,.06)}
+  .iconbtn{
+    width:32px;height:32px;border:1px solid var(--border);border-radius:6px;background:var(--card);
+    display:flex;align-items:center;justify-content:center;color:var(--muted-fg);cursor:pointer;
+  }
+  .iconbtn:hover{background:var(--muted)}
+  .avatar{
+    width:30px;height:30px;border-radius:999px;background:var(--primary);color:var(--primary-fg);
+    display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;
+  }
+
+  /* body split: sidebar | list | detail */
+  .appbody{display:flex;height:584px;background:var(--card)}
+
+  /* sidebar */
+  .sidebar{
+    width:244px;flex-shrink:0;border-right:1px solid var(--border);
+    background:var(--canvas);padding:14px 10px;display:flex;flex-direction:column;
+  }
+  .side-head{
+    font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--muted-fg);padding:4px 8px 9px;
+  }
+  .navitem{
+    display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:6px;cursor:pointer;
+    border:1px solid transparent;margin-bottom:2px;user-select:none;
+    transition:background .12s ease, border-color .12s ease;
+  }
+  .navitem:hover{background:rgba(24,24,27,.04)}
+  .navitem.active{border-color:var(--primary);background:rgba(24,24,27,.05)}
+  .navitem .ic{
+    width:26px;height:26px;border-radius:6px;background:var(--card);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:var(--muted-fg);flex-shrink:0;
+    transition:background .12s ease, color .12s ease, border-color .12s ease;
+  }
+  .navitem.active .ic{background:var(--primary);border-color:var(--primary);color:var(--primary-fg)}
+  .navitem .meta{flex:1;min-width:0;overflow:hidden}
+  .navitem .lbl{display:block;font-size:12.8px;font-weight:500;color:var(--fg);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .navitem .desc{display:block;font-size:11px;color:var(--muted-fg);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .badge{
+    font-size:11px;font-weight:600;color:var(--muted-fg);background:var(--muted);
+    border-radius:999px;padding:2px 8px;min-width:24px;text-align:center;flex-shrink:0;
+    font-variant-numeric:tabular-nums;
+  }
+  .navitem.active .badge{background:var(--primary);color:var(--primary-fg)}
+  .side-sep{height:1px;background:var(--border);margin:8px 8px}
+  .side-foot{
+    margin-top:auto;padding:11px 9px 2px;font-family:'JetBrains Mono',monospace;
+    font-size:10px;line-height:1.7;color:var(--muted-fg);letter-spacing:.01em;
+  }
+  .side-foot b{color:var(--fg);font-weight:500}
+
+  /* center: list column */
+  .main{flex:1;display:flex;flex-direction:column;min-width:0;border-right:1px solid var(--border)}
+  .pane-head{
+    padding:14px 18px 13px;border-bottom:1px solid var(--border);
+  }
+  .pane-head .top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+  .pane-head .h-title{font-size:19px;font-weight:600;letter-spacing:-.02em;color:var(--fg);line-height:1.2}
+  .pane-head .h-sub{font-size:12px;color:var(--muted-fg);margin-top:3px}
+  .pane-head .h-sub .cnt{color:var(--fg);font-weight:600}
+  .viewtog{display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden;flex-shrink:0}
+  .viewtog button{
+    border:none;background:var(--card);padding:6px 10px;font-family:inherit;font-size:11.5px;
+    color:var(--muted-fg);cursor:pointer;display:flex;align-items:center;gap:5px;
+  }
+  .viewtog button.on{background:var(--muted);color:var(--fg);font-weight:500}
+  .viewtog button+button{border-left:1px solid var(--border)}
+
+  /* results bar: showing N of 28 + active chip */
+  .resultbar{
+    display:flex;align-items:center;gap:10px;margin-top:11px;min-height:24px;
+  }
+  .showing{
+    font-size:11.5px;color:var(--muted-fg);font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+  .showing b{color:var(--fg);font-weight:600}
+  .facetchip{
+    display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:500;color:var(--fg);
+    background:rgba(24,24,27,.05);border:1px solid var(--primary);border-radius:999px;
+    padding:3px 5px 3px 11px;line-height:1;
+  }
+  .facetchip .fx{
+    width:16px;height:16px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+    background:var(--primary);color:var(--primary-fg);cursor:pointer;flex-shrink:0;
+  }
+  .facetchip .fx:hover{background:#000}
+  .resetbtn{
+    border:none;background:none;font-family:inherit;font-size:11.5px;color:var(--muted-fg);
+    cursor:pointer;text-decoration:underline;text-underline-offset:2px;padding:2px 0;
+  }
+  .resetbtn:hover{color:var(--fg)}
+  .rb-spacer{flex:1}
+
+  .listwrap{flex:1;overflow-y:auto;padding:6px 10px 14px}
+  .listwrap::-webkit-scrollbar{width:10px}
+  .listwrap::-webkit-scrollbar-thumb{background:#E4E4E7;border-radius:999px;border:3px solid var(--card)}
+
+  .grouplabel{
+    display:flex;align-items:center;gap:9px;padding:13px 8px 7px;
+    font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-fg);
+  }
+  .grouplabel .ln{flex:1;height:1px;background:var(--border)}
+
+  .row{
+    display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:8px;cursor:pointer;
+    border:1px solid transparent;transition:background .1s ease, border-color .1s ease;
+  }
+  .row:hover{background:var(--muted)}
+  .row.sel{border-color:var(--primary);background:rgba(24,24,27,.05)}
+  .row:hover .chev,.row.sel .chev{color:var(--muted-fg)}
+  .chip{
+    width:33px;height:33px;border-radius:7px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:600;letter-spacing:-.02em;
+    background:var(--blue-bg);color:var(--blue);font-variant-numeric:tabular-nums;
+  }
+  .chip.ref{background:var(--muted);color:var(--muted-fg)}
+  .row .body{flex:1;min-width:0}
+  .row .rt{display:block;font-size:12.8px;font-weight:500;color:var(--fg);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .rmeta{font-size:11px;color:var(--muted-fg);margin-top:2px;display:flex;align-items:center;gap:6px}
+  .tag{
+    font-size:9.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+    padding:3px 7px;border-radius:999px;flex-shrink:0;
+  }
+  .tag.proc{background:#E7F4E7;color:var(--green)}
+  .tag.ref{background:var(--muted);color:var(--muted-fg)}
+  .pages{
+    font-size:11px;color:var(--muted-fg);font-variant-numeric:tabular-nums;
+    flex-shrink:0;min-width:50px;text-align:right;
+  }
+  .chev{color:#D4D4D8;flex-shrink:0;display:flex}
+  .hl{background:rgba(0,107,223,.16);border-radius:2px}
+
+  .noresults{
+    padding:46px 24px;text-align:center;color:var(--muted-fg);font-size:12.5px;
+  }
+  .noresults .nr-ic{
+    width:38px;height:38px;border-radius:9px;background:var(--muted);margin:0 auto 12px;
+    display:flex;align-items:center;justify-content:center;color:#A1A1AA;
+  }
+
+  /* right: detail / preview pane */
+  .detail{
+    width:316px;flex-shrink:0;background:var(--canvas);display:flex;flex-direction:column;
+    overflow-y:auto;
+  }
+  .detail::-webkit-scrollbar{width:10px}
+  .detail::-webkit-scrollbar-thumb{background:#E4E4E7;border-radius:999px;border:3px solid var(--canvas)}
+  .d-empty{
+    flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:30px 28px;color:var(--muted-fg);gap:13px;
+  }
+  .d-empty .de-ic{
+    width:42px;height:42px;border-radius:10px;background:var(--card);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:#C4C4C8;
+  }
+  .d-empty .de-t{font-size:13px;font-weight:500;color:var(--muted-fg)}
+  .d-empty .de-s{font-size:11.5px;line-height:1.5;max-width:200px}
+
+  .d-head{padding:18px 20px 16px;border-bottom:1px solid var(--border)}
+  .d-eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted-fg);display:flex;align-items:center;gap:7px;margin-bottom:11px;
+  }
+  .d-eyebrow .lt{
+    background:var(--primary);color:var(--primary-fg);border-radius:4px;padding:2px 6px;font-weight:500;letter-spacing:.04em;
+  }
+  .d-eyebrow .lt.ref{background:var(--muted);color:var(--muted-fg)}
+  .d-title{font-size:16px;font-weight:600;letter-spacing:-.02em;color:var(--fg);line-height:1.28}
+  .d-attr{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}
+  .attr{
+    font-size:10.5px;color:var(--muted-fg);background:var(--card);border:1px solid var(--border);
+    border-radius:6px;padding:4px 8px;display:flex;align-items:center;gap:5px;font-variant-numeric:tabular-nums;
+  }
+  .attr svg{color:#A1A1AA}
+  .attr b{color:var(--fg);font-weight:600}
+
+  .d-body{padding:16px 20px 22px}
+  .d-sect{
+    font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--muted-fg);margin:0 0 11px;
+  }
+  .d-lead{font-size:12px;color:var(--ink-2);line-height:1.55;margin-bottom:18px}
+
+  .steps{list-style:none;display:flex;flex-direction:column;gap:0}
+  .steps li{display:flex;gap:11px;padding:0 0 14px;position:relative}
+  .steps li:last-child{padding-bottom:0}
+  .steps .sn{
+    width:21px;height:21px;border-radius:999px;background:var(--card);border:1px solid var(--border);
+    color:var(--fg);font-size:10.5px;font-weight:600;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;z-index:1;font-variant-numeric:tabular-nums;
+  }
+  .steps li:not(:last-child)::before{
+    content:"";position:absolute;left:10px;top:21px;bottom:3px;width:1px;background:var(--border);
+  }
+  .steps .stx{font-size:12px;color:var(--ink-2);line-height:1.5;padding-top:2px}
+
+  .refbox{
+    background:var(--card);border:1px solid var(--border);border-radius:8px;padding:13px 14px;
+    display:flex;flex-direction:column;gap:9px;
+  }
+  .refbox .rr{display:flex;gap:9px;align-items:flex-start;font-size:11.5px;color:var(--ink-2);line-height:1.45}
+  .refbox .rr svg{color:var(--accent);flex-shrink:0;margin-top:1px}
+
+  .d-foot{
+    margin-top:18px;padding-top:14px;border-top:1px solid var(--border);
+    display:flex;align-items:center;gap:9px;
+  }
+  .openbtn{
+    flex:1;height:33px;border:1px solid var(--primary);background:var(--primary);color:var(--primary-fg);
+    border-radius:6px;font-family:inherit;font-size:12px;font-weight:500;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:7px;letter-spacing:-.01em;
+  }
+  .openbtn:hover{background:#000}
+  .ghostbtn{
+    height:33px;width:33px;border:1px solid var(--border);background:var(--card);color:var(--muted-fg);
+    border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  }
+  .ghostbtn:hover{background:var(--muted);color:var(--fg)}
+
+  /* footnote under window */
+  .underbar{
+    display:flex;align-items:center;gap:13px;margin-top:18px;flex-wrap:wrap;
+  }
+  .underbar .pin{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.04em;
+    color:var(--accent);border:1px solid var(--accent-soft);background:var(--accent-wash);
+    border-radius:999px;padding:3px 10px;
+  }
+  .underbar .note{font-size:12.5px;color:var(--mkt-muted);font-weight:400;line-height:1.5}
+  .underbar .prov{
+    margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    color:var(--faint);letter-spacing:.03em;white-space:nowrap;
+  }
+  .underbar .prov b{color:var(--ink-2);font-weight:500}
+  @media (max-width:1080px){
+    .underbar .prov{margin-left:0;width:100%}
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Interactive · Procedure Library</div>
+    <div class="lede">
+      <h1 class="title">One 122-page receiving manual, split into <span class="num">28</span> role-tagged procedures. Everyone sees only theirs.</h1>
+      <p>Pick a job function on the left. The library narrows to that role's work instructions in real time — and any section opens to its actual steps.</p>
+    </div>
+
+    <section class="window" aria-label="Proctor procedure library">
+      <div class="titlebar">
+        <div class="traffic"><i></i><i></i><i></i></div>
+        <div class="tb-label"><span class="lock">●</span>app.proctor.io — Receiving SOP 026 · Procedures</div>
+      </div>
+
+      <div class="appbar">
+        <div class="brand">
+          <span class="logo" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.2 5.4 10.6 12 3" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="name">Proctor</span>
+        </div>
+        <nav class="crumb"><span>Receiving SOP 026</span><span class="sep">/</span><span class="cur">Procedures</span></nav>
+        <span class="spacer"></span>
+        <div class="search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+          <input id="search" type="text" placeholder="Search procedures" aria-label="Search procedures">
+        </div>
+        <button class="iconbtn" aria-label="Filters" title="Filters">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h18M6 12h12M10 19h4"/></svg>
+        </button>
+        <div class="avatar" title="Dana R.">DR</div>
+      </div>
+
+      <div class="appbody">
+        <aside class="sidebar" id="sidebar" aria-label="Job functions">
+          <div class="side-head">Job function</div>
+          <div id="navlist"></div>
+          <div class="side-foot">SOP&nbsp;026 · rev.&nbsp;2026-06<br><b>28 sections</b> indexed<br>24&nbsp;procedure · 8&nbsp;reference</div>
+        </aside>
+
+        <section class="main">
+          <header class="pane-head">
+            <div class="top">
+              <div>
+                <div class="h-title" id="paneTitle">All procedures</div>
+                <div class="h-sub" id="paneSub"><span class="cnt">28</span> sections · entire receiving workflow</div>
+              </div>
+              <div class="viewtog">
+                <button class="on" aria-label="List view">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>List
+                </button>
+                <button aria-label="Board view">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Board
+                </button>
+              </div>
+            </div>
+            <div class="resultbar" id="resultbar"></div>
+          </header>
+          <div class="listwrap" id="list"></div>
+        </section>
+
+        <aside class="detail" id="detail" aria-label="Section detail"></aside>
+      </div>
+    </section>
+
+    <div class="underbar">
+      <span class="pin">LIVE DEMO</span>
+      <span class="note">Selecting a role recomputes the list and count instantly; opening a section reveals its real work instruction.</span>
+      <span class="prov">Source: <b>Receiving SOP 026</b> · pp. 1–121 · demo data</span>
+    </div>
+  </main>
+
+<script>
+(function(){
+  var ROLES=[
+    {key:"all",     label:"All procedures", desc:"Every section in SOP 026",        icon:"layers"},
+    {key:"unloader",label:"Unloader",       desc:"Physical unload of trailers",      icon:"box"},
+    {key:"receiver",label:"Receiver",       desc:"Verify ASN + system receive",      icon:"clipboard"},
+    {key:"oc",      label:"Ops Coordinator",desc:"ASN print, audits, sign-off",      icon:"print"},
+    {key:"exc",     label:"Exceptions Clerk",desc:"Discrepancies & hazmat",          icon:"alert"},
+    {key:"am",      label:"AM / Coordinator",desc:"Plan, staff, approve",            icon:"user"},
+    {key:"shared",  label:"Shared / All",   desc:"Reference & start/end of shift",   icon:"globe"}
+  ];
+  var ROLE_LABEL={unloader:"Unloader",receiver:"Receiver",oc:"Ops Coordinator",exc:"Exceptions Clerk",am:"AM / Coordinator",shared:"Shared"};
+
+  var S=[
+    ["A","Overview, Definitions & Core Roles","shared","ref","4–6"],
+    ["B","Equipment (+ equipment × role matrix)","shared","ref","7–10"],
+    ["C","Layout — hand / fork / clamp setups","shared","ref","11–12"],
+    ["D","Safety Practices","shared","ref","13–17"],
+    ["E","Roles & ABC Assignment","shared","ref","18–19"],
+    ["F","Manager's Plan","am","proc","20–21"],
+    ["G","Shift Start Up","shared","proc","22"],
+    ["H","View & Print ASN","oc","proc","23–24"],
+    ["I","Operating Dock Locks","unloader","proc","25"],
+    ["J","Inspect the Trailer / Container","unloader","proc","26"],
+    ["K","TI-HI, Build & Secure a Pallet","unloader","proc","27–35"],
+    ["L","SKUs with FIFO Labeling Requirement","receiver","proc","36–38"],
+    ["M","Unloading International Freight","unloader","proc","39–48"],
+    ["N","Handling Wooden Crates","unloader","proc","49–50"],
+    ["O","Hand Unloading Configuration","unloader","proc","51–52"],
+    ["P","Conveyor Unload","unloader","proc","53–61"],
+    ["Q","Forklift Unloading Configuration","unloader","proc","62–64"],
+    ["R","Clamp Unloading","unloader","proc","65–76"],
+    ["S","Smart Unloading Configuration","unloader","proc","77–79"],
+    ["T","Receive/Verify ASN — International","receiver","proc","80–89"],
+    ["U","Unloading Domestic Freight","receiver","proc","90–92"],
+    ["V","Receive/Verify ASN — Domestic","receiver","proc","93–96"],
+    ["W","End of Unloading Trailer Process","unloader","proc","97"],
+    ["X","Exceptions (10 flows incl. hazmat)","exc","proc","98–117"],
+    ["Y","Process Flow Diagrams","shared","ref","118"],
+    ["Z","DC Best Practices","shared","ref","119"],
+    ["AA","End of Shift","shared","proc","120"],
+    ["BB","Revision Notes","shared","ref","121"]
+  ].map(function(r){return{ltr:r[0],title:r[1],role:r[2],type:r[3],pages:r[4]};});
+
+  // demo work-instruction content per section
+  var DETAIL={
+    A:{lead:"Baseline reference establishing terminology and the core receiving roles every team member shares.",items:["Defines ASN, TI-HI, FIFO, hazmat class and other key terms used throughout SOP 026.","Maps the six core job functions and where each one engages in the receiving flow.","Required reading before first dock shift; reviewed at every revision."]},
+    B:{lead:"Equipment register with the equipment-by-role authorization matrix.","items":["Lists every powered and manual unit on the receiving floor with asset IDs.","Cross-references which role is certified to operate each unit.","Pre-shift inspection requirements per equipment class."]},
+    C:{lead:"Dock layout reference for the three primary unload setups.","items":["Hand-unload lane geometry and conveyor staging zones.","Forklift travel paths and pallet build positions.","Clamp setup clearances and floor-marking standard."]},
+    D:{lead:"Mandatory safety practices governing the receiving dock at all times.","items":["PPE requirements by zone and task.","Pinch-point, fall and powered-equipment hazard controls.","Stop-work authority and incident escalation path."]},
+    E:{lead:"Role definitions and the ABC labor-assignment model.","items":["Each role's responsibilities, hand-offs and sign-off authority.","ABC assignment logic for staffing a trailer.","Coverage rules when a role is unfilled."]},
+    F:{lead:"The AM / Coordinator builds the shift plan before the first trailer is spotted.","items":["Pull the day's inbound schedule and ASN volume.","Assign ABC labor against expected trailer mix.","Confirm equipment availability and dock-door allocation.","Publish the plan and brief leads at shift start."]},
+    G:{lead:"Shift start-up sequence everyone runs before unloading begins.","items":["Clock in and confirm role assignment on the board.","Complete equipment pre-use inspection.","Verify dock area is clear and dock locks are armed.","Attend the start-of-shift safety brief."]},
+    H:{lead:"Ops Coordinator retrieves and prints the ASN for each inbound trailer.","items":["Open the inbound trailer record in the WMS.","Locate the matching ASN by trailer / seal number.","Validate carton and pallet counts against the schedule.","Print the ASN packet and stage it at the assigned door."]},
+    I:{lead:"Engage the dock lock before any trailer is entered.","items":["Confirm trailer is fully backed to the dock seal.","Activate the dock lock and verify the green interlock signal.","Chock wheels if the lock indicator is not confirmed.","Do not enter until the lock light reads secure."]},
+    J:{lead:"Inspect the trailer or container before unloading product.","items":["Verify seal number matches the ASN, then break the seal.","Check for load shift, damage, leaks or contamination.","Photograph and flag any exception before touching freight.","Confirm floor and load are safe to enter."]},
+    K:{lead:"Build and secure a pallet to the published TI-HI standard.","items":["Look up the SKU's TI (per layer) and HI (layers high).","Stack to pattern, keeping faces square and within footprint.","Secure with banding or wrap per product class.","Apply the pallet license-plate label and stage."]},
+    L:{lead:"Receiver applies FIFO labeling to SKUs that require date rotation.","items":["Identify FIFO-flagged SKUs from the ASN line detail.","Capture the manufacture / receipt date on each unit or pallet.","Apply the rotation label so oldest stock is picked first.","Confirm label scans cleanly into the WMS."]},
+    M:{lead:"Unload international freight with the added compliance checks it requires.","items":["Confirm container documentation and customs clearance status.","Inspect for fumigation, moisture and pest indicators.","Unload to the international staging lane.","Flag any documentation mismatch to the Exceptions Clerk."]},
+    N:{lead:"Handle wooden crates safely during unload.","items":["Assess crate weight and integrity before lifting.","Use the correct equipment — never hand-break a crate.","Stage intact crates; route damaged ones to exceptions.","Dispose of dunnage per the DC waste standard."]},
+    O:{lead:"Configure the dock for a hand-unload operation.","items":["Position the extendable conveyor at the trailer mouth.","Set the hand-unload crew and rotation.","Confirm carton flow direction and scan point.","Begin unloading from the trailer's rear face."]},
+    P:{lead:"Run a conveyor unload from trailer to sortation.","items":["Extend and align the powered conveyor into the trailer.","Feed cartons label-up at a steady cadence.","Clear jams using lockout before reaching in.","Retract and sanitize the conveyor at completion."]},
+    Q:{lead:"Configure the dock for forklift unloading of floor-loaded or palletized freight.","items":["Confirm forks, capacity plate and operator certification.","Set travel path and pedestrian exclusion zone.","Unload pallets to the build / stage position.","Sound horn at blind corners and door thresholds."]},
+    R:{lead:"Clamp-unload appliance and boxed freight without a pallet.","items":["Select clamp pressure for the product class.","Approach square; clamp, lift and back out smoothly.","Build the unit load to TI-HI before banding.","Inspect for clamp-crush before staging."]},
+    S:{lead:"Operate the smart / automated unloading configuration.","items":["Confirm the automated unit's pre-run self-check passed.","Position trailer and engage the automated feed.","Monitor throughput and clear soft jams.","Hand off to manual unload if the unit faults."]},
+    T:{lead:"Receive and verify an international ASN in the system.","items":["Match received cartons to the international ASN lines.","Reconcile customs and country-of-origin data.","Record over/short/damage against each line.","System-receive and release the trailer record."]},
+    U:{lead:"Unload domestic freight through the standard flow.","items":["Confirm the domestic ASN and door assignment.","Unload and stage per the published configuration.","Capture counts at the scan point.","Signal readiness for system receipt."]},
+    V:{lead:"Receive and verify a domestic ASN in the system.","items":["Match received cartons to the domestic ASN lines.","Record overage, shortage and damage per line.","Resolve scan mismatches or route to exceptions.","System-receive and close the trailer record."]},
+    W:{lead:"Close out the trailer once unloading is complete.","items":["Confirm the trailer is empty and swept.","Reconcile final counts against the ASN.","Release the dock lock and signal the yard.","Mark the trailer complete in the WMS."]},
+    X:{lead:"Ten exception flows for discrepancies, damage and hazmat events.","items":["Identify the exception type — over, short, damage, hazmat, etc.","Quarantine affected freight per the matching flow.","For hazmat: isolate, reference the SDS and notify per protocol.","Document the exception and route for disposition."]},
+    Y:{lead:"Process-flow diagrams summarizing the end-to-end receiving workflow.","items":["Visual map of trailer arrival through system receipt.","Decision points for international vs domestic freight.","Hand-off boundaries between each job function."]},
+    Z:{lead:"DC best-practice reference distilled from high-performing sites.","items":["Throughput and quality tips by unload configuration.","Common error patterns and how to avoid them.","Continuous-improvement notes from prior revisions."]},
+    AA:{lead:"End-of-shift wind-down everyone completes before clocking out.","items":["Stage and label all incomplete work for hand-off.","Return and plug in powered equipment; report defects.","Confirm dock doors closed and locks disarmed.","Submit shift counts and clock out."]},
+    BB:{lead:"Revision history for SOP 026.","items":["Change log of every revision with date and author.","Summary of what changed and why.","Effective date and acknowledgment requirement."]}
+  };
+
+  var ICONS={
+    layers:'<path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="M3 13l9 5 9-5"/>',
+    box:'<path d="M3 8 12 3l9 5v8l-9 5-9-5V8Z"/><path d="M3 8l9 5 9-5M12 13v8"/>',
+    clipboard:'<rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1M9 11h6M9 15h4"/>',
+    print:'<path d="M7 8V3h10v5M7 18H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="7" y="15" width="10" height="6" rx="1"/>',
+    alert:'<path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17h.01"/>',
+    user:'<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>',
+    globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/>'
+  };
+  function svgIcon(name){return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+ICONS[name]+'</svg>';}
+
+  var TOTAL=S.length;
+  var counts={};
+  ROLES.forEach(function(r){counts[r.key]=0;});
+  S.forEach(function(s){counts[s.role]++; counts.all++;});
+
+  var current="all", query="", selectedLtr=null;
+
+  var navHTML=ROLES.map(function(r){
+    return '<div class="navitem'+(r.key==="all"?" active":"")+'" data-key="'+r.key+'" role="button" tabindex="0" aria-pressed="'+(r.key==="all")+'">'+
+      '<span class="ic" aria-hidden="true">'+svgIcon(r.icon)+'</span>'+
+      '<span class="meta"><span class="lbl">'+r.label+'</span><span class="desc">'+r.desc+'</span></span>'+
+      '<span class="badge">'+counts[r.key]+'</span>'+
+    '</div>'+(r.key==="all"?'<div class="side-sep"></div>':'');
+  }).join("");
+  document.getElementById("navlist").innerHTML=navHTML;
+
+  var chev='<span class="chev"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>';
+
+  function esc(t){return t.replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+  function mark(t){
+    if(!query) return esc(t);
+    var i=t.toLowerCase().indexOf(query);
+    if(i<0) return esc(t);
+    return esc(t.slice(0,i))+'<span class="hl">'+esc(t.slice(i,i+query.length))+'</span>'+esc(t.slice(i+query.length));
+  }
+  function byLtr(l){for(var i=0;i<S.length;i++){if(S[i].ltr===l)return S[i];}return null;}
+
+  function rowHTML(s){
+    var sel=(s.ltr===selectedLtr)?" sel":"";
+    return '<div class="row'+sel+'" role="button" tabindex="0" data-ltr="'+s.ltr+'" aria-label="'+esc(s.title)+'">'+
+      '<span class="chip'+(s.type==="ref"?" ref":"")+'">'+s.ltr+'</span>'+
+      '<span class="body"><span class="rt">'+mark(s.title)+'</span>'+
+        '<span class="rmeta">'+ROLE_LABEL[s.role]+' · '+(s.type==="proc"?"Procedure":"Reference")+'</span></span>'+
+      '<span class="tag '+s.type+'">'+(s.type==="proc"?"Proc":"Ref")+'</span>'+
+      '<span class="pages">p.'+s.pages+'</span>'+chev+
+    '</div>';
+  }
+
+  function matchesQuery(s){
+    if(!query) return true;
+    return s.title.toLowerCase().indexOf(query)>-1 || s.ltr.toLowerCase()===query;
+  }
+
+  function visibleSections(){
+    if(current==="all") return S.filter(matchesQuery);
+    var out=S.filter(function(s){return s.role===current && matchesQuery(s);});
+    if(current!=="shared"){
+      out=out.concat(S.filter(function(s){return s.role==="shared" && matchesQuery(s);}));
+    }
+    return out;
+  }
+
+  function renderResultBar(shownCount){
+    var rb=document.getElementById("resultbar");
+    var html='<span class="showing">Showing <b>'+shownCount+'</b> of '+TOTAL+' sections</span>';
+    if(current!=="all"){
+      html+='<span class="facetchip">'+ROLE_LABEL[current]+
+        '<span class="fx" data-clear="1" role="button" tabindex="0" aria-label="Clear role filter">'+
+        '<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span></span>';
+    }
+    if(query){
+      html+='<span class="facetchip">“'+esc(query)+'”'+
+        '<span class="fx" data-clearq="1" role="button" tabindex="0" aria-label="Clear search">'+
+        '<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span></span>';
+    }
+    html+='<span class="rb-spacer"></span>';
+    if(current!=="all"||query){
+      html+='<button class="resetbtn" data-reset="1">Reset</button>';
+    }
+    rb.innerHTML=html;
+  }
+
+  function render(){
+    var list=document.getElementById("list");
+    var html="";
+    var shown=0;
+
+    if(current==="all"){
+      var rows=S.filter(matchesQuery);
+      shown=rows.length;
+      if(shown){ html=rows.map(rowHTML).join(""); }
+    } else {
+      var primary=S.filter(function(s){return s.role===current && matchesQuery(s);});
+      shown=primary.length;
+      if(primary.length){
+        html+='<div class="grouplabel">'+ROLE_LABEL[current]+' procedures<span class="ln"></span></div>';
+        html+=primary.map(rowHTML).join("");
+      }
+      if(current!=="shared"){
+        var refs=S.filter(function(s){return s.role==="shared" && matchesQuery(s);});
+        if(refs.length){
+          shown+=refs.length;
+          html+='<div class="grouplabel">Shared reference — everyone uses these<span class="ln"></span></div>';
+          html+=refs.map(rowHTML).join("");
+        }
+      }
+    }
+
+    if(!shown){
+      html='<div class="noresults"><div class="nr-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></div>'+
+        'No sections match'+(query?' “'+esc(query)+'”':'')+'.<br>Try a different term or reset the filters.</div>';
+    }
+    list.innerHTML=html;
+
+    var role=ROLES.filter(function(r){return r.key===current;})[0];
+    document.getElementById("paneTitle").textContent = current==="all" ? "All procedures" : role.label;
+    var sub=document.getElementById("paneSub");
+    if(current==="all"){
+      sub.innerHTML='<span class="cnt">'+counts.all+'</span> sections · entire receiving workflow';
+    } else {
+      var nProc=S.filter(function(s){return s.role===current && s.type==="proc";}).length;
+      var nRef=S.filter(function(s){return s.role===current && s.type==="ref";}).length;
+      var bits=[];
+      if(nProc) bits.push(nProc+" procedure"+(nProc>1?"s":""));
+      if(nRef) bits.push(nRef+" reference");
+      var noun=counts[current]===1?"section":"sections";
+      sub.innerHTML='<span class="cnt">'+counts[current]+'</span> '+noun+' for this role · '+bits.join(" + ");
+    }
+
+    renderResultBar(shown);
+
+    document.querySelectorAll(".navitem").forEach(function(n){
+      var on=n.getAttribute("data-key")===current;
+      n.classList.toggle("active", on);
+      n.setAttribute("aria-pressed", on);
+    });
+
+    // keep selection valid against the visible set
+    var vis=visibleSections();
+    if(selectedLtr && !vis.some(function(s){return s.ltr===selectedLtr;})){
+      selectedLtr=null;
+    }
+    renderDetail();
+  }
+
+  function renderDetail(){
+    var d=document.getElementById("detail");
+    if(!selectedLtr){
+      d.innerHTML='<div class="d-empty"><div class="de-ic">'+
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>'+
+        '</div><div class="de-t">Select a section</div>'+
+        '<div class="de-s">Open any row to preview its work instruction — the actual steps your role would follow on the dock.</div></div>';
+      return;
+    }
+    var s=byLtr(selectedLtr);
+    var det=DETAIL[s.ltr]||{lead:"",items:[]};
+    var isProc=s.type==="proc";
+    var body;
+    if(isProc){
+      body='<div class="d-sect">Procedure steps</div>'+
+        '<ol class="steps">'+det.items.map(function(t,i){
+          return '<li><span class="sn">'+(i+1)+'</span><span class="stx">'+esc(t)+'</span></li>';
+        }).join("")+'</ol>';
+    } else {
+      body='<div class="d-sect">What this reference covers</div>'+
+        '<div class="refbox">'+det.items.map(function(t){
+          return '<div class="rr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>'+esc(t)+'</span></div>';
+        }).join("")+'</div>';
+    }
+    d.innerHTML=
+      '<div class="d-head">'+
+        '<div class="d-eyebrow"><span class="lt'+(isProc?"":" ref")+'">SEC '+s.ltr+'</span>'+(isProc?"Work instruction":"Reference section")+'</div>'+
+        '<div class="d-title">'+esc(s.title)+'</div>'+
+        '<div class="d-attr">'+
+          '<span class="attr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.3 3-5 7-5s7 1.7 7 5"/></svg><b>'+ROLE_LABEL[s.role]+'</b></span>'+
+          '<span class="attr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l3 3v15H6z"/><path d="M15 3v3h3"/></svg>pp. <b>'+s.pages+'</b></span>'+
+          '<span class="attr">'+(isProc?'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#057F04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><b style="color:#057F04">Procedure</b>':'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>Reference')+'</span>'+
+        '</div>'+
+      '</div>'+
+      '<div class="d-body">'+
+        '<div class="d-lead">'+esc(det.lead)+'</div>'+
+        body+
+        '<div class="d-foot">'+
+          '<button class="openbtn">Open full section'+
+            '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></button>'+
+          '<button class="ghostbtn" aria-label="Bookmark" title="Bookmark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12v17l-6-4-6 4z"/></svg></button>'+
+        '</div>'+
+      '</div>';
+  }
+
+  function selectRole(key){
+    current = (key===current && key!=="all") ? "all" : key;
+    render();
+  }
+  function resetAll(){ current="all"; query=""; document.getElementById("search").value=""; render(); }
+
+  document.getElementById("navlist").addEventListener("click",function(e){
+    var item=e.target.closest(".navitem"); if(item) selectRole(item.getAttribute("data-key"));
+  });
+  document.getElementById("navlist").addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){var item=e.target.closest(".navitem");if(item){e.preventDefault();selectRole(item.getAttribute("data-key"));}}
+  });
+
+  document.getElementById("list").addEventListener("click",function(e){
+    var row=e.target.closest(".row"); if(row){ selectedLtr=row.getAttribute("data-ltr"); render(); }
+  });
+  document.getElementById("list").addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){var row=e.target.closest(".row");if(row){e.preventDefault();selectedLtr=row.getAttribute("data-ltr");render();}}
+  });
+
+  document.getElementById("resultbar").addEventListener("click",function(e){
+    if(e.target.closest("[data-clear]")){ current="all"; render(); return; }
+    if(e.target.closest("[data-clearq]")){ query=""; document.getElementById("search").value=""; render(); return; }
+    if(e.target.closest("[data-reset]")){ resetAll(); return; }
+  });
+  document.getElementById("resultbar").addEventListener("keydown",function(e){
+    if(e.key!=="Enter"&&e.key!==" ")return;
+    if(e.target.closest("[data-clear]")){e.preventDefault();current="all";render();}
+    else if(e.target.closest("[data-clearq]")){e.preventDefault();query="";document.getElementById("search").value="";render();}
+  });
+
+  document.getElementById("search").addEventListener("input",function(e){
+    query=e.target.value.trim().toLowerCase(); render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

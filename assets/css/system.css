@@ -20,12 +20,24 @@
 body { font-family:'DM Sans', sans-serif; background:var(--paper); color:var(--ink); }
 h1, h2, h3, h4, .font-display { font-family:'DM Sans', sans-serif; letter-spacing:-0.02em; font-weight:500; }
 
-/* ---- scroll-reveal helpers (both naming conventions in use across pages) ---- */
-.fade-in { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
-.fade-in.visible { opacity:1; transform:translateY(0); }
+/* ---- scroll-reveal — ONE convention site-wide: .reveal → .in (added by assets/js/reveal.js) ---- */
 .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
 .reveal.in { opacity:1; transform:none; }
-nav.scrolled { box-shadow:0 1px 0 0 var(--line); }
+
+/* ---- site nav — the one canonical bar; every page uses the identical markup ----
+   chrome: .site-nav (fixed, blurred, hairline) · inner: .nav-inner (edge rail + 64px height)
+   links: .nav-tabs > a (live) | span.cur (current page) | span.dis (not-yet-live). */
+.site-nav { position:fixed; top:0; left:0; right:0; z-index:50; background:rgba(243,243,243,.9); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border-bottom:1px solid var(--line); transition:box-shadow .3s ease; }
+.site-nav.scrolled, nav.scrolled { box-shadow:0 1px 0 0 var(--line); }
+.nav-inner { display:flex; align-items:center; justify-content:space-between; height:64px; padding:0 24px; }
+@media(min-width:640px){ .nav-inner { padding:0 32px; } }
+@media(min-width:1024px){ .nav-inner { padding:0 48px; } }
+.nav-tabs { display:flex; align-items:center; gap:2px; font-size:13px; }
+.nav-tabs a, .nav-tabs span { padding:6px 14px; color:var(--muted); text-decoration:none; white-space:nowrap; transition:color .18s ease; cursor:pointer; }
+.nav-tabs a:hover { color:var(--ink); }
+.nav-tabs .cur { color:#9DA2B3; font-weight:500; cursor:default; }
+.nav-tabs .dis { color:#CFD1D8; cursor:default; }
+@media(max-width:1040px){ .nav-tabs a, .nav-tabs span { padding:6px 9px; font-size:12px; } }
 
 /* ---- micro-typography & rules ---- */
 .mono-label { font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; }
@@ -48,15 +60,32 @@ nav.scrolled { box-shadow:0 1px 0 0 var(--line); }
 .btn-icon { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:999px; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); transition:background .18s ease, color .18s ease; cursor:pointer; }
 .btn-icon:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
 
-/* ---- pills & tags ---- */
-.pill { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:500; letter-spacing:.01em; padding:3px 11px; border-radius:999px; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); white-space:nowrap; }
+/* ---- chips: exactly two shapes, chosen by content, never by page ----
+   ROUND .pill  = a live STATE / status, true right now, sentence case
+                  ("Phase 1", "In progress", "Roadmap"). Soft shape → status.
+   SQUARE .tag  = a fixed LABEL from a set — priority, category, metadata,
+                  mono uppercase ("MUST", "SOP", "API"). Systematic shape → catalog.
+   The decision is one question: is it a state, or a label?
+   Do NOT invent a third chip. The variants below only change the fill.
+   .codechip (inline code) and the segmented control are separate, non-chip elements. */
+.pill { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:500; letter-spacing:.01em; padding:3px 11px; border-radius:var(--r-pill); border:1px solid var(--line-2); background:var(--surface); color:var(--ink); white-space:nowrap; }
 .pill-solid { background:var(--ink); color:#fff; border-color:var(--ink); }
 .pill-accent { background:var(--accent-wash); color:var(--accent); border-color:var(--accent-soft); }
-.pill .ring { width:6px; height:6px; border-radius:999px; border:1.5px solid currentColor; flex:none; }
-.pill .dot-i { width:6px; height:6px; border-radius:999px; background:var(--ink); flex:none; }
+.pill .ring { width:6px; height:6px; border-radius:var(--r-pill); border:1.5px solid currentColor; flex:none; }
+.pill .dot-i { width:6px; height:6px; border-radius:var(--r-pill); background:var(--ink); flex:none; }
 .tag { display:inline-block; font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; padding:2px 7px; border-radius:var(--r-xs); }
 .tag-must { background:var(--ink); color:#fff; }
 .tag-nice { background:transparent; color:var(--muted); border:1px solid var(--line-2); }
+.tag-accent { background:var(--accent-wash); color:var(--accent); }
+
+/* ---- inline code reference (.codechip) — NOT a chip: a mono code token in
+   running text or a row (a file or field name). Square, paper fill, hairline. */
+.codechip { font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--ink-2); background:var(--paper); border:1px solid var(--line-2); border-radius:var(--r-xs); padding:1px 7px; }
+
+/* ---- metric tile (.sumtile) — the ONE summary/stat tile ----
+   Flat card holding a .stat number + label; used by the Overview & Recap
+   at-a-glance bands. Don't reinvent per page — pair it with the .stat token. */
+.sumtile { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); padding:22px; }
 
 /* ---- breakdown diagram — one canonical "X becomes Y" component ----
    source doc (left) → arrow verb → cell grid (right). Single source card
@@ -93,6 +122,11 @@ nav.scrolled { box-shadow:0 1px 0 0 var(--line); }
 .bd-cell .ll i { height:6px; border-radius:3px; background:var(--line); }
 .bd-more { display:flex; align-items:center; justify-content:center; border:1px dashed var(--line-2); border-radius:var(--r-sm); color:var(--muted); font-size:13px; font-weight:500; min-height:78px; }
 
+/* .flowrow (numbered step row) and .probcols (labeled checklist columns) were
+   DE-PROMOTED from the shared system — they were used by methodology.html only,
+   so they now live page-local in that file. Not canonical components; don't
+   re-add them here. (.bd-viz stays — it's shared with implementation.html.) */
+
 /* ---- closing statement band — full-bleed closing line ---- */
 .statement { background:var(--surface); border-top:1px solid var(--line); padding:clamp(84px,12vw,168px) 0; }
 .statement .st-head { color:var(--ink); font-family:'DM Sans', sans-serif; font-weight:500; letter-spacing:-.04em; line-height:1.05; font-size:clamp(2.2rem, 6vw, 5.5rem); max-width:none; min-height:2.1em; }
@@ -100,3 +134,8 @@ nav.scrolled { box-shadow:0 1px 0 0 var(--line); }
 .statement .st-caret { display:inline-block; width:.05em; height:.82em; margin-left:.06em; border-radius:1px; background:var(--accent); vertical-align:-.06em; }
 .statement .st-head.typed .st-caret { animation:st-blink 1.05s step-end infinite; }
 @keyframes st-blink { 50% { opacity:0; } }
+
+/* ---- hero metrics — at-a-glance number row beneath a hero (procedures · implementation · deployment) ---- */
+.hero-metrics { display:flex; flex-wrap:wrap; gap:34px 56px; margin-top:56px; }
+.hero-metrics .m .n { font-family:'DM Sans', sans-serif; font-weight:500; font-size:46px; line-height:1; letter-spacing:-.03em; color:var(--ink); }
+.hero-metrics .m .l { font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:11px; }

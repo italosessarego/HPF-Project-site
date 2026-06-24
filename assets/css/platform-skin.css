@@ -1,0 +1,127 @@
+/* ============================================================================
+   PLATFORM SKIN — drop-in design language of the real SOP platform.
+
+   Source of truth: SOP Demo 6.18/packages/ui/src/styles/
+     · globals.css        — core theme tokens (shadcn "zinc")
+     · semantic-ramp.css  — badge success / info / warning / danger / neutral
+     · themes/sop.css     — domain badges (training / observation / certification)
+   Color values are the live OKLCH literals, copied verbatim — 1:1 with the app.
+   (task-runner.css is the full runner replica; this is the lightweight
+   token + primitives layer that any NEW product demo can import.)
+
+   USAGE — wrap any PRODUCT mock/demo in `.sop`. Everything inside adopts the
+   platform font, colors, and components. Keep it OFF the proposal chrome
+   (system.css presentation layer) so the two design languages stay distinct:
+       depicts the tool        → .sop  (this file)
+       meetBean explaining     → system.css
+
+     <div class="sop">
+       <button class="sop-btn">Start</button>
+       <span class="sop-badge sop-badge--info">Pending</span>
+       <div class="sop-card"> … </div>
+       <input class="sop-input" placeholder="Search…">
+     </div>
+
+   Light mode only (the demos render light). For a dark demo, copy the `.dark`
+   block from globals.css/semantic-ramp.css onto a `.sop.dark { … }` selector.
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+.sop {
+  /* core (globals.css :root) — hex in comments for reference */
+  --background: oklch(1 0 0);                          /* #FFFFFF  card/surface     */
+  --canvas: #F8F8F8;                                   /*          page bg behind cards */
+  --foreground: oklch(0.1408 0.0044 285.8229);         /* #09090B  primary text     */
+  --card: oklch(1 0 0);
+  --primary: oklch(0.2103 0.0059 285.8852);            /* #18181B  buttons / ring   */
+  --primary-foreground: oklch(0.9851 0 0);             /* #FAFAFA                   */
+  --secondary: oklch(0.9674 0.0013 286.3752);          /* #F4F4F5                   */
+  --secondary-foreground: oklch(0.2103 0.0059 285.8852);
+  --muted: oklch(0.9674 0.0013 286.3752);              /* #F4F4F5  hover / track    */
+  --muted-foreground: oklch(0.5517 0.0138 285.9385);   /* #71717A  secondary text   */
+  --border: oklch(0.9197 0.004 286.3202);              /* #E4E4E7  hairlines        */
+  --input: oklch(0.9197 0.004 286.3202);
+  --ring: oklch(0.2103 0.0059 285.8852);
+  --destructive: oklch(0.6368 0.2078 25.3313);
+  --radius: 0.5rem;                                    /* 8px                       */
+
+  /* semantic badge ramp (semantic-ramp.css) */
+  --badge-success-bg: oklch(0.95 0.02 142);  --badge-success-fg: oklch(0.517 0.174 142.495);
+  --badge-info-bg: oklch(0.95 0.02 254);     --badge-info-fg: oklch(0.546 0.196 256.802);
+  --badge-warning-bg: oklch(0.95 0.03 85);   --badge-warning-fg: oklch(0.55 0.16 65);
+  --badge-danger-bg: oklch(0.95 0.03 25);    --badge-danger-fg: oklch(0.55 0.2 25);
+  --badge-neutral-bg: oklch(0.97 0 0);       --badge-neutral-fg: oklch(0.556 0 0);
+
+  /* domain badges (themes/sop.css) */
+  --type-training-bg: oklch(0.95 0.02 180);      --type-training-fg: oklch(0.5 0.16 180);
+  --type-certification-bg: oklch(0.95 0.02 280); --type-certification-fg: oklch(0.5 0.2 280);
+
+  font-family: 'Inter', system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  color: var(--foreground);
+  text-align: left;
+}
+
+/* ---- typography ---- */
+.sop h1, .sop h2, .sop h3 { font-weight: 600; letter-spacing: -0.02em; color: var(--foreground); margin: 0; }
+.sop h1 { font-size: 20px; line-height: 1.3; }
+.sop h2 { font-size: 16px; line-height: 1.35; }
+.sop-muted { color: var(--muted-foreground); }
+.sop-mono { font-family: 'JetBrains Mono', monospace; }
+
+/* ---- card (shadcn Card: bg-card, border, rounded-lg, shadow-xs) ---- */
+.sop-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .05);
+  padding: 16px;
+}
+
+/* ---- button (shadcn Button) — default / secondary / outline / ghost / destructive ---- */
+.sop-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 36px; padding: 0 14px;
+  font-family: inherit; font-size: 12.8px; font-weight: 500; line-height: 1;
+  border: 1px solid transparent; border-radius: calc(var(--radius) - 2px);   /* 6px */
+  background: var(--primary); color: var(--primary-foreground);
+  cursor: pointer; white-space: nowrap;
+  transition: background .15s ease, border-color .15s ease, opacity .15s ease;
+}
+.sop-btn:hover { opacity: .9; }
+.sop-btn--secondary { background: var(--secondary); color: var(--secondary-foreground); }
+.sop-btn--secondary:hover { background: var(--muted); opacity: 1; }
+.sop-btn--outline { background: transparent; color: var(--foreground); border-color: var(--border); }
+.sop-btn--outline:hover { background: var(--muted); opacity: 1; }
+.sop-btn--ghost { background: transparent; color: var(--foreground); }
+.sop-btn--ghost:hover { background: var(--muted); opacity: 1; }
+.sop-btn--destructive { background: var(--destructive); color: #fff; }
+.sop-btn--sm { height: 32px; padding: 0 10px; }
+.sop-btn svg { width: 16px; height: 16px; }
+
+/* ---- badge (shadcn Badge: rounded-md, text-xs, px-2, font-medium) ---- */
+.sop-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: 6px;
+  font-size: 12px; font-weight: 500; line-height: 1.4; white-space: nowrap;
+  background: var(--badge-neutral-bg); color: var(--badge-neutral-fg);
+}
+.sop-badge--info     { background: var(--badge-info-bg);          color: var(--badge-info-fg); }
+.sop-badge--success  { background: var(--badge-success-bg);       color: var(--badge-success-fg); }
+.sop-badge--warning  { background: var(--badge-warning-bg);       color: var(--badge-warning-fg); }
+.sop-badge--danger   { background: var(--badge-danger-bg);        color: var(--badge-danger-fg); }
+.sop-badge--training { background: var(--type-training-bg);       color: var(--type-training-fg); }
+.sop-badge--cert     { background: var(--type-certification-bg);  color: var(--type-certification-fg); }
+
+/* ---- input (shadcn Input: h-9, border-input, rounded-md) ---- */
+.sop-input {
+  width: 100%; height: 36px; padding: 0 12px; box-sizing: border-box;
+  font-family: inherit; font-size: 14px; color: var(--foreground);
+  background: var(--background); border: 1px solid var(--input);
+  border-radius: calc(var(--radius) - 2px);   /* 6px */
+  outline: none; transition: border-color .15s ease, box-shadow .15s ease;
+}
+.sop-input::placeholder { color: var(--muted-foreground); }
+.sop-input:focus { border-color: var(--ring); box-shadow: 0 0 0 3px rgba(24, 24, 27, .12); }

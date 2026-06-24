@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harbor Freight · Methodology · MeetBean</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon-32.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['DM Sans', 'sans-serif'] },
+        colors: {
+          dark: { 900: '#1E1D1D', 800: '#1E1E24', 700: '#343E3F', 600: '#40424D' },
+          brand: { DEFAULT: '#70A593', light: '#9CC9BB', dark: '#508875' },
+        },
+      } },
+    };
+  </script>
+
+  <link rel="stylesheet" href="../assets/css/system.css" />
+</head>
+<body class="antialiased">
+
+  <!-- NAV -->
+  <nav id="main-nav" class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="../assets/images/meetbean-logo-dark.svg" alt="meetBean" class="h-5" />
+        <span class="mono-label hidden lg:inline" style="color:var(--faint)">/ Methodology · v3</span>
+      </a>
+      <div class="nav-tabs">
+        <a href="index.html">Project Overview</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="implementation.html">Implementation Plan</a>
+        <a href="procedures.html">Procedure Breakdown</a>
+        <a href="recap.html">Recap</a>
+        <a href="deployment.html">Deployment Phases</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="relative overflow-hidden flex items-center" style="border-bottom:1px solid var(--line); min-height:80vh">
+    <div class="grid-bg absolute inset-0" style="-webkit-mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%);"></div>
+
+    <!-- left vertical rail -->
+    <div class="hidden lg:flex absolute left-0 top-16 bottom-0 w-14 flex-col items-center justify-between py-10" style="border-right:1px solid var(--line)">
+      <span class="dot" style="width:7px;height:7px;border-radius:var(--r-pill);background:var(--accent-mid)"></span>
+      <span class="mono-label" style="writing-mode:vertical-rl; transform:rotate(180deg); color:var(--muted)">Methodology · Harbor&nbsp;Freight</span>
+      <span class="mono-label" style="color:var(--faint)">00</span>
+    </div>
+
+    <div class="relative w-full px-6 sm:px-8 lg:pl-28 lg:pr-12 py-24">
+      <div class="eyebrow mono-label mb-8"><span class="dot"></span><span>Methodology</span></div>
+      <h1 class="reveal text-5xl md:text-6xl lg:text-7xl leading-[1.02] mb-8 max-w-4xl" style="transition-delay:.1s">
+        Scattered know-how<br><span style="color:var(--muted)">becomes one enforced standard.</span>
+      </h1>
+      <p class="reveal text-lg leading-relaxed max-w-2xl" style="color:var(--muted); transition-delay:.2s">
+        Consistency across sites doesn&rsquo;t come from a better document or another tool. It comes from a loop &mdash; capture the right way to work, transfer it the same way to everyone, and coach adherence on the floor. Each stage produces the artifact the next one builds on, and the floor feeds improvement back to the start.
+      </p>
+      <div class="reveal mt-10 flex flex-wrap items-center gap-3" style="transition-delay:.3s">
+        <span class="pill pill-accent">Capture</span>
+        <span style="color:var(--faint)">&rarr;</span>
+        <span class="pill pill-accent">Transfer</span>
+        <span style="color:var(--faint)">&rarr;</span>
+        <span class="pill pill-accent">Continuous Coaching</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- AT A GLANCE -->
+  <section class="py-16 md:py-20" style="background:var(--paper); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="reveal flex items-center justify-between gap-6 mb-8">
+        <div class="eyebrow mono-label"><span class="dot"></span><span>At a glance</span></div>
+        <span class="mono-label" style="color:var(--faint)">The method, in four numbers</span>
+      </div>
+      <div class="reveal grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="sumtile">
+          <div class="stat" style="color:var(--ink)">3</div>
+          <p class="text-[13px] mt-2.5" style="color:var(--muted)">Stages in one continuous loop</p>
+        </div>
+        <div class="sumtile">
+          <div class="stat" style="color:var(--ink)">1</div>
+          <p class="text-[13px] mt-2.5" style="color:var(--muted)">Governed source of truth per procedure</p>
+        </div>
+        <div class="sumtile">
+          <div class="stat" style="color:var(--ink)">%</div>
+          <p class="text-[13px] mt-2.5" style="color:var(--muted)">Adherence becomes a number you manage</p>
+        </div>
+        <div class="sumtile">
+          <div class="stat" style="color:var(--ink)">&#8635;</div>
+          <p class="text-[13px] mt-2.5" style="color:var(--muted)">Floor gaps feed back into capture</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE LOOP -->
+  <section id="the-loop" class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="reveal mb-12">
+        <div class="flex items-center justify-between gap-6 mb-8">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>The method</span></div>
+        </div>
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">A system, not a document</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            Three stages, each answering one question and producing one artifact. The artifact carries forward &mdash; a captured SOP becomes the training, the training becomes the thing you observe against &mdash; and what the floor surfaces returns to the start.
+          </p>
+        </div>
+      </div>
+
+      <div id="loop-cards" class="reveal grid md:grid-cols-3 gap-4"></div>
+
+      <!-- the loop closes -->
+      <div class="reveal card p-6 md:p-7 mt-4 flex items-start gap-4">
+        <span class="mono-label flex-shrink-0" style="color:var(--accent); margin-top:2px">&#8635;</span>
+        <p class="text-[14px] leading-relaxed" style="color:var(--ink-2)">
+          <span class="font-medium" style="color:var(--ink)">The loop closes.</span>
+          Improvement ideas and gaps surfaced during coaching feed back into Capture &mdash; so the standard gets sharper every cycle instead of drifting out of date.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section id="the-problem" class="py-20 md:py-24" style="background:var(--paper); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="reveal mb-12">
+        <div class="flex items-center justify-between gap-6 mb-8">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>What it replaces</span></div>
+        </div>
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">The same three gaps, every time</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            Before a system like this exists, the cracks show up in the same three places. Each stage of the loop closes one of them.
+          </p>
+        </div>
+      </div>
+
+      <div id="problem-cards" class="reveal grid md:grid-cols-3 gap-4"></div>
+    </div>
+  </section>
+
+  <!-- INSIDE EACH STAGE -->
+  <section id="inside" class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="reveal mb-12">
+        <div class="flex items-center justify-between gap-6 mb-8">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Inside each stage</span></div>
+        </div>
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Concrete, and measurable</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            Each stage is real capability &mdash; and each one turns into numbers you can manage by site and job function. Here is what each does, and what it lets you see.
+          </p>
+        </div>
+      </div>
+
+      <div id="stage-blocks" class="reveal space-y-4"></div>
+    </div>
+  </section>
+
+  <!-- THE ARTIFACT CHAIN -->
+  <section id="chain" class="py-20 md:py-24" style="background:var(--paper); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="reveal">
+        <div class="flex items-center justify-between gap-6 mb-8">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>It compounds</span></div>
+        </div>
+        <div class="max-w-2xl mb-14">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">One procedure, three artifacts</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            Capture a procedure once and it doesn&rsquo;t just sit in a library. The same source becomes the training people are taught from and the standard they&rsquo;re observed against &mdash; one data model, no re-keying, nothing out of sync.
+          </p>
+        </div>
+      </div>
+
+      <div class="bd-viz reveal">
+        <div class="bd-src">
+          <div class="doc">
+            <div class="doc-top">
+              <span class="bd-cap">Captured once</span>
+              <span class="bd-pages">1 source</span>
+            </div>
+            <div class="doc-title">Governed SOP <span>&middot; single source of truth</span></div>
+            <div class="bd-lines">
+              <i class="h" style="width:50%"></i><i></i><i style="width:83%"></i>
+              <i class="h" style="width:40%;margin-top:4px"></i><i style="width:92%"></i><i></i>
+              <i class="h" style="width:33%;margin-top:4px"></i><i style="width:75%"></i><i style="width:83%"></i>
+            </div>
+          </div>
+        </div>
+        <div class="bd-arrow">
+          <span class="lbl">Becomes</span>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+        <div class="bd-grid three">
+          <div class="bd-cell"><div class="n">Capture</div><div class="t">The SOP itself</div><div class="ll"><i></i><i style="width:66%"></i><i style="width:80%"></i></div></div>
+          <div class="bd-cell"><div class="n">Transfer</div><div class="t">A training, taught identically</div><div class="ll"><i></i><i style="width:66%"></i><i style="width:80%"></i></div></div>
+          <div class="bd-cell"><div class="n">Coaching</div><div class="t">An observation to score against</div><div class="ll"><i></i><i style="width:66%"></i><i style="width:80%"></i></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IT FITS YOUR OPERATION -->
+  <section id="fit" class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="reveal mb-12">
+        <div class="flex items-center justify-between gap-6 mb-8">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>It fits how you run</span></div>
+        </div>
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Configured to your sites &mdash; scoped to each role</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            MeetBean maps the platform to your sites and job functions on day one. From there, every screen is scoped to the person looking at it &mdash; each opens to exactly what they need to do today, and nothing they don&rsquo;t.
+          </p>
+        </div>
+      </div>
+
+      <div id="role-cards" class="reveal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+    </div>
+  </section>
+
+  <!-- CLOSING STATEMENT -->
+  <section class="statement">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <h2 class="st-head reveal">
+        From one procedure to<br><span class="st-accent">a living compliance program.</span>
+      </h2>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12" style="background:var(--ink)">
+    <div class="px-6 sm:px-8 lg:px-12 flex items-center justify-between">
+      <img src="../assets/images/meetbean-logo-light.svg" alt="meetBean" class="h-5 opacity-90" />
+      <span class="mono-label" style="color:var(--faint)">Methodology · Harbor Freight</span>
+    </div>
+  </footer>
+
+  <script>
+    /* ---------- THE LOOP — three peer stage cards ---------- */
+    const LOOP = [
+      { n:'01', stage:'Capture', q:'What is the right way to do the work?',
+        artifact:'SOPs', artifactNote:'a single, governed source of truth' },
+      { n:'02', stage:'Transfer', q:'Is everyone trained the same way?',
+        artifact:'Trainings', artifactNote:'taught identically, with a record of who&rsquo;s mastered what' },
+      { n:'03', stage:'Continuous Coaching', q:'Do people still follow it after training?',
+        artifact:'Observations', artifactNote:'adherence quantified and coached in real time' },
+    ];
+
+    function renderLoop() {
+      document.getElementById('loop-cards').innerHTML = LOOP.map(s => `
+        <div class="card p-7 md:p-8 flex flex-col">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="mono-label" style="color:var(--faint)">${s.n}</span>
+            <span class="pill pill-accent">${s.stage}</span>
+          </div>
+          <p class="mono-label mb-2" style="color:var(--faint)">Answers</p>
+          <p class="text-lg leading-snug mb-7" style="color:var(--ink)">${s.q}</p>
+          <div class="mt-auto pt-5" style="border-top:1px solid var(--line)">
+            <p class="mono-label mb-1.5" style="color:var(--faint)">Produces</p>
+            <p class="font-display text-xl" style="color:var(--ink)">${s.artifact}</p>
+            <p class="text-[13px] mt-1.5 leading-relaxed" style="color:var(--muted)">${s.artifactNote}</p>
+          </div>
+        </div>`).join('');
+    }
+
+    /* ---------- THE PROBLEM — three gap cards, mapped to stages ---------- */
+    const GAPS = [
+      { stage:'Capture', title:'No single source of truth',
+        points:[
+          'SOPs scattered across formats and SharePoint',
+          'Collaboration lost across Teams, email and meetings',
+          'Documents drift out of date with no correctness check',
+          'No proof anyone read an update',
+        ] },
+      { stage:'Transfer', title:'No standard way to train',
+        points:[
+          'Training depends entirely on who&rsquo;s teaching',
+          'Different trainers teach the same thing differently',
+          'Records live on paper and spreadsheets',
+          'No cross-site visibility, so weak sites stay hidden',
+        ] },
+      { stage:'Continuous Coaching', title:'No way to know it&rsquo;s followed',
+        points:[
+          'No systematic way to quantify adherence',
+          'Generic forms not tied to the SOP',
+          'Pencil-whipped records; only the easy person observed',
+          'Notes on problems, but no coaching and no trends',
+        ] },
+    ];
+
+    function renderGaps() {
+      document.getElementById('problem-cards').innerHTML = GAPS.map(g => `
+        <div class="card p-7 md:p-8">
+          <span class="pill mb-5">${g.stage}</span>
+          <h3 class="font-display text-lg mt-4 mb-4" style="color:var(--ink)">${g.title}</h3>
+          <ul class="space-y-2.5">
+            ${g.points.map(p => `<li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--line-2); margin-top:1px">&times;</span><span>${p}</span></li>`).join('')}
+          </ul>
+        </div>`).join('');
+    }
+
+    /* ---------- INSIDE EACH STAGE — capability boards (renderBlock pattern) ---------- */
+    const STAGES = [
+      { phase:'Capture', name:'The SOP source of truth',
+        tagline:'One governed canvas for every procedure.',
+        desc:'Status, version, author and last-updated on a single canvas, with photos and video embedded in the procedure and governance built in &mdash; draft, review, approve, acknowledge.',
+        does:[
+          'One canvas: status, version, author, last-updated',
+          'Photos &amp; video embedded in the procedure',
+          'Full version history with red-lined diffs',
+          'Acknowledgment tracked automatically',
+          'Draft &rarr; review &rarr; approve &rarr; acknowledge governance',
+        ],
+        measure:[
+          'SOP compliance &mdash; all reviewed yearly? every function covered?',
+          'Review workload &mdash; what&rsquo;s due, prioritized by expiry',
+          'Supervisor compliance &mdash; are reviewers keeping up? repeat offenders?',
+        ],
+        note:'Measure: every procedure accounted for, nothing silently expiring.' },
+      { phase:'Transfer', name:'Training without trainer drift',
+        tagline:'The same skills, taught the same way, everywhere.',
+        desc:'Each step is the exact skill to learn, with trainer instructions and &ldquo;what good looks like&rdquo; shown in media. Assign to one trainee or a whole crew; the training matrix updates live.',
+        does:[
+          'Each step is the exact skill to learn',
+          'Trainer instructions + &ldquo;what good looks like&rdquo; in media',
+          'Assign to one trainee or a whole crew',
+          'A simple checkmark per skill &mdash; not pass/fail',
+          'A training matrix that updates live',
+        ],
+        measure:[
+          'Training coverage &mdash; who&rsquo;s trained on what; gaps by function/site',
+          'Upcoming &amp; overdue training',
+          'Trainer compliance &mdash; on time? time-to-train; sites that lag',
+        ],
+        note:'Measure: who&rsquo;s mastered what, with the weak sites no longer hidden.' },
+      { phase:'Continuous Coaching', name:'Adherence you can manage',
+        tagline:'Quantify whether the standard is actually followed.',
+        desc:'Targets per observer and auto-assigned subjects &mdash; not just the convenient person. Guided prompts of what to look for, a graded scale that auto-scores to an adherence %, and immediate coaching with scheduled follow-up.',
+        does:[
+          'Targets per observer; auto-assigned subjects',
+          'Guided prompts with notes &amp; photo evidence',
+          'A graded scale that auto-scores to an adherence %',
+          'Immediate coaching + scheduled follow-up',
+          '&ldquo;Global questions&rdquo; surface systemic blockers &amp; ideas',
+        ],
+        measure:[
+          'Are observations being done &mdash; observers vs. targets; worst sites',
+          'Process adherence &mdash; score by site/function/prompt; most-failed prompts',
+          'Correlations &mdash; observer vs. scores; trainers vs. downstream scores',
+        ],
+        note:'Measure: adherence as a managed number &mdash; and the feedback that returns to Capture.' },
+    ];
+
+    function renderStageBlock(p) {
+      return `
+        <div class="card overflow-hidden">
+          <div class="p-7 md:p-9 md:flex gap-10">
+            <div class="md:w-2/5 mb-6 md:mb-0">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="pill pill-accent">${p.phase}</span>
+              </div>
+              <h3 class="text-2xl md:text-[1.75rem] mb-3" style="color:var(--ink)">${p.name}</h3>
+              <p class="text-[15px] leading-snug mb-3" style="color:var(--ink-2)">${p.tagline}</p>
+              <p class="text-[13.5px] leading-relaxed" style="color:var(--muted)">${p.desc}</p>
+            </div>
+            <div class="md:w-3/5 md:pl-10 md:border-l pt-6 md:pt-0" style="border-color:var(--line)">
+              <p class="mono-label mb-4" style="color:var(--faint)">What it does</p>
+              <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-2.5">
+                ${p.does.map(d => `<li class="flex items-start gap-2.5 text-[13.5px]" style="color:var(--ink-2)"><span style="color:var(--accent); margin-top:1px">&check;</span><span>${d}</span></li>`).join('')}
+              </ul>
+              <div class="mt-6 pt-5" style="border-top:1px solid var(--line)">
+                <p class="mono-label mb-3" style="color:var(--faint)">What you can measure</p>
+                <ul class="space-y-2">
+                  ${p.measure.map(m => `<li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--ink); margin-top:1px">&check;</span><span>${m}</span></li>`).join('')}
+                </ul>
+                <p class="text-[12.5px] mt-4" style="color:var(--faint)">${p.note}</p>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renderStages() {
+      document.getElementById('stage-blocks').innerHTML = STAGES.map(renderStageBlock).join('');
+    }
+
+    /* ---------- ROLE SCOPING ---------- */
+    const ROLES = [
+      { role:'Associate', sees:'Their trainings and today&rsquo;s to-dos &mdash; exactly what to do next.' },
+      { role:'Supervisor', sees:'Their people, plus the trainings and observations they own.' },
+      { role:'Site manager', sees:'Their site&rsquo;s functions and dashboards in one view.' },
+      { role:'Executive', sees:'Adherence dashboards across every site, side by side.' },
+    ];
+
+    function renderRoles() {
+      document.getElementById('role-cards').innerHTML = ROLES.map((r, i) => `
+        <div class="card p-6 flex flex-col">
+          <span class="mono-label mb-4" style="color:var(--faint)">${String(i + 1).padStart(2, '0')}</span>
+          <h3 class="font-display text-lg mb-2" style="color:var(--ink)">${r.role}</h3>
+          <p class="text-[13.5px] leading-relaxed" style="color:var(--muted)">${r.sees}</p>
+        </div>`).join('');
+    }
+
+    renderLoop();
+    renderGaps();
+    renderStages();
+    renderRoles();
+  </script>
+  <script src="../assets/js/reveal.js"></script>
+</body>
+</html>

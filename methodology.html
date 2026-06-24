@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -24,126 +24,16 @@
   </script>
 
   <link rel="stylesheet" href="assets/css/system.css" />
+  <link rel="stylesheet" href="assets/css/task-runner.css" />
+  <link rel="stylesheet" href="assets/css/procedure-canvas.css" />
 
   <style>
     /* Page-specific styles only. Shared tokens & components: assets/css/system.css */
 
-    /* ---- nav (shared meetBean tab style) ---- */
-    .nav-tabs { display:flex; align-items:center; gap:2px; font-size:13px; }
-    .nav-tabs a, .nav-tabs span { padding:6px 14px; color:var(--muted); text-decoration:none; white-space:nowrap; transition:color .18s ease; }
-    .nav-tabs a:hover { color:var(--ink); }
-    .nav-tabs .cur { color:#9DA2B3; font-weight:500; }
-    .nav-tabs .dis { color:#B4B6C0; }
-    @media(max-width:1040px){ .nav-tabs a, .nav-tabs span { padding:6px 9px; font-size:12px; } }
-
-    /* ---- hero flow teaser ---- */
-    .hero-flow { display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-top:48px; }
-    .hflow { display:inline-flex; align-items:center; gap:9px; font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500; letter-spacing:.03em; padding:9px 16px; border-radius:999px; border:1px solid var(--line-2); color:var(--ink); background:var(--surface); }
-    .hflow .i { font-size:10px; color:var(--accent); font-weight:500; }
-    .hero-flow .ar { color:var(--muted); font-weight:600; }
-
-    /* ---- section sub-blocks ---- */
-    .sublbl { display:block; margin-bottom:14px; }
-    .subnote { font-size:14px; line-height:1.6; color:var(--muted); max-width:60ch; }
-    .subnote b { color:var(--ink); font-weight:600; }
-    /* measure / principle sub-headers — give the faint label clear air above the grid */
-    .measure-h { display:block; color:var(--faint); margin-bottom:24px; }
-    .pc-d { font-size:13px; line-height:1.6; color:var(--muted); }
-
-    /* ---- the model — three steps ---- */
-    .model { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-    @media(max-width:920px){ .model { grid-template-columns:1fr; } }
-    .mcard { padding:28px 26px; border:1px solid var(--line); border-radius:var(--r-sm); background:var(--surface); display:flex; flex-direction:column; }
-    .mcard .mc-n { font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500; color:var(--accent); letter-spacing:.06em; margin-bottom:20px; display:flex; align-items:center; gap:9px; }
-    .mcard .mc-n::after { content:""; height:1px; flex:1; background:var(--line); }
-    .mcard h3 { font-size:20px; font-weight:500; letter-spacing:-.015em; margin-bottom:9px; }
-    .mcard .mc-q { font-size:14px; color:var(--ink-2); margin-bottom:15px; line-height:1.45; }
-    .mcard .mc-d { font-size:13px; color:var(--muted); line-height:1.58; margin-bottom:20px; flex:1; }
-    .mcard .mc-out { display:flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); border-top:1px solid var(--line); padding-top:15px; }
-    .mcard .mc-out b { color:var(--ink); font-weight:600; }
-    .mcard .mc-out .a { color:var(--accent); }
-
-    .loopline { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:22px; }
-    .loop-pill { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500; padding:7px 14px; border-radius:999px; border:1px solid var(--line-2); color:var(--ink); background:var(--surface); }
-    .loop-pill.k { background:var(--ink); color:#fff; border-color:var(--ink); }
-    .loopline .ar { color:var(--muted); font-weight:600; }
-    .loopline .back { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.05em; color:var(--accent); display:inline-flex; align-items:center; gap:6px; }
-
-    /* ---- problem lists ---- */
-    .problist { display:grid; grid-template-columns:1fr 1fr; gap:16px 34px; margin-top:4px; }
-    @media(max-width:760px){ .problist { grid-template-columns:1fr; } }
-    .problist li { display:flex; gap:11px; font-size:13px; color:var(--muted); line-height:1.5; align-items:flex-start; }
-    .problist li .x { color:var(--muted); flex:none; margin-top:1px; font-size:13px; }
-
-    /* ---- feature lists ---- */
-    .featlist { display:grid; grid-template-columns:1fr 1fr; gap:15px 34px; }
-    @media(max-width:760px){ .featlist { grid-template-columns:1fr; } }
-    /* two independent columns — keeps even row spacing even when an item wraps */
-    .featcols { display:grid; grid-template-columns:1fr 1fr; gap:34px; align-items:start; }
-    .featcols ul { display:flex; flex-direction:column; gap:15px; margin:0; padding:0; list-style:none; }
-    @media(max-width:760px){ .featcols { grid-template-columns:1fr; gap:15px; } }
-    .featlist li, .featcols li { display:flex; gap:10px; font-size:13px; color:var(--ink-2); line-height:1.5; align-items:flex-start; }
-    .featlist li .c, .featcols li .c { color:var(--accent); flex:none; margin-top:1px; }
-
-    /* ---- generic mock surface ---- */
-    .mock { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden; }
-    .mock-bar { display:flex; align-items:center; gap:7px; padding:11px 16px; border-bottom:1px solid var(--line); background:var(--paper); }
-    .mock-bar .dot3 { width:8px; height:8px; border-radius:999px; background:var(--line-2); }
-    .mock-bar .mb-t { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-left:6px; }
-
-    /* ---- role views ---- */
-    .role-rows { display:flex; flex-direction:column; }
-    .role-row { display:grid; grid-template-columns:140px 1fr; gap:16px; align-items:center; padding:14px 16px; border-top:1px solid var(--line); }
-    .role-row:first-child { border-top:none; }
-    .role-row .rr-name { font-weight:600; font-size:13px; letter-spacing:-.01em; }
-    .role-row .rr-name span { display:block; font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:400; color:var(--faint); letter-spacing:.04em; margin-top:3px; text-transform:uppercase; }
-    .role-row .rr-sees { display:flex; flex-wrap:wrap; gap:6px; }
-    .seechip { font-size:11px; font-weight:500; padding:3px 10px; border-radius:999px; border:1px solid var(--line-2); color:var(--ink-2); background:var(--surface); white-space:nowrap; }
-    .seechip.acc { color:var(--accent); border-color:var(--accent-soft); background:var(--accent-wash); }
-
-    /* ---- today / home screen ---- */
-    .today { display:flex; flex-direction:column; }
-    .today-row { display:flex; align-items:center; gap:13px; padding:14px 16px; border-top:1px solid var(--line); }
-    .today-row:first-child { border-top:none; }
-    .today-row .tbox { width:17px; height:17px; border:1.5px solid var(--line-2); border-radius:var(--r-xs); flex:none; position:relative; }
-    .today-row.done .tbox { background:var(--accent); border-color:var(--accent); }
-    .today-row.done .tbox::after { content:"✓"; position:absolute; inset:0; color:#fff; font-size:11px; font-weight:700; display:grid; place-items:center; }
-    .today-row .tt { flex:1; min-width:0; }
-    .today-row .tt .t1 { font-size:13px; font-weight:500; color:var(--ink); letter-spacing:-.01em; }
-    .today-row.done .tt .t1 { color:var(--muted); }
-    .today-row .tt .t2 { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--faint); letter-spacing:.04em; margin-top:3px; text-transform:uppercase; }
-    .today-row .tk { font-size:10px; font-weight:500; padding:3px 10px; border-radius:999px; white-space:nowrap; }
-    .tk.new { color:var(--accent); background:var(--accent-wash); border:1px solid var(--accent-soft); }
-    .tk.due { color:var(--ink); background:var(--paper); border:1px solid var(--line-2); }
-    .tk.prog { color:var(--muted); background:transparent; border:1px solid var(--line-2); }
-
-    /* ---- SOP canvas mock ---- */
-    .sopwrap { display:grid; grid-template-columns:1fr 224px; }
-    @media(max-width:760px){ .sopwrap { grid-template-columns:1fr; } }
-    .sop-main { padding:20px 22px; }
-    .sop-side { border-left:1px solid var(--line); background:var(--paper); padding:18px; display:flex; flex-direction:column; gap:18px; }
-    @media(max-width:760px){ .sop-side { border-left:none; border-top:1px solid var(--line); } }
-    .sop-title { font-size:16px; font-weight:600; letter-spacing:-.01em; margin-bottom:9px; }
-    .sop-meta { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:16px; }
-    .sop-meta .mchip { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); border:1px solid var(--line-2); border-radius:999px; padding:2px 9px; }
-    .sop-lines { display:flex; flex-direction:column; gap:7px; margin-bottom:16px; }
-    .sop-lines i { height:7px; border-radius:3px; background:var(--line); }
-    .sop-lines i.h { background:var(--line-2); }
-    .sop-media { display:flex; gap:9px; }
-    .sop-media .ph { flex:1; height:62px; border:1px solid var(--line); border-radius:var(--r-sm); background:linear-gradient(135deg,#EEF1F0,#F7F7F6); display:grid; place-items:center; color:var(--faint); }
-    .side-grp .sg-h { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); margin-bottom:9px; }
-    .side-grp .deriv { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-2); padding:5px 0; }
-    .side-grp .deriv .d-dot { width:5px; height:5px; border-radius:999px; background:var(--accent-mid); flex:none; }
-    .vtimeline { display:flex; flex-direction:column; gap:0; }
-    .vrow { display:flex; gap:9px; font-size:11px; color:var(--muted); padding:6px 0; position:relative; }
-    .vrow .vdot { width:7px; height:7px; border-radius:999px; border:1.5px solid var(--line-2); background:var(--surface); flex:none; margin-top:3px; }
-    .vrow.cur .vdot { background:var(--accent); border-color:var(--accent); }
-    .vrow b { color:var(--ink); font-weight:600; }
-    .vrow .red { color:var(--muted); }
-    .vrow .grn { color:var(--accent); }
-    .sidetags { display:flex; flex-wrap:wrap; gap:6px; }
-
-    /* ---- approval / acknowledge flow ---- */
+    /* ---- de-promoted from system.css — now page-local to methodology ----
+       .flowrow (numbered step row) + .probcols (labeled checklist columns) were
+       pulled out of the shared design system (they were methodology-only). Kept
+       here verbatim so this page still renders; the system no longer carries them. */
     .flowrow { display:flex; align-items:stretch; gap:0; border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden; background:var(--surface); margin-top:6px; }
     @media(max-width:760px){ .flowrow { flex-direction:column; } }
     .fstep { flex:1; padding:16px 16px; border-right:1px solid var(--line); position:relative; }
@@ -153,77 +43,138 @@
     .fstep .fs-t { font-size:13px; font-weight:600; letter-spacing:-.01em; margin-bottom:4px; }
     .fstep .fs-d { font-size:12px; color:var(--muted); line-height:1.45; }
 
-    /* ---- training accordion ---- */
-    .trmatrix { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:2px; }
-    .trbar { height:6px; border-radius:999px; background:var(--panel); overflow:hidden; flex:1; }
-    .trbar > i { display:block; height:100%; background:var(--accent); border-radius:999px; }
-    .acc { display:flex; flex-direction:column; }
-    .acc-item { border-top:1px solid var(--line); }
-    .acc-item:first-child { border-top:none; }
-    .acc-head { display:flex; align-items:center; gap:13px; padding:13px 16px; cursor:pointer; transition:background .14s; width:100%; text-align:left; background:transparent; border:0; }
-    .acc-head:hover { background:var(--paper); }
-    .acc-head .abox { width:18px; height:18px; border:1.5px solid var(--line-2); border-radius:var(--r-xs); flex:none; position:relative; }
-    .acc-item.done .abox { background:var(--accent); border-color:var(--accent); }
-    .acc-item.done .abox::after { content:"✓"; position:absolute; inset:0; color:#fff; font-size:11px; font-weight:700; display:grid; place-items:center; }
-    .acc-head .askill { flex:1; font-size:13px; font-weight:500; color:var(--ink); letter-spacing:-.01em; }
-    .acc-item.done .askill { color:var(--muted); }
-    .acc-head .achev { width:13px; height:13px; color:var(--faint); transition:transform .2s; flex:none; }
-    .acc-item.open .achev { transform:rotate(90deg); }
-    .acc-body { display:none; padding:0 16px 16px 47px; }
-    .acc-item.open .acc-body { display:block; }
-    .acc-body .ab-lbl { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
-    .acc-body .ab-txt { font-size:12px; color:var(--muted); line-height:1.55; margin-bottom:12px; }
-    .acc-body .ab-media { display:flex; gap:8px; }
-    .acc-body .ab-media .ph { width:84px; height:54px; border:1px solid var(--line); border-radius:var(--r-sm); background:linear-gradient(135deg,#EEF1F0,#F7F7F6); display:grid; place-items:center; color:var(--faint); }
+    /* ---- micro-label above the capability grid + the "measure" link (shared) ---- */
+    .keycap { display:flex; align-items:center; gap:12px; color:var(--faint); margin:30px 0 16px; }
+    .keycap::after { content:""; height:1px; flex:1; background:var(--line); }
+    .measure-link { display:inline-flex; align-items:center; gap:8px; margin-top:26px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-soft); padding-bottom:3px; transition:gap .18s ease, border-color .18s ease; }
+    .measure-link:hover { gap:13px; border-color:var(--accent); }
 
-    /* ---- observation prompt mock ---- */
-    .obctx { display:flex; flex-wrap:wrap; gap:9px; margin-bottom:18px; }
-    .ctxchip { display:inline-flex; align-items:center; gap:7px; font-size:11px; color:var(--ink-2); border:1px solid var(--line-2); border-radius:999px; padding:5px 12px; background:var(--surface); }
-    .ctxchip b { color:var(--ink); font-weight:600; }
-    .ctxchip .cdot { width:6px; height:6px; border-radius:999px; flex:none; }
-    .obprompt { padding:18px 18px; }
-    .obprompt .opn { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--faint); letter-spacing:.08em; margin-bottom:9px; }
-    .obprompt .opq { font-size:16px; font-weight:600; letter-spacing:-.01em; line-height:1.4; margin-bottom:12px; }
-    .obprompt .oplook { font-size:12px; color:var(--muted); line-height:1.55; margin-bottom:12px; }
-    .obprompt .oplook b { display:block; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
-    .obprompt .opvid { display:inline-flex; align-items:center; gap:7px; font-size:11px; color:var(--ink-2); margin-bottom:16px; }
-    .obprompt .opvid .pl { width:18px; height:18px; border-radius:999px; background:var(--accent-wash); border:1px solid var(--accent-soft); color:var(--accent); display:grid; place-items:center; flex:none; }
+    /* =====================================================================
+       UNIFIED STAGE SHELL — one grid + one invisible exhibit bay + one
+       2-column capability panel. Shared by Capture / Training / Observation
+       so all three are ONE component. The bay adds no border/fill/shadow —
+       the mocks keep their own chrome; mass on the left comes from the grid,
+       not a box, so the page stays flat & hairline.
+       ===================================================================== */
+    .stage-row { display:grid; grid-template-columns: minmax(0,1fr) 620px; gap: clamp(40px,5vw,84px); align-items: start; }
+    .stage-text { max-width:672px; }   /* holds eyebrow + title + subtitle + capabilities; exhibit top-aligns with it */
+    /* single-column check list */
+    .stage-text .caps { display:grid; grid-template-columns:1fr; gap:14px; align-content:start; margin:0; padding:0; list-style:none; }
+    .stage-text .caps li { display:flex; gap:12px; align-items:flex-start; font-size:14.5px; line-height:1.55; color:var(--ink-2); }
+    .stage-text .caps li .c { color:var(--accent); flex:none; font-size:17px; line-height:1.35; }
+    /* RIGHT: invisible bay — same box for canvas OR phone, exhibit centered.
+       No forced height: each row sizes to its own exhibit (no dead space). */
+    .stage-bay { display:grid; place-items:center; }
+    .stage-bay .proc-frame { --ts-scale:.66; margin:0; }
+    .stage-bay .device { margin:0; }
+    /* The real SOP procedure is a long document. Render it as a fixed-height
+       VIEWPORT matching the phone: the document shows its top (clips), and the
+       meta sidebar pins its actions to the base — exactly how the app looks at
+       one screen height. (Only side-by-side; stacks naturally on narrow.) */
+    @media(min-width:1181px){
+      .stage-bay .proc-frame { height: clamp(488px,72vh,640px); position: relative; }
+      .stage-bay .proc-frame > .proc-screen { height: calc(clamp(488px,72vh,640px) / 0.66); }
+      .stage-bay .proc-canvas { overflow: hidden; }
+      .stage-bay .proc-side { overflow: hidden; }
+      /* soft fade over the document area only (sidebar ≈186px rendered at .66) so
+         the clipped document bottom reads as "scrolls below" */
+      .stage-bay .proc-frame::after { content:""; position:absolute; left:1px; right:187px; bottom:1px; height:44px; background:linear-gradient(rgba(255,255,255,0), #fff); pointer-events:none; }
+    }
+    @media(max-width:1180px){
+      .stage-row { grid-template-columns:1fr; gap:44px; align-items:start; }
+      .stage-text { max-width:none; }
+    }
+    @media(max-width:1180px) and (min-width:760px){ .stage-bay .proc-frame { --ts-scale:.60; } }
+    @media(max-width:600px){ .stage-bay .proc-frame { --ts-scale:.46; } }
+    @media(max-width:440px){ .stage-bay .proc-frame { --ts-scale:.36; } }
 
-    /* graded scale */
-    .scale { display:flex; gap:5px; flex-wrap:wrap; }
-    .scale .sc { font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:500; letter-spacing:.02em; padding:5px 10px; border-radius:var(--r-xs); border:1px solid var(--line-2); color:var(--muted); cursor:pointer; transition:border-color .14s, color .14s, background .14s; user-select:none; }
-    .scale .sc:hover { border-color:var(--ink); color:var(--ink); }
-    .scale .sc.on { font-weight:600; }
-    .scale .sc.on[data-v="4"] { background:#DEEDE4; color:#22704A; border-color:#AFD2BF; }  /* Always   — green */
-    .scale .sc.on[data-v="3"] { background:#E8EFD5; color:#536C26; border-color:#CBDAA8; }  /* Mostly   — yellow-green */
-    .scale .sc.on[data-v="2"] { background:#F7E9CE; color:#8C6011; border-color:#E4CEA0; }  /* Somewhat — amber */
-    .scale .sc.on[data-v="1"] { background:#F6DDD6; color:#A93C29; border-color:#E6BEB2; }  /* Never    — red */
-    .scale-cap { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:11px; }
-    .scale-cap .sc-l { font-size:12px; color:var(--muted); }
-    .scale-cap .sc-l b { color:var(--ink); font-weight:600; }
-    .scale-cap .sc-score { font-family:'DM Sans',sans-serif; font-weight:500; font-size:20px; letter-spacing:-.02em; color:var(--accent); }
+    /* ---- phone screen (bare app screen — no device frame) ---- */
+    .phone { position:relative; flex:none; height:clamp(488px,72vh,640px); aspect-ratio:9 / 19; margin:0; display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--line); border-radius:42px; overflow:hidden; box-shadow:0 30px 72px -34px rgba(30,29,29,.34), 0 6px 18px -12px rgba(30,29,29,.18); }
+    .ps-status { display:flex; align-items:center; justify-content:space-between; padding:15px 22px 5px; }
+    .ps-time { font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:600; color:var(--ink); letter-spacing:.01em; }
+    .ps-ind { display:flex; align-items:center; gap:6px; color:var(--ink); }
+    .ps-ind svg { display:block; }
+    .ps-head { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); padding:10px 22px 13px; border-bottom:1px solid var(--line); }
+    .ps-home { position:absolute; left:0; right:0; bottom:0; display:flex; justify-content:center; padding:20px 0 12px; background:linear-gradient(to top, var(--surface) 62%, rgba(255,255,255,0)); }
+    .ps-head { padding-top:9px; padding-bottom:11px; }
+    .ps-home::after { content:""; width:126px; height:5px; border-radius:var(--r-pill); background:var(--line-2); }
 
-    /* ---- reports reuse the problem-column treatment (.probcols / .probcol) ---- */
-    .probcol li .q { color:var(--accent-mid); flex:none; margin-top:1px; font-size:13px; }
+    /* ---- SOP canvas mock ---- */
+    .sopwrap { display:grid; grid-template-columns:1fr 224px; }
+    @media(max-width:760px){ .sopwrap { grid-template-columns:1fr; } }
+    /* inside a phone, always stack (container is narrow regardless of viewport) */
+    .phone .sopwrap { grid-template-columns:1fr; }
+    .phone .sop-side { border-left:none; border-top:1px solid var(--line); }
+    .sop-main { padding:16px 20px; }
+    .sop-side { border-left:1px solid var(--line); background:var(--paper); padding:15px 18px; display:flex; flex-direction:column; gap:13px; }
+    @media(max-width:760px){ .sop-side { border-left:none; border-top:1px solid var(--line); } }
+    .sop-title { font-size:16px; font-weight:600; letter-spacing:-.01em; margin-bottom:9px; }
+    .sop-meta { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:16px; }
+    .sop-lines { display:flex; flex-direction:column; gap:7px; margin-bottom:16px; }
+    .sop-lines i { height:7px; border-radius:var(--r-xs); background:var(--line); }
+    .sop-lines i.h { background:var(--line-2); }
+    .sop-media { display:flex; gap:9px; }
+    .sop-media .ph { flex:1; height:52px; border:1px solid var(--line); border-radius:var(--r-sm); background:linear-gradient(135deg,#EEF1F0,#F7F7F6); display:grid; place-items:center; color:var(--faint); }
+    .side-grp .sg-h { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); margin-bottom:9px; }
+    .side-grp .deriv { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-2); padding:5px 0; }
+    .side-grp .deriv .d-dot { width:5px; height:5px; border-radius:var(--r-pill); background:var(--accent-mid); flex:none; }
+    .vtimeline { display:flex; flex-direction:column; gap:0; }
+    .vrow { display:flex; gap:9px; font-size:11px; color:var(--muted); padding:6px 0; position:relative; }
+    .vrow .vdot { width:7px; height:7px; border-radius:var(--r-pill); border:1.5px solid var(--line-2); background:var(--surface); flex:none; margin-top:3px; }
+    .vrow.cur .vdot { background:var(--accent); border-color:var(--accent); }
+    .vrow b { color:var(--ink); font-weight:600; }
+    .vrow .red { color:var(--muted); }
+    .vrow .grn { color:var(--accent); }
+    .sidetags { display:flex; flex-wrap:wrap; gap:6px; }
 
-    /* ---- consolidated problem columns (top of page) ---- */
-    .probcols { display:grid; grid-template-columns:repeat(3,1fr); gap:30px 36px; }
-    @media(max-width:860px){ .probcols { grid-template-columns:1fr; gap:28px; } }
-    .probcol .pc-h { display:flex; align-items:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
-    .probcol .pc-h .pc-n { color:var(--faint); }
-    .probcol .pc-h::after { content:""; height:1px; flex:1; background:var(--line); }
-    .probcol ul { display:flex; flex-direction:column; gap:14px; }
-    .probcol li { display:flex; gap:11px; font-size:13px; color:var(--muted); line-height:1.5; align-items:flex-start; }
-    .probcol li .x { color:var(--muted); flex:none; margin-top:1px; font-size:13px; }
+    /* Task-runner components (.device / .app-screen / .ro-* / .ts-*) now live in
+       the reusable stylesheet assets/css/task-runner.css — linked in <head>. */
 
     /* ---- closing statement uses shared .statement ---- */
+
+    /* ---- reports / dashboard ---- */
+    .seg { display:inline-flex; gap:4px; padding:4px; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-pill); margin-bottom:26px; }
+    .seg-btn { font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.02em; padding:9px 20px; border-radius:var(--r-pill); border:0; background:transparent; color:var(--muted); cursor:pointer; transition:background .18s ease, color .18s ease, box-shadow .18s ease; }
+    .seg-btn:hover:not(.is-active) { color:var(--ink); }
+    .seg-btn.is-active { background:var(--surface); color:var(--ink); box-shadow:0 1px 3px rgba(30,29,29,.13); }
+    .dash { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:18px; box-shadow:0 24px 60px -40px rgba(30,29,29,.30); }
+    .dash-head { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:16px; padding:2px 4px; }
+    .dash-filters { display:flex; gap:8px; }
+    .dchip { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.04em; color:var(--muted); border:1px solid var(--line-2); border-radius:var(--r-pill); padding:4px 10px; }
+    .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:12px; }
+    @media(max-width:760px){ .kpis { grid-template-columns:repeat(2,1fr); } }
+    .kpi { border:1px solid var(--line); border-radius:var(--r-sm); padding:15px 16px; background:var(--paper); }
+    .kpi-l { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); margin-bottom:9px; }
+    .kpi-v { font-family:'DM Sans',sans-serif; font-weight:500; font-size:30px; letter-spacing:-.025em; color:var(--ink); line-height:1; }
+    .kpi-foot { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:11px; }
+    .kpi-d { font-size:11px; font-weight:500; white-space:nowrap; }
+    .kpi-d.up { color:var(--accent); }
+    .kpi-d.dn { color:#B0573F; }
+    .spark { width:60px; height:22px; flex:none; }
+    .charts { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    @media(max-width:760px){ .charts { grid-template-columns:1fr; } }
+    .cpanel { padding:16px 16px 14px; background:var(--paper); }
+    .cpanel-t { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+    .cht { width:100%; height:auto; display:block; }
+    .donut-panel .donut-wrap { display:flex; align-items:center; gap:18px; }
+    .donut-wrap svg { flex:none; }
+    .legend { display:flex; flex-direction:column; gap:10px; flex:1; }
+    .lg-row { display:flex; align-items:center; gap:9px; font-size:12.5px; }
+    .lg-dot { width:9px; height:9px; border-radius:3px; flex:none; }
+    .lg-l { color:var(--ink-2); flex:1; }
+    .lg-v { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); }
+    .watchlist { display:flex; flex-direction:column; }
+    .wl-row { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0; border-top:1px solid var(--line); font-size:13px; }
+    .wl-row:first-child { border-top:none; }
+    .wl-a { color:var(--ink); }
+    .wl-b { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--accent); white-space:nowrap; }
   </style>
 </head>
 <body class="antialiased">
 
   <!-- NAV -->
-  <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-shadow duration-300" style="background:rgba(243,243,243,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)">
-    <div class="px-6 sm:px-8 lg:px-12 h-16 flex items-center justify-between">
+  <nav id="main-nav" class="site-nav">
+    <div class="nav-inner">
       <a href="index.html" class="flex items-center gap-3">
         <img src="assets/images/meetbean-logo-dark.svg" alt="meetBean" class="h-5" />
         <span class="mono-label hidden lg:inline" style="color:var(--faint)">/ Project</span>
@@ -231,9 +182,10 @@
       <div class="nav-tabs">
         <a href="index.html">Project Overview</a>
         <span class="cur" aria-current="page">Methodology</span>
-        <a href="implementation.html">Implementation Plan</a>
         <a href="procedures.html">Procedure Breakdown</a>
-        <span class="dis" aria-disabled="true">Deployment Phases</span>
+        <a href="implementation.html">Implementation Plan</a>
+        <a href="recap.html">Recap</a>
+        <span class="dis">Deployment Phases</span>
       </div>
     </div>
   </nav>
@@ -243,7 +195,7 @@
     <div class="grid-bg absolute inset-0" style="-webkit-mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%);"></div>
 
     <div class="hidden lg:flex absolute left-0 top-16 bottom-0 w-14 flex-col items-center justify-between py-10" style="border-right:1px solid var(--line)">
-      <span style="width:7px;height:7px;border-radius:999px;background:var(--accent-mid)"></span>
+      <span style="width:7px;height:7px;border-radius:var(--r-pill);background:var(--accent-mid)"></span>
       <span class="mono-label" style="writing-mode:vertical-rl; transform:rotate(180deg); color:var(--muted)">Methodology · Harbor&nbsp;Freight</span>
       <span class="mono-label" style="color:var(--faint)">02</span>
     </div>
@@ -256,178 +208,114 @@
       <p class="reveal text-lg leading-relaxed max-w-2xl" style="color:var(--muted); transition-delay:.2s">
         How we turn scattered know-how into one standard — <strong style="color:var(--ink);font-weight:600">captured</strong> once, <strong style="color:var(--ink);font-weight:600">transferred</strong> the same way every time, and <strong style="color:var(--ink);font-weight:600">coached</strong> so it holds on the floor. The playbook below is drawn from solving this across multiple operations.
       </p>
-      <div class="hero-flow reveal" style="transition-delay:.3s">
-        <span class="hflow"><span class="i">01</span>Capture</span>
-        <span class="ar">&rarr;</span>
-        <span class="hflow"><span class="i">02</span>Transfer</span>
-        <span class="ar">&rarr;</span>
-        <span class="hflow"><span class="i">03</span>Continuous&nbsp;Coaching</span>
+    </div>
+  </section>
+
+  <!-- AT A GLANCE -->
+  <section class="py-16 md:py-20" style="background:var(--surface); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="reveal flex items-center justify-between gap-6 mb-8">
+        <div class="eyebrow mono-label"><span class="dot"></span><span>At a glance</span></div>
+      </div>
+      <div class="reveal grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="sumtile">
+          <div class="stat" style="color:var(--ink)">Capture</div>
+          <p class="text-[13px] mt-2.5" style="color:var(--muted)">Produces SOPs &mdash; the single source of truth</p>
+        </div>
+        <div class="sumtile">
+          <div class="stat" style="color:var(--ink)">Transfer</div>
+          <p class="text-[13px] mt-2.5" style="color:var(--muted)">Produces Trainings &mdash; taught the same way</p>
+        </div>
+        <div class="sumtile">
+          <div class="stat" style="color:var(--ink)">Coaching</div>
+          <p class="text-[13px] mt-2.5" style="color:var(--muted)">Produces Observations &mdash; maintain adherence</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 01 · THE PROBLEM (consolidated · experiment) -->
-  <section class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
+  <!-- WHAT IT REPLACES -->
+  <section id="the-problem" class="py-20 md:py-24" style="background:var(--paper); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
-      <div class="reveal">
+      <div class="reveal mb-12">
         <div class="flex items-center justify-between gap-6 mb-8">
-          <div class="eyebrow mono-label"><span class="dot"></span><span>The problem today</span></div>
-          <span class="mono-label" style="color:var(--faint)">01 / 06</span>
+          <div class="eyebrow mono-label"><span class="dot"></span><span>What it replaces</span></div>
         </div>
         <div class="max-w-2xl">
-          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Where the standard breaks down today</h2>
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">The same three gaps, every time</h2>
           <p class="text-lg leading-relaxed" style="color:var(--muted)">
-            Before the platform, the same gaps show up in three places — the <strong style="color:var(--ink);font-weight:600">SOPs</strong> that define the work, the <strong style="color:var(--ink);font-weight:600">training</strong> that transfers it, and the <strong style="color:var(--ink);font-weight:600">observations</strong> that confirm it&rsquo;s actually followed.
+            Before a system like this exists, the cracks show up in the same three places. Each stage of the loop closes one of them.
           </p>
         </div>
       </div>
 
-      <div class="probcols reveal" style="margin-top:48px">
-        <div class="probcol">
-          <p class="pc-h"><span class="pc-n">01</span> Process &amp; SOPs</p>
-          <ul id="cap-prob"></ul>
+      <div class="reveal grid md:grid-cols-3 gap-4">
+        <div class="card p-7 md:p-8">
+          <span class="pill mb-5">Procedures</span>
+          <h3 class="font-display text-lg mt-4 mb-4" style="color:var(--ink)">No single source of truth</h3>
+          <ul class="space-y-2.5">
+            <li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--line-2); margin-top:1px">&times;</span><span>SOPs scattered across formats and SharePoint</span></li>
+            <li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--line-2); margin-top:1px">&times;</span><span>Collaboration lost across Teams, email and meetings</span></li>
+            <li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--line-2); margin-top:1px">&times;</span><span>Documents drift out of date with no correctness check</span></li>
+            <li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--line-2); margin-top:1px">&times;</span><span>No proof anyone read an update</span></li>
+          </ul>
         </div>
-        <div class="probcol">
-          <p class="pc-h"><span class="pc-n">02</span> Training</p>
-          <ul id="tr-prob"></ul>
+        <div class="card p-7 md:p-8">
+          <span class="pill mb-5">Transfer</span>
+          <h3 class="font-display text-lg mt-4 mb-4" style="color:var(--ink)">No standard way to train</h3>
+          <ul class="space-y-2.5">
+            <li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--line-2); margin-top:1px">&times;</span><span>Training depends entirely on who&rsquo;s teaching</span></li>
+            <li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--line-2); margin-top:1px">&times;</span><span>Different trainers teach the same thing differently</span></li>
+            <li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--line-2); margin-top:1px">&times;</span><span>Records live on paper and spreadsheets</span></li>
+            <li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--line-2); margin-top:1px">&times;</span><span>No cross-site visibility, so weak sites stay hidden</span></li>
+          </ul>
         </div>
-        <div class="probcol">
-          <p class="pc-h"><span class="pc-n">03</span> Observations</p>
-          <ul id="ob-prob"></ul>
+        <div class="card p-7 md:p-8">
+          <span class="pill mb-5">Continuous Coaching</span>
+          <h3 class="font-display text-lg mt-4 mb-4" style="color:var(--ink)">No way to know it&rsquo;s followed</h3>
+          <ul class="space-y-2.5">
+            <li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--line-2); margin-top:1px">&times;</span><span>No systematic way to quantify adherence</span></li>
+            <li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--line-2); margin-top:1px">&times;</span><span>Generic forms not tied to the SOP</span></li>
+            <li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--line-2); margin-top:1px">&times;</span><span>Pencil-whipped records; only the easy person observed</span></li>
+            <li class="flex items-start gap-2.5 text-[13px] leading-snug" style="color:var(--muted)"><span class="flex-shrink-0" style="color:var(--line-2); margin-top:1px">&times;</span><span>Notes on problems, but no coaching and no trends</span></li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 02 · THE MODEL -->
+  <!-- CAPTURE -->
   <section class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
-      <div class="reveal">
-        <div class="flex items-center justify-between gap-6 mb-8">
-          <div class="eyebrow mono-label"><span class="dot"></span><span>The model</span></div>
-          <span class="mono-label" style="color:var(--faint)">02 / 06</span>
-        </div>
-        <div class="max-w-2xl">
-          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Capture, transfer, coach</h2>
+      <!-- one stage row: eyebrow + title + subtitle + capabilities (left) | exhibit bay (right), top-aligned -->
+      <div class="stage-row reveal">
+        <div class="stage-text">
+          <div class="eyebrow mono-label mb-7"><span class="dot"></span><span>Capture &middot; SOPs</span></div>
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">What is the right way to do the work?</h2>
           <p class="text-lg leading-relaxed" style="color:var(--muted)">
-            Three steps. <strong style="color:var(--ink);font-weight:600">Capture</strong> the right way to do the work, <strong style="color:var(--ink);font-weight:600">transfer</strong> it to every associate the same way, then <strong style="color:var(--ink);font-weight:600">coach</strong> it continuously so the standard holds. Each step produces an artifact the next one builds on.
+            Make the proper method the <strong style="color:var(--ink);font-weight:600">single source of truth</strong> &mdash; current, governed, and impossible to lose track of. Everything downstream derives from here.
           </p>
+          <p class="mono-label keycap">Key capabilities</p>
+          <ul class="caps">
+          <li><span class="c">&#10003;</span><span>Status, version, author and last-updated on one canvas</span></li>
+          <li><span class="c">&#10003;</span><span>Photos and videos embedded in the procedure</span></li>
+          <li><span class="c">&#10003;</span><span>Full version history with red-lined diffs of changes</span></li>
+          <li><span class="c">&#10003;</span><span>Automatic acknowledgment tracking, no chasing signatures</span></li>
+          </ul>
+          <a href="#reports" class="measure-link">See what you can measure &darr;</a>
         </div>
+        <div class="stage-bay"><div class="proc-frame"><div class="proc-screen" id="capScreenA"></div></div></div>
       </div>
 
-      <div class="model reveal" style="margin-top:40px">
-        <div class="mcard">
-          <div class="mc-n">01</div>
-          <h3>Capture</h3>
-          <p class="mc-q">What is the right way to do the work?</p>
-          <p class="mc-d">Pin down the proper method as a single, current source of truth — governed, versioned, and impossible to lose track of.</p>
-          <div class="mc-out">Produces&nbsp;<b class="a">SOPs</b></div>
-        </div>
-        <div class="mcard">
-          <div class="mc-n">02</div>
-          <h3>Transfer</h3>
-          <p class="mc-q">Is everyone trained the same way?</p>
-          <p class="mc-d">Move the method to every associate with no trainer-to-trainer drift and no skipped steps — and a record of who has mastered what.</p>
-          <div class="mc-out">Produces&nbsp;<b class="a">Trainings</b></div>
-        </div>
-        <div class="mcard">
-          <div class="mc-n">03</div>
-          <h3>Continuous Coaching</h3>
-          <p class="mc-q">Do people still follow it after training?</p>
-          <p class="mc-d">Quantify whether the method is actually followed on the floor, and coach the gaps in real time before they become habits.</p>
-          <div class="mc-out">Produces&nbsp;<b class="a">Observations</b></div>
-        </div>
-      </div>
-
-      <div class="loopline reveal">
-        <span class="loop-pill k">Capture</span><span class="ar">&rarr;</span>
-        <span class="loop-pill">Transfer</span><span class="ar">&rarr;</span>
-        <span class="loop-pill">Coaching</span>
-        <span class="back">&#8635;&nbsp;improvement ideas &amp; gaps feed back into Capture</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- 02 · CAPTURE -->
-  <section class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
-    <div class="px-6 sm:px-8 lg:px-12">
-      <div class="reveal">
-        <div class="flex items-center justify-between gap-6 mb-8">
-          <div class="eyebrow mono-label"><span class="dot"></span><span>Capture · SOPs</span></div>
-          <span class="mono-label" style="color:var(--faint)">03 / 06</span>
-        </div>
-        <div class="max-w-3xl">
-          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Capture the right way to do the work</h2>
-          <p class="text-lg leading-relaxed" style="color:var(--muted)">
-            Make the proper method the <strong style="color:var(--ink);font-weight:600">single source of truth</strong> — current, governed, and impossible to lose track of. Everything downstream derives from here.
-          </p>
-        </div>
-      </div>
-
-      <ul class="featlist reveal" style="margin-top:30px">
-        <li><span class="c">&#10003;</span><span>One canvas with status, version, author and last-updated — at a glance</span></li>
-        <li><span class="c">&#10003;</span><span>Photos and videos embedded in the procedure itself</span></li>
-        <li><span class="c">&#10003;</span><span>Full version history with red-lined diffs of what changed</span></li>
-        <li><span class="c">&#10003;</span><span>Acknowledgment tracked automatically — no chasing signatures</span></li>
-      </ul>
-
-      <!-- what it does -->
-      <div class="reveal" style="margin-top:42px">
+      <!-- governance flow -->
+      <div class="reveal" style="margin-top:52px">
+        <p class="mono-label" style="color:var(--faint); margin-bottom:18px">Draft → review → approve → acknowledge</p>
         <div class="flowrow">
           <div class="fstep"><div class="fs-n">01</div><div class="fs-t">Draft &amp; collaborate</div><div class="fs-d">Comments live inside the SOP — @mention, reply, assign, mark complete. No more Teams, email and meeting threads to chase.</div></div>
           <div class="fstep"><div class="fs-n">02</div><div class="fs-t">Review</div><div class="fs-d">Named reviewers check the work before it goes live, so a procedure is correct before anyone follows it.</div></div>
           <div class="fstep"><div class="fs-n">03</div><div class="fs-t">Approve</div><div class="fs-d">The approver gets a notification and can approve, or send it back with notes that land in the comments.</div></div>
           <div class="fstep"><div class="fs-n">04</div><div class="fs-t">Acknowledge</div><div class="fs-d">On publish, acknowledgers are notified and the system tracks who has read it — proof on file if you ever need it.</div></div>
         </div>
-
-        <div class="mock" style="margin-top:30px">
-          <div class="mock-bar"><span class="dot3"></span><span class="dot3"></span><span class="dot3"></span><span class="mb-t">Procedure canvas</span></div>
-          <div class="sopwrap">
-            <div class="sop-main">
-              <div class="sop-title">Receive / Verify ASN — International</div>
-              <div class="sop-meta">
-                <span class="pill pill-accent" style="font-size:10px">Published</span>
-                <span class="mchip">v3</span>
-                <span class="mchip">M. Reyes</span>
-                <span class="mchip">updated 3 days ago</span>
-              </div>
-              <div class="sop-lines">
-                <i class="h" style="width:46%"></i><i></i><i style="width:88%"></i><i style="width:72%"></i>
-              </div>
-              <div class="sop-media">
-                <div class="ph"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-                <div class="ph"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></div>
-                <div class="ph"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-              </div>
-            </div>
-            <div class="sop-side">
-              <div class="side-grp">
-                <div class="sg-h">Related executions</div>
-                <div class="deriv"><span class="d-dot"></span>Training checklist</div>
-                <div class="deriv"><span class="d-dot"></span>Observation audit</div>
-                <div class="deriv"><span class="d-dot"></span>Certification</div>
-              </div>
-              <div class="side-grp">
-                <div class="sg-h">Version control</div>
-                <div class="vtimeline">
-                  <div class="vrow cur"><span class="vdot"></span><span><b>v3</b> · current <span class="grn">+ 2 steps</span></span></div>
-                  <div class="vrow"><span class="vdot"></span><span>v2 <span class="red">&minus; FIFO note</span></span></div>
-                  <div class="vrow"><span class="vdot"></span><span>v1 · original</span></div>
-                </div>
-              </div>
-              <div class="side-grp">
-                <div class="sg-h">Tags</div>
-                <div class="sidetags"><span class="seechip">Receiver</span><span class="seechip">Site 04</span><span class="seechip">Inbound</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- measure -->
-      <div class="reveal" style="margin-top:42px">
-        <p class="mono-label measure-h" style="color:var(--faint)">What you can measure</p>
-        <div class="probcols" id="cap-rep"></div>
       </div>
     </div>
   </section>
@@ -435,249 +323,204 @@
   <!-- 03 · TRANSFER -->
   <section class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
-      <div class="reveal">
-        <div class="flex items-center justify-between gap-6 mb-8">
-          <div class="eyebrow mono-label"><span class="dot"></span><span>Transfer · Training</span></div>
-          <span class="mono-label" style="color:var(--faint)">04 / 06</span>
-        </div>
-        <div class="max-w-3xl">
-          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Transfer the knowledge — the same way, every time</h2>
+      <div class="stage-row reveal">
+        <div class="stage-text">
+          <div class="eyebrow mono-label mb-7"><span class="dot"></span><span>Transfer · Training</span></div>
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Is everyone trained the same way?</h2>
           <p class="text-lg leading-relaxed" style="color:var(--muted)">
-            Once the method is captured, remove the <strong style="color:var(--ink);font-weight:600">trainer-to-trainer variation</strong> so every associate learns it the same, complete way — and you can see exactly who is ready for the floor.
+            Each step carries the skill to learn, the trainer&rsquo;s instructions on what not to forget, and photos and videos of the proper method &mdash; so the same skill is taught the same way no matter who delivers it.
           </p>
+          <p class="mono-label keycap">Key capabilities</p>
+          <ul class="caps">
+          <li><span class="c">&#10003;</span><span>Each step mapped to the exact skill to learn</span></li>
+        <li><span class="c">&#10003;</span><span>Trainer instructions and media for what good looks like</span></li>
+        <li><span class="c">&#10003;</span><span>Assignment to one trainee or a whole crew</span></li>
+        <li><span class="c">&#10003;</span><span>A simple checkmark per skill, not a pass/fail grade</span></li>
+          <li><span class="c">&#10003;</span><span>A training matrix that updates in real time</span></li>
+          </ul>
+          <a href="#reports" class="measure-link">See what you can measure ↓</a>
         </div>
-      </div>
-
-      <ul class="featlist reveal" style="margin-top:30px">
-        <li><span class="c">&#10003;</span><span>Step title = the exact skill the new associate needs to learn</span></li>
-        <li><span class="c">&#10003;</span><span>Instructions + media show the trainer how to teach it and what good looks like</span></li>
-        <li><span class="c">&#10003;</span><span>Assign to one trainee or bulk-assign across a crew</span></li>
-        <li><span class="c">&#10003;</span><span>A simple checkmark per skill — not a pass/fail grade</span></li>
-        <li><span class="c">&#10003;</span><span>The training matrix updates in real time as items are checked</span></li>
-      </ul>
-
-      <!-- what it does -->
-      <div class="reveal" style="margin-top:42px">
-        <div class="grid lg:grid-cols-2 gap-6" style="align-items:start">
-          <div>
-            <div class="mock">
-              <div class="mock-bar"><span class="dot3"></span><span class="dot3"></span><span class="dot3"></span><span class="mb-t">Training runner</span></div>
-              <div style="padding:16px 16px 6px">
-                <div class="trmatrix">
-                  <span style="font-size:12px;color:var(--muted)">Receive / Verify ASN — <b style="color:var(--ink)">5 of 8 mastered</b></span>
-                </div>
-                <div class="trbar" style="margin-bottom:6px"><i style="width:62%"></i></div>
-              </div>
-              <div class="acc" id="train-acc">
-                <div class="acc-item done"><button class="acc-head"><span class="abox"></span><span class="askill">Locate &amp; read the ASN Control Log</span><svg class="achev" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
-                  <div class="acc-body"><div class="ab-lbl">Trainer instructions</div><div class="ab-txt">Show them the ASN #, Door #, Container #, item TI-HI and inner pack qty. Make sure they read it before walking to the door.</div><div class="ab-media"><span class="ph"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span><span class="ph"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></span></div></div>
-                </div>
-                <div class="acc-item done"><button class="acc-head"><span class="abox"></span><span class="askill">Match the pallet plaque to the ASN number</span><svg class="achev" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
-                  <div class="acc-body"><div class="ab-lbl">Trainer instructions</div><div class="ab-txt">Don&rsquo;t let them eyeball it — the plaque number must physically match the log before counting begins.</div></div>
-                </div>
-                <div class="acc-item open"><button class="acc-head"><span class="abox"></span><span class="askill">Identify single- vs multi-SKU pallets &amp; escalate</span><svg class="achev" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
-                  <div class="acc-body"><div class="ab-lbl">Trainer instructions</div><div class="ab-txt">One SKU per pallet continues. More than one means stop and call AM/OC — teach the escalation, not a workaround.</div><div class="ab-media"><span class="ph"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span></div></div>
-                </div>
-                <div class="acc-item"><button class="acc-head"><span class="abox"></span><span class="askill">Receive item-level in WMOS (dock door, iLPN, qty)</span><svg class="achev" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
-                  <div class="acc-body"><div class="ab-lbl">Trainer instructions</div><div class="ab-txt">Walk the RF Gladiator login and the Recv Item Lvl path; verify pack qty before entering quantity.</div></div>
-                </div>
-                <div class="acc-item"><button class="acc-head"><span class="abox"></span><span class="askill">Place the iLPN in the correct pallet position</span><svg class="achev" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
-                  <div class="acc-body"><div class="ab-lbl">Trainer instructions</div><div class="ab-txt">Bottom-right corner, facing out, one per pallet per SKU — so putaway can read it.</div></div>
-                </div>
-              </div>
-            </div>
+        <div class="stage-bay"><div class="device">
+          <div class="app-screen">
+          <div class="ro-head">
+            <span class="ro-title">Receiver Training</span>          </div>
+          <div class="ro-status">
+            <span class="ro-badge">In progress</span>
+            <span class="ro-step">Step 2 of 5</span>
+            <span class="ro-score">0% score</span>
           </div>
-
-          <div>
-            <p style="font-size:14px; line-height:1.6; color:var(--ink-2); margin-bottom:20px">
-              Each step carries the <b style="font-weight:600">skill to learn</b>, the <b style="font-weight:600">trainer&rsquo;s instructions</b> on what not to forget, and <b style="font-weight:600">photos and videos of the proper method</b> — so the same skill is taught the same way no matter who delivers it.
-            </p>
-            <div class="card" style="padding:16px 18px; margin-top:22px; background:var(--accent-wash); border-color:var(--accent-soft)">
-              <p style="font-size:13px; line-height:1.55; color:var(--ink-2)"><b style="color:var(--accent); font-weight:600">Why it matters —</b> showing trainers exactly how to teach each skill, with the proper method on screen, is what removes variation from trainer to trainer.</p>
-            </div>
+          <div class="ro-steps-head">
+            <span class="ro-steps-lbl">Steps</span>
+            <span class="ro-steps-prog" id="roMastered">1 of 5 mastered</span>
           </div>
-        </div>
+          <div class="ro-progress"><i id="roProg" style="width:20%"></i></div>
+          <div class="ro-card ro-checklist" id="train-list"></div>
+          <div class="ro-foot end">
+            <button class="ro-btn ro-complete" id="roComplete" disabled>Complete task</button>
+          </div>
+          </div>
+        </div></div>
       </div>
 
-      <!-- measure -->
-      <div class="reveal" style="margin-top:42px">
-        <p class="mono-label measure-h" style="color:var(--faint)">What you can measure</p>
-        <div class="probcols" id="tr-rep"></div>
-      </div>
     </div>
   </section>
 
   <!-- 04 · CONTINUOUS COACHING -->
   <section class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
-      <div class="reveal">
-        <div class="flex items-center justify-between gap-6 mb-8">
-          <div class="eyebrow mono-label"><span class="dot"></span><span>Continuous Coaching · Observations</span></div>
-          <span class="mono-label" style="color:var(--faint)">05 / 06</span>
-        </div>
-        <div class="max-w-3xl">
-          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Coach the standard so it holds</h2>
+      <div class="stage-row reveal">
+        <div class="stage-text">
+          <div class="eyebrow mono-label mb-7"><span class="dot"></span><span>Continuous Coaching · Observations</span></div>
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Do people still follow procedures after training?</h2>
           <p class="text-lg leading-relaxed" style="color:var(--muted)">
-            Training gets them ready. Observation keeps them there — <strong style="color:var(--ink);font-weight:600">quantifying</strong> whether people still follow the method, and coaching the gaps in real time before corners get cut.
+            Each prompt carries the key steps to watch for, the standard the associate should be hitting, and photos and videos of the proper method &mdash; so every observer knows what to look for, no matter who&rsquo;s observing.
           </p>
+          <p class="mono-label keycap">Key capabilities</p>
+          <ul class="caps">
+          <li><span class="c">&#10003;</span><span>Observation targets set per observer, by day or week</span></li>
+          <li><span class="c">&#10003;</span><span>Prior trend and most-missed prompts shown up front</span></li>
+          <li><span class="c">&#10003;</span><span>Immediate coaching feedback, then a scheduled follow-up</span></li>
+          <li><span class="c">&#10003;</span><span>Auto-assigned subjects, never just the convenient person</span></li>
+          <li><span class="c">&#10003;</span><span>Guided prompts with notes and photo evidence</span></li>
+          </ul>
+          <a href="#reports" class="measure-link">See what you can measure ↓</a>
         </div>
-      </div>
-
-      <div class="featcols reveal" style="margin-top:30px">
-        <ul>
-          <li><span class="c">&#10003;</span><span><b style="color:var(--ink);font-weight:600">Targets</b> — set how many observations each observer owes per day or week</span></li>
-          <li><span class="c">&#10003;</span><span><b style="color:var(--ink);font-weight:600">Context first</b> — prior trend and most-missed prompts before they start</span></li>
-          <li><span class="c">&#10003;</span><span><b style="color:var(--ink);font-weight:600">Summary &amp; coach</b> — immediate feedback on what to improve, then schedule a follow-up</span></li>
-        </ul>
-        <ul>
-          <li><span class="c">&#10003;</span><span><b style="color:var(--ink);font-weight:600">Auto-assigned</b> — the system picks who to observe, so it&rsquo;s never just the convenient person</span></li>
-          <li><span class="c">&#10003;</span><span><b style="color:var(--ink);font-weight:600">Guided prompts</b> — what to look for, with notes and photo evidence as they go</span></li>
-        </ul>
-      </div>
-
-      <!-- what makes it work -->
-      <div class="reveal" style="margin-top:42px">
-        <p class="mono-label measure-h" style="color:var(--faint)">What makes an observation actually work</p>
-        <div class="probcols">
-          <div class="probcol">
-            <p class="pc-h"><span class="pc-n">01</span> Specific</p>
-            <p class="pc-d">Job-specific, not generic — the observer checks <b style="color:var(--ink);font-weight:600">this</b> procedure&rsquo;s steps, not a one-size form.</p>
+        <div class="stage-bay"><div class="device">
+          <div class="app-screen">
+          <div class="ro-head">
+            <span class="ro-title">Receiver Observation</span>          </div>
+          <div class="ro-status">
+            <span class="ro-badge">In progress</span>
+            <span class="ro-step">Step 5 of 5</span>
+            <span class="ro-score">50% score</span>
           </div>
-          <div class="probcol">
-            <p class="pc-h"><span class="pc-n">02</span> Enough sample</p>
-            <p class="pc-d">Observations actually get done, spread across people — a big enough sample that the numbers mean something, with no pencil-whipping.</p>
-          </div>
-          <div class="probcol">
-            <p class="pc-h"><span class="pc-n">03</span> Real coaching</p>
-            <p class="pc-d">A coaching session right after to fix mistakes in real time, then a follow-up to confirm the fix stuck.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- what it does -->
-      <div class="reveal" style="margin-top:42px">
-        <div class="grid lg:grid-cols-2 gap-6" style="align-items:start">
-          <div>
-            <div class="mock">
-              <div class="mock-bar"><span class="dot3"></span><span class="dot3"></span><span class="dot3"></span><span class="mb-t">Observation runner &middot; prompt 3 of 6</span></div>
-              <div class="obprompt">
-                <div class="obctx">
-                  <span class="ctxchip"><span class="cdot" style="background:var(--accent-mid)"></span>Observing <b>A. Khan</b></span>
-                  <span class="ctxchip">Prior score <b>72%</b></span>
-                  <span class="ctxchip"><span class="cdot" style="background:var(--ink)"></span>Most-missed prompt</span>
-                </div>
-                <div class="opn">PROMPT 03</div>
-                <div class="opq">Is the associate scanning each package one-by-one, not batch-scanning?</div>
-                <div class="oplook"><b>What to look for</b>Each carton scanned individually at the point of handling — no scanning one and waving the rest through.</div>
-                <div class="opvid"><span class="pl">&#9654;</span> Watch: what &ldquo;good&rdquo; looks like</div>
-                <div class="scale" id="obScale">
-                  <span class="sc" data-v="4">Always</span>
-                  <span class="sc on" data-v="3">Mostly</span>
-                  <span class="sc" data-v="2">Somewhat</span>
-                  <span class="sc" data-v="1">Never</span>
-                </div>
-                <div class="scale-cap">
-                  <span class="sc-l">Graded, not pass/fail &mdash; <b>auto-scored</b> to an adherence %</span>
-                  <span class="sc-score" id="obScore">75%</span>
-                </div>
-              </div>
+          <div class="ro-card">
+            <div class="ro-qn">Question 1 of 5</div>
+            <h2 class="ro-q">Match pallet plaque to the ASN number</h2>
+            <div class="ro-guide-lbl">What to look for</div>
+            <div class="ro-guide" id="obsLook"></div>
+            <div class="ro-guide-lbl">Reference</div>
+            <div class="ro-ref">
+              <div class="ro-refcell"><div class="ro-refbox"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+              <div class="ro-refcell"><div class="ro-refbox"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M10 8.6l5 3.4-5 3.4z" fill="currentColor" stroke="none"/></svg></div></div>
             </div>
+            <div class="ro-opts" id="roScale" role="radiogroup"></div>
           </div>
-
-          <div>
-            <p style="font-size:14px; line-height:1.6; color:var(--ink-2); margin-bottom:20px">
-              Each prompt carries the <b style="font-weight:600">key steps to watch for</b>, the <b style="font-weight:600">standard the associate should be hitting</b>, and <b style="font-weight:600">photos and videos of the proper method</b> — so every observer knows what to look for, no matter who&rsquo;s observing.
-            </p>
-            <div class="card" style="padding:16px 18px; margin-top:20px; background:var(--accent-wash); border-color:var(--accent-soft)">
-              <p style="font-size:13px; line-height:1.55; color:var(--ink-2)"><b style="color:var(--accent); font-weight:600">Global questions —</b> surface systemic issues. Beyond the prompts, each observation can ask: <i>What&rsquo;s preventing them from doing their job? Any improvement ideas?</i> — turning the floor into a source of fixes that feed back to Capture.</p>
-            </div>
+          <div class="ro-foot">
+            <button class="ro-btn ro-prev">Previous</button>
+            <button class="ro-btn ro-complete">Complete Task</button>
           </div>
-        </div>
+          </div>
+        </div></div>
       </div>
 
-      <!-- measure -->
-      <div class="reveal" style="margin-top:42px">
-        <p class="mono-label measure-h" style="color:var(--faint)">What you can measure</p>
-        <div class="probcols" id="ob-rep"></div>
-      </div>
     </div>
   </section>
 
-  <!-- 05 · THE PLATFORM -->
-  <section class="py-20 md:py-24" style="background:var(--paper); border-bottom:1px solid var(--line)">
+  <!-- REPORTS / DASHBOARDS -->
+  <section id="reports" class="py-20 md:py-24" style="background:var(--paper); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
-      <div class="reveal">
+      <div class="reveal mb-12">
         <div class="flex items-center justify-between gap-6 mb-8">
-          <div class="eyebrow mono-label"><span class="dot"></span><span>The platform</span></div>
-          <span class="mono-label" style="color:var(--faint)">06 / 06</span>
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Reporting</span></div>
         </div>
         <div class="max-w-2xl">
-          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Set up to your structure — everyone sees only their part</h2>
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Every stage becomes a number you can manage</h2>
           <p class="text-lg leading-relaxed" style="color:var(--muted)">
-            We configure the platform to your sites and job functions, then scope every screen to the person&rsquo;s role. No one wades through tools they&rsquo;ll never use — and each person opens to <strong style="color:var(--ink);font-weight:600">exactly what they need to do today</strong>.
+            Capture, transfer and coaching each roll up into live dashboards &mdash; compliance, coverage and adherence by site and job function, with the trends and the outliers surfaced for you. Switch between the three to see what each measures.
           </p>
         </div>
       </div>
 
-      <div class="reveal" style="margin-top:42px">
-        <p class="mono-label sublbl" style="color:var(--faint)">Implementation</p>
-        <p class="subnote">We set it up for you — your <b>sites, job functions and roles</b>, mapped on day one — so the platform mirrors how the operation already works.</p>
+      <div class="reveal seg" role="tablist" aria-label="Report area">
+        <button class="seg-btn is-active" data-tab="procedures" role="tab">Procedures</button>
+        <button class="seg-btn" data-tab="trainings" role="tab">Trainings</button>
+        <button class="seg-btn" data-tab="observations" role="tab">Observations</button>
       </div>
 
-      <div class="grid lg:grid-cols-2 gap-6 reveal" style="margin-top:42px">
-        <div>
-          <p class="mono-label sublbl" style="color:var(--faint)">Role-based views · the right screens per role</p>
-          <div class="mock">
-            <div class="mock-bar"><span class="dot3"></span><span class="dot3"></span><span class="dot3"></span><span class="mb-t">Access by role</span></div>
-            <div class="role-rows">
-              <div class="role-row">
-                <div class="rr-name">Associate<span>operator</span></div>
-                <div class="rr-sees"><span class="seechip">Their trainings</span><span class="seechip">Today&rsquo;s to-dos</span></div>
+      <div class="reveal dash" id="dash"><!-- rendered by script --></div>
+    </div>
+  </section>
+
+  <!-- THE PLATFORM -->
+  <section id="platform" class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="reveal mb-12">
+        <div class="flex items-center justify-between gap-6 mb-8">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>The platform</span></div>
+        </div>
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Set up to your structure &mdash; everyone sees only their part</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            We configure the platform to your sites and job functions, then scope every screen to the person&rsquo;s role. No one wades through tools they&rsquo;ll never use &mdash; and each person opens to <strong style="color:var(--ink);font-weight:600">exactly what they need to do today</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal grid lg:grid-cols-2 gap-4">
+        <!-- Card A — Role-based views -->
+        <div class="card p-6 md:p-7">
+          <h3 class="font-display text-lg mb-6" style="color:var(--ink)">Role-based views</h3>
+          <div class="space-y-4">
+            <div class="flex items-start justify-between gap-4 flex-wrap">
+              <span class="font-display text-[15px] flex-shrink-0" style="color:var(--ink)">Associate</span>
+              <div class="flex flex-wrap gap-1.5 justify-end">
+                <span class="tag tag-nice">Their trainings</span>
+                <span class="tag tag-nice">Today&rsquo;s to-dos</span>
               </div>
-              <div class="role-row">
-                <div class="rr-name">Supervisor<span>front line</span></div>
-                <div class="rr-sees"><span class="seechip">Their operators</span><span class="seechip acc">Trainings</span><span class="seechip acc">Observations</span></div>
+            </div>
+            <div style="height:1px;background:var(--line)"></div>
+            <div class="flex items-start justify-between gap-4 flex-wrap">
+              <span class="font-display text-[15px] flex-shrink-0" style="color:var(--ink)">Supervisor</span>
+              <div class="flex flex-wrap gap-1.5 justify-end">
+                <span class="tag tag-nice">Their operators</span>
+                <span class="tag tag-accent">Trainings</span>
+                <span class="tag tag-accent">Observations</span>
               </div>
-              <div class="role-row">
-                <div class="rr-name">Site Manager<span>one site</span></div>
-                <div class="rr-sees"><span class="seechip">All job functions</span><span class="seechip">Site dashboards</span></div>
+            </div>
+            <div style="height:1px;background:var(--line)"></div>
+            <div class="flex items-start justify-between gap-4 flex-wrap">
+              <span class="font-display text-[15px] flex-shrink-0" style="color:var(--ink)">Site Manager</span>
+              <div class="flex flex-wrap gap-1.5 justify-end">
+                <span class="tag tag-nice">All job functions</span>
+                <span class="tag tag-nice">Site dashboards</span>
               </div>
-              <div class="role-row">
-                <div class="rr-name">Executive<span>all sites</span></div>
-                <div class="rr-sees"><span class="seechip">Dashboards only</span><span class="seechip">Every site</span></div>
+            </div>
+            <div style="height:1px;background:var(--line)"></div>
+            <div class="flex items-start justify-between gap-4 flex-wrap">
+              <span class="font-display text-[15px] flex-shrink-0" style="color:var(--ink)">Executive</span>
+              <div class="flex flex-wrap gap-1.5 justify-end">
+                <span class="tag tag-nice">Dashboards only</span>
+                <span class="tag tag-nice">Every site</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div>
-          <p class="mono-label sublbl" style="color:var(--faint)">Daily home screen · tailored to each user</p>
-          <div class="mock">
-            <div class="mock-bar"><span class="dot3"></span><span class="dot3"></span><span class="dot3"></span><span class="mb-t">Today &middot; J. Alvarez &middot; Receiving</span></div>
-            <div class="today">
-              <div class="today-row">
-                <span class="tbox"></span>
-                <div class="tt"><div class="t1">Observation — Receiving, Door 4</div><div class="t2">Assigned to you</div></div>
-                <span class="tk due">Due today</span>
-              </div>
-              <div class="today-row">
-                <span class="tbox"></span>
-                <div class="tt"><div class="t1">Training — Receive / Verify ASN</div><div class="t2">In progress · 5 of 8</div></div>
-                <span class="tk prog">Continue</span>
-              </div>
-              <div class="today-row">
-                <span class="tbox"></span>
-                <div class="tt"><div class="t1">Acknowledge — Safety SOP v3</div><div class="t2">Published 2 days ago</div></div>
-                <span class="tk new">New</span>
-              </div>
-              <div class="today-row done">
-                <span class="tbox"></span>
-                <div class="tt"><div class="t1">Observation — Putaway</div><div class="t2">Completed 9:12 AM</div></div>
-                <span class="tk prog">Done</span>
-              </div>
+        <!-- Card B — A daily home screen -->
+        <div class="card p-6 md:p-7">
+          <h3 class="font-display text-lg mb-6" style="color:var(--ink)">A daily home screen</h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-4">
+              <span class="text-[14px]" style="color:var(--ink-2)">Observation &mdash; Receiving, Door 4</span>
+              <span class="pill flex-shrink-0">Due today</span>
+            </div>
+            <div style="height:1px;background:var(--line)"></div>
+            <div class="flex items-center justify-between gap-4">
+              <span class="text-[14px]" style="color:var(--ink-2)">Training &mdash; Receive / Verify ASN &middot; 5 of 8</span>
+              <span class="pill flex-shrink-0">Continue</span>
+            </div>
+            <div style="height:1px;background:var(--line)"></div>
+            <div class="flex items-center justify-between gap-4">
+              <span class="text-[14px]" style="color:var(--ink-2)">Acknowledge &mdash; Safety SOP v3</span>
+              <span class="pill pill-accent flex-shrink-0">New</span>
+            </div>
+            <div style="height:1px;background:var(--line)"></div>
+            <div class="flex items-center justify-between gap-4">
+              <span class="text-[14px]" style="color:var(--ink-2)">Observation &mdash; Putaway &middot; 9:12 AM</span>
+              <span class="pill flex-shrink-0">Done</span>
             </div>
           </div>
-          <p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); margin-top:14px; letter-spacing:.02em">Less time deciding what to do &mdash; the platform already knows.</p>
         </div>
       </div>
     </div>
@@ -686,7 +529,7 @@
   <!-- CLOSING STATEMENT -->
   <section class="statement reveal">
     <div class="px-6 sm:px-8 lg:px-12">
-      <h2 class="st-head">From one procedure to<br><span style="color:var(--muted)">a living compliance program</span></h2>
+      <h2 class="st-head">From one procedure to<br><span style="color:var(--muted)">a living compliance program.</span></h2>
     </div>
   </section>
 
@@ -694,101 +537,205 @@
   <footer class="py-12" style="background:var(--ink)">
     <div class="px-6 sm:px-8 lg:px-12 flex items-center justify-between">
       <img src="assets/images/meetbean-logo-light.svg" alt="meetBean" class="h-5 opacity-90" />
-      <span class="mono-label" style="color:var(--faint)">Methodology · meetBean</span>
+      <span class="mono-label" style="color:var(--faint)">Methodology · Harbor Freight</span>
     </div>
   </footer>
 
+  <!-- worked-example data: single source of truth, shared with procedures.html -->
+  <script src="assets/js/worked-example.js"></script>
   <script>
-  /* ---------------- DATA ---------------- */
-  const PROBLEMS = {
-    cap: [
-      "No single source of truth — SOPs live in different formats, scattered across SharePoint",
-      "Collaboration spread across Teams, email and meetings — impossible to track",
-      "Documents quietly drift out of date, with no check they&rsquo;re correct before going live",
-      "No way to confirm people actually read an update once it&rsquo;s published",
-    ],
-    tr: [
-      "No standard way to train — it depends on the trainer, and skills get missed",
-      "Different trainers teach the same process differently",
-      "Records live on paper or scattered spreadsheets — hard to see who&rsquo;s trained on what, or when",
-      "No visibility or accountability across the org — underperforming sites stay hidden",
-    ],
-    ob: [
-      "No systematic way to know people follow the process — or to quantify adherence",
-      "Generic forms, not specific to each SOP, and observers don&rsquo;t always know what to look for",
-      "Pencil-whipped records or the same easy person observed — no proof it was really done",
-      "Notes on what&rsquo;s wrong but no coaching to fix it — paper and spreadsheets, no trends across sites",
-    ],
+  /* ---------------- REPORTS DASHBOARD ---------------- */
+  const DASH = {
+    procedures: {
+      name:'Procedures',
+      kpis:[
+        {l:'SOP compliance', v:'94%', d:'+3 pts', up:true, s:[78,82,80,85,88,90,89,92,94]},
+        {l:'Due for review', v:'23', d:'−6', up:true, s:[40,38,34,33,30,28,27,25,23]},
+        {l:'Expired', v:'4', d:'−2', up:true, s:[9,8,8,7,6,6,5,5,4]},
+        {l:'Avg review time', v:'2.1d', d:'−0.4d', up:true, s:[3.1,2.9,2.8,2.7,2.5,2.4,2.3,2.2,2.1]}
+      ],
+      trend:{t:'Compliance · last 12 weeks', d:[78,80,79,83,85,84,88,90,89,92,93,94]},
+      bars:{t:'Reviewed on time · by site', d:[['S1',96],['S2',88],['S3',79],['S4',92],['S5',71],['S6',85]]},
+      donut:{t:'SOP status', d:[['Current',78],['Expiring',18],['Expired',4]]},
+      list:{t:'Behind on review', r:[['Site 05 · Inbound','5 overdue'],['J. Alvarez','3 overdue'],['Site 03 · Putaway','2 overdue']]}
+    },
+    trainings: {
+      name:'Trainings',
+      kpis:[
+        {l:'Workforce trained', v:'87%', d:'+5 pts', up:true, s:[62,66,68,71,74,79,82,85,87]},
+        {l:'In progress', v:'142', d:'+18', up:true, s:[90,98,105,112,120,128,134,139,142]},
+        {l:'Overdue', v:'11', d:'−4', up:true, s:[22,20,19,17,16,14,13,12,11]},
+        {l:'Avg time-to-train', v:'6.5d', d:'−0.8d', up:true, s:[8,7.8,7.5,7.2,7,6.9,6.7,6.6,6.5]}
+      ],
+      trend:{t:'Coverage · last 12 weeks', d:[62,65,68,67,71,74,76,79,80,83,85,87]},
+      bars:{t:'Coverage · by job function', d:[['Recv',92],['Putw',84],['Pick',77],['Pack',88],['Load',69],['Ship',81]]},
+      donut:{t:'Skill status', d:[['Mastered',72],['In progress',19],['Not started',9]]},
+      list:{t:'Sites lagging', r:[['Site 05','69% covered'],['Site 03','77% covered'],['Site 06','81% covered']]}
+    },
+    observations: {
+      name:'Observations',
+      kpis:[
+        {l:'Adherence', v:'91%', d:'+2 pts', up:true, s:[83,85,86,88,87,89,90,90,91]},
+        {l:'Observations · wk', v:'318', d:'+34', up:true, s:[240,255,268,277,288,298,305,312,318]},
+        {l:'Sites below target', v:'3', d:'−2', up:true, s:[7,6,6,5,5,4,4,3,3]},
+        {l:'Follow-ups set', v:'46', d:'+9', up:true, s:[30,33,36,38,40,42,43,45,46]}
+      ],
+      trend:{t:'Adherence · last 12 weeks', d:[82,84,83,86,85,88,87,89,90,89,91,91]},
+      bars:{t:'Adherence · by site', d:[['S1',95],['S2',90],['S3',84],['S4',93],['S5',79],['S6',88]]},
+      donut:{t:'Grade mix', d:[['Always',58],['Mostly',27],['Somewhat',11],['Never',4]]},
+      list:{t:'Most-failed prompts', r:[['Scan one-by-one','31% miss'],['Match plaque to ASN','22% miss'],['Escalate multi-SKU','17% miss']]}
+    }
   };
+  const COLS = ['#508875','#70A593','#9CC9BB','rgba(30,29,29,.18)'];
 
-  const REPORTS = {
-    cap: [
-      { n:"Report 01", h:"SOP compliance", items:["Is every SOP reviewed at least once a year?","Does every job function have the SOPs it needs?","Anything expired or about to expire?"] },
-      { n:"Report 02", h:"Work management", items:["How many SOPs are due for review, and when?","Prioritize by expired, expiring in 2 weeks, expiring in 30 days"] },
-      { n:"Report 03", h:"Supervisor compliance", items:["Are reviewers reviewing on time?","Are acknowledgers acknowledging new SOPs?","Which authors or sites fall behind — any repeat offenders?"] },
-    ],
-    tr: [
-      { n:"Report 01", h:"Training coverage", items:["Who&rsquo;s been trained on what — the training matrix","Where are the gaps by job function and site?"] },
-      { n:"Report 02", h:"Work management", items:["How many trainings are coming up?","Prioritize by expired, expiring in 2 weeks, expiring in 30 days"] },
-      { n:"Report 03", h:"Trainer compliance", items:["Are people being trained on time?","Average time-to-train per job function, per site","Does the same training take longer at some sites than others?"] },
-    ],
-    ob: [
-      { n:"Report 01", h:"Are observations being done", items:["Which observers are falling behind their targets?","Which job functions and sites have the most problems?","Observer compliance by site and job function"] },
-      { n:"Report 02", h:"Process adherence", items:["Adherence score by site, job function and prompt","Which are the most-failed prompts?","Where is practice drifting from the standard?"] },
-      { n:"Report 03", h:"Correlations", items:["Observer vs. high / low scores","Trainers vs. low scores downstream","Deviations between observations and performance"] },
-    ],
-  };
-
-  /* ---------------- RENDER ---------------- */
-  function renderProblems(id, arr){
-    document.getElementById(id).innerHTML = arr.map(p =>
-      `<li><span class="x">&#10005;</span><span>${p}</span></li>`).join("");
+  function spark(a){
+    var w=60,h=22,mn=Math.min.apply(null,a),mx=Math.max.apply(null,a),r=(mx-mn)||1,pts='',i;
+    for(i=0;i<a.length;i++){ pts+=(i/(a.length-1)*w).toFixed(1)+','+(h-2-((a[i]-mn)/r)*(h-4)).toFixed(1)+' '; }
+    return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none"><polyline points="'+pts+'" fill="none" stroke="#70A593" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   }
-  function renderReports(id, arr){
-    document.getElementById(id).innerHTML = arr.map((r,i) => `
-      <div class="probcol">
-        <p class="pc-h"><span class="pc-n">0${i+1}</span> ${r.h}</p>
-        <ul>${r.items.map(it => `<li><span class="q">&#8250;</span><span>${it}</span></li>`).join("")}</ul>
-      </div>`).join("");
+  function areaC(a){
+    var W=540,H=178,pl=6,pr=6,pt=14,pb=20,iw=W-pl-pr,ih=H-pt-pb;
+    var mn=Math.min.apply(null,a)*0.94,mx=Math.max.apply(null,a)*1.03,r=(mx-mn)||1,i;
+    var X=function(i){return pl+i/(a.length-1)*iw;},Y=function(v){return pt+ih-(v-mn)/r*ih;};
+    var line='';for(i=0;i<a.length;i++){line+=(i?'L':'M')+X(i).toFixed(1)+' '+Y(a[i]).toFixed(1)+' ';}
+    var ar=line+'L'+X(a.length-1).toFixed(1)+' '+(pt+ih)+' L'+X(0).toFixed(1)+' '+(pt+ih)+' Z';
+    var grid='';for(var g=0;g<=3;g++){var gy=(pt+ih*g/3).toFixed(1);grid+='<line x1="'+pl+'" y1="'+gy+'" x2="'+(W-pr)+'" y2="'+gy+'" stroke="rgba(30,29,29,.06)" stroke-width="1"/>';}
+    return '<svg class="cht" viewBox="0 0 '+W+' '+H+'">'+grid+'<path d="'+ar+'" fill="rgba(80,136,117,.10)"/><path d="'+line+'" fill="none" stroke="#508875" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="'+X(a.length-1).toFixed(1)+'" cy="'+Y(a[a.length-1]).toFixed(1)+'" r="3.6" fill="#508875"/></svg>';
   }
-  renderProblems("cap-prob", PROBLEMS.cap);
-  renderProblems("tr-prob", PROBLEMS.tr);
-  renderProblems("ob-prob", PROBLEMS.ob);
-  renderReports("cap-rep", REPORTS.cap);
-  renderReports("tr-rep", REPORTS.tr);
-  renderReports("ob-rep", REPORTS.ob);
-
-  /* training accordion */
-  document.querySelectorAll("#train-acc .acc-head").forEach(h => {
-    h.addEventListener("click", () => h.closest(".acc-item").classList.toggle("open"));
+  function barsC(d){
+    var W=540,H=178,pl=4,pr=4,pt=12,pb=24,n=d.length,iw=W-pl-pr,ih=H-pt-pb,gap=iw/n,bw=gap*0.5,s='',i;
+    for(i=0;i<n;i++){var x=pl+gap*i+(gap-bw)/2,bh=d[i][1]/100*ih,y=pt+ih-bh;
+      s+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+bh.toFixed(1)+'" rx="3" fill="#70A593"/>';
+      s+='<text x="'+(x+bw/2).toFixed(1)+'" y="'+(H-8)+'" text-anchor="middle" font-size="11" fill="#6B6E7C" font-family="JetBrains Mono, monospace">'+d[i][0]+'</text>';}
+    s+='<line x1="'+pl+'" y1="'+(pt+ih)+'" x2="'+(W-pr)+'" y2="'+(pt+ih)+'" stroke="rgba(30,29,29,.12)" stroke-width="1"/>';
+    return '<svg class="cht" viewBox="0 0 '+W+' '+H+'">'+s+'</svg>';
+  }
+  function donutC(d){
+    var sz=148,cx=74,cy=74,rad=52,sw=17,c=2*Math.PI*rad,tot=0,off=0,segs='',i;
+    for(i=0;i<d.length;i++)tot+=d[i][1];
+    for(i=0;i<d.length;i++){var len=d[i][1]/tot*c;
+      segs+='<circle cx="'+cx+'" cy="'+cy+'" r="'+rad+'" fill="none" stroke="'+COLS[i%COLS.length]+'" stroke-width="'+sw+'" stroke-dasharray="'+len.toFixed(2)+' '+(c-len).toFixed(2)+'" stroke-dashoffset="'+(-off).toFixed(2)+'" transform="rotate(-90 '+cx+' '+cy+')"/>';
+      off+=len;}
+    var pct=Math.round(d[0][1]/tot*100);
+    return '<svg viewBox="0 0 '+sz+' '+sz+'" width="148" height="148">'+segs+'<text x="'+cx+'" y="'+(cy-1)+'" text-anchor="middle" font-size="26" font-family="DM Sans, sans-serif" font-weight="500" fill="#1E1D1D">'+pct+'%</text><text x="'+cx+'" y="'+(cy+15)+'" text-anchor="middle" font-size="8.5" font-family="JetBrains Mono, monospace" fill="#6B6E7C" letter-spacing="1">'+d[0][0].toUpperCase()+'</text></svg>';
+  }
+  function renderDash(k){
+    var D=DASH[k];
+    var kpis=D.kpis.map(function(x){return '<div class="kpi"><p class="kpi-l">'+x.l+'</p><div class="kpi-v">'+x.v+'</div><div class="kpi-foot"><span class="kpi-d '+(x.up?'up':'dn')+'">'+(x.up?'▲':'▼')+' '+x.d+'</span>'+spark(x.s)+'</div></div>';}).join('');
+    var legend=D.donut.d.map(function(it,i){return '<div class="lg-row"><span class="lg-dot" style="background:'+COLS[i%COLS.length]+'"></span><span class="lg-l">'+it[0]+'</span><span class="lg-v">'+it[1]+'%</span></div>';}).join('');
+    var list=D.list.r.map(function(r){return '<div class="wl-row"><span class="wl-a">'+r[0]+'</span><span class="wl-b">'+r[1]+'</span></div>';}).join('');
+    document.getElementById('dash').innerHTML =
+      '<div class="dash-head"><span class="mono-label" style="color:var(--faint)">'+D.name+' · dashboard</span><div class="dash-filters"><span class="dchip">All sites</span><span class="dchip">Last 12 wks</span></div></div>'+
+      '<div class="kpis">'+kpis+'</div>'+
+      '<div class="charts">'+
+        '<div class="card cpanel"><p class="cpanel-t">'+D.trend.t+'</p>'+areaC(D.trend.d)+'</div>'+
+        '<div class="card cpanel"><p class="cpanel-t">'+D.bars.t+'</p>'+barsC(D.bars.d)+'</div>'+
+        '<div class="card cpanel donut-panel"><p class="cpanel-t">'+D.donut.t+'</p><div class="donut-wrap">'+donutC(D.donut.d)+'<div class="legend">'+legend+'</div></div></div>'+
+        '<div class="card cpanel"><p class="cpanel-t">'+D.list.t+'</p><div class="watchlist">'+list+'</div></div>'+
+      '</div>';
+  }
+  document.querySelectorAll('.seg-btn').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.seg-btn').forEach(function(x){x.classList.remove('is-active');});
+      b.classList.add('is-active');
+      renderDash(b.dataset.tab);
+    });
   });
+  if(document.getElementById('dash')) renderDash('procedures');
 
-  /* observation grade scale — pick one of the four responses, adherence score updates live */
-  const obScale = document.getElementById("obScale");
-  if (obScale) {
-    const obScore = document.getElementById("obScore");
-    obScale.querySelectorAll(".sc").forEach(btn => btn.addEventListener("click", () => {
-      obScale.querySelectorAll(".sc").forEach(x => x.classList.remove("on"));
-      btn.classList.add("on");
-      if (obScore) obScore.textContent = Math.round(+btn.dataset.v / 4 * 100) + "%";
+  /* ---- runner mocks rendered from the shared worked-example data (window.EXAMPLES,
+     same source as the Procedure Breakdown). Mapping: skill→training step title,
+     trainer instructions→training body, prompt→observation title, what-to-look-for
+     →observation subtitle, SCALE→Always/Mostly/Somewhat/Never. ---- */
+  (function renderRunnerMocks(){
+    const EX = (window.EXAMPLES || {}).T;
+    const SCALE = window.SCALE || [["Always",4],["Mostly",3],["Somewhat",2],["Never",1]];
+    if (!EX) return;
+    const esc = s => String(s).replace(/[&<>]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;" }[c]));
+    const CHEV = '<svg class="ts-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+    const IMG = '<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+    const VID = '<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M10 8.6l5 3.4-5 3.4z" fill="currentColor" stroke="none"/></svg>';
+    const REF = '<div class="ro-guide-lbl">Reference</div><div class="ro-ref"><div class="ro-refcell"><div class="ro-refbox">' + IMG + '</div></div><div class="ro-refcell"><div class="ro-refbox">' + VID + '</div></div></div>';
+    const guide = (label, text) => '<div class="ro-guide-lbl">' + label + '</div><div class="ro-guide">' + esc(text) + '</div>';
+
+    /* TRAINING — show TRAIN_LIMIT steps that each fit ONE line (skip titles longer
+       than MAX_TITLE). OPEN_STEP (0-indexed) is open + unchecked by default — the
+       "current" step; steps before it are checked. Body = trainer-instructions
+       guidance card, then reference photos. */
+    const TRAIN_LIMIT = 5, MAX_TITLE = 64, OPEN_STEP = 1;
+    const list = document.getElementById("train-list");
+    if (list) {
+      const TRAIN = EX.training.filter(t => t[0].length <= MAX_TITLE).slice(0, TRAIN_LIMIT);
+      list.innerHTML = TRAIN.map((t, i) => {
+        const checked = i < OPEN_STEP;
+        const cls = "ts-item" + (checked ? " done" : "") + (i === OPEN_STEP ? " open" : "");
+        return '<div class="' + cls + '"><div class="ts-row"><input type="checkbox" class="ts-check"' + (checked ? " checked" : "") + '><button class="ts-trigger"><span class="ts-title">' + (i + 1) + ". " + esc(t[0]) + "</span>" + CHEV + '</button></div><div class="ts-body">' + guide("Trainer instructions", t[2] || "") + REF + "</div></div>";
+      }).join("");
+      const screen = list.closest(".app-screen");
+      const done = Math.min(OPEN_STEP, TRAIN.length), tot = TRAIN.length;
+      const m = document.getElementById("roMastered"); if (m) m.textContent = done + " of " + tot + " mastered";
+      const p = document.getElementById("roProg"); if (p) p.style.width = (tot ? done / tot * 100 : 0) + "%";
+      const st = screen && screen.querySelector(".ro-step"); if (st) st.textContent = "Step " + (OPEN_STEP + 1) + " of " + tot;
+      const sc = screen && screen.querySelector(".ro-score"); if (sc) sc.remove();
+    }
+
+    /* OBSERVATION — grade ONE step. Behavior-style obs prompts wrap at the 20px
+       title, so the prompt is a short one-line STEP; the matching "what to look
+       for" goes in the amber guidance card, with reference photos below it. */
+    const scale = document.getElementById("roScale");
+    if (scale) {
+      const screen = scale.closest(".app-screen"), PRE = "Mostly";
+      const prompt = (EX.training.find(t => t[0].length <= 44) || EX.obs[0])[0];
+      const look = (EX.obs[0] && EX.obs[0][1]) || "";
+      if (screen) {
+        screen.querySelector(".ro-qn").textContent = "Question 1 of " + EX.obs.length;
+        screen.querySelector(".ro-q").textContent = prompt;
+        const lookEl = screen.querySelector("#obsLook"); if (lookEl) lookEl.textContent = look;
+        const st = screen.querySelector(".ro-step"); if (st) st.textContent = "Step 1 of " + EX.obs.length;
+        const sc = screen.querySelector(".ro-score");
+        scale._setScore = v => { if (sc) sc.textContent = Math.round(v / 4 * 100) + "% score"; };
+      }
+      scale.innerHTML = SCALE.map(p => '<label class="ro-opt' + (p[0] === PRE ? " on" : "") + '"><input type="radio" name="ro-grade" class="ro-radio" data-v="' + p[1] + '"' + (p[0] === PRE ? " checked" : "") + '><span class="ro-opt-l">' + esc(p[0]) + "</span></label>").join("");
+      const pre = SCALE.find(s => s[0] === PRE); if (scale._setScore) scale._setScore(pre ? pre[1] : 4);
+    }
+  })();
+
+  /* training checklist — expand/collapse a step, or tick its checkbox to master it */
+  const trainList = document.getElementById("train-list");
+  if (trainList) {
+    const items = [...trainList.querySelectorAll(".ts-item")];
+    const mastered = document.getElementById("roMastered");
+    const prog = document.getElementById("roProg");
+    const complete = document.getElementById("roComplete");
+    const refresh = () => {
+      const done = items.filter(i => i.classList.contains("done")).length;
+      if (mastered) mastered.textContent = done + " of " + items.length + " mastered";
+      if (prog) prog.style.width = (done / items.length * 100) + "%";
+      if (complete) complete.disabled = done < items.length;
+    };
+    items.forEach(item => {
+      const trigger = item.querySelector(".ts-trigger");
+      const check = item.querySelector(".ts-check");
+      if (trigger) trigger.addEventListener("click", () => item.classList.toggle("open"));
+      if (check) check.addEventListener("change", () => { item.classList.toggle("done", check.checked); refresh(); });
+    });
+  }
+
+  /* observation grade scale — pick one of the A–E responses, selection highlights live */
+  const roScale = document.getElementById("roScale");
+  if (roScale) {
+    roScale.querySelectorAll(".ro-radio").forEach(radio => radio.addEventListener("change", () => {
+      roScale.querySelectorAll(".ro-opt").forEach(x => x.classList.remove("on"));
+      if (radio.checked) { radio.closest(".ro-opt").classList.add("on"); if (roScale._setScore) roScale._setScore(+radio.dataset.v); }
     }));
   }
 
-  /* reveal on scroll */
-  const io = new IntersectionObserver((es)=>es.forEach(en=>{
-    if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
-  }), { threshold:.12 });
-  document.querySelectorAll(".reveal").forEach((el,i)=>{ el.style.transitionDelay=(Math.min(i,6)*70)+"ms"; io.observe(el); });
-
-  /* nav shadow on scroll */
-  const nav = document.getElementById("main-nav");
-  window.addEventListener("scroll", () => nav.classList.toggle("scrolled", window.scrollY > 8));
 
   /* closing statement — typewriter (monochrome text, single sage caret) */
   (function(){
     const head=document.querySelector('.statement .st-head');
     if(!head) return;
-    const full=["From one procedure to","a living compliance program"].join("\n");
+    const full=["From one procedure to","a living compliance program."].join("\n");
     const draw=n=>{
       const s=full.slice(0,n), nl=s.indexOf("\n");
       const body = nl<0 ? s : s.slice(0,nl)+'<br><span style="color:var(--muted)">'+s.slice(nl+1)+'</span>';
@@ -810,5 +757,120 @@
     sio.observe(head);
   })();
   </script>
+  <script>
+  /* procedure-canvas mock — fills both A/B option screens from one template
+     (static skeleton; remove the unused option's markup once a layout is picked) */
+  (function(){
+    const a = document.getElementById('capScreenA');
+    if (!a) return;
+    const USER  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg>';
+    const CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+    const PHOTO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+    const PLAY  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M10 8.5l5 3.5-5 3.5z" fill="currentColor" stroke="none"/></svg>';
+    const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>';
+    const ALERT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>';
+    const PIN   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+    const BRIEF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>';
+    const TAG   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.2" fill="currentColor"/></svg>';
+    const CAL   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
+    const INNER =
+      '<div class="proc-canvas">' +
+        '<div class="proc-measure">' +
+          '<h1 class="proc-title">Receive &amp; Verify ASN — International Freight</h1>' +
+          '<div class="proc-status">' +
+            '<span class="proc-badge pub">' + CHECK + ' Published</span>' +
+            '<span class="proc-badge ver">v4</span>' +
+            '<span class="proc-meta">' + USER + ' Created by A. Admin</span>' +
+            '<span class="proc-meta">' + CLOCK + ' Updated 1 day ago</span>' +
+            '<span class="proc-meta warn">' + ALERT + ' Acknowledgment Required</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="proc-measure proc-body">' +
+          '<h2 class="proc-h2">Purpose</h2>' +
+          '<p>This procedure defines the standard method for receiving and verifying an Advance Shipping Notice (ASN) against inbound international freight at the dock, and for recording any discrepancies before product is putaway.</p>' +
+          '<div class="proc-figure">' + PHOTO + '</div>' +
+          '<h3 class="proc-h3">Before you start</h3>' +
+          '<ul class="proc-list ul">' +
+            '<li>Confirm the trailer seal number matches the ASN.</li>' +
+            '<li>Stage an RF scanner and the dock checklist.</li>' +
+            '<li>Verify the receiving lane is clear of pallets.</li>' +
+          '</ul>' +
+          '<h3 class="proc-h3">Receive &amp; verify ASN</h3>' +
+          '<ol class="proc-list ol">' +
+            '<li>Scan the inbound ASN barcode to open the receipt.</li>' +
+            '<li>Count pallets and compare against the expected quantity.</li>' +
+            '<li>Inspect for visible damage and photograph any exceptions.</li>' +
+            '<li>Confirm SKU and lot codes on three random cartons.</li>' +
+          '</ol>' +
+          '<h3 class="proc-h3">Record &amp; escalate</h3>' +
+          '<p>Log the verified count in the WMS. If the variance exceeds tolerance, flag the receipt and notify the shift supervisor before releasing the trailer.</p>' +
+        '</div>' +
+      '</div>' +
+      '<div class="proc-side">' +
+        '<div class="side-sec">' +
+          '<div class="side-h">Workflow</div>' +
+          '<div class="side-body side-props">' +
+            '<span class="side-k">' + USER + ' Reviewer</span>' +
+            '<span class="side-v">Sam Supervisor<span class="ok">' + CHECK + '</span></span>' +
+            '<div class="side-stack">' +
+              '<span class="side-k">' + USER + ' Acknowledgers</span>' +
+              '<div class="stack-v">' +
+                '<span class="ack-prog">1 of 6 acknowledged</span>' +
+                '<div class="ack-row"><span class="ack-name"><span class="ok">' + CHECK + '</span>R. Receiver</span><span class="ack-date">2 days ago</span></div>' +
+                '<div class="ack-row"><span class="ack-name">M. Martinez</span></div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="side-stack">' +
+              '<span class="side-k">' + USER + ' Collaborators</span>' +
+              '<div class="stack-v"><span>J. Lee</span><span>D. Okoro</span></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="side-sec">' +
+          '<div class="side-h">Organization</div>' +
+          '<div class="side-body side-props">' +
+            '<span class="side-k">' + PIN + ' Sites</span>' +
+            '<span class="side-v"><span class="side-badges"><span class="proc-chip">Atlanta DC</span></span></span>' +
+            '<span class="side-k">' + BRIEF + ' Job Function</span>' +
+            '<span class="side-v"><span class="side-badges"><span class="proc-chip">Receiver</span></span></span>' +
+            '<span class="side-k">' + TAG + ' Tags</span>' +
+            '<span class="side-v"><span class="side-badges"><span class="proc-chip">DOT</span><span class="proc-chip">Forklift</span><span class="proc-chip">Pallet Jack</span></span></span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="side-sec">' +
+          '<div class="side-h">Timeline</div>' +
+          '<div class="side-body side-props">' +
+            '<span class="side-k">' + CAL + ' Expiration</span>' +
+            '<span class="side-v">1 year</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="side-sec">' +
+          '<div class="side-h">Versions</div>' +
+          '<div class="side-body side-versions">' +
+            '<div class="ver-row cur">' +
+              '<span class="ver-l"><span class="ver-line"><span class="ver-n">v4</span><span class="proc-badge info">Published</span><span class="proc-badge cur">Current</span></span><span class="ver-title">Receive &amp; Verify ASN — International Freight</span></span>' +
+              '<span class="ver-r"><span class="ver-label">Published</span><span class="ver-date">Jun 22</span></span>' +
+            '</div>' +
+            '<div class="ver-row">' +
+              '<span class="ver-l"><span class="ver-line"><span class="ver-n">v3</span><span class="proc-badge arc">Archived</span></span><span class="ver-title">Receive &amp; Verify ASN — International Freight</span></span>' +
+              '<span class="ver-r"><span class="ver-label">Published</span><span class="ver-date">Jun 19</span></span>' +
+            '</div>' +
+            '<div class="ver-row">' +
+              '<span class="ver-l"><span class="ver-line"><span class="ver-n">Draft</span><span class="proc-badge draft">Draft</span></span><span class="ver-title">Working copy</span></span>' +
+              '<span class="ver-r"><span class="ver-label">Edited</span><span class="ver-date">Jun 23</span></span>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="proc-spacer"></div>' +
+        '<div class="proc-actions">' +
+          '<div class="proc-btn solid">Create New Version</div>' +
+          '<div class="proc-btn outline">Compare with previous</div>' +
+          '<div class="proc-btn outline">Archive</div>' +
+        '</div>' +
+      '</div>';
+    a.innerHTML = INNER;
+  })();
+  </script>
+  <script src="assets/js/reveal.js"></script>
 </body>
 </html>

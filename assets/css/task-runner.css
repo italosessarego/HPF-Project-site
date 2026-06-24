@@ -1,0 +1,164 @@
+/* ============================================================================
+   TASK-RUNNER COMPONENTS — reusable, drop-in mock of the real SOP platform.
+
+   A 1:1 replica of the live product's task runner. Source of truth = the app
+   codebase at `SOP Demo 6.18/apps/web/src/components/tasks/runner/`; every value
+   here is lifted from it — design tokens (8px radius, Inter, text-sm = 12.8px),
+   the exact Tailwind classes, and the theme's oklch colors resolved to hex
+   (globals.css / semantic-ramp.css). No phone chrome (no status bar / clock).
+
+   USAGE — wrap a screen in a `.device` (the scaled phone frame):
+
+     <div class="device">
+       <div class="app-screen"> … runner markup (.ro-* / .ts-*) … </div>
+     </div>
+
+   The `.app-screen` is rendered at the platform's TRUE 560px width, then the
+   `.device` zooms the whole thing down (--ts-scale) so the internal layout
+   stays pixel-exact while the screen becomes phone-sized. The frame sizes to
+   the scaled content (tall phone, shows everything).
+
+   Two screen recipes share the same primitives:
+     • Observation (graded)  — .ro-head / .ro-status / .ro-card / .ro-opts …
+     • Training  (checklist) — .ro-steps-head / .ro-progress / .ro-checklist …
+   ============================================================================ */
+
+/* ---- phone device frame -------------------------------------------------- */
+/* Scales the true-size screen down via `zoom` (layout-aware, so the frame sizes
+   to the scaled content and text stays crisp). Tune --ts-scale to taste. */
+.device {
+  --ts-scale: 0.6;            /* whole-screen scale (1 = real platform size)   */
+  --ts-design-w: 560px;       /* the runner <main>'s true internal width        */
+  box-sizing: border-box;
+  /* keep the (wider) screen width; +2px so the 1px border doesn't shave it */
+  width: calc(var(--ts-design-w) * var(--ts-scale) + 2px);
+  /* as tall as the SOP/Capture phone — mirrors its clamp. min-height (not
+     height) so a longer screen grows instead of clipping; shorter screens get
+     empty canvas below, like a real phone page. */
+  min-height: clamp(488px, 72vh, 640px);
+  padding-top: 20px;          /* top bezel so the title clears the rounded corner */
+  margin: 0 auto;
+  background: #F8F8F8;        /* --canvas */
+  border: 1px solid #E4E4E7; /* --border */
+  border-radius: 42px;        /* phone silhouette */
+  overflow: hidden;
+  /* the floaty drop shadow from the original phone design */
+  box-shadow: 0 30px 72px -34px rgba(30, 29, 29, 0.34), 0 6px 18px -12px rgba(30, 29, 29, 0.18);
+}
+.device > .app-screen { width: var(--ts-design-w); zoom: var(--ts-scale); }
+
+/* ---- the app screen (runner <main>, p-6 on the app canvas) ---------------- */
+.app-screen {
+  /* theme tokens (globals.css / semantic-ramp.css, oklch → hex) */
+  --ts-canvas: #F8F8F8;       /* page bg behind the card (--canvas) */
+  --ts-card: #FFFFFF;         /* --card */
+  --ts-fg: #09090B;           /* --foreground */
+  --ts-primary: #18181B;      /* --primary / --ring (buttons, selected border) */
+  --ts-primary-fg: #FAFAFA;   /* --primary-foreground */
+  --ts-muted: #F4F4F5;        /* --muted (hover, progress track, thumb) */
+  --ts-muted-fg: #71717A;     /* --muted-foreground (secondary text) */
+  --ts-border: #E4E4E7;       /* --border / --input */
+  --ts-blue: #006BDF;         /* --badge-info-fg (status badge + control accent) */
+  --ts-blue-fg: #E6F0FC;      /* --badge-info-bg (badge text) */
+  --ts-green: #057F04;        /* --success (progress fill, done dot) */
+  --ts-amber-bg: #FCF3E0;     /* guidance card — light ember fill */
+  --ts-amber-border: #ECCF93; /* guidance card — amber border */
+  --ts-amber-fg: #6E5F44;     /* guidance card — warm text */
+  --ts-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.05); /* --shadow-xs */
+  width: 560px; box-sizing: border-box; padding: 24px; background: var(--ts-canvas);
+  font-family: 'Inter', system-ui, sans-serif; letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased; color: var(--ts-fg); text-align: left;
+}
+
+/* header: h1 text-xl/600 + ghost Exit button (mb-4) */
+.ro-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.ro-title { font-size: 20px; font-weight: 600; line-height: 1.3; color: var(--ts-fg); }
+.ro-exit { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 10px; margin-right: -10px;
+  font-family: inherit; font-size: 12.8px; font-weight: 500; color: var(--ts-fg); background: none; border: 0; border-radius: 6px; cursor: pointer; }
+.ro-exit:hover { background: var(--ts-muted); }
+.ro-exit svg { width: 16px; height: 16px; }
+
+/* meta row: badge · step · score (text-sm muted, gap-3, mb-6) */
+.ro-status { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; font-size: 12.8px; color: var(--ts-muted-fg); }
+.ro-badge { display: inline-flex; align-items: center; height: 24px; padding: 0 7.2px; border-radius: 6px;
+  background: var(--ts-blue); color: var(--ts-blue-fg); font-size: 11.2px; font-weight: 500; }
+
+/* card: white, rounded-lg(8px), py/px-6(24px), shadow-xs, NO border, base text-sm */
+.ro-card { background: var(--ts-card); border-radius: 8px; padding: 24px; box-shadow: var(--ts-shadow); font-size: 12.8px; }
+
+/* question header (space-y-1) */
+.ro-qn { font-size: 12.8px; color: var(--ts-muted-fg); margin-bottom: 4px; }
+.ro-q { font-size: 20px; font-weight: 600; line-height: 1.3; color: var(--ts-fg); margin-bottom: 4px; }
+.ro-sub { font-size: 12.8px; color: var(--ts-muted-fg); line-height: 1.4; }
+
+/* options (space-y-3=12px; each p-4=16px, gap-3, rounded-lg, border) */
+.ro-opts { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+.ro-opt { display: flex; align-items: center; gap: 12px; padding: 16px; border: 1px solid var(--ts-border); border-radius: 8px;
+  background: var(--ts-card); cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease; }
+.ro-opt:hover { background: rgba(244, 244, 245, 0.5); }
+.ro-opt.on { border-color: var(--ts-primary); background: rgba(24, 24, 27, 0.05); }
+.ro-radio { width: 16px; height: 16px; flex: none; margin: 0; accent-color: var(--ts-blue); cursor: pointer; }
+.ro-opt-l { font-size: 12.8px; color: var(--ts-fg); }
+
+/* notes block (space-y-2=8px) — 24px above only when it follows the card's
+   options (observation); in the training body it follows a 12px-spaced desc */
+.ro-notes-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.ro-card > .ro-notes-wrap { margin-top: 24px; }
+.ro-notes-lbl { font-size: 12.8px; font-weight: 500; color: var(--ts-fg); }
+.ro-notes { width: 100%; box-sizing: border-box; border: 1px solid var(--ts-border); border-radius: 6px; padding: 8px 10px;
+  font-family: inherit; font-size: 12.8px; line-height: 1.4; color: var(--ts-fg); background: var(--ts-card); min-height: 64px; box-shadow: var(--ts-shadow); resize: vertical; }
+.ro-notes::placeholder { color: var(--ts-muted-fg); }
+.ro-notes:focus { outline: none; border-color: var(--ts-primary); }
+.ro-photo { display: inline-flex; align-items: center; gap: 4px; height: 32px; padding: 0 10px; border: 1px solid var(--ts-border); border-radius: 6px;
+  background: var(--ts-card); font-family: inherit; font-size: 12.8px; font-weight: 500; color: var(--ts-fg); cursor: pointer; box-shadow: var(--ts-shadow); }
+.ro-photo:hover { background: var(--ts-muted); }
+.ro-photo svg { width: 16px; height: 16px; }
+
+/* reference photos (text-xs label, 64px thumb — kept grayed-out w/ icon) */
+.ro-ref-block { margin-top: 4px; }
+.ro-reflbl { font-size: 11.2px; font-weight: 500; color: var(--ts-muted-fg); margin-bottom: 4px; }
+.ro-ref { display: flex; flex-wrap: wrap; gap: 8px; }
+.ro-refcell { display: inline-flex; flex-direction: column; gap: 4px; }
+.ro-refbox { width: 64px; height: 64px; border-radius: 6px; background: var(--ts-muted); border: 1px solid var(--ts-border); display: grid; place-items: center; color: var(--ts-muted-fg); }
+.ro-refcap { font-size: 11px; color: var(--ts-muted-fg); }
+
+/* guidance card — "Trainer instructions" / "What to look for" in a light-ember
+   amber card, with an uppercase label above; reference photos sit below it. */
+.ro-guide-lbl { font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ts-muted-fg); margin: 14px 0 6px; }
+.ro-guide { background: var(--ts-amber-bg); border: 1px solid var(--ts-amber-border); border-radius: 8px; padding: 12px 14px; font-size: 12.8px; line-height: 1.45; color: var(--ts-amber-fg); }
+/* the training body's first label sits flush to the top of the expanded body */
+.ts-body > .ro-guide-lbl:first-child { margin-top: 0; }
+
+/* footer: Previous (outline) + Complete Task (solid) — h-9, rounded-md, text-sm */
+.ro-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; }
+.ro-foot.end { justify-content: flex-end; }
+.ro-btn { display: inline-flex; align-items: center; justify-content: center; height: 36px; padding: 0 10px; border-radius: 6px;
+  font-family: inherit; font-size: 12.8px; font-weight: 500; cursor: pointer; border: 1px solid transparent; transition: background 0.15s ease; }
+.ro-prev { background: var(--ts-card); border-color: var(--ts-border); color: var(--ts-fg); box-shadow: var(--ts-shadow); }
+.ro-prev:hover { background: var(--ts-muted); }
+.ro-complete { background: var(--ts-primary); border-color: var(--ts-primary); color: var(--ts-primary-fg); }
+.ro-complete:hover { background: rgba(24, 24, 27, 0.8); }
+.ro-complete:disabled { opacity: 0.5; cursor: default; }
+.ro-complete:disabled:hover { background: var(--ts-primary); }
+
+/* ---- TRAINING checklist (RunnerChecklistView) — progress + accordion ----- */
+/* outer space-y-4 = 16px between progress / card / footer */
+.ro-steps-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; font-size: 12.8px; }
+.ro-steps-lbl { font-weight: 500; color: var(--ts-fg); }
+.ro-steps-prog { color: var(--ts-muted-fg); }
+.ro-progress { height: 6px; width: 100%; background: var(--ts-muted); border-radius: 999px; overflow: hidden; }
+.ro-progress > i { display: block; height: 100%; width: 20%; background: var(--ts-green); border-radius: 999px; transition: width 0.25s ease; }
+.ro-card.ro-checklist { margin-top: 16px; padding: 4px 16px; font-size: 12.8px; }
+.ts-item + .ts-item { border-top: 1px solid var(--ts-border); }
+.ts-row { display: flex; align-items: center; gap: 12px; padding: 4px 0; }
+.ts-check { width: 18px; height: 18px; flex: none; margin: 0; accent-color: var(--ts-blue); border-radius: 4px; cursor: pointer; }
+.ts-trigger { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; width: 100%; padding: 8px 0;
+  background: none; border: 0; cursor: pointer; text-align: left; font-family: inherit; }
+.ts-trigger:hover .ts-title { text-decoration: underline; }
+.ts-title { flex: 1; font-size: 12.8px; font-weight: 500; color: var(--ts-fg); }
+.ts-item.done .ts-title { color: var(--ts-muted-fg); text-decoration: line-through; font-weight: 400; }
+.ts-chev { width: 16px; height: 16px; color: var(--ts-muted-fg); flex: none; transition: transform 0.2s ease; }
+.ts-item.open .ts-chev { transform: rotate(180deg); }
+.ts-body { display: none; padding: 0 0 16px 30px; }
+.ts-item.open .ts-body { display: block; }
+.ts-desc { font-size: 12.8px; color: var(--ts-muted-fg); line-height: 1.4; margin-bottom: 12px; }

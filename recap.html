@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harbor Freight · Recap &amp; Next Steps · MeetBean</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon-32.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['DM Sans', 'sans-serif'] },
+      colors: {
+        dark: { 900: '#1E1D1D', 800: '#1E1E24', 700: '#343E3F', 600: '#40424D' },
+        brand: { DEFAULT: '#70A593', light: '#9CC9BB', dark: '#508875' },
+      },
+    } } };
+  </script>
+
+  <link rel="stylesheet" href="assets/css/system.css" />
+
+  <style>
+    /* Page-specific styles only. Shared tokens & components: assets/css/system.css */
+
+
+    /* ---- hero meta ---- */
+    .meta-block .who { list-style:none; margin:10px 0 0; padding:0; display:flex; flex-direction:column; gap:4px; }
+    .meta-block .who li { font-size:13.5px; color:var(--ink-2); line-height:1.5; }
+
+    /* ---- requirement rows ---- */
+    .req { display:flex; gap:20px; align-items:flex-start; padding:22px 24px; }
+    .req .num { font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--faint); flex:none; width:24px; margin-top:3px; }
+    .req .body { flex:1; min-width:0; }
+    .req .t { font-weight:600; font-size:15.5px; letter-spacing:-.01em; color:var(--ink); }
+    .req .d { font-size:13.5px; line-height:1.6; color:var(--muted); margin-top:6px; max-width:64ch; }
+
+    /* ---- next-step lanes ---- */
+    .lane { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); padding:26px; height:100%; }
+    .lane h3 { font-weight:600; font-size:16px; color:var(--ink); margin-bottom:4px; }
+    .lane .role { font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+    .lane ul { display:flex; flex-direction:column; gap:11px; margin-top:16px; }
+    .lane li { display:flex; gap:10px; font-size:13.5px; line-height:1.5; color:var(--muted); }
+    .lane li .b { color:var(--accent-mid); flex:none; margin-top:1px; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- NAV (shared two-page toggle) -->
+  <!-- NAV -->
+  <nav id="main-nav" class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/images/meetbean-logo-dark.svg" alt="meetBean" class="h-5" />
+        <span class="mono-label hidden lg:inline" style="color:var(--faint)">/ Project</span>
+      </a>
+      <div class="nav-tabs">
+        <a href="index.html">Project Overview</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="procedures.html">Procedure Breakdown</a>
+        <a href="implementation.html">Implementation Plan</a>
+        <span class="cur" aria-current="page">Recap</span>
+        <span class="dis">Deployment Phases</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="relative overflow-hidden flex items-center" style="border-bottom:1px solid var(--line); min-height:80vh">
+    <div class="grid-bg absolute inset-0" style="-webkit-mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%);"></div>
+
+    <!-- left vertical rail -->
+    <div class="hidden lg:flex absolute left-0 top-16 bottom-0 w-14 flex-col items-center justify-between py-10" style="border-right:1px solid var(--line)">
+      <span style="width:7px;height:7px;border-radius:var(--r-pill);background:var(--accent-mid)"></span>
+      <span class="mono-label" style="writing-mode:vertical-rl; transform:rotate(180deg); color:var(--muted)">Recap · Harbor&nbsp;Freight</span>
+      <span class="mono-label" style="color:var(--faint)">04</span>
+    </div>
+
+    <div class="relative w-full px-6 sm:px-8 lg:pl-28 lg:pr-12 py-24">
+      <div class="eyebrow mono-label mb-8"><span class="dot"></span><span>Post-demo recap</span><span style="color:var(--line-2)">/</span><span>Jun 22, 2026</span></div>
+      <h1 class="reveal text-5xl md:text-6xl lg:text-7xl leading-[1.02] mb-8 max-w-4xl" style="transition-delay:.1s">
+        What we covered.<br><span style="color:var(--muted)">What&rsquo;s next.</span>
+      </h1>
+      <p class="reveal text-lg leading-relaxed max-w-2xl" style="color:var(--muted); transition-delay:.2s">
+        A recap of today&rsquo;s walkthrough — what we covered, the requirements you raised, and the short path to getting MeetBean onboarded.
+      </p>
+
+      <div class="reveal flex flex-wrap items-start gap-x-16 gap-y-8 mt-12" style="transition-delay:.3s">
+        <div class="meta-block">
+          <span class="mono-label" style="color:var(--faint)">In the room · Harbor Freight</span>
+          <ul class="who">
+            <li>Alex Lamarre</li>
+            <li>Tammy Lawson</li>
+            <li>Chasity Towler</li>
+            <li>James Turnure</li>
+          </ul>
+        </div>
+        <div class="meta-block">
+          <span class="mono-label" style="color:var(--faint)">MeetBean</span>
+          <ul class="who">
+            <li>Italo Sessarego</li>
+            <li>Meghan Raab</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AT A GLANCE -->
+  <section class="py-16 md:py-20" style="background:var(--surface); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="reveal flex items-center justify-between gap-6 mb-8">
+        <div class="eyebrow mono-label"><span class="dot"></span><span>At a glance</span></div>
+        <span class="mono-label" style="color:var(--faint)">From today&rsquo;s demo</span>
+      </div>
+      <div id="glance" class="reveal grid grid-cols-1 sm:grid-cols-3 gap-4"></div>
+    </div>
+  </section>
+
+  <!-- 01 · WHAT WE COVERED -->
+  <section class="py-20 md:py-24" style="background:var(--paper); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="reveal mb-10">
+        <div class="flex items-center justify-between gap-6 mb-8">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>What we covered</span></div>
+        </div>
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">What we walked through</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            We took the team through MeetBean in three parts — the methodology behind it, how we split one giant SOP into job-specific procedures and their derivatives, and a live demo of the platform itself. The short version: it&rsquo;s ready to deploy now.
+          </p>
+        </div>
+      </div>
+      <div id="covered" class="reveal grid md:grid-cols-3 gap-4"></div>
+    </div>
+  </section>
+
+  <!-- 02 · WHAT WE HEARD FROM YOU -->
+  <section class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="reveal mb-10">
+        <div class="flex items-center justify-between gap-6 mb-8">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>What we heard from you</span></div>
+        </div>
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">Your requirements, captured</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            Everything you raised today, written down so nothing gets lost between here and onboarding.
+          </p>
+        </div>
+      </div>
+      <div id="reqs" class="reveal card" style="overflow:hidden"></div>
+    </div>
+  </section>
+
+  <!-- 03 · NEXT STEPS — the procurement path -->
+  <section class="py-20 md:py-24" style="background:var(--paper); border-bottom:1px solid var(--line)">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <div class="reveal mb-10">
+        <div class="flex items-center justify-between gap-6 mb-8">
+          <div class="eyebrow mono-label"><span class="dot"></span><span>Next steps</span></div>
+        </div>
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-[2.4rem] leading-[1.1] mb-4">What happens next</h2>
+          <p class="text-lg leading-relaxed" style="color:var(--muted)">
+            The next step is the procurement process. Rather than take vendor onboarding, IT, and legal one at a time, we propose a single kickoff with all three &mdash; from there each side splits into parallel tracks, so the approvals move at once instead of in sequence.
+          </p>
+        </div>
+      </div>
+      <div id="lanes" class="reveal grid md:grid-cols-3 gap-4"></div>
+    </div>
+  </section>
+
+  <!-- CLOSING STATEMENT -->
+  <section class="statement reveal">
+    <div class="px-6 sm:px-8 lg:px-12">
+      <h2 class="st-head">Let&rsquo;s get MeetBean<br><span style="color:var(--muted)">onboarded.</span></h2>
+      <div class="flex flex-wrap items-center gap-3 mt-10">
+        <a class="btn btn-solid" href="mailto:italo@meetbean.ai?subject=Harbor%20Freight%20%2B%20MeetBean%20%E2%80%94%20onboarding">Reply to schedule &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12" style="background:var(--ink)">
+    <div class="px-6 sm:px-8 lg:px-12 flex items-center justify-between">
+      <img src="assets/images/meetbean-logo-light.svg" alt="meetBean" class="h-5 opacity-90" />
+      <span class="mono-label" style="color:var(--faint)">Recap · Harbor Freight</span>
+    </div>
+  </footer>
+
+  <script>
+    const GLANCE = [
+      { big:'3', sub:'topics covered' },
+      { big:'6', sub:'requirements captured' },
+      { big:'1', sub:'immediate next step' },
+    ];
+
+    const COVERED = [
+      { t:'The methodology',
+        d:'Our approach in three moves — capture each procedure once as the single source of truth, transfer it through training so everyone learns the same method, then coach continuously with graded observations (not pass/fail) so adherence is measured, not assumed.' },
+      { t:'The split',
+        d:'We took your 122-page Receiving SOP and broke it into 22 atomic, job-specific procedures across 5 job functions. Each one becomes the source for its derivatives — work instructions, trainings, and observations — all linked back, so nothing drifts when the method changes.' },
+      { t:'The demo',
+        d:'We ran the live platform end-to-end — the supervisor&rsquo;s day, from trainings to graded observations to dashboards to version-controlled procedures. It&rsquo;s ready to deploy now, and the requirements you raised along the way are captured for the build.' },
+    ];
+
+    const REQS = [
+      { t:'&ldquo;Wipe and re-train&rdquo; trigger', tag:'Critical', cls:'tag-must',
+        d:'Any SOP change automatically invalidates prior certifications — forcing fresh training and assessment so no one stays signed off on an outdated method.' },
+      { t:'Your 1&ndash;4 CSD scale', tag:'Customization', cls:'tag-nice',
+        d:'The platform adapts to your Continuous Skills Development rating — 1 (&ldquo;learned the topic, can&rsquo;t yet perform&rdquo;) through 4 (&ldquo;can train others&rdquo;) — rather than a generic scale.' },
+      { t:'Role-based visibility', tag:'Customization', cls:'tag-nice',
+        d:'Data shows by role. Hourly CSD leads, for example, won&rsquo;t see manager-level coaching notes.' },
+      { t:'Associate profiles', tag:'Requested', cls:'tag-nice',
+        d:'One consolidated record per associate — training history, observation scores, and coaching notes together — for a complete performance picture.' },
+      { t:'SOP onboarding service', tag:'Included', cls:'tag-accent',
+        d:'We break long, multi-topic SOPs into focused, job-specific procedures. Your 122-page Receiving SOP became 22 procedures across 5 job functions.' },
+      { t:'Integrations', tag:'Top priority', cls:'tag-accent',
+        d:'<strong style="color:var(--ink);font-weight:600">Manhattan WMS</strong> first — correlate labor-management data (pace) with method adherence for the full performance picture.<span style="display:block;margin-top:7px"><strong style="color:var(--ink);font-weight:600">Axonify</strong> next — push certification status, by manual upload now or via API later.</span>' },
+    ];
+
+    const LANES = [
+      { role:'Procurement', h:'Vendor onboarding', items:[
+        'Vendor setup and any required forms',
+        'Purchase order and commercials',
+        'Lock the timeline to a Phase 1 go-live',
+      ] },
+      { role:'IT / Security', h:'Access &amp; integration', items:[
+        'Security review, SSO, and access model',
+        'Data handling and where it lives',
+        'Scope the Manhattan WMS and Axonify integrations',
+      ] },
+      { role:'Legal', h:'Paper &amp; terms', items:[
+        'Review the MSA and data-processing terms',
+        'Confirm security, privacy, and IP language',
+        'Flag anything needing sign-off early',
+      ] },
+    ];
+
+    function renderGlance() {
+      document.getElementById('glance').innerHTML = GLANCE.map(t => `
+        <div class="sumtile">
+          <div class="stat" style="color:var(--ink)">${t.big}</div>
+          <p class="text-[13px] mt-2.5" style="color:var(--muted)">${t.sub}</p>
+        </div>`).join('');
+    }
+
+    function renderCovered() {
+      document.getElementById('covered').innerHTML = COVERED.map((c, i) => `
+        <div class="card p-6">
+          <div class="mono-label mb-4" style="color:var(--faint)">${String(i + 1).padStart(2, '0')}</div>
+          <h3 class="font-display text-lg mb-2" style="color:var(--ink)">${c.t}</h3>
+          <p class="text-[13.5px] leading-relaxed" style="color:var(--muted)">${c.d}</p>
+        </div>`).join('');
+    }
+
+    function renderReqs() {
+      document.getElementById('reqs').innerHTML = REQS.map((r, i) => `
+        <div class="req" ${i ? 'style="border-top:1px solid var(--line)"' : ''}>
+          <span class="num">${String(i + 1).padStart(2, '0')}</span>
+          <div class="body">
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="t">${r.t}</span>
+              <span class="tag ${r.cls}">${r.tag}</span>
+            </div>
+            <p class="d">${r.d}</p>
+          </div>
+        </div>`).join('');
+    }
+
+    function renderLanes() {
+      document.getElementById('lanes').innerHTML = LANES.map(l => `
+        <div class="lane">
+          <div class="role">${l.role}</div>
+          <h3>${l.h}</h3>
+          <ul>
+            ${l.items.map(it => `<li><span class="b">&#8594;</span><span>${it}</span></li>`).join('')}
+          </ul>
+        </div>`).join('');
+    }
+
+    renderGlance();
+    renderCovered();
+    renderReqs();
+    renderLanes();
+  </script>
+  <script src="assets/js/closing.js"></script>
+  <script src="assets/js/reveal.js"></script>
+</body>
+</html>

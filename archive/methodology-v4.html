@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harbor Freight · Methodology (v4 — all versions) · MeetBean</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon-32.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/system.css" />
+
+  <style>
+    /* v4 is a "contact sheet" of the three methodology versions, stacked.
+       Each version is embedded verbatim in its own frame so its page-local
+       CSS + scripts (which collide across versions) stay fully isolated. */
+    .v4-wrap { max-width:1180px; margin:0 auto; padding:0 24px; }
+
+    /* version divider band between embeds */
+    .v4-band { border-top:1px solid var(--line); background:var(--paper); }
+    .v4-band-inner { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; padding:34px 0 22px; flex-wrap:wrap; }
+    .v4-band .vno { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+    .v4-band h2 { font-size:1.5rem; line-height:1.15; color:var(--ink); }
+    .v4-band p { font-size:13.5px; color:var(--muted); margin-top:6px; max-width:52ch; line-height:1.5; }
+    .v4-open { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.04em; color:var(--ink); text-decoration:none; border:1px solid var(--line-2); border-radius:999px; padding:7px 14px; white-space:nowrap; transition:background .18s ease,color .18s ease; }
+    .v4-open:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
+
+    /* the embedded version */
+    .v4-frame-shell { border:1px solid var(--line); border-radius:var(--r-sm,14px); overflow:hidden; background:var(--surface); box-shadow:0 1px 0 0 var(--line); }
+    .v4-frame-shell iframe { display:block; width:100%; border:0; height:2800px; /* fallback until auto-sized */ }
+    .v4-frame-shell.measuring iframe { overflow:auto; }
+
+    /* hero */
+    .v4-hero { padding:120px 0 8px; }
+    .v4-hero .eyebrow { margin-bottom:18px; }
+    .v4-hero h1 { font-size:clamp(2rem,4.4vw,3rem); line-height:1.05; letter-spacing:-.02em; color:var(--ink); }
+    .v4-hero .sub { font-size:15px; color:var(--muted); margin-top:16px; max-width:60ch; line-height:1.6; }
+    .v4-jump { display:flex; gap:10px; flex-wrap:wrap; margin-top:26px; }
+    .v4-jump a { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.04em; color:var(--ink-2); text-decoration:none; border:1px solid var(--line-2); border-radius:999px; padding:7px 14px; transition:background .18s ease,color .18s ease; }
+    .v4-jump a:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
+
+    .v4-note { font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--faint); margin-top:10px; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- NAV -->
+  <nav id="main-nav" class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="../assets/images/meetbean-logo-dark.svg" alt="meetBean" class="h-5" />
+        <span class="mono-label hidden lg:inline" style="color:var(--faint)">/ Methodology · v4</span>
+      </a>
+      <div class="nav-tabs">
+        <a href="index.html">Project Overview</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="implementation.html">Implementation Plan</a>
+        <a href="deployment.html">Deployment</a>
+        <a href="design-system.html">Design System</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="v4-hero">
+    <div class="v4-wrap">
+      <div class="eyebrow"><span class="dot"></span><span class="mono-label">Methodology · v4 — all versions, stacked</span></div>
+      <h1>Every methodology version,<br>on one page.</h1>
+      <p class="sub">A single scrollable contact sheet of all three methodology directions — the original long-form interactive page, and the two card-based rewrites. Each is embedded exactly as it stands, so you can compare them top to bottom and pick the direction to take forward.</p>
+      <div class="v4-jump">
+        <a href="#v1">↓ Version 1</a>
+        <a href="#v2">↓ Version 2</a>
+        <a href="#v3">↓ Version 3</a>
+      </div>
+      <p class="v4-note">Each block below is the live page itself — links inside it work. Best viewed over a local server; over file:// a frame may scroll on its own.</p>
+    </div>
+  </header>
+
+  <!-- ============ VERSION 1 ============ -->
+  <section id="v1" class="v4-band" style="margin-top:64px">
+    <div class="v4-wrap">
+      <div class="v4-band-inner">
+        <div>
+          <p class="vno">Version 1 · original</p>
+          <h2>Long-form, interactive</h2>
+          <p>The full original methodology page — spotlight spine, numbered flow rows, training accordion, a live observation grading scale, and the typewriter closing statement. The most detailed of the three.</p>
+        </div>
+        <a class="v4-open" href="methodology.html" target="_blank" rel="noopener">Open standalone ↗</a>
+      </div>
+    </div>
+    <div class="v4-wrap" style="padding-bottom:8px">
+      <div class="v4-frame-shell"><iframe data-src="methodology.html" title="Methodology — Version 1" loading="lazy" scrolling="no"></iframe></div>
+    </div>
+  </section>
+
+  <!-- ============ VERSION 2 ============ -->
+  <section id="v2" class="v4-band">
+    <div class="v4-wrap">
+      <div class="v4-band-inner">
+        <div>
+          <p class="vno">Version 2 · card rewrite</p>
+          <h2>Stage cards</h2>
+          <p>A tighter card-based rewrite — three peer stage cards (Capture → Transfer → Continuous Coaching), the gaps they replace, and a capability board per stage. Cleaner and faster to read.</p>
+        </div>
+        <a class="v4-open" href="methodology-v2.html" target="_blank" rel="noopener">Open standalone ↗</a>
+      </div>
+    </div>
+    <div class="v4-wrap" style="padding-bottom:8px">
+      <div class="v4-frame-shell"><iframe data-src="methodology-v2.html" title="Methodology — Version 2" loading="lazy" scrolling="no"></iframe></div>
+    </div>
+  </section>
+
+  <!-- ============ VERSION 3 ============ -->
+  <section id="v3" class="v4-band">
+    <div class="v4-wrap">
+      <div class="v4-band-inner">
+        <div>
+          <p class="vno">Version 3 · card rewrite + roles</p>
+          <h2>Stage cards, with role scoping</h2>
+          <p>Version 2's structure plus a role-scoping section — what each role (Associate, Supervisor, Site manager, Executive) sees. The most complete of the card-based directions.</p>
+        </div>
+        <a class="v4-open" href="methodology-v3.html" target="_blank" rel="noopener">Open standalone ↗</a>
+      </div>
+    </div>
+    <div class="v4-wrap" style="padding-bottom:8px">
+      <div class="v4-frame-shell"><iframe data-src="methodology-v3.html" title="Methodology — Version 3" loading="lazy" scrolling="no"></iframe></div>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid var(--line); margin-top:8px">
+    <div class="v4-wrap" style="padding:30px 24px 60px">
+      <p class="mono-label" style="color:var(--faint)">Harbor Freight × meetBean · Methodology v4 — comparison stack</p>
+    </div>
+  </footer>
+
+  <!-- nav scrolled-state, matching the rest of the site -->
+  <script>
+    (function(){
+      var nav=document.getElementById('main-nav');
+      var onScroll=function(){ nav.classList.toggle('scrolled', window.scrollY>8); };
+      onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+    })();
+  </script>
+
+  <!-- auto-size each embedded version so the page reads as one continuous stack -->
+  <script>
+    (function(){
+      var frames = Array.prototype.slice.call(document.querySelectorAll('.v4-frame-shell iframe'));
+
+      function fit(frame){
+        try{
+          var doc = frame.contentDocument || frame.contentWindow.document;
+          if(!doc || !doc.body) return false;
+          var h = Math.max(
+            doc.body.scrollHeight, doc.documentElement.scrollHeight,
+            doc.body.offsetHeight, doc.documentElement.offsetHeight
+          );
+          if(h > 0){
+            frame.style.height = h + 'px';
+            frame.parentNode.classList.remove('measuring');
+            return true;
+          }
+        }catch(e){ /* cross-origin (file://) — keep fallback height + own scroll */ }
+        frame.parentNode.classList.add('measuring');
+        return false;
+      }
+
+      function fitAll(){ frames.forEach(fit); }
+
+      // The embedded pages use 100vh-ish hero sections. Inside a frame, vh resolves
+      // to the frame's own height — and since we size the frame TO the content, that
+      // creates a runaway feedback loop that inflates every hero to tens of thousands
+      // of px. Pin those viewport-height heroes to a fixed height to break the loop.
+      // (min-height only — never clips real content, which always keeps its natural height.)
+      function deviewport(frame){
+        try{
+          var doc = frame.contentDocument || frame.contentWindow.document;
+          if(!doc || !doc.head || doc.getElementById('v4-fix')) return;
+          var st = doc.createElement('style');
+          st.id = 'v4-fix';
+          st.textContent =
+            'html,body{height:auto !important;min-height:0 !important}' +
+            'section{min-height:0 !important}' +
+            'section.relative.overflow-hidden{min-height:560px !important}';
+          doc.head.appendChild(st);
+        }catch(e){ /* cross-origin (file://) — heroes stay at their own height */ }
+      }
+
+      frames.forEach(function(frame){
+        frame.addEventListener('load', function(){
+          deviewport(frame);
+          fit(frame);
+          // re-measure a few times for late fonts / lazy render
+          [120, 400, 900, 1800].forEach(function(t){ setTimeout(function(){ deviewport(frame); fit(frame); }, t); });
+          // observe inner body if same-origin
+          try{
+            var doc = frame.contentDocument || frame.contentWindow.document;
+            if(window.ResizeObserver && doc && doc.body){
+              new ResizeObserver(function(){ fit(frame); }).observe(doc.body);
+            }
+          }catch(e){}
+        });
+        // assign src now (was deferred via data-src so listeners attach first)
+        frame.src = frame.getAttribute('data-src');
+      });
+
+      window.addEventListener('resize', fitAll, {passive:true});
+    })();
+  </script>
+</body>
+</html>

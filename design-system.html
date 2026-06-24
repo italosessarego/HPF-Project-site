@@ -8,12 +8,12 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { theme: { extend: {
-      fontFamily: { sans: ['Inter', 'sans-serif'], display: ['DM Sans', 'sans-serif'] },
+      fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['DM Sans', 'sans-serif'] },
       colors: {
         dark: { 900: '#1E1D1D', 800: '#1E1E24', 700: '#343E3F', 600: '#40424D' },
         brand: { DEFAULT: '#70A593', light: '#9CC9BB', dark: '#508875' },
@@ -71,6 +71,8 @@
       <a class="toclink" href="#type">Type</a>
       <a class="toclink" href="#space">Space &amp; line</a>
       <a class="toclink" href="#components">Components</a>
+      <a class="toclink" href="#rules">Rules</a>
+      <a class="toclink" href="#chrome">Page chrome</a>
       <a class="toclink" href="#sections">Section setup</a>
       <a class="toclink" href="#a11y">Accessibility</a>
     </div>
@@ -80,7 +82,7 @@
 
     <!-- PRINCIPLES -->
     <section id="principles" class="ds-section">
-      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Principles</span></div><span class="mono-label" style="color:var(--faint)">00</span></div>
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Principles</span></div></div>
       <div class="grid md:grid-cols-2 gap-4">
         <div class="specimen">
           <h3 class="text-lg mb-2">Monochrome + one accent</h3>
@@ -92,7 +94,7 @@
         </div>
         <div class="specimen">
           <h3 class="text-lg mb-2">Flat + Swiss scaffolding</h3>
-          <p class="text-[14px] leading-relaxed" style="color:var(--muted)">No gradients or shadows. Hairline rules, tracked uppercase micro-labels with bullets, and index numbers (01 / 04) give every section a precise, systematic frame.</p>
+          <p class="text-[14px] leading-relaxed" style="color:var(--muted)">No gradients or shadows. Hairline rules and tracked uppercase micro-labels with bullets give every section a precise, systematic frame.</p>
         </div>
         <div class="specimen">
           <h3 class="text-lg mb-2">One typeface, calm type</h3>
@@ -103,7 +105,7 @@
 
     <!-- COLOR -->
     <section id="color" class="ds-section">
-      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Color</span></div><span class="mono-label" style="color:var(--faint)">01</span></div>
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Color</span></div></div>
 
       <p class="mono-label mb-4" style="color:var(--muted)">Surfaces &amp; ink</p>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
@@ -128,7 +130,7 @@
 
     <!-- TYPE -->
     <section id="type" class="ds-section">
-      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Typography</span></div><span class="mono-label" style="color:var(--faint)">02</span></div>
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Typography</span></div></div>
 
       <div class="grid md:grid-cols-3 gap-4 mb-10">
         <div class="specimen"><p class="font-display text-3xl mb-1" style="font-weight:500">Aa</p><p class="text-[13px] font-medium">DM Sans · Medium</p><p class="spec">Display · headings · 500</p></div>
@@ -153,7 +155,7 @@
 
     <!-- SPACE & LINE -->
     <section id="space" class="ds-section">
-      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Space &amp; line</span></div><span class="mono-label" style="color:var(--faint)">03</span></div>
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Space &amp; line</span></div></div>
       <div class="grid md:grid-cols-2 gap-4">
         <div class="specimen">
           <p class="mono-label mb-4" style="color:var(--muted)">Spacing scale · 4px base</p>
@@ -179,14 +181,15 @@
 
     <!-- COMPONENTS -->
     <section id="components" class="ds-section">
-      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Components</span></div><span class="mono-label" style="color:var(--faint)">04</span></div>
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Components</span></div></div>
 
       <div class="grid md:grid-cols-2 gap-4">
         <!-- eyebrow / index -->
         <div class="specimen">
           <p class="mono-label mb-5" style="color:var(--faint)">Section header</p>
-          <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>For the record</span></div><span class="mono-label" style="color:var(--faint)">01 / 04</span></div>
+          <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>For the record</span></div><span class="mono-label" style="color:var(--faint)">From today&rsquo;s demo</span></div>
           <h3 class="text-2xl">Your requirements, addressed</h3>
+          <p class="spec mt-3">Eyebrow left. Right side is an <strong style="color:var(--ink)">optional</strong> contextual stamp &mdash; a date or label that adds meaning (&ldquo;As of Jun 18&rdquo;, &ldquo;From today&rsquo;s demo&rdquo;). No progress counters; omit it when there&rsquo;s nothing to say.</p>
         </div>
 
         <!-- buttons -->
@@ -210,9 +213,11 @@
             <span class="pill"><span class="ring"></span>Roadmap</span>
           </div>
           <div class="flex flex-wrap items-center gap-2.5">
-            <span class="tag tag-must">Must</span>
-            <span class="tag tag-nice">Nice</span>
+            <span class="tag tag-must">MUST</span>
+            <span class="tag tag-nice">NICE</span>
+            <span class="tag tag-accent">SOP</span>
           </div>
+          <p class="spec mt-4">Round <code>.pill</code> = a state; square <code>.tag</code> = a label. See <a class="toclink" href="#rules" style="color:var(--accent);text-decoration:underline">Rules</a> for when to use which.</p>
         </div>
 
         <!-- stat -->
@@ -259,11 +264,154 @@
         <!-- statement band -->
         <div class="specimen md:col-span-2">
           <p class="mono-label mb-2" style="color:var(--faint)">Statement band &mdash; full-bleed closing line</p>
-          <p class="text-[13px] leading-relaxed mb-6" style="color:var(--muted)">A page&rsquo;s last word: one large DM Sans line, full-bleed on a light surface, with a <strong style="color:var(--ink);font-weight:600">single sage phrase</strong> carrying the payoff. Closing punctuation &mdash; not a numbered section, so it stays out of the <code>01 / 04</code> count. In production the type scales fluidly edge-to-edge (<code>clamp(2.6rem, 8.4vw, 8.5rem)</code>); shown reduced below. Swap the text only.</p>
+          <p class="text-[13px] leading-relaxed mb-6" style="color:var(--muted)">Every page&rsquo;s last word, and the same component each time: one large DM Sans line, full-bleed on a light surface, that <strong style="color:var(--ink);font-weight:600">types itself out on scroll-in</strong> &mdash; monochrome text (second line in muted grey), a <strong style="color:var(--ink);font-weight:600">single sage caret</strong> that blinks once settled. The typewriter is shared (<code>assets/js/closing.js</code>, reduced-motion safe); a page only swaps the text. Closing punctuation &mdash; not a titled section, so it carries no eyebrow or stamp, and no body subtitle. The optional <strong style="color:var(--ink);font-weight:600">Reply / schedule button</strong> belongs only on the recap&rsquo;s closing, where the page&rsquo;s job is to prompt action. In production the type scales fluidly edge-to-edge (<code>clamp(2.2rem, 6vw, 5.5rem)</code>); shown reduced below.</p>
           <div style="border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden">
             <div class="statement" style="border-top:0; padding:48px 36px">
-              <h2 class="st-head" style="font-size:clamp(1.9rem,4.4vw,3.2rem)">From one procedure to <span class="st-accent">a living compliance program</span></h2>
+              <h2 class="st-head typed" style="font-size:clamp(1.9rem,4.4vw,3.2rem)">From one procedure to<br><span style="color:var(--muted)">a living compliance program</span><span class="st-caret" aria-hidden="true"></span></h2>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RULES -->
+    <section id="rules" class="ds-section">
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Rules &mdash; when to use what</span></div></div>
+      <p class="text-[15px] leading-relaxed mb-8 max-w-2xl" style="color:var(--muted)">The system is small on purpose. For every choice below there are exactly two answers, picked by <strong style="color:var(--ink)">content</strong>, never by page. If you reach for a third, you&rsquo;re inventing &mdash; stop and reuse.</p>
+
+      <div class="grid md:grid-cols-2 gap-4">
+
+        <!-- RULE 1 — chips -->
+        <div class="specimen md:col-span-2">
+          <p class="mono-label mb-2" style="color:var(--faint)">Rule 1 &middot; Chips &mdash; exactly two, chosen by content</p>
+          <p class="text-[13px] leading-relaxed mb-6 max-w-2xl" style="color:var(--muted)">One question decides it: <strong style="color:var(--ink)">is it a state, or a label?</strong> Never invent a third chip.</p>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="card p-5">
+              <div class="flex items-center gap-2.5 mb-4">
+                <span class="pill">Phase 1</span>
+                <span class="pill pill-solid">In progress</span>
+                <span class="pill pill-accent">Roadmap</span>
+              </div>
+              <p class="text-[13px] font-medium mb-1">Round <code>.pill</code> &mdash; a live state</p>
+              <p class="text-[13px] leading-relaxed" style="color:var(--muted)">Sentence case, true right now. Soft shape = status. Variants <code>.pill-solid</code> (ink), <code>.pill-accent</code> (sage wash).</p>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center gap-2.5 mb-4">
+                <span class="tag tag-must">MUST</span>
+                <span class="tag tag-nice">NICE</span>
+                <span class="tag tag-accent">SOP</span>
+              </div>
+              <p class="text-[13px] font-medium mb-1">Square <code>.tag</code> &mdash; a fixed label</p>
+              <p class="text-[13px] leading-relaxed" style="color:var(--muted)">Mono uppercase, from a known set (priority, category, metadata). Systematic shape = catalog. Variants <code>.tag-must</code>, <code>.tag-nice</code>, <code>.tag-accent</code>.</p>
+            </div>
+          </div>
+          <p class="spec mt-5">Not chips: <code>.codechip</code> is inline mono code (a file or field name, e.g. <span class="codechip">work_order.csv</span>); the segmented filter control is a <strong style="color:var(--ink)">control</strong>. Neither is a chip.</p>
+        </div>
+
+        <!-- RULE 2 — cards -->
+        <div class="specimen md:col-span-2">
+          <p class="mono-label mb-2" style="color:var(--faint)">Rule 2 &middot; Cards &mdash; two patterns only</p>
+          <p class="text-[13px] leading-relaxed mb-6 max-w-2xl" style="color:var(--muted)">If it&rsquo;s white + hairline + padding, it&rsquo;s already <code>.card</code> &mdash; don&rsquo;t invent a new shell.</p>
+          <div class="grid md:grid-cols-2 gap-4 items-start">
+            <div class="card p-5">
+              <p class="text-[13px] font-medium mb-1"><code>.card</code> &mdash; the flat info card</p>
+              <p class="text-[13px] leading-relaxed" style="color:var(--muted)">White surface, hairline, <code>--r-sm</code> radius, no shadow. The default for any block of heading + prose.</p>
+            </div>
+            <div class="sumtile">
+              <p class="stat">87<span style="font-size:1.25rem;color:var(--faint)">%</span></p>
+              <p class="spec mt-1.5"><code>.sumtile</code> &mdash; the one metric tile</p>
+            </div>
+          </div>
+          <p class="spec mt-5">Reserved: the breakdown family (<code>.bd-viz</code> / <code>.bd-cell</code>) is strictly for &ldquo;X becomes Y&rdquo; transformations &mdash; not a general card.</p>
+        </div>
+
+        <!-- RULE 3 — columns -->
+        <div class="specimen md:col-span-2">
+          <p class="mono-label mb-2" style="color:var(--faint)">Rule 3 &middot; Columns &mdash; default to the equal grid</p>
+          <p class="text-[13px] leading-relaxed mb-6 max-w-2xl" style="color:var(--muted)">Equal peers go in a plain Tailwind grid &mdash; the one shared column pattern. A labeled checklist (mono header + rule + list) is a <strong style="color:var(--ink)">page-local</strong> pattern, built in the page that needs it, not a system component. Avoid bespoke pixel <code>grid-template-columns</code> except a genuinely asymmetric layout (a fixed sidebar beside flowing content) &mdash; and standardize even those.</p>
+          <div class="grid md:grid-cols-2 gap-4 items-start">
+            <div class="card p-5">
+              <p class="text-[13px] font-medium mb-3">Equal grid &mdash; <code>grid md:grid-cols-2/3/4 gap-4</code></p>
+              <div class="grid grid-cols-3 gap-2">
+                <div style="height:34px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-xs)"></div>
+                <div style="height:34px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-xs)"></div>
+                <div style="height:34px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-xs)"></div>
+              </div>
+              <p class="spec mt-3">Peer items of equal weight &mdash; what the calm pages use.</p>
+            </div>
+            <div class="card p-5">
+              <p class="text-[13px] font-medium mb-3">Labeled checklist &mdash; <span style="color:var(--muted)">page-local, not a system component</span></p>
+              <p class="spec" style="line-height:1.7">A mono header + hairline rule + a marked list is a useful column shape, but it was used by only one page, so it was de-promoted from the shared system. Build it locally if a page needs it &mdash; don&rsquo;t add it back here.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RULE 4 — radius & tokens -->
+        <div class="specimen md:col-span-2">
+          <p class="mono-label mb-2" style="color:var(--faint)">Rule 4 &middot; Radius &amp; tokens</p>
+          <p class="text-[13px] leading-relaxed mb-5 max-w-2xl" style="color:var(--muted)">Always use the radius tokens; never hardcode <code>999px</code> or <code>3px</code>. Cards stay small-radius (<code>--r-sm</code>); only chips, pills, and buttons go <code>--r-pill</code>.</p>
+          <div class="flex flex-wrap items-center gap-6">
+            <div class="flex items-center gap-3"><div style="width:46px;height:46px;background:var(--panel);border:1px solid var(--line-2);border-radius:var(--r-xs)"></div><span class="spec">--r-xs · tags, codechip</span></div>
+            <div class="flex items-center gap-3"><div style="width:46px;height:46px;background:var(--panel);border:1px solid var(--line-2);border-radius:var(--r-sm)"></div><span class="spec">--r-sm · cards, tiles</span></div>
+            <div class="flex items-center gap-3"><div style="width:46px;height:46px;background:var(--panel);border:1px solid var(--line-2);border-radius:var(--r-pill)"></div><span class="spec">--r-pill · pills, buttons</span></div>
+          </div>
+          <p class="text-[13px] leading-relaxed mt-6 pt-5" style="color:var(--ink-2);border-top:1px solid var(--line)">One rule of thumb: if you&rsquo;re about to write a new component class, first check whether <code>.card</code>, <code>.sumtile</code>, <code>.pill</code>, <code>.tag</code> or <code>.bd-viz</code> already covers it.</p>
+        </div>
+
+        <!-- RULE 5 — at a glance -->
+        <div class="specimen md:col-span-2">
+          <p class="mono-label mb-2" style="color:var(--faint)">Rule 5 &middot; At a glance &mdash; the one summary band</p>
+          <p class="text-[13px] leading-relaxed mb-6 max-w-3xl" style="color:var(--muted)">Every page opens, right after the hero, with one <strong style="color:var(--ink)">At a glance</strong> band &mdash; a row of 3&ndash;4 <code>.sumtile</code>s, each a <code>.stat</code> figure + a one-line label, in a <code>grid grid-cols-2 lg:grid-cols-4 gap-4</code>. The band gets its own section; its background follows the page&rsquo;s <code>--paper</code>/<code>--surface</code> alternation so it always contrasts the section below. Same component, same place, every time &mdash; <strong style="color:var(--ink)">never numbers baked into the hero</strong>. Use it <strong style="color:var(--ink)">only with real, headline facts</strong>; a tile can hold a figure or a key term (&ldquo;Phase&nbsp;1&rdquo;). If a page has nothing genuinely summary-worthy, skip it &mdash; a padded glance band fights calm harder than none does.</p>
+          <div class="reveal grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="sumtile"><div class="stat" style="color:var(--ink)">3</div><p class="text-[13px] mt-2.5" style="color:var(--muted)">Weeks to live</p></div>
+            <div class="sumtile"><div class="stat" style="color:var(--ink)">28</div><p class="text-[13px] mt-2.5" style="color:var(--muted)">Sections A&ndash;BB</p></div>
+            <div class="sumtile"><div class="stat" style="color:var(--ink)">Phase 1</div><p class="text-[13px] mt-2.5" style="color:var(--muted)">Live day one</p></div>
+            <div class="sumtile"><div class="stat" style="color:var(--ink)">13</div><p class="text-[13px] mt-2.5" style="color:var(--muted)">Live in Phase&nbsp;1</p></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PAGE CHROME -->
+    <section id="chrome" class="ds-section">
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Page chrome</span></div></div>
+      <p class="text-[15px] leading-relaxed mb-8 max-w-2xl" style="color:var(--muted)">The three things every page shares verbatim &mdash; nav, motion, and type. All three live in <code>assets/css/system.css</code> + <code>assets/js/reveal.js</code> so a new page inherits them by linking those two files. Never re-implement them per page.</p>
+      <div class="grid md:grid-cols-2 gap-4">
+
+        <!-- navigation -->
+        <div class="specimen md:col-span-2">
+          <p class="mono-label mb-5" style="color:var(--faint)">Navigation &mdash; one canonical bar</p>
+          <div style="border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden; margin-bottom:18px">
+            <div style="background:rgba(243,243,243,.9); border-bottom:1px solid var(--line)">
+              <div class="flex items-center justify-between" style="height:56px; padding:0 18px">
+                <div class="flex items-center gap-3"><img src="assets/images/meetbean-logo-dark.svg" alt="meetBean" class="h-5" /><span class="mono-label" style="color:var(--faint)">/ Project</span></div>
+                <div class="nav-tabs"><span class="cur" aria-current="page">Current</span><a href="#chrome">Live link</a><span class="dis" aria-disabled="true">Not&nbsp;yet&nbsp;live</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="text-[13px] leading-relaxed" style="color:var(--muted)">Markup is identical on every page: <code>&lt;nav class="site-nav"&gt;</code> &rarr; <code>.nav-inner</code> &rarr; brand on the left, <code>.nav-tabs</code> on the right. Each tab is an <code>&lt;a&gt;</code> (live) except the current page, which becomes <code>&lt;span class="cur"&gt;</code>, and any not-yet-live page, which is <code>&lt;span class="dis"&gt;</code>. Same item set, same order, on all pages &mdash; only the <code>.cur</code> moves.</p>
+        </div>
+
+        <!-- motion -->
+        <div class="specimen">
+          <p class="mono-label mb-5" style="color:var(--faint)">Motion &mdash; scroll reveal</p>
+          <p class="text-[13px] leading-relaxed" style="color:var(--muted)">One convention site-wide. Add <code>class="reveal"</code> to anything that should fade-and-rise into view; <code>assets/js/reveal.js</code> (loaded last on every page) adds <code>.in</code> as it enters the viewport. No per-page <code>IntersectionObserver</code> &mdash; <code>reveal.js</code> also drives the nav&rsquo;s scroll shadow.</p>
+          <ul class="spec" style="line-height:1.9; list-style:none; margin-top:12px">
+            <li><code>.reveal</code> &middot; start state (hidden, +24px)</li>
+            <li><code>.reveal.in</code> &middot; settled (added by reveal.js)</li>
+            <li>load <code>reveal.js</code> after the page&rsquo;s own scripts</li>
+            <li><code>closing.js</code> &middot; the one other motion script &mdash; types the closing <code>.st-head</code></li>
+          </ul>
+        </div>
+
+        <!-- fonts -->
+        <div class="specimen">
+          <p class="mono-label mb-5" style="color:var(--faint)">Type &mdash; two faces only</p>
+          <p class="text-[13px] leading-relaxed" style="color:var(--muted)"><strong style="color:var(--ink)">DM&nbsp;Sans</strong> for everything visible &mdash; display and body, contrast by size/weight &mdash; and <strong style="color:var(--ink)">JetBrains&nbsp;Mono</strong> for micro-labels (<code>.mono-label</code>). That&rsquo;s the whole type system; no third typeface (Inter was removed). Load only those two in the Google Fonts link, and keep both Tailwind <code>sans</code> and <code>display</code> mapped to DM&nbsp;Sans.</p>
+          <div class="flex items-baseline gap-4 mt-4">
+            <span class="font-display" style="font-size:2rem; font-weight:500">Aa</span>
+            <span class="mono-label" style="color:var(--muted)">Aa &middot; mono</span>
           </div>
         </div>
       </div>
@@ -271,12 +419,12 @@
 
     <!-- SECTION SETUP -->
     <section id="sections" class="ds-section">
-      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Section setup</span></div><span class="mono-label" style="color:var(--faint)">05</span></div>
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Section setup</span></div></div>
       <p class="text-[15px] leading-relaxed mb-8 max-w-2xl" style="color:var(--muted)">Every content section is built from one scaffold &mdash; full-bleed, one vertical rhythm, one header pattern. Reuse it exactly so a new page lands in step with Project&nbsp;Overview, Implementation&nbsp;Plan, and Procedure&nbsp;Breakdown.</p>
       <div class="grid md:grid-cols-2 gap-4">
         <div class="specimen">
           <p class="mono-label mb-5" style="color:var(--faint)">Header anatomy</p>
-          <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Section label</span></div><span class="mono-label" style="color:var(--faint)">01 / 04</span></div>
+          <div class="flex items-center justify-between mb-5"><div class="eyebrow mono-label"><span class="dot"></span><span>Section label</span></div><span class="mono-label" style="color:var(--faint)">As of Jun 18</span></div>
           <div class="max-w-2xl">
             <h3 class="text-2xl mb-2">Section heading</h3>
             <p class="text-[14px] leading-relaxed" style="color:var(--muted)">One or two lines of intro at Body&nbsp;L, held to a max-w-2xl column. Content begins about 56&nbsp;px below.</p>
@@ -288,7 +436,7 @@
             <li>&lt;section&gt; full-bleed &middot; <strong style="color:var(--ink)">py-20 md:py-24</strong></li>
             <li>background alternates <strong style="color:var(--ink)">--paper / --surface</strong> &middot; top <strong style="color:var(--ink)">--line</strong></li>
             <li>edge rail <strong style="color:var(--ink)">px-6 sm:px-8 lg:px-12</strong> &middot; never a centered column</li>
-            <li>header row &middot; eyebrow left, index <strong style="color:var(--ink)">01 / 04</strong> right &middot; <strong style="color:var(--ink)">mb-8</strong> &middot; no divider rule</li>
+            <li>header row &middot; eyebrow left, <strong style="color:var(--ink)">optional</strong> contextual stamp right (date / label, else omit) &middot; <strong style="color:var(--ink)">mb-8</strong> &middot; no divider rule</li>
             <li>h2 <strong style="color:var(--ink)">text-3xl md:text-[2.4rem]</strong> &middot; mb-4 &middot; in max-w-2xl</li>
             <li>intro <strong style="color:var(--ink)">text-lg</strong> &middot; --muted</li>
             <li>content &middot; margin-top <strong style="color:var(--ink)">~56px</strong></li>
@@ -299,7 +447,7 @@
 
     <!-- ACCESSIBILITY -->
     <section id="a11y" class="ds-section">
-      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Accessibility</span></div><span class="mono-label" style="color:var(--faint)">06</span></div>
+      <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Accessibility</span></div></div>
       <div class="specimen">
         <p class="text-[15px] leading-relaxed mb-4" style="color:var(--ink-2)">
           The sage greens are <strong style="font-weight:600">accent colors, not text colors</strong>. On white, <span style="color:var(--accent-mid)">#70A593</span> and even <span style="color:var(--accent)">#508875</span> do not meet WCAG AA for normal body text.

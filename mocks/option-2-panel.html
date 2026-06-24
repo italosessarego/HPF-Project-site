@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Procedure Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* meetBean marketing tokens */
+    --ink:#1E1D1D; --muted:#5F626C; --faint:#6B6E7C;
+    --paper:#F3F3F3; --surface:#FFFFFF;
+    --line:rgba(30,29,29,.12); --line-2:rgba(30,29,29,.24);
+    --accent:#508875; --accent-mid:#70A593; --accent-soft:#9CC9BB; --accent-wash:#EAF2EE;
+    /* product-calm tokens (data UI) */
+    --fg:#18181B; --muted-fg:#71717A; --border:#E4E4E7;
+    --card:#FFFFFF; --canvas:#F8F8F8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink)}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding:48px 32px 64px;
+    display:flex;flex-direction:column;align-items:center;
+  }
+  .wrap{width:100%;max-width:1240px}
+
+  /* ---------- marketing header ---------- */
+  .mkt{margin:0 4px 26px}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-weight:500;
+    font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);display:flex;align-items:center;gap:8px;margin-bottom:14px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .mkt h1{
+    font-family:'DM Sans',sans-serif;font-weight:600;
+    font-size:28px;line-height:1.15;letter-spacing:-.015em;color:var(--ink);
+    margin-bottom:9px;
+  }
+  .mkt p{
+    font-family:'DM Sans',sans-serif;font-weight:400;
+    font-size:14.5px;color:var(--muted);max-width:560px;line-height:1.5;
+  }
+
+  /* ---------- the soft floating panel ---------- */
+  .panel{
+    background:var(--card);
+    border-radius:14px;
+    border:1px solid rgba(30,29,29,.05);
+    box-shadow:0 1px 1px rgba(30,29,29,.03), 0 18px 50px -18px rgba(30,29,29,.18);
+    display:grid;
+    grid-template-columns:236px 1fr 1.05fr;
+    overflow:hidden;
+    min-height:620px;
+  }
+  .col{padding:22px 0}
+  .col-fn{border-right:1px solid var(--border)}
+  .col-list{border-right:1px solid var(--border)}
+  .col-pad{padding-left:22px;padding-right:22px}
+
+  .col-head{
+    font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--muted-fg);padding:0 22px;margin-bottom:14px;
+  }
+
+  /* ---------- job functions ---------- */
+  .fn{
+    position:relative;cursor:pointer;
+    padding:9px 22px 9px 22px;
+    display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+    line-height:1.4;
+  }
+  .fn .name{font-size:13.5px;font-weight:500;color:var(--fg)}
+  .fn .ct{
+    font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;
+    font-size:11.5px;color:var(--muted-fg);font-weight:400;
+  }
+  .fn:hover{background:rgba(30,29,29,.018)}
+  .fn.active{background:var(--accent-wash)}
+  .fn.active::before{
+    content:"";position:absolute;left:0;top:6px;bottom:6px;width:2px;
+    background:var(--accent);border-radius:0 2px 2px 0;
+  }
+  .fn.active .name{color:var(--ink)}
+  .fn.active .ct{color:var(--accent)}
+  .fn-sep{height:1px;background:var(--line);margin:8px 22px}
+
+  /* ---------- procedure list ---------- */
+  .list{max-height:560px;overflow-y:auto}
+  .list::-webkit-scrollbar{width:8px}
+  .list::-webkit-scrollbar-thumb{background:rgba(30,29,29,.12);border-radius:8px;border:2px solid var(--card)}
+  .row{
+    position:relative;cursor:pointer;
+    display:grid;grid-template-columns:26px 1fr auto;align-items:center;gap:12px;
+    padding:13px 22px;
+    border-bottom:1px solid var(--line);
+  }
+  .row:first-child{border-top:1px solid var(--line)}
+  .row .ix{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;
+    color:var(--muted-fg);font-variant-numeric:tabular-nums;
+  }
+  .row .ttl{font-size:13px;font-weight:500;color:var(--fg);line-height:1.35}
+  .row .pg{
+    font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;
+    font-size:11.5px;color:var(--muted-fg);white-space:nowrap;
+  }
+  .row.ref .ttl{color:var(--muted-fg);font-weight:400}
+  .row.ref .ttl .reflab{
+    font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--faint);margin-left:8px;opacity:.85;
+  }
+  .row:hover{background:rgba(30,29,29,.018)}
+  .row.active{background:var(--accent-wash)}
+  .row.active::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);
+  }
+  .row.active .ix{color:var(--accent)}
+  .row.active .ttl{color:var(--ink);font-weight:600}
+  .row.active.ref .ttl{font-weight:500}
+
+  /* ---------- preview ---------- */
+  .pv{padding:24px 28px}
+  .pv .seclab{
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;
+  }
+  .pv h2{
+    font-size:19px;font-weight:600;color:var(--fg);line-height:1.25;
+    letter-spacing:-.01em;margin-bottom:10px;
+  }
+  .pv .attr{
+    font-size:12px;color:var(--muted-fg);font-weight:400;
+    padding-bottom:18px;margin-bottom:4px;border-bottom:1px solid var(--line);
+  }
+  .pv .attr .sepd{margin:0 7px;color:var(--border)}
+  .steps{list-style:none;margin-top:2px}
+  .steps li{
+    display:grid;grid-template-columns:22px 1fr;gap:14px;align-items:start;
+    padding:13px 0;border-bottom:1px solid var(--line);
+  }
+  .steps li:last-child{border-bottom:none}
+  .steps .n{
+    font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;
+    font-size:11.5px;color:var(--muted-fg);padding-top:1px;font-weight:500;
+  }
+  .steps .tx{font-size:13px;line-height:1.5;color:var(--fg)}
+  .pv .note{
+    font-size:13px;line-height:1.55;color:var(--muted-fg);margin-top:6px;
+  }
+  .pv .note .pgline{
+    display:block;margin-top:14px;font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mkt">
+    <div class="eyebrow"><span class="dot"></span>Procedure Library</div>
+    <h1>Pick a role. See only its procedures.</h1>
+    <p>The full Receiving SOP, organized by job function — choose a role to narrow the list, then open any section to preview the work instruction.</p>
+  </header>
+
+  <main class="panel">
+    <!-- col 1: job functions -->
+    <section class="col col-fn">
+      <div class="col-head">Job functions</div>
+      <div id="fnList"></div>
+    </section>
+
+    <!-- col 2: procedure list -->
+    <section class="col col-list">
+      <div class="col-head">Procedures</div>
+      <div class="list" id="procList"></div>
+    </section>
+
+    <!-- col 3: preview -->
+    <section class="col">
+      <div class="pv" id="preview"></div>
+    </section>
+  </main>
+</div>
+
+<script>
+const FUNCTIONS = [
+  {key:'unloader', label:'Unloader', count:11},
+  {key:'receiver', label:'Receiver', count:4},
+  {key:'oc', label:'Ops Coordinator', count:1},
+  {key:'exc', label:'Exceptions Clerk', count:1},
+  {key:'am', label:'AM / Coordinator', count:1},
+  {key:'shared', label:'Shared / All', count:10},
+];
+const FNLABEL = {unloader:'Unloader',receiver:'Receiver',oc:'Ops Coordinator',exc:'Exceptions Clerk',am:'AM / Coordinator',shared:'Shared / All'};
+
+const SECTIONS = [
+  ['A','Overview, Definitions & Core Roles','shared','ref','4-6'],
+  ['B','Equipment (+ equipment x role matrix)','shared','ref','7-10'],
+  ['C','Layout - hand / fork / clamp setups','shared','ref','11-12'],
+  ['D','Safety Practices','shared','ref','13-17'],
+  ['E','Roles & ABC Assignment','shared','ref','18-19'],
+  ['F',"Manager's Plan",'am','proc','20-21'],
+  ['G','Shift Start Up','shared','proc','22'],
+  ['H','View & Print ASN','oc','proc','23-24'],
+  ['I','Operating Dock Locks','unloader','proc','25'],
+  ['J','Inspect the Trailer / Container','unloader','proc','26'],
+  ['K','TI-HI, Build & Secure a Pallet','unloader','proc','27-35'],
+  ['L','SKUs with FIFO Labeling Requirement','receiver','proc','36-38'],
+  ['M','Unloading International Freight','unloader','proc','39-48'],
+  ['N','Handling Wooden Crates','unloader','proc','49-50'],
+  ['O','Hand Unloading Configuration','unloader','proc','51-52'],
+  ['P','Conveyor Unload','unloader','proc','53-61'],
+  ['Q','Forklift Unloading Configuration','unloader','proc','62-64'],
+  ['R','Clamp Unloading','unloader','proc','65-76'],
+  ['S','Smart Unloading Configuration','unloader','proc','77-79'],
+  ['T','Receive/Verify ASN - International','receiver','proc','80-89'],
+  ['U','Unloading Domestic Freight','receiver','proc','90-92'],
+  ['V','Receive/Verify ASN - Domestic','receiver','proc','93-96'],
+  ['W','End of Unloading Trailer Process','unloader','proc','97'],
+  ['X','Exceptions (10 flows incl. hazmat)','exc','proc','98-117'],
+  ['Y','Process Flow Diagrams','shared','ref','118'],
+  ['Z','DC Best Practices','shared','ref','119'],
+  ['AA','End of Shift','shared','proc','120'],
+  ['BB','Revision Notes','shared','ref','121'],
+];
+
+const STEPS = {
+  T:["Obtain the ASN Control Log (ASN#, Door#, Container#, TI-HI, inner pack).","Walk to the door number on the log.","Verify the pallet plaque matches the ASN number.","Check the ASN SKU matches the assigned container.","Count offloaded pallets; record on the tally sheet.","Verify TI-HI against the ASN for each SKU.","Check the PO number printed on the carton.","Count boxes per pallet x units per box.","Calculate total units and verify against the ASN Report.","RF Gladiator: log in to WMOS -> Receiving -> Recv Item Lvl-HFT.","Enter dock door, scan ASN, scan iLPN, verify pack qty, enter qty.","Place the iLPN bottom-right on the pallet; repeat per SKU.","Tally total units and write beside “Received”.","Close the load at a workstation."],
+  L:["Open the DC FIFO Shelf Life Labeling SKUs spreadsheet.","Obtain the PO / packing slip for the freight.","Check whether each SKU is listed in the FIFO spreadsheet.","Determine master-only vs master+inner (yellow = master+inner, blue = master only).","Use the year's color sticker.","OC notifies the Receiver of inbound SKUs needing stickers.","Locate the staged item; get stickers + an empty pallet.","Master pack: label top outside of case; stack per TI-HI.","Master+inner: label master, label inner, replace, re-label master.","Receive the item into WMOS."],
+  V:["Obtain the signed BOL + a blank ASN Control Log.","Tally case & unit counts per SKU onto the log.","Match physical counts to the BOL.","If no BOL, pull PO details from WMOS.","Log in to WMOS at the nearest workstation.","Create an ASN from PO (domestic ASN# begin with “D”).","Set Shipped Qty, Save -> ASN goes In-Transit.","Print the ASN.","Receive the shipment per the Section T flow."]
+};
+
+let activeFn = 'all';
+let activeSec = 'T';
+
+const fnListEl = document.getElementById('fnList');
+const procListEl = document.getElementById('procList');
+const previewEl = document.getElementById('preview');
+
+function renderFunctions(){
+  const totalAll = SECTIONS.length;
+  let html = '';
+  html += fnItem('all','All',totalAll);
+  html += '<div class="fn-sep"></div>';
+  FUNCTIONS.forEach(f => { html += fnItem(f.key, f.label, f.count); });
+  fnListEl.innerHTML = html;
+  fnListEl.querySelectorAll('.fn').forEach(el=>{
+    el.addEventListener('click',()=>{ activeFn = el.dataset.key; renderFunctions(); renderList(); });
+  });
+}
+function fnItem(key,label,count){
+  const a = key===activeFn ? ' active' : '';
+  return `<div class="fn${a}" data-key="${key}">
+    <span class="name">${label}</span>
+    <span class="ct">${count}</span>
+  </div>`;
+}
+
+function renderList(){
+  const rows = SECTIONS.filter(s => activeFn==='all' || s[2]===activeFn);
+  // keep selection visible; if filtered out, select first available
+  if(!rows.some(r=>r[0]===activeSec) && rows.length){ activeSec = rows[0][0]; }
+  let html='';
+  rows.forEach(([letter,title,role,type,pages])=>{
+    const isRef = type==='ref';
+    const a = letter===activeSec ? ' active':'';
+    const refCls = isRef ? ' ref':'';
+    const refLab = isRef ? '<span class="reflab">ref</span>' : '';
+    html += `<div class="row${a}${refCls}" data-sec="${letter}">
+      <span class="ix">${letter}</span>
+      <span class="ttl">${title}${refLab}</span>
+      <span class="pg">${pages}</span>
+    </div>`;
+  });
+  procListEl.innerHTML = html;
+  procListEl.querySelectorAll('.row').forEach(el=>{
+    el.addEventListener('click',()=>{ activeSec = el.dataset.sec; renderList(); renderPreview(); });
+  });
+  renderPreview();
+}
+
+function renderPreview(){
+  const sec = SECTIONS.find(s=>s[0]===activeSec);
+  if(!sec){ previewEl.innerHTML=''; return; }
+  const [letter,title,role,type,pages] = sec;
+  const typeLabel = type==='ref' ? 'Reference' : 'Work instruction';
+  const attr = `${FNLABEL[role]} <span class="sepd">·</span> pp. ${pages} <span class="sepd">·</span> ${typeLabel}`;
+  let body='';
+  if(STEPS[letter]){
+    body = '<ol class="steps">' + STEPS[letter].map((t,i)=>
+      `<li><span class="n">${i+1}</span><span class="tx">${t}</span></li>`).join('') + '</ol>';
+  } else {
+    body = `<p class="note">Work instruction prepared from your SOP.
+      <span class="pgline">Source pages ${pages}</span></p>`;
+  }
+  previewEl.innerHTML = `
+    <div class="seclab">Section ${letter}</div>
+    <h2>${title}</h2>
+    <div class="attr">${attr}</div>
+    ${body}`;
+}
+
+renderFunctions();
+renderList();
+</script>
+</body>
+</html>
