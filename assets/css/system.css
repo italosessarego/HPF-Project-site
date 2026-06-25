@@ -18,7 +18,17 @@
 }
 
 /* ---- base ---- */
+html { background:var(--paper); }   /* paint off-white from the first frame — kills the white flash between page loads */
 body { font-family:'DM Sans', sans-serif; background:var(--paper); color:var(--ink); }
+
+/* ---- cross-page navigation — stop the flicker between clicks ----
+   This is a multi-page site, so every nav click is a full reload. Opt into
+   cross-document View Transitions so pages cross-fade instead of hard-cutting,
+   and give the nav a stable transition name so the (identical) bar holds steady
+   across the navigation instead of repainting. Progressive enhancement: browsers
+   without support just navigate normally. */
+@view-transition { navigation:auto; }
+.site-nav { view-transition-name:site-nav; }
 h1, h2, h3, h4, .font-display { font-family:'DM Sans', sans-serif; letter-spacing:-0.02em; font-weight:500; }
 
 /* ---- scroll-reveal — ONE convention site-wide: .reveal → .in (added by assets/js/reveal.js) ---- */
