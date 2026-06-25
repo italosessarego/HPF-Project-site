@@ -30,18 +30,7 @@
   <style>
     /* Page-specific styles only. Shared tokens & components: assets/css/system.css */
 
-    /* ---- de-promoted from system.css — now page-local to methodology ----
-       .flowrow (numbered step row) + .probcols (labeled checklist columns) were
-       pulled out of the shared design system (they were methodology-only). Kept
-       here verbatim so this page still renders; the system no longer carries them. */
-    .flowrow { display:flex; align-items:stretch; gap:0; border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden; background:var(--surface); margin-top:6px; }
-    @media(max-width:760px){ .flowrow { flex-direction:column; } }
-    .fstep { flex:1; padding:16px 16px; border-right:1px solid var(--line); position:relative; }
-    .fstep:last-child { border-right:none; }
-    @media(max-width:760px){ .fstep { border-right:none; border-bottom:1px solid var(--line); } .fstep:last-child { border-bottom:none; } }
-    .fstep .fs-n { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:.08em; margin-bottom:8px; }
-    .fstep .fs-t { font-size:13px; font-weight:600; letter-spacing:-.01em; margin-bottom:4px; }
-    .fstep .fs-d { font-size:12px; color:var(--muted); line-height:1.45; }
+    /* .flowrow / .fstep removed — the Capture governance lifecycle is now the shared .flow-pills strip (system.css). */
 
     /* ---- micro-label above the capability grid + the "measure" link (shared) ---- */
     .keycap { display:flex; align-items:center; gap:12px; color:var(--faint); margin:30px 0 16px; }
@@ -56,7 +45,12 @@
        the mocks keep their own chrome; mass on the left comes from the grid,
        not a box, so the page stays flat & hairline.
        ===================================================================== */
-    .stage-row { display:grid; grid-template-columns: minmax(0,1fr) 620px; gap: clamp(40px,5vw,84px); align-items: start; }
+    /* text capped left; mock column fills the rest and CENTERS the mock in it, so
+       the exhibit floats dead-center between the text's right edge and the page edge.
+       No grid gap (a gap would bias the mock toward the edge); the 700px column min
+       guarantees breathing room from the text down at the narrowest side-by-side
+       (fits the widened 660px canvas). */
+    .stage-row { display:grid; grid-template-columns: minmax(0,672px) minmax(700px,1fr); gap: 0; align-items: start; }
     .stage-text { max-width:672px; }   /* holds eyebrow + title + subtitle + capabilities; exhibit top-aligns with it */
     /* single-column check list */
     .stage-text .caps { display:grid; grid-template-columns:1fr; gap:14px; align-content:start; margin:0; padding:0; list-style:none; }
@@ -65,20 +59,25 @@
     /* RIGHT: invisible bay — same box for canvas OR phone, exhibit centered.
        No forced height: each row sizes to its own exhibit (no dead space). */
     .stage-bay { display:grid; place-items:center; }
-    .stage-bay .proc-frame { --ts-scale:.66; margin:0; }
+    .stage-bay .proc-frame { --ts-scale:.60; margin:0; }   /* matches the two phone .device mocks (.60) */
     .stage-bay .device { margin:0; }
+    /* grey document canvas, matching the real SOP platform (sidebar stays white) */
+    .stage-bay .proc-canvas { background:#F4F4F5; }
+    /* the real SOP platform renders entirely in Inter (override the title's DM Sans
+       and the body's native system stack) */
+    .stage-bay .proc-screen, .stage-bay .proc-screen * { font-family:'Inter', system-ui, sans-serif; }
     /* The real SOP procedure is a long document. Render it as a fixed-height
        VIEWPORT matching the phone: the document shows its top (clips), and the
        meta sidebar pins its actions to the base — exactly how the app looks at
        one screen height. (Only side-by-side; stacks naturally on narrow.) */
     @media(min-width:1181px){
-      .stage-bay .proc-frame { height: clamp(488px,72vh,640px); position: relative; }
-      .stage-bay .proc-frame > .proc-screen { height: calc(clamp(488px,72vh,640px) / 0.66); }
+      .stage-bay .proc-frame { --proc-w: 1100px; height: clamp(488px,72vh,640px); position: relative; }   /* canvas 25% wider on desktop (660px frame); stacked/mobile keep the 880 default so they don't overflow */
+      .stage-bay .proc-frame > .proc-screen { height: calc(clamp(488px,72vh,640px) / 0.60); }
       .stage-bay .proc-canvas { overflow: hidden; }
       .stage-bay .proc-side { overflow: hidden; }
       /* soft fade over the document area only (sidebar ≈186px rendered at .66) so
          the clipped document bottom reads as "scrolls below" */
-      .stage-bay .proc-frame::after { content:""; position:absolute; left:1px; right:187px; bottom:1px; height:44px; background:linear-gradient(rgba(255,255,255,0), #fff); pointer-events:none; }
+      .stage-bay .proc-frame::after { content:""; position:absolute; left:1px; right:170px; bottom:1px; height:44px; background:linear-gradient(rgba(244,244,245,0), #F4F4F5); pointer-events:none; }
     }
     @media(max-width:1180px){
       .stage-row { grid-template-columns:1fr; gap:44px; align-items:start; }
@@ -185,16 +184,15 @@
         <a href="procedures.html">Procedure Breakdown</a>
         <a href="implementation.html">Implementation Plan</a>
         <a href="recap.html">Recap</a>
-        <span class="dis">Deployment Phases</span>
       </div>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section id="hero" class="relative overflow-hidden flex items-center" style="border-bottom:1px solid var(--line); min-height:80vh">
+  <section id="hero" class="hero">
     <div class="grid-bg absolute inset-0" style="-webkit-mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%);"></div>
 
-    <div class="hidden lg:flex absolute left-0 top-16 bottom-0 w-14 flex-col items-center justify-between py-10" style="border-right:1px solid var(--line)">
+    <div class="hero-rail">
       <span style="width:7px;height:7px;border-radius:var(--r-pill);background:var(--accent-mid)"></span>
       <span class="mono-label" style="writing-mode:vertical-rl; transform:rotate(180deg); color:var(--muted)">Methodology · Harbor&nbsp;Freight</span>
       <span class="mono-label" style="color:var(--faint)">02</span>
@@ -214,7 +212,7 @@
   <!-- AT A GLANCE -->
   <section class="py-16 md:py-20" style="background:var(--surface); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
-      <div class="reveal flex items-center justify-between gap-6 mb-8">
+      <div class="reveal section-head mb-8">
         <div class="eyebrow mono-label"><span class="dot"></span><span>At a glance</span></div>
       </div>
       <div class="reveal grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -238,7 +236,7 @@
   <section id="the-problem" class="py-20 md:py-24" style="background:var(--paper); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
       <div class="reveal mb-12">
-        <div class="flex items-center justify-between gap-6 mb-8">
+        <div class="section-head mb-8">
           <div class="eyebrow mono-label"><span class="dot"></span><span>What it replaces</span></div>
         </div>
         <div class="max-w-2xl">
@@ -295,6 +293,12 @@
           <p class="text-lg leading-relaxed" style="color:var(--muted)">
             Make the proper method the <strong style="color:var(--ink);font-weight:600">single source of truth</strong> &mdash; current, governed, and impossible to lose track of. Everything downstream derives from here.
           </p>
+          <div class="flow-pills" style="margin-top:22px">
+            <span class="tag tag-nice">Draft</span><span class="flow-arrow">&rarr;</span>
+            <span class="tag tag-nice">Review</span><span class="flow-arrow">&rarr;</span>
+            <span class="tag tag-nice">Approve</span><span class="flow-arrow">&rarr;</span>
+            <span class="tag tag-accent">Acknowledge</span>
+          </div>
           <p class="mono-label keycap">Key capabilities</p>
           <ul class="caps">
           <li><span class="c">&#10003;</span><span>Status, version, author and last-updated on one canvas</span></li>
@@ -305,17 +309,6 @@
           <a href="#reports" class="measure-link">See what you can measure &darr;</a>
         </div>
         <div class="stage-bay"><div class="proc-frame"><div class="proc-screen" id="capScreenA"></div></div></div>
-      </div>
-
-      <!-- governance flow -->
-      <div class="reveal" style="margin-top:52px">
-        <p class="mono-label" style="color:var(--faint); margin-bottom:18px">Draft → review → approve → acknowledge</p>
-        <div class="flowrow">
-          <div class="fstep"><div class="fs-n">01</div><div class="fs-t">Draft &amp; collaborate</div><div class="fs-d">Comments live inside the SOP — @mention, reply, assign, mark complete. No more Teams, email and meeting threads to chase.</div></div>
-          <div class="fstep"><div class="fs-n">02</div><div class="fs-t">Review</div><div class="fs-d">Named reviewers check the work before it goes live, so a procedure is correct before anyone follows it.</div></div>
-          <div class="fstep"><div class="fs-n">03</div><div class="fs-t">Approve</div><div class="fs-d">The approver gets a notification and can approve, or send it back with notes that land in the comments.</div></div>
-          <div class="fstep"><div class="fs-n">04</div><div class="fs-t">Acknowledge</div><div class="fs-d">On publish, acknowledgers are notified and the system tracks who has read it — proof on file if you ever need it.</div></div>
-        </div>
       </div>
     </div>
   </section>
@@ -421,7 +414,7 @@
   <section id="reports" class="py-20 md:py-24" style="background:var(--paper); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
       <div class="reveal mb-12">
-        <div class="flex items-center justify-between gap-6 mb-8">
+        <div class="section-head mb-8">
           <div class="eyebrow mono-label"><span class="dot"></span><span>Reporting</span></div>
         </div>
         <div class="max-w-2xl">
@@ -446,7 +439,7 @@
   <section id="platform" class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
       <div class="reveal mb-12">
-        <div class="flex items-center justify-between gap-6 mb-8">
+        <div class="section-head mb-8">
           <div class="eyebrow mono-label"><span class="dot"></span><span>The platform</span></div>
         </div>
         <div class="max-w-2xl">
@@ -534,7 +527,7 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-12" style="background:var(--ink)">
+  <footer class="site-footer">
     <div class="px-6 sm:px-8 lg:px-12 flex items-center justify-between">
       <img src="assets/images/meetbean-logo-light.svg" alt="meetBean" class="h-5 opacity-90" />
       <span class="mono-label" style="color:var(--faint)">Methodology · Harbor Freight</span>
@@ -776,7 +769,7 @@
     const INNER =
       '<div class="proc-canvas">' +
         '<div class="proc-measure">' +
-          '<h1 class="proc-title">Receive &amp; Verify ASN — International Freight</h1>' +
+          '<h1 class="proc-title">Receive &amp; Verify ASN</h1>' +
           '<div class="proc-status">' +
             '<span class="proc-badge pub">' + CHECK + ' Published</span>' +
             '<span class="proc-badge ver">v4</span>' +
@@ -811,19 +804,11 @@
           '<div class="side-h">Workflow</div>' +
           '<div class="side-body side-props">' +
             '<span class="side-k">' + USER + ' Reviewer</span>' +
-            '<span class="side-v">Sam Supervisor<span class="ok">' + CHECK + '</span></span>' +
-            '<div class="side-stack">' +
-              '<span class="side-k">' + USER + ' Acknowledgers</span>' +
-              '<div class="stack-v">' +
-                '<span class="ack-prog">1 of 6 acknowledged</span>' +
-                '<div class="ack-row"><span class="ack-name"><span class="ok">' + CHECK + '</span>R. Receiver</span><span class="ack-date">2 days ago</span></div>' +
-                '<div class="ack-row"><span class="ack-name">M. Martinez</span></div>' +
-              '</div>' +
-            '</div>' +
-            '<div class="side-stack">' +
-              '<span class="side-k">' + USER + ' Collaborators</span>' +
-              '<div class="stack-v"><span>J. Lee</span><span>D. Okoro</span></div>' +
-            '</div>' +
+            '<span class="side-v muted">&mdash;</span>' +
+            '<span class="side-k">' + USER + ' Acknowledgers</span>' +
+            '<span class="side-v muted">&mdash;</span>' +
+            '<span class="side-k">' + USER + ' Collaborators</span>' +
+            '<span class="side-v muted">&mdash;</span>' +
           '</div>' +
         '</div>' +
         '<div class="side-sec">' +
@@ -834,7 +819,7 @@
             '<span class="side-k">' + BRIEF + ' Job Function</span>' +
             '<span class="side-v"><span class="side-badges"><span class="proc-chip">Receiver</span></span></span>' +
             '<span class="side-k">' + TAG + ' Tags</span>' +
-            '<span class="side-v"><span class="side-badges"><span class="proc-chip">DOT</span><span class="proc-chip">Forklift</span><span class="proc-chip">Pallet Jack</span></span></span>' +
+            '<span class="side-v"><span class="side-badges"><span class="proc-chip">DOT</span><span class="proc-chip">Forklift</span></span></span>' +
           '</div>' +
         '</div>' +
         '<div class="side-sec">' +
@@ -848,11 +833,11 @@
           '<div class="side-h">Versions</div>' +
           '<div class="side-body side-versions">' +
             '<div class="ver-row cur">' +
-              '<span class="ver-l"><span class="ver-line"><span class="ver-n">v4</span><span class="proc-badge info">Published</span><span class="proc-badge cur">Current</span></span><span class="ver-title">Receive &amp; Verify ASN — International Freight</span></span>' +
+              '<span class="ver-l"><span class="ver-line"><span class="ver-n">v4</span><span class="proc-badge info">Published</span><span class="proc-badge cur">Current</span></span><span class="ver-title">Receive &amp; Verify ASN</span></span>' +
               '<span class="ver-r"><span class="ver-label">Published</span><span class="ver-date">Jun 22</span></span>' +
             '</div>' +
             '<div class="ver-row">' +
-              '<span class="ver-l"><span class="ver-line"><span class="ver-n">v3</span><span class="proc-badge arc">Archived</span></span><span class="ver-title">Receive &amp; Verify ASN — International Freight</span></span>' +
+              '<span class="ver-l"><span class="ver-line"><span class="ver-n">v3</span><span class="proc-badge arc">Archived</span></span><span class="ver-title">Receive &amp; Verify ASN</span></span>' +
               '<span class="ver-r"><span class="ver-label">Published</span><span class="ver-date">Jun 19</span></span>' +
             '</div>' +
             '<div class="ver-row">' +
@@ -860,12 +845,6 @@
               '<span class="ver-r"><span class="ver-label">Edited</span><span class="ver-date">Jun 23</span></span>' +
             '</div>' +
           '</div>' +
-        '</div>' +
-        '<div class="proc-spacer"></div>' +
-        '<div class="proc-actions">' +
-          '<div class="proc-btn solid">Create New Version</div>' +
-          '<div class="proc-btn outline">Compare with previous</div>' +
-          '<div class="proc-btn outline">Archive</div>' +
         '</div>' +
       '</div>';
     a.innerHTML = INNER;

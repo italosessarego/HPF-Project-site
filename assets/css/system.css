@@ -12,7 +12,8 @@
   --ink:#1E1D1D; --ink-2:#343E3F; --muted:#5F626C; --faint:#6B6E7C;
   --line:rgba(30,29,29,.12); --line-2:rgba(30,29,29,.24);
   --accent:#508875; --accent-mid:#70A593; --accent-soft:#9CC9BB; --accent-wash:#EAF2EE;
-  --indigo:#4F5E91; --indigo-mid:#6C7BA7; --indigo-soft:#AEB8D6;
+  --indigo:#4F5E91; --indigo-mid:#6C7BA7; --indigo-soft:#AEB8D6; --indigo-wash:rgba(108,123,167,.16);
+  --amber:#B45309; --amber-soft:#E2C8A4; --amber-wash:#F8F0E4;
   --r-xs:3px; --r-sm:6px; --r-md:10px; --r-pill:999px;
 }
 
@@ -73,10 +74,20 @@ h1, h2, h3, h4, .font-display { font-family:'DM Sans', sans-serif; letter-spacin
 .pill-accent { background:var(--accent-wash); color:var(--accent); border-color:var(--accent-soft); }
 .pill .ring { width:6px; height:6px; border-radius:var(--r-pill); border:1.5px solid currentColor; flex:none; }
 .pill .dot-i { width:6px; height:6px; border-radius:var(--r-pill); background:var(--ink); flex:none; }
-.tag { display:inline-block; font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; padding:2px 7px; border-radius:var(--r-xs); }
+.tag { display:inline-block; font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; padding:2px 7px; border-radius:var(--r-xs); white-space:nowrap; }
 .tag-must { background:var(--ink); color:#fff; }
 .tag-nice { background:transparent; color:var(--muted); border:1px solid var(--line-2); }
 .tag-accent { background:var(--accent-wash); color:var(--accent); }
+.tag-indigo { background:var(--indigo-wash); color:var(--indigo); }
+.tag-amber { background:var(--amber-wash); color:var(--amber); }
+
+/* ---- sequence flow strip (.flow-pills) — a LABEL-ONLY sequence shown as chips
+   joined by .flow-arrow separators ("→", or "+" for a fork). Chips follow the
+   state-vs-label rule (.tag for labels, .pill for states). Shared by the Derive
+   strip (procedures) and the Capture governance lifecycle (methodology). A
+   sequence whose steps carry real body text uses cards, not this. ---- */
+.flow-pills { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:6px; }
+.flow-arrow { color:var(--muted); font-weight:600; }
 
 /* ---- inline code reference (.codechip) — NOT a chip: a mono code token in
    running text or a row (a file or field name). Square, paper fill, hairline. */
@@ -135,7 +146,22 @@ h1, h2, h3, h4, .font-display { font-family:'DM Sans', sans-serif; letter-spacin
 .statement .st-head.typed .st-caret { animation:st-blink 1.05s step-end infinite; }
 @keyframes st-blink { 50% { opacity:0; } }
 
-/* ---- hero metrics — at-a-glance number row beneath a hero (procedures · implementation · deployment) ---- */
-.hero-metrics { display:flex; flex-wrap:wrap; gap:34px 56px; margin-top:56px; }
-.hero-metrics .m .n { font-family:'DM Sans', sans-serif; font-weight:500; font-size:46px; line-height:1; letter-spacing:-.03em; color:var(--ink); }
-.hero-metrics .m .l { font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:11px; }
+/* ---- hero — the one full-bleed page intro (every page's <section id="hero">) ----
+   Relative + clipped, content vertically centered, hairline base, uniform 80vh.
+   Page-specific inner content (eyebrow, h1, exhibit) stays in the page; the
+   optional vertical left rail is .hero-rail. Replaces the per-page inline
+   `relative overflow-hidden flex items-center` + `min-height:NNvh` block. */
+.hero { position:relative; overflow:hidden; display:flex; align-items:center; border-bottom:1px solid var(--line); min-height:80vh; }
+.hero-rail { display:none; }
+@media(min-width:1024px){
+  .hero-rail { display:flex; position:absolute; left:0; top:64px; bottom:0; width:56px; flex-direction:column; align-items:center; justify-content:space-between; padding:40px 0; border-right:1px solid var(--line); }
+}
+
+/* ---- site footer — the one dark closing bar; every page uses identical markup.
+   Replaces the per-page inline `py-12` + `background:var(--ink)`. ---- */
+.site-footer { background:var(--ink); padding-block:48px; }
+
+/* ---- section header row — eyebrow on the left, optional mono stamp on the right.
+   Replaces the per-page inline `flex items-center justify-between gap-6` wrapper
+   (and index's old page-local .divider-eyebrow). ---- */
+.section-head { display:flex; align-items:center; justify-content:space-between; gap:24px; }

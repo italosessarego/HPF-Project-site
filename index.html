@@ -40,7 +40,6 @@
     /* summary band */
     .jump { display:inline-flex; align-items:center; gap:7px; font-size:13px; color:var(--ink); text-decoration:none; }
     .jump:hover { color:var(--accent); }
-    .divider-eyebrow { display:flex; align-items:center; justify-content:space-between; gap:24px; }
   </style>
 </head>
 <body class="antialiased">
@@ -58,15 +57,14 @@
         <a href="procedures.html">Procedure Breakdown</a>
         <a href="implementation.html">Implementation Plan</a>
         <a href="recap.html">Recap</a>
-        <span class="dis">Deployment Phases</span>
       </div>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section id="hero" class="relative overflow-hidden flex items-center" style="border-bottom:1px solid var(--line); min-height:84vh">
+  <section id="hero" class="hero">
     <div class="grid-bg absolute inset-0" style="-webkit-mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 70% at 22% 8%, #000 30%, transparent 100%);"></div>
-    <div class="hidden lg:flex absolute left-0 top-16 bottom-0 w-14 flex-col items-center justify-between py-10" style="border-right:1px solid var(--line)">
+    <div class="hero-rail">
       <span class="dot" style="width:7px;height:7px;border-radius:var(--r-pill);background:var(--accent-mid)"></span>
       <span class="mono-label" style="writing-mode:vertical-rl; transform:rotate(180deg); color:var(--muted)">Project · Harbor&nbsp;Freight</span>
       <span class="mono-label" style="color:var(--faint)">01</span>
@@ -82,7 +80,7 @@
   <!-- SUMMARY BAND -->
   <section class="py-16 md:py-20" style="background:var(--surface); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
-      <div class="reveal divider-eyebrow mb-8">
+      <div class="reveal section-head mb-8">
         <div class="eyebrow mono-label"><span class="dot"></span><span>At a glance</span></div>
         <span class="mono-label" style="color:var(--faint)">As of Jun 18</span>
       </div>
@@ -98,7 +96,7 @@
   <section id="where-things-stand" class="py-20 md:py-24" style="background:var(--paper); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
       <div class="reveal mb-10">
-        <div class="divider-eyebrow mb-8">
+        <div class="section-head mb-8">
           <div class="eyebrow mono-label"><span class="dot"></span><span>Where things stand</span></div>
         </div>
         <div class="max-w-2xl">
@@ -115,7 +113,7 @@
   <section id="the-platform" class="py-20 md:py-24" style="background:var(--surface); border-bottom:1px solid var(--line)">
     <div class="px-6 sm:px-8 lg:px-12">
       <div class="reveal mb-10">
-        <div class="divider-eyebrow mb-8">
+        <div class="section-head mb-8">
           <div class="eyebrow mono-label"><span class="dot"></span><span>The platform</span></div>
         </div>
         <div class="max-w-2xl">
@@ -146,7 +144,7 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-12" style="background:var(--ink)">
+  <footer class="site-footer">
     <div class="px-6 sm:px-8 lg:px-12 flex items-center justify-between">
       <img src="assets/images/meetbean-logo-light.svg" alt="meetBean" class="h-5 opacity-90" />
       <span class="mono-label" style="color:var(--faint)">Project Overview · Harbor Freight</span>

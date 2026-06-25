@@ -41,12 +41,12 @@
 <body class="antialiased">
 
   <!-- NAV -->
-  <nav class="sticky top-0 z-50" style="background:rgba(243,243,243,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)">
-    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
+  <nav id="main-nav" class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="flex items-center gap-3">
         <img src="assets/images/meetbean-logo-dark.svg" alt="meetBean" class="h-5" />
-        <span class="mono-label" style="color:var(--faint)">/ Design System</span>
-      </div>
+        <span class="mono-label hidden lg:inline" style="color:var(--faint)">/ Design System</span>
+      </a>
       <a href="index.html" class="btn">Back to project</a>
     </div>
   </nav>
@@ -54,7 +54,7 @@
   <!-- HEADER -->
   <header class="relative overflow-hidden" style="border-bottom:1px solid var(--line)">
     <div class="grid-bg absolute inset-0" style="-webkit-mask-image: radial-gradient(ellipse 70% 70% at 25% 0%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 70% 70% at 25% 0%, #000 30%, transparent 100%);"></div>
-    <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-16">
+    <div class="relative px-6 sm:px-8 lg:px-12 pt-20 pb-16">
       <div class="eyebrow mono-label mb-7"><span class="dot"></span><span>meetBean</span><span style="color:var(--line-2)">·</span><span style="color:var(--faint)">v1.0</span></div>
       <h1 class="text-4xl md:text-5xl leading-[1.08] max-w-3xl mb-5">Design system.<br><span style="color:var(--muted)">Minimal, futuristic, calm.</span></h1>
       <p class="text-lg max-w-2xl leading-relaxed" style="color:var(--muted)">
@@ -65,7 +65,7 @@
 
   <!-- TOC -->
   <div style="border-bottom:1px solid var(--line); background:var(--surface)">
-    <div class="max-w-6xl mx-auto px-6 py-3 flex flex-wrap gap-x-6 gap-y-1 mono-label" style="color:var(--muted)">
+    <div class="px-6 sm:px-8 lg:px-12 py-3 flex flex-wrap gap-x-6 gap-y-1 mono-label" style="color:var(--muted)">
       <a class="toclink" href="#principles">Principles</a>
       <a class="toclink" href="#color">Color</a>
       <a class="toclink" href="#type">Type</a>
@@ -78,7 +78,7 @@
     </div>
   </div>
 
-  <main class="max-w-6xl mx-auto px-6 py-16 space-y-24">
+  <main class="px-6 sm:px-8 lg:px-12 py-16 space-y-24">
 
     <!-- PRINCIPLES -->
     <section id="principles" class="ds-section">
@@ -216,6 +216,8 @@
             <span class="tag tag-must">MUST</span>
             <span class="tag tag-nice">NICE</span>
             <span class="tag tag-accent">SOP</span>
+            <span class="tag tag-indigo">FUTURE</span>
+            <span class="tag tag-amber">OBS</span>
           </div>
           <p class="spec mt-4">Round <code>.pill</code> = a state; square <code>.tag</code> = a label. See <a class="toclink" href="#rules" style="color:var(--accent);text-decoration:underline">Rules</a> for when to use which.</p>
         </div>
@@ -302,7 +304,7 @@
                 <span class="tag tag-accent">SOP</span>
               </div>
               <p class="text-[13px] font-medium mb-1">Square <code>.tag</code> &mdash; a fixed label</p>
-              <p class="text-[13px] leading-relaxed" style="color:var(--muted)">Mono uppercase, from a known set (priority, category, metadata). Systematic shape = catalog. Variants <code>.tag-must</code>, <code>.tag-nice</code>, <code>.tag-accent</code>.</p>
+              <p class="text-[13px] leading-relaxed" style="color:var(--muted)">Mono uppercase, from a known set (priority, category, metadata). Systematic shape = catalog. Variants <code>.tag-must</code>, <code>.tag-nice</code>, <code>.tag-accent</code>, <code>.tag-indigo</code>, <code>.tag-amber</code> &mdash; each only changes the fill.</p>
             </div>
           </div>
           <p class="spec mt-5">Not chips: <code>.codechip</code> is inline mono code (a file or field name, e.g. <span class="codechip">work_order.csv</span>); the segmented filter control is a <strong style="color:var(--ink)">control</strong>. Neither is a chip.</p>
@@ -376,7 +378,7 @@
     <!-- PAGE CHROME -->
     <section id="chrome" class="ds-section">
       <div class="flex items-center justify-between mb-8"><div class="eyebrow mono-label"><span class="dot"></span><span>Page chrome</span></div></div>
-      <p class="text-[15px] leading-relaxed mb-8 max-w-2xl" style="color:var(--muted)">The three things every page shares verbatim &mdash; nav, motion, and type. All three live in <code>assets/css/system.css</code> + <code>assets/js/reveal.js</code> so a new page inherits them by linking those two files. Never re-implement them per page.</p>
+      <p class="text-[15px] leading-relaxed mb-8 max-w-2xl" style="color:var(--muted)">The things every page shares verbatim &mdash; the hero, nav, footer, motion, and type. All live in <code>assets/css/system.css</code> + <code>assets/js/reveal.js</code> so a new page inherits them by linking those two files. Never re-implement them per page.</p>
       <div class="grid md:grid-cols-2 gap-4">
 
         <!-- navigation -->
@@ -391,6 +393,12 @@
             </div>
           </div>
           <p class="text-[13px] leading-relaxed" style="color:var(--muted)">Markup is identical on every page: <code>&lt;nav class="site-nav"&gt;</code> &rarr; <code>.nav-inner</code> &rarr; brand on the left, <code>.nav-tabs</code> on the right. Each tab is an <code>&lt;a&gt;</code> (live) except the current page, which becomes <code>&lt;span class="cur"&gt;</code>, and any not-yet-live page, which is <code>&lt;span class="dis"&gt;</code>. Same item set, same order, on all pages &mdash; only the <code>.cur</code> moves.</p>
+        </div>
+
+        <!-- hero & site footer -->
+        <div class="specimen md:col-span-2">
+          <p class="mono-label mb-5" style="color:var(--faint)">Hero &amp; footer &mdash; every page&rsquo;s open and close</p>
+          <p class="text-[13px] leading-relaxed" style="color:var(--muted)">Both are one class now, not copied per page. <code>&lt;section id="hero" class="hero"&gt;</code> is the full-bleed intro &mdash; relative + clipped, content vertically centered, a hairline base, one uniform <code>80vh</code> height. Inside it sits a <code>.grid-bg</code> mask, the optional vertical <code>.hero-rail</code> (the left page-number rail, <code>lg</code>+ only), then eyebrow + <code>h1</code> + intro. The page closes with <code>&lt;footer class="site-footer"&gt;</code> &mdash; the one dark <code>--ink</code> bar, logo left, mono stamp right. Don&rsquo;t re-declare either inline; both live in <code>system.css</code>.</p>
         </div>
 
         <!-- motion -->
@@ -436,7 +444,7 @@
             <li>&lt;section&gt; full-bleed &middot; <strong style="color:var(--ink)">py-20 md:py-24</strong></li>
             <li>background alternates <strong style="color:var(--ink)">--paper / --surface</strong> &middot; top <strong style="color:var(--ink)">--line</strong></li>
             <li>edge rail <strong style="color:var(--ink)">px-6 sm:px-8 lg:px-12</strong> &middot; never a centered column</li>
-            <li>header row &middot; eyebrow left, <strong style="color:var(--ink)">optional</strong> contextual stamp right (date / label, else omit) &middot; <strong style="color:var(--ink)">mb-8</strong> &middot; no divider rule</li>
+            <li>header row &middot; <code>.section-head</code> &middot; eyebrow left, <strong style="color:var(--ink)">optional</strong> contextual stamp right (date / label, else omit) &middot; <strong style="color:var(--ink)">mb-8</strong> &middot; no divider rule</li>
             <li>h2 <strong style="color:var(--ink)">text-3xl md:text-[2.4rem]</strong> &middot; mb-4 &middot; in max-w-2xl</li>
             <li>intro <strong style="color:var(--ink)">text-lg</strong> &middot; --muted</li>
             <li>content &middot; margin-top <strong style="color:var(--ink)">~56px</strong></li>
@@ -462,8 +470,8 @@
 
   </main>
 
-  <footer style="background:var(--ink)" class="py-12">
-    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+  <footer class="site-footer">
+    <div class="px-6 sm:px-8 lg:px-12 flex items-center justify-between">
       <img src="assets/images/meetbean-logo-light.svg" alt="meetBean" class="h-5 opacity-90" />
       <span class="mono-label" style="color:var(--faint)">Design System · v1.0</span>
     </div>
